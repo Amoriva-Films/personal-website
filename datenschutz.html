@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutz – Amoriva Films</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #0A0A0A; --white: #FAFAFA; --cream: #F4EFE8;
+      --gold: #C4A882; --muted: #7A7065; --text: #1E1E1E;
+      --serif: 'Cormorant Garamond', serif; --sans: 'Montserrat', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--white); color: var(--text); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+      padding: 1.2rem 6%;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s;
+    }
+    .nav-back:hover { color: var(--white); }
+
+    .page-hero {
+      padding: 160px 6% 80px;
+      background: var(--black);
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; color: var(--white); letter-spacing: 0.05em;
+    }
+    .page-hero p {
+      font-family: var(--serif); font-style: italic;
+      color: rgba(255,255,255,0.35); font-size: 1rem; margin-top: 0.8rem;
+    }
+
+    .content {
+      max-width: 760px; margin: 0 auto;
+      padding: 80px 6% 120px;
+    }
+    .content h2 {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+      margin-top: 3rem; margin-bottom: 1rem; color: var(--text);
+    }
+    .content h2:first-child { margin-top: 0; }
+    .content p {
+      font-size: 0.88rem; line-height: 1.95; color: var(--muted);
+      font-weight: 300; margin-bottom: 0.6rem;
+    }
+    .content ul {
+      margin: 0.6rem 0 0.6rem 1.5rem;
+      font-size: 0.88rem; line-height: 1.95; color: var(--muted); font-weight: 300;
+    }
+    .content a {
+      color: var(--gold); text-decoration: none; transition: color 0.3s;
+    }
+    .content a:hover { color: var(--black); }
+    .divider { border: none; border-top: 1px solid #E8E0D4; margin: 3rem 0; }
+
+    footer {
+      background: var(--black); padding: 2.5rem 6%;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
+    footer a {
+      font-size: 0.68rem; color: rgba(255,255,255,0.35);
+      text-decoration: none; transition: color 0.3s;
+    }
+    footer a:hover { color: var(--white); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Amoriva Films</a>
+  <a href="index.html" class="nav-back">← Zurück zur Website</a>
+</nav>
+
+<div class="page-hero">
+  <h1>Datenschutz&shy;erklärung</h1>
+  <p>Transparenz ist uns wichtig.</p>
+</div>
+
+<div class="content">
+
+  <h2>1. Verantwortlicher</h2>
+  <p>
+    Amoriva Films<br>
+    Inhaber: Nevio Mastrogiorgio<br>
+    Grafhorster Str. 16b, 38458 Velpke<br>
+    E-Mail: <a href="mailto:mastrogiorgio.nevio@gmail.com">mastrogiorgio.nevio@gmail.com</a>
+  </p>
+
+  <hr class="divider">
+
+  <h2>2. Datenerfassung beim Besuch der Website</h2>
+  <p>
+    Beim Aufrufen dieser Website werden automatisch technische Informationen erfasst (Server-Logfiles):
+  </p>
+  <ul>
+    <li>Browsertyp und -version</li>
+    <li>Verwendetes Betriebssystem</li>
+    <li>Referrer-URL</li>
+    <li>Uhrzeit der Serveranfrage</li>
+    <li>IP-Adresse (anonymisiert)</li>
+  </ul>
+  <p>
+    Diese Daten dienen ausschließlich der technischen Bereitstellung und Sicherheit der Website.
+    Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.
+  </p>
+
+  <hr class="divider">
+
+  <h2>3. Hosting</h2>
+  <p>
+    Diese Website wird über <strong>Vercel Inc.</strong> gehostet (440 N Barranca Ave #4133, Covina, CA 91723, USA).
+    Beim Besuch der Website werden personenbezogene Daten auf den Servern von Vercel verarbeitet.
+    Weitere Informationen findest du in der <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Vercel</a>.
+  </p>
+
+  <hr class="divider">
+
+  <h2>4. Kontaktaufnahme / Anfrageformular</h2>
+  <p>
+    Wenn du uns über das Kontaktformular oder per E-Mail kontaktierst, werden die von dir übermittelten Daten
+    (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht) zur Bearbeitung deiner Anfrage gespeichert.
+    Die Daten werden nicht ohne deine Einwilligung an Dritte weitergegeben.
+  </p>
+  <p>
+    Das Formular wird über den Dienst <strong>FormSubmit</strong> verarbeitet. Dabei werden deine Daten
+    an unsere E-Mail-Adresse weitergeleitet. Weitere Informationen unter
+    <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener">formsubmit.co/privacy</a>.
+  </p>
+
+  <hr class="divider">
+
+  <h2>5. Kommunikation über WhatsApp</h2>
+  <p>
+    Du kannst uns alternativ über WhatsApp kontaktieren. Dabei wird deine Telefonnummer verarbeitet.
+    WhatsApp ist ein Dienst der Meta Platforms Ireland Ltd. Die Nutzung erfolgt freiwillig und auf eigene Verantwortung.
+    Weitere Informationen findest du in der <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von WhatsApp</a>.
+  </p>
+
+  <hr class="divider">
+
+  <h2>6. Online-Meetings (Zoom / Google Meet)</h2>
+  <p>
+    Für Kennenlerngespräche nutzen wir Videocall-Dienste. Dabei können Name, E-Mail-Adresse und
+    Kommunikationsdaten verarbeitet werden. Die Nutzung erfolgt auf Basis deiner Einwilligung.
+  </p>
+
+  <hr class="divider">
+
+  <h2>7. Cookies</h2>
+  <p>
+    Diese Website verwendet keine Tracking-Cookies. Es werden ausschließlich technisch notwendige Cookies
+    eingesetzt, die für den Betrieb der Website erforderlich sind. Du kannst Cookies in deinem Browser
+    jederzeit deaktivieren.
+  </p>
+
+  <hr class="divider">
+
+  <h2>8. Deine Rechte</h2>
+  <p>Du hast jederzeit das Recht auf:</p>
+  <ul>
+    <li>Auskunft über deine bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
+    <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+    <li>Löschung deiner Daten (Art. 17 DSGVO)</li>
+    <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+    <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+    <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+  </ul>
+  <p>
+    Zur Ausübung deiner Rechte wende dich an:
+    <a href="mailto:mastrogiorgio.nevio@gmail.com">mastrogiorgio.nevio@gmail.com</a>
+  </p>
+  <p>
+    Du hast außerdem das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren.
+  </p>
+
+  <hr class="divider">
+
+  <h2>9. SSL-Verschlüsselung</h2>
+  <p>
+    Diese Website nutzt aus Sicherheitsgründen eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung
+    erkennst du daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt.
+  </p>
+
+  <hr class="divider">
+
+  <h2>10. Speicherdauer</h2>
+  <p>
+    Deine Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck erforderlich ist oder
+    gesetzliche Aufbewahrungsfristen dies verlangen. Anfragen werden nach Abschluss der Korrespondenz gelöscht,
+    sofern keine gesetzlichen Pflichten entgegenstehen.
+  </p>
+
+  <hr class="divider">
+
+  <h2>11. Änderungen dieser Datenschutzerklärung</h2>
+  <p>
+    Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie stets den aktuellen
+    rechtlichen Anforderungen entsprechend zu halten. Stand: April 2025.
+  </p>
+
+</div>
+
+<footer>
+  <p>© 2025 Amoriva Films · Nevio Mastrogiorgio</p>
+  <div class="footer-links">
+    <a href="index.html">Startseite</a>
+    <a href="impressum.html">Impressum</a>
+  </div>
+</footer>
+
+</body>
+</html>

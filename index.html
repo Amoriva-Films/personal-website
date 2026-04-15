@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Amoriva Films – Cinematische Hochzeitsfilme. Wir erzählen eure Hochzeit wie einen Film, nicht wie eine Dokumentation.">
+  <title>Amoriva Films – Cinematische Hochzeitsfilme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:      #0A0A0A;
+      --white:      #FAFAFA;
+      --cream:      #F4EFE8;
+      --beige:      #DDD3C3;
+      --gold:       #C4A882;
+      --gold-dark:  #9B8060;
+      --text:       #1E1E1E;
+      --muted:      #7A7065;
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'Montserrat', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVIGATION ─────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.8rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.94);
+      backdrop-filter: blur(12px);
+      padding: 1.1rem 6%;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      border: 1px solid rgba(255,255,255,0.5) !important;
+      padding: 0.55rem 1.4rem !important;
+      color: var(--white) !important;
+      transition: all 0.3s !important;
+    }
+    .nav-cta:hover {
+      background: var(--white) !important;
+      color: var(--black) !important;
+      border-color: var(--white) !important;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 1.8rem; right: 6%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=90');
+      background-size: cover;
+      background-position: center 35%;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(0,0,0,0.5) 0%,
+        rgba(0,0,0,0.35) 40%,
+        rgba(0,0,0,0.65) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+      max-width: 920px;
+    }
+    .hero-eyebrow {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+    .hero-title em { font-style: italic; }
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.3s forwards;
+    }
+    .hero-cta:hover {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2s forwards;
+    }
+    .hero-scroll span {
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .scroll-bar {
+      width: 1px;
+      height: 55px;
+      background: linear-gradient(to bottom, rgba(196,168,130,0.8), transparent);
+      animation: pulse 2.2s ease infinite;
+    }
+
+    /* ── GLOBAL HELPERS ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.12s; }
+    .delay-2 { transition-delay: 0.24s; }
+    .delay-3 { transition-delay: 0.36s; }
+
+    .eyebrow {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.18;
+      margin-bottom: 1.5rem;
+    }
+    .section-text {
+      font-size: 0.88rem;
+      line-height: 2;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 2.5rem;
+      border: 1px solid currentColor;
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.35s ease;
+    }
+    .btn-light {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .btn-light:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+    .btn-dark {
+      color: var(--black);
+      border-color: var(--black);
+    }
+    .btn-dark:hover { background: var(--black); color: var(--white); }
+
+    /* ── HOOK ────────────────────────────────────── */
+    #hook {
+      padding: 130px 6%;
+      background: var(--cream);
+    }
+    .hook-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9rem;
+      align-items: center;
+    }
+    .hook-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .hook-img-wrap {
+      position: relative;
+    }
+    .hook-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -18px; left: -18px;
+      right: 18px; bottom: 18px;
+      border: 1px solid var(--gold);
+      pointer-events: none;
+    }
+    .hook-img-wrap img {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── SHOWREEL ────────────────────────────────── */
+    #showreel {
+      padding: 130px 6%;
+      background: var(--black);
+      text-align: center;
+    }
+    #showreel .section-title { color: var(--white); }
+    #showreel .section-text {
+      color: rgba(255,255,255,0.45);
+      max-width: 480px;
+      margin: 0 auto 3.5rem;
+    }
+    .video-outer {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      background: #0f0f0f;
+      border: 1px solid rgba(196,168,130,0.2);
+    }
+    .video-outer iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .play-btn {
+      width: 88px;
+      height: 88px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .play-btn:hover { background: rgba(196,168,130,0.12); transform: scale(1.05); }
+    .play-btn::after {
+      content: '';
+      width: 0; height: 0;
+      border-left: 22px solid var(--gold);
+      border-top: 13px solid transparent;
+      border-bottom: 13px solid transparent;
+      margin-left: 6px;
+    }
+    .video-placeholder p {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ABOUT ───────────────────────────────────── */
+    #about {
+      padding: 130px 6%;
+      background: var(--white);
+    }
+    .about-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9rem;
+      align-items: center;
+    }
+    .about-img img {
+      width: 100%;
+      height: 620px;
+      object-fit: cover;
+      filter: grayscale(15%);
+      transition: filter 0.6s;
+    }
+    .about-img img:hover { filter: grayscale(0%); }
+    .about-text .section-text { margin-bottom: 1.4rem; }
+    .signature {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-style: italic;
+      color: var(--text);
+      margin-top: 2.2rem;
+    }
+    .signature-role {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* ── ANGEBOT ─────────────────────────────────── */
+    #angebot {
+      padding: 130px 6%;
+      background: var(--black);
+      text-align: center;
+    }
+    #angebot .section-title { color: var(--white); }
+    #angebot .section-text {
+      color: rgba(255,255,255,0.4);
+      max-width: 580px;
+      margin: 0 auto 4.5rem;
+    }
+    .angebot-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .angebot-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2.8rem 1.8rem;
+      text-align: left;
+      transition: border-color 0.4s;
+    }
+    .angebot-card:hover { border-color: rgba(196,168,130,0.5); }
+    .angebot-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .angebot-card h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .angebot-card p {
+      font-size: 0.78rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.38);
+      font-weight: 300;
+    }
+
+    /* ── VERTRAUEN ───────────────────────────────── */
+    #vertrauen {
+      padding: 130px 6%;
+      background: var(--cream);
+      text-align: center;
+    }
+    .vertrauen-hero-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto 5rem;
+    }
+    .testimonial-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .testimonial {
+      background: var(--white);
+      padding: 2.8rem 2.4rem;
+      text-align: left;
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.2rem;
+    }
+    .testimonial-text {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+    .testimonial-author {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ABLAUF ──────────────────────────────────── */
+    #ablauf {
+      padding: 130px 6%;
+      background: var(--white);
+      text-align: center;
+    }
+    .steps-wrap {
+      max-width: 960px;
+      margin: 5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      position: relative;
+    }
+    .steps-wrap::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: calc(16.67% + 1rem);
+      right: calc(16.67% + 1rem);
+      height: 1px;
+      background: var(--beige);
+    }
+    .step-num {
+      width: 3rem;
+      height: 3rem;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--gold);
+      background: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+    .step h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .step p {
+      font-size: 0.84rem;
+      line-height: 1.9;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ── CTA ─────────────────────────────────────── */
+    #cta {
+      position: relative;
+      padding: 160px 6%;
+      text-align: center;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.58);
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+    }
+    #cta .section-title { color: var(--white); max-width: 740px; margin: 0 auto 1rem; }
+    #cta p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+      font-weight: 300;
+      margin-bottom: 2.8rem;
+    }
+
+    /* ── KONTAKT ─────────────────────────────────── */
+    #kontakt {
+      padding: 130px 6%;
+      background: var(--white);
+    }
+    .kontakt-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .kontakt-inner .section-text {
+      max-width: 520px;
+      margin: 0 auto 3.5rem;
+    }
+    form { text-align: left; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .form-group { margin-bottom: 2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 0;
+      border: none;
+      border-bottom: 1px solid var(--beige);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-bottom-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(30,30,30,0.3); }
+    .btn-submit {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1.1rem;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.35s;
+    }
+    .btn-submit:hover { background: var(--gold-dark); }
+    .form-note {
+      text-align: center;
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+    .contact-alt {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--beige);
+      text-align: center;
+    }
+    .contact-alt p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .contact-alt a {
+      color: var(--gold-dark);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+    .contact-alt a:hover { color: var(--black); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 5rem 6% 2.5rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 3rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 2rem;
+    }
+    .footer-brand .logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .footer-brand .tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 0.3rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: right;
+    }
+    .footer-contact a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.78rem;
+      transition: color 0.3s;
+    }
+    .footer-contact a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.18);
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.15); }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1024px) {
+      .angebot-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 860px) {
+      nav { padding: 1.5rem 5%; }
+      nav.scrolled { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hook-grid,
+      .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .hook-img-wrap { order: -1; }
+      .hook-img-wrap img,
+      .about-img img { height: 360px; }
+
+      .testimonial-grid { grid-template-columns: 1fr; }
+
+      .steps-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .steps-wrap::before { display: none; }
+
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+
+      .footer-top { flex-direction: column; }
+      .footer-contact { text-align: left; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      #hook, #showreel, #about, #angebot,
+      #vertrauen, #ablauf, #cta, #kontakt { padding: 90px 5%; }
+      .angebot-grid { grid-template-columns: 1fr; }
+      .cta-bg { background-attachment: scroll; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Amoriva Films</a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#showreel">Showreel</a></li>
+    <li><a href="#ablauf">Ablauf</a></li>
+    <li><a href="#kontakt" class="nav-cta">Anfragen</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMenu()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <button class="mobile-close" onclick="closeMenu()" aria-label="Schließen">✕</button>
+  <a href="#about"     onclick="closeMenu()">Über uns</a>
+  <a href="#showreel"  onclick="closeMenu()">Showreel</a>
+  <a href="#angebot"   onclick="closeMenu()">Leistungen</a>
+  <a href="#ablauf"    onclick="closeMenu()">Ablauf</a>
+  <a href="#kontakt"   onclick="closeMenu()">Anfragen</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" aria-label="Willkommen">
+  <div class="hero-bg" id="heroBg" role="img" aria-label="Hochzeitsszene"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Cinematische Hochzeitsfilme</span>
+    <h1 class="hero-title">
+      Eure Hochzeit ist mehr als ein Tag.<br>
+      <em>Es ist eure Geschichte.</em>
+    </h1>
+    <p class="hero-sub">Wir erzählen sie wie einen Film.</p>
+    <a href="#kontakt" class="hero-cta">Jetzt unverbindlich anfragen</a>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- EMOTIONAL HOOK -->
+<section id="hook">
+  <div class="hook-grid">
+    <div class="hook-text">
+      <span class="eyebrow reveal">Mehr als ein Video</span>
+      <blockquote class="hook-quote reveal">
+        „Stellt euch vor, ihr sitzt in zehn Jahren zusammen auf dem Sofa.
+        Eure Kinder schlafen. Ihr drückt Play —
+        <em>und ihr seid wieder dort.</em>"
+      </blockquote>
+      <p class="section-text reveal">
+        Nicht die Daten. Nicht die Dekoration. Das Gefühl, wenn dein Vater dich das erste Mal
+        im Brautkleid sieht. Der Blick deines Partners, bevor du um die Ecke kommst.
+        Die Tränen, die niemand geplant hat.
+      </p>
+      <br>
+      <p class="section-text reveal delay-1">
+        Genau das bewahren wir für euch. Nicht als Aufzeichnung —
+        sondern als Film, der sich anfühlt, als wäre er nur für euch gemacht.
+      </p>
+    </div>
+    <div class="hook-img-wrap reveal delay-2">
+      <img
+        src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=85"
+        alt="Hochzeitspaar in einem romantischen Moment"
+        loading="lazy"
+      >
+    </div>
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+<section id="showreel">
+  <span class="eyebrow reveal">Das Ergebnis</span>
+  <h2 class="section-title reveal">Fühlt, <em>was wir erschaffen</em></h2>
+  <p class="section-text reveal">Jeder Film ist einzigartig — wie die Hochzeit selbst.</p>
+  <div class="video-outer reveal">
+    <div class="video-placeholder">
+      <div class="play-btn" aria-label="Video abspielen"></div>
+      <p>Showreel · Coming Soon</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <img
+        src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=85"
+        alt="Amoriva Films – Nevio Mastrogiorgio"
+        loading="lazy"
+      >
+    </div>
+    <div class="about-text reveal delay-2">
+      <span class="eyebrow">Unsere Geschichte</span>
+      <h2 class="section-title">Warum wir<br><em>anders sind</em></h2>
+      <p class="section-text">
+        Ich bin Nevio Mastrogiorgio — und ich habe Amoriva Films aus einem einzigen Gedanken
+        heraus gegründet: Hochzeitsvideos müssen sich nicht wie Hochzeitsvideos anfühlen.
+      </p>
+      <br>
+      <p class="section-text">
+        Zu viele Paare bekommen nach ihrer Hochzeit einen Film zurück, der sich anfühlt wie
+        eine Aufzeichnung. Chronologisch. Distanziert. Austauschbar. Ich wollte etwas anderes
+        schaffen — etwas, das sich anfühlt wie Kino.
+      </p>
+      <br>
+      <p class="section-text">
+        Jede Hochzeit hat eine Geschichte. Unsere Aufgabe ist es, sie zu finden — in den stillen
+        Momenten zwischen den großen, in den Blicken, die keine Worte brauchen, in den Gefühlen,
+        die sonst niemand auf einem Foto festhalten kann.
+      </p>
+      <div class="signature">Nevio Mastrogiorgio</div>
+      <p class="signature-role">Gründer · Amoriva Films</p>
+    </div>
+  </div>
+</section>
+
+<!-- ANGEBOT -->
+<section id="angebot">
+  <span class="eyebrow reveal">Was ihr bekommt</span>
+  <h2 class="section-title reveal">Kein Standardpaket.<br><em style="color:var(--gold)">Euer Film.</em></h2>
+  <p class="section-text reveal">
+    Wir begleiten euch durch euren gesamten Tag — ruhig, unauffällig,<br>mit einem Auge für das Besondere.
+  </p>
+  <div class="angebot-grid">
+    <div class="angebot-card reveal">
+      <span class="angebot-num">I</span>
+      <h3>Ganztägige Begleitung</h3>
+      <p>Von den ersten Vorbereitungen bis zur Nacht. Wir sind dabei, ohne jemals zu stören.</p>
+    </div>
+    <div class="angebot-card reveal delay-1">
+      <span class="angebot-num">II</span>
+      <h3>Cinematischer Highlightfilm</h3>
+      <p>4–6 Minuten. Storybasiert. Emotional. Ein Film, der sich anfühlt wie ein Film.</p>
+    </div>
+    <div class="angebot-card reveal delay-2">
+      <span class="angebot-num">III</span>
+      <h3>Persönliches Storytelling</h3>
+      <p>Kein Template, keine Schablone. Eure Geschichte — erzählt auf eure Art.</p>
+    </div>
+    <div class="angebot-card reveal delay-3">
+      <span class="angebot-num">IV</span>
+      <h3>Premium Nachbearbeitung</h3>
+      <p>Cinematische Farben, sorgfältig ausgewählte Musik, professioneller Schnitt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VERTRAUEN -->
+<section id="vertrauen">
+  <span class="eyebrow reveal">Für Paare, die mehr wollen</span>
+  <blockquote class="vertrauen-hero-quote reveal">
+    „Für Paare, die mehr wollen als nur Erinnerungen —
+    die etwas wollen, das sie <em>bewegt.</em>"
+  </blockquote>
+  <div class="testimonial-grid">
+    <div class="testimonial reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        „Als wir den Film das erste Mal gesehen haben, haben wir beide geweint.
+        Nicht aus Nostalgie — aus Staunen darüber, wie schön unser Tag wirklich war."
+      </p>
+      <p class="testimonial-author">Sarah &amp; Marco · Hannover</p>
+    </div>
+    <div class="testimonial reveal delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        „Nevio hat Momente eingefangen, an die wir uns selbst kaum erinnert hätten.
+        Es fühlt sich an wie ein Kinofilm — über uns."
+      </p>
+      <p class="testimonial-author">Julia &amp; Thomas · Hamburg</p>
+    </div>
+    <div class="testimonial reveal delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        „Wir hätten nie gedacht, dass ein Hochzeitsfilm uns so sehr berühren kann.
+        Amoriva Films ist in einer ganz anderen Liga."
+      </p>
+      <p class="testimonial-author">Lena &amp; David · Berlin</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABLAUF -->
+<section id="ablauf">
+  <span class="eyebrow reveal">So einfach geht's</span>
+  <h2 class="section-title reveal">Drei Schritte bis<br><em>zu eurem Film</em></h2>
+  <div class="steps-wrap">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>Anfrage</h3>
+      <p>Ihr schreibt uns. Wir melden uns innerhalb von 24 Stunden — persönlich, nicht automatisch.</p>
+    </div>
+    <div class="step reveal delay-1">
+      <div class="step-num">2</div>
+      <h3>Kennenlernen</h3>
+      <p>Wir sprechen über euch, eure Hochzeit, eure Geschichte. Kein Formular — ein echtes Gespräch.</p>
+    </div>
+    <div class="step reveal delay-2">
+      <div class="step-num">3</div>
+      <h3>Hochzeit &amp; Film</h3>
+      <p>Wir begleiten euren Tag und liefern einen Film, der bleibt. Für immer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg" role="img" aria-label="Tanzende Brautpaar Szene"></div>
+  <div class="cta-overlay"></div>
+  <div class="cta-inner reveal">
+    <span class="eyebrow" style="color:var(--gold)">Euer Termin wartet</span>
+    <h2 class="section-title">
+      Sichert euch euren Termin —<br>
+      <em>bevor es jemand anderes tut.</em>
+    </h2>
+    <p>
+      Wir nehmen bewusst nur wenige Hochzeiten pro Jahr an.<br>
+      Damit jeder Film die Aufmerksamkeit bekommt, die er verdient.
+    </p>
+    <a href="#kontakt" class="btn btn-light">Jetzt unverbindlich anfragen</a>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="kontakt-inner">
+    <span class="eyebrow reveal">Schreibt uns</span>
+    <h2 class="section-title reveal">Erzählt uns<br><em>von eurem Tag</em></h2>
+    <p class="section-text reveal">
+      Füllt das Formular aus — wir melden uns innerhalb von 24 Stunden persönlich bei euch.
+    </p>
+    <form
+      action="https://formsubmit.co/mastrogiorgio.nevio@gmail.com"
+      method="POST"
+      class="reveal"
+    >
+      <input type="hidden" name="_subject" value="Neue Hochzeitsanfrage – Amoriva Films">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://amoriva-films.de/#kontakt">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Eure Namen</label>
+          <input type="text" id="name" name="name" placeholder="Lena &amp; Thomas" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Hochzeitsdatum</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Eure E-Mail</label>
+          <input type="email" id="email" name="email" placeholder="eure@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="location">Location / Ort</label>
+          <input type="text" id="location" name="location" placeholder="Hamburg, Bayern, …">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Eure Geschichte</label>
+        <textarea id="message" name="message" placeholder="Erzählt uns ein bisschen von euch, eurer Hochzeit und euren Wünschen…"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Anfrage senden</button>
+      <p class="form-note">Unverbindlich · Kostenlos · Antwort innerhalb 24h</p>
+    </form>
+
+    <div class="contact-alt reveal">
+      <p>Oder direkt Kontakt aufnehmen:</p>
+      <a href="tel:01556559747">📞 0155 6559747</a>
+      <a href="mailto:mastrogiorgio.nevio@gmail.com">✉ E-Mail schreiben</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Amoriva Films</div>
+      <div class="tagline">Hochzeiten wie Filme erzählt.</div>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="#about">Über uns</a>
+      <a href="#angebot">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#kontakt">Anfragen</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="tel:01556559747">0155 6559747</a>
+      <a href="mailto:mastrogiorgio.nevio@gmail.com">mastrogiorgio.nevio@gmail.com</a>
+      <a href="https://amoriva-films.de">amoriva-films.de</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Amoriva Films · Nevio Mastrogiorgio · Grafhorster Str. 16b, 38458 Velpke</p>
+    <p class="footer-copy">Mit Liebe gemacht — für Paare, die mehr wollen.</p>
+  </div>
+</footer>
+
+<script>
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  /* Mobile menu */
+  function openMenu()  {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* Smooth anchors */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* Hero parallax */
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight) {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+    }
+  });
+</script>
+</body>
+</html>
