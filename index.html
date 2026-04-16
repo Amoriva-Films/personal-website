@@ -183,36 +183,79 @@
     .play-btn::after { content: ''; width: 0; height: 0; border-left: 22px solid var(--gold); border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
     .video-placeholder p { font-family: var(--serif); font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.3); }
 
-    /* ─── CINEMATIC GALLERY ───────────────────────── */
-    #gallery { background: var(--white); padding: 0; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      grid-template-rows: 380px 380px;
-      gap: 3px;
+    /* ─── CINEMATIC GALLERY (neu) ───────────────── */
+    #gallery { background: #070707; padding: 100px 0 0; }
+    .gallery-intro { text-align: center; padding: 0 5% 70px; }
+    .gallery-intro .section-title { color: #fff; margin-bottom: 0; }
+
+    .cine-banner {
+      width: 100%; height: 55vh; min-height: 320px;
+      overflow: hidden; position: relative; background: #111;
     }
-    .gallery-cell { overflow: hidden; position: relative; background: #111; }
-    .gallery-cell.tall { grid-row: span 2; }
-    .gallery-cell img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      filter: contrast(1.06) saturate(0.85) brightness(0.97);
-      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
+    .cine-banner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: contrast(1.1) saturate(0.72) brightness(0.88);
+      transform: scale(1.05);
+      transition: transform 12s ease;
     }
-    .gallery-cell:hover img { transform: scale(1.05); filter: contrast(1.1) saturate(0.95) brightness(1); }
-    .gallery-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.45));
-      padding: 2rem 1.5rem 1.2rem;
-      opacity: 0; transition: opacity 0.4s;
+    .cine-banner:hover img { transform: scale(1.0); }
+
+    .cine-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+      margin-top: 3px;
     }
-    .gallery-cell:hover .gallery-label { opacity: 1; }
-    .gallery-label span { font-family: var(--serif); font-size: 0.9rem; font-style: italic; color: rgba(255,255,255,0.85); }
+    .cine-cell {
+      overflow: hidden; position: relative; background: #111;
+      height: 62vh; min-height: 340px;
+    }
+    .cine-cell img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: contrast(1.08) saturate(0.75) brightness(0.88);
+      transform: scale(1.04);
+      transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s ease;
+    }
+    .cine-cell:hover img {
+      transform: scale(1.09);
+      filter: contrast(1.12) saturate(0.88) brightness(1.0);
+    }
+
+    /* Vignette filmic overlay */
+    .cine-vignette {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 48%, rgba(0,0,0,0.45) 100%);
+    }
+    .cine-caption {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      padding: 3.5rem 2rem 1.8rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .cine-cell:hover .cine-caption { opacity: 1; transform: translateY(0); }
+    .cine-caption span {
+      font-family: var(--serif); font-size: 1.05rem;
+      font-style: italic; color: rgba(255,255,255,0.92);
+      letter-spacing: 0.03em;
+    }
+
+    .cine-wide {
+      width: 100%; height: 42vh; min-height: 220px;
+      overflow: hidden; position: relative; background: #111;
+      margin-top: 3px;
+    }
+    .cine-wide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      object-position: center 60%;
+      filter: contrast(1.1) saturate(0.7) brightness(0.85);
+      transform: scale(1.03);
+      transition: transform 12s ease;
+    }
+    .cine-wide:hover img { transform: scale(1.06); }
 
     /* ─── RING PHOTO STRIP ───────────────────────── */
     #rings { display: grid; grid-template-columns: 1fr 1fr; }
     .ring-cell { overflow: hidden; height: 65vh; min-height: 380px; position: relative; background: #0d0d0d; }
-    .ring-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; filter: contrast(1.05) saturate(0.88); }
+    .ring-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; filter: contrast(1.08) saturate(0.78) brightness(0.9); }
     .ring-cell:hover img { transform: scale(1.04); }
 
     /* ─── TEAM ───────────────────────────────────── */
@@ -360,8 +403,10 @@
       .hook-grid { grid-template-columns: 1fr; gap: 3rem; }
       .hook-img-wrap { order: -1; }
       .hook-img-wrap img, .team-photo img { height: 360px; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-cell.tall { grid-row: span 1; }
+      .cine-row { grid-template-columns: 1fr; }
+      .cine-cell { height: 70vw; min-height: 280px; }
+      .cine-banner { height: 50vw; min-height: 240px; }
+      .cine-wide { height: 40vw; min-height: 200px; }
       #rings { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
       .referenz-grid { grid-template-columns: 1fr; }
@@ -374,7 +419,9 @@
     }
     @media (max-width: 600px) {
       #hook, #showreel, #about, #angebot, #referenz, #ablauf, #cta, #kontakt { padding: 90px 5%; }
-      .gallery-grid { grid-template-columns: 1fr; }
+      #gallery { padding: 70px 0 0; }
+      .gallery-intro { padding: 0 5% 50px; }
+      .cine-cell { height: 80vw; }
       .zusatz-grid { grid-template-columns: 1fr; }
       .cta-bg { background-attachment: scroll; }
     }
@@ -455,27 +502,40 @@
 
 <!-- CINEMATIC GALLERY -->
 <section id="gallery">
-  <div class="gallery-grid">
-    <div class="gallery-cell tall">
-      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1200&q=95" alt="Brautpaar" loading="lazy">
-      <div class="gallery-label"><span>Ein Blick, der alles sagt</span></div>
+  <div class="gallery-intro reveal">
+    <span class="eyebrow">Cinematische Momente</span>
+    <h2 class="section-title">Bilder, die<br><em>alles sagen.</em></h2>
+  </div>
+
+  <!-- Banner: Kino-breit, volle Breite -->
+  <div class="cine-banner">
+    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=2400&q=95" alt="Hochzeitspaar im goldenen Licht" loading="lazy">
+    <div class="cine-vignette"></div>
+  </div>
+
+  <!-- 3 Portraits -->
+  <div class="cine-row">
+    <div class="cine-cell">
+      <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=95" alt="Der stille Moment" loading="lazy">
+      <div class="cine-vignette"></div>
+      <div class="cine-caption"><span>Der stille Moment davor</span></div>
     </div>
-    <div class="gallery-cell">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=95" alt="Hochzeitszeremonie" loading="lazy">
-      <div class="gallery-label"><span>Der Moment des Jaworts</span></div>
+    <div class="cine-cell">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215afd?auto=format&fit=crop&w=900&q=95" alt="Hochzeitszeremonie" loading="lazy">
+      <div class="cine-vignette"></div>
+      <div class="cine-caption"><span>Das Jawort</span></div>
     </div>
-    <div class="gallery-cell">
-      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=95" alt="Hochzeitstanz" loading="lazy">
-      <div class="gallery-label"><span>Der erste Tanz</span></div>
+    <div class="cine-cell">
+      <img src="https://images.unsplash.com/photo-1503455637927-730bce8583c0?auto=format&fit=crop&w=900&q=95" alt="Romantischer Moment" loading="lazy">
+      <div class="cine-vignette"></div>
+      <div class="cine-caption"><span>Nur für euch</span></div>
     </div>
-    <div class="gallery-cell">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=95" alt="Romantischer Moment" loading="lazy">
-      <div class="gallery-label"><span>Stille Momente</span></div>
-    </div>
-    <div class="gallery-cell">
-      <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=95" alt="Brautpaar im Abendlicht" loading="lazy">
-      <div class="gallery-label"><span>Cinematische Tiefe</span></div>
-    </div>
+  </div>
+
+  <!-- Finale volle Breite -->
+  <div class="cine-wide">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2400&q=95" alt="Hochzeitsfeier im Abendlicht" loading="lazy">
+    <div class="cine-vignette"></div>
   </div>
 </section>
 
