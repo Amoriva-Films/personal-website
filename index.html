@@ -35,6 +35,7 @@
       --beige:      #E0D5C5;
       --gold:       #C4A882;
       --gold-dark:  #9B8060;
+      --green:      #546D39;
       --text:       #1A1A1A;
       --muted:      #6B6560;
       --serif:      'Cormorant Garamond', Georgia, serif;
@@ -113,21 +114,22 @@
     .hero-content {
       position: relative; z-index: 2; text-align: center; padding: 0 2rem; max-width: 980px;
     }
-    .hero-eyebrow {
-      display: block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.45em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 2rem;
-      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
-    }
     .hero-title {
-      font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 300; line-height: 1.12; color: #fff; margin-bottom: 1.5rem;
-      opacity: 0; animation: fadeUp 1s ease 0.6s forwards;
+      font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300; line-height: 1.08; color: #fff; margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+      letter-spacing: 0.06em;
     }
     .hero-title em { font-style: italic; }
+    .hero-service {
+      display: block; font-size: 0.6rem; font-weight: 400; letter-spacing: 0.5em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+    }
     .hero-sub {
-      font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-      font-weight: 300; font-style: italic; color: rgba(255,255,255,0.8); margin-bottom: 3rem;
-      opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+      font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.4rem);
+      font-weight: 300; font-style: italic; color: rgba(255,255,255,0.75); margin-bottom: 3rem;
+      opacity: 0; animation: fadeUp 1s ease 1s forwards;
     }
     .hero-cta {
       display: inline-block; padding: 1.1rem 3rem;
@@ -153,7 +155,7 @@
     .d3 { transition-delay: 0.45s; }
     .d4 { transition-delay: 0.6s; }
 
-    .eyebrow { display: block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .eyebrow { display: block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
     .section-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
     .section-text { font-size: 0.88rem; line-height: 2.05; color: var(--muted); font-weight: 300; }
 
@@ -381,11 +383,10 @@
   <a href="#hero" class="nav-logo"><span class="logo-top">Amoriva</span><span class="logo-bottom">Films</span></a>
   <ul class="nav-links">
     <li><a href="#about">Team</a></li>
-    <li><a href="#showreel">Showreel</a></li>
-    <li><a href="#angebot">Preise</a></li>
+    <li><a href="#showreel">Film</a></li>
     <li><a href="#referenz">Referenzen</a></li>
     <li><a href="#ablauf">Ablauf</a></li>
-    <li><a href="#kontakt" class="nav-cta">Anfragen</a></li>
+    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
   </ul>
   <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -394,11 +395,10 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMenu()">&#x2715;</button>
   <a href="#about"    onclick="closeMenu()">Team</a>
-  <a href="#showreel" onclick="closeMenu()">Showreel</a>
-  <a href="#angebot"  onclick="closeMenu()">Preise</a>
+  <a href="#showreel" onclick="closeMenu()">Film</a>
   <a href="#referenz" onclick="closeMenu()">Referenzen</a>
   <a href="#ablauf"   onclick="closeMenu()">Ablauf</a>
-  <a href="#kontakt"  onclick="closeMenu()">Anfragen</a>
+  <a href="#kontakt"  onclick="closeMenu()">Kontakt</a>
 </div>
 
 <!-- HERO -->
@@ -406,13 +406,10 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow">Cinematische Hochzeitsfilme</span>
-    <h1 class="hero-title">
-      Euer Tag.<br>
-      <em>Euer Gefühl. Euer Film.</em>
-    </h1>
-    <p class="hero-sub">Hochzeiten wie Filme erzählt. Nicht wie Dokumentationen.</p>
-    <a href="#kontakt" class="hero-cta">Jetzt euren Termin anfragen</a>
+    <h1 class="hero-title">Amoriva Films</h1>
+    <span class="hero-service">Film &nbsp;&#183;&nbsp; Foto</span>
+    <p class="hero-sub">Eure Geschichte. So erzählt, dass ihr sie immer wieder fühlen könnt.</p>
+    <a href="#kontakt" class="hero-cta">Jetzt senden</a>
   </div>
   <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
 </section>
@@ -499,7 +496,7 @@
     <div class="team-card reveal">
       <div class="team-photo nevio-photo"><img src="nevio.jpg" alt="Nevio Mastrogiorgio" loading="lazy"></div>
       <div class="team-name">Nevio, 20</div>
-      <span class="team-role">Gründer &nbsp;&#183;&nbsp; Beratung &amp; Kundenkontakt</span>
+      <span class="team-role">Founder &nbsp;&#183;&nbsp; Beratung &amp; Kundenkontakt</span>
       <a href="mailto:nevio.mastrogiorgio@amoriva-films.de" class="team-email">nevio.mastrogiorgio@amoriva-films.de</a>
       <p class="team-text">
         Nevio ist vom ersten Gespräch an euer fester Ansprechpartner. Er hört zu, stellt die richtigen Fragen und sorgt dafür, dass ihr euch von Anfang an wirklich aufgehoben fühlt. Mit ihm könnt ihr offen reden und einfach ihr sein, damit ihr an eurem Tag ganz präsent seid. Für die Momente, die später zählen.
@@ -508,7 +505,7 @@
     <div class="team-card reveal d2">
       <div class="team-photo"><img src="danilo.jpg" alt="Danilo Buonafede" loading="lazy"></div>
       <div class="team-name">Danilo, 21</div>
-      <span class="team-role">Co-Gründer &nbsp;&#183;&nbsp; Kamera &amp; Kreation</span>
+      <span class="team-role">Co-Founder &nbsp;&#183;&nbsp; Kamera &amp; Kreation</span>
       <a href="mailto:danilo.buonafede@amoriva-films.de" class="team-email">danilo.buonafede@amoriva-films.de</a>
       <p class="team-text">
         Danilo lebt für den perfekten Moment hinter der Kamera. Mit seinem ruhigen Blick und seinem natürlichen Gespür für Licht und Emotion entstehen Aufnahmen, die man nicht vergisst. Er sieht Dinge, bevor sie passieren, und hält sie fest, bevor sie verschwinden. Genau das macht den Unterschied in eurem Film.
@@ -517,11 +514,9 @@
   </div>
 </section>
 
-<!-- ANGEBOT -->
-<section id="angebot">
+<!-- ANGEBOT REMOVED -->
+<section id="angebot" style="display:none;">
   <span class="eyebrow reveal">Transparente Preise</span>
-  <h2 class="section-title reveal">Findet das Paket,<br><em style="color:var(--gold)">das zu euch passt.</em></h2>
-  <p class="section-text reveal">Kein Kleingedrucktes. Keine versteckten Kosten. Was ihr seht, ist was ihr bekommt.</p>
 
   <div class="pakete-grid">
 
@@ -621,7 +616,7 @@
       <div class="ref-card ref-highlighted reveal">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="ref-text">
-          Wir haben den Film zum ersten Mal in unserem Wohnzimmer gesehen und danach eine Stunde lang nichts gesagt. Einfach dasitzen. Es hat uns beide komplett überwältigt. So hätten wir uns das nie vorgestellt.
+          Wir haben den Film gestern bekommen und direkt angeschaut. Es war einfach krass, wie viele Momente wir gar nicht richtig mitbekommen haben. Man fühlt sich wieder komplett zurückversetzt. Würde ich genau so wieder machen.
         </p>
         <p class="ref-author">Laura &amp; Jakob &nbsp;&#183;&nbsp; Wolfsburg</p>
       </div>
@@ -629,7 +624,7 @@
       <div class="ref-card reveal d1">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="ref-text">
-          Wir haben nicht damit gerechnet, wie sehr uns der Film berühren würde. Als wir ihn das erste Mal gesehen haben, war es, als würden wir diesen Moment nochmal leben. Genau so, wie er sich angefühlt hat.
+          Ich hatte ehrlich gesagt erst überlegt, ob wir überhaupt ein Video brauchen. Jetzt ist es das Wertvollste, was wir von dem Tag haben.
         </p>
         <p class="ref-author">Mishelle &amp; Julian &nbsp;&#183;&nbsp; Wolfsburg</p>
       </div>
@@ -637,7 +632,7 @@
       <div class="ref-card reveal d2">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="ref-text">
-          Was Nevio und Danilo eingefangen haben, ist schwer in Worte zu fassen. Keine gestellten Momente. Keine Inszenierung. Einfach wir, so wie wir wirklich sind. Der Film ist etwas, das wir für immer behalten.
+          Das erste Gespräch war mega angenehm. Kein Druck, kein langes Gerede. Einfach ein normales Gespräch auf Augenhöhe, das war für uns direkt ein gutes Zeichen.
         </p>
         <p class="ref-author">Max &amp; Johanne &nbsp;&#183;&nbsp; Braunschweig</p>
       </div>
@@ -674,7 +669,7 @@
   <div class="cta-bg"></div>
   <div class="cta-overlay"></div>
   <div class="cta-inner reveal">
-    <span class="eyebrow" style="color:var(--gold)">Begrenzte Termine</span>
+    <span class="eyebrow" style="color:var(--green)">Begrenzte Termine</span>
     <h2 class="section-title">Wir nehmen pro Jahr<br><em>nur wenige Hochzeiten an.</em></h2>
     <p>Damit jeder Film die Aufmerksamkeit bekommt, die er verdient.<br>Schreibt uns bevor euer Datum vergeben ist.</p>
     <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Jetzt anfragen</a>
@@ -684,9 +679,9 @@
 <!-- KONTAKT -->
 <section id="kontakt">
   <div class="kontakt-inner">
-    <span class="eyebrow reveal">Schreibt uns</span>
-    <h2 class="section-title reveal">Erzählt uns<br><em>von eurem Tag</em></h2>
-    <p class="section-text reveal">Füllt das Formular aus. Wir melden uns innerhalb von 24 Stunden persönlich bei euch. Versprochen.</p>
+    <span class="eyebrow reveal">Wenn ihr denkt, wir passen zusammen</span>
+    <h2 class="section-title reveal">Schreibt<br><em>uns.</em></h2>
+    <p class="section-text reveal">Kein langer Prozess. Einfach eine ehrliche Nachricht, wir melden uns persönlich bei euch.</p>
 
     <form action="https://formsubmit.co/nevio.mastrogiorgio@amoriva-films.de" method="POST" class="reveal">
       <input type="hidden" name="_subject" value="Neue Hochzeitsanfrage von der Website">
@@ -733,7 +728,7 @@
         <label for="message">Erzählt uns von euch</label>
         <textarea id="message" name="Nachricht" placeholder="Wo heiratet ihr? Was ist euch beim Film besonders wichtig? Was sollen wir auf keinen Fall verpassen?"></textarea>
       </div>
-      <button type="submit" class="btn-submit">Anfrage absenden</button>
+      <button type="submit" class="btn-submit">Senden</button>
       <p class="form-note">
         Unverbindlich &nbsp;&#183;&nbsp; Kostenlos &nbsp;&#183;&nbsp; Antwort innerhalb 24 Stunden<br>
         Oder direkt: <a href="tel:015565559747" style="color:var(--gold-dark)">01556 / 5559747</a>
@@ -757,11 +752,10 @@
     <div class="footer-col">
       <span class="footer-col-title">Navigation</span>
       <a href="#about">Team</a>
-      <a href="#showreel">Showreel</a>
-      <a href="#angebot">Preise</a>
+      <a href="#showreel">Film</a>
       <a href="#referenz">Referenzen</a>
       <a href="#ablauf">Ablauf</a>
-      <a href="#kontakt">Anfragen</a>
+      <a href="#kontakt">Kontakt</a>
     </div>
     <div class="footer-col">
       <span class="footer-col-title">Kontakt</span>
