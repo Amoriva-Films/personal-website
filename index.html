@@ -169,52 +169,51 @@
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
-      cursor: pointer;
-      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .showreel-thumb {
       position: absolute; inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1920&q=85');
-      background-size: cover; background-position: center;
-      opacity: 0.42;
-      transition: opacity 0.5s ease;
+      background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=85');
+      background-size: cover; background-position: center 40%;
+      opacity: 0.18;
+      filter: grayscale(60%);
     }
-    .showreel-wrap:hover .showreel-thumb { opacity: 0.32; }
-    .showreel-iframe {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: none; display: none;
-    }
-    .showreel-overlay {
-      position: absolute; inset: 0;
+    .showreel-coming {
+      position: relative; z-index: 2;
+      text-align: center;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 2rem; z-index: 2;
+      align-items: center; gap: 1.2rem;
+      padding: 2rem;
     }
-    .play-btn {
-      width: 90px; height: 90px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.4);
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.05);
-      transition: all 0.35s ease;
+    .showreel-coming .eyebrow {
+      color: var(--gold); margin-bottom: 0;
     }
-    .showreel-wrap:hover .play-btn {
-      border-color: var(--gold);
-      background: rgba(196,168,130,0.1);
-      transform: scale(1.07);
+    .showreel-coming-title {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      font-weight: 300; color: #fff;
+      line-height: 1.1; letter-spacing: 0.04em;
     }
-    .play-triangle {
-      width: 0; height: 0;
-      border-top: 13px solid transparent;
-      border-bottom: 13px solid transparent;
-      border-left: 22px solid rgba(255,255,255,0.85);
-      margin-left: 6px;
-      transition: border-left-color 0.35s;
+    .showreel-coming-title em { font-style: italic; }
+    .showreel-coming-sub {
+      font-size: 0.72rem; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.4rem;
     }
-    .showreel-wrap:hover .play-triangle { border-left-color: var(--gold); }
-    .showreel-label {
-      font-size: 0.52rem; letter-spacing: 0.5em;
-      text-transform: uppercase; color: rgba(255,255,255,0.35);
+    .showreel-divider {
+      width: 32px; height: 1px;
+      background: var(--gold); opacity: 0.7;
+      margin: 0.6rem auto;
+    }
+    @media (max-width: 860px) {
+      .showreel-wrap { aspect-ratio: 4 / 3; }
+      .showreel-coming-title { font-size: clamp(2rem, 10vw, 3.5rem); }
+    }
+    @media (max-width: 480px) {
+      .showreel-wrap { aspect-ratio: 1 / 1; }
     }
 
     /* ─── GALLERY ────────────────────────────────── */
@@ -231,11 +230,12 @@
     .gallery-main { overflow: hidden; grid-row: span 2; background: var(--black); }
     .gallery-main img {
       width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: center 25%;
-      aspect-ratio: 3 / 4; max-height: 520px;
-      transition: transform 0.9s ease;
+      object-fit: cover; object-position: center center;
+      aspect-ratio: 3 / 4; max-height: 600px;
+      filter: grayscale(100%);
+      transition: transform 0.9s ease, filter 0.6s ease;
     }
-    .gallery-main:hover img { transform: scale(1.03); }
+    .gallery-main:hover img { transform: scale(1.03); filter: grayscale(80%); }
     .gallery-small { overflow: hidden; background: var(--black); }
     .gallery-small img {
       width: 100%; height: 100%; display: block;
@@ -547,17 +547,15 @@
 </section>
 
 <!-- SHOWREEL -->
-<!-- VIMEO / YOUTUBE ID EINFÜGEN: data-video="DEINE_VIDEO_ID" data-platform="vimeo" oder data-platform="youtube" -->
 <section id="showreel">
-  <div class="showreel-wrap" id="showreelWrap" data-video="" data-platform="youtube">
+  <div class="showreel-wrap">
     <div class="showreel-thumb"></div>
-    <div class="showreel-overlay" id="showreelOverlay">
-      <div class="play-btn">
-        <div class="play-triangle"></div>
-      </div>
-      <span class="showreel-label">Showreel ansehen</span>
+    <div class="showreel-coming reveal">
+      <span class="eyebrow">&#10022; &nbsp; Showreel 2025</span>
+      <div class="showreel-divider"></div>
+      <h2 class="showreel-coming-title">Coming<br><em>Soon.</em></h2>
+      <p class="showreel-coming-sub">Unser Showreel ist in Bearbeitung</p>
     </div>
-    <iframe class="showreel-iframe" id="showreelIframe" allowfullscreen allow="autoplay; fullscreen"></iframe>
   </div>
 </section>
 
@@ -569,7 +567,7 @@
   </div>
   <div class="gallery-editorial">
     <div class="gallery-main">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=95&crop=faces" alt="Brautpaar" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=95" alt="Brautpaar" loading="lazy">
     </div>
     <div class="gallery-small">
       <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=900&q=95&crop=faces" alt="Inniger Moment" loading="lazy" style="object-position: center 30%;">
@@ -816,25 +814,9 @@
     if (window.scrollY < window.innerHeight) heroBg.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
   });
 
-  // Showreel click to embed
-  const showreelWrap = document.getElementById('showreelWrap');
-  const showreelOverlay = document.getElementById('showreelOverlay');
-  const showreelIframe = document.getElementById('showreelIframe');
-  showreelWrap.addEventListener('click', function() {
-    const videoId = this.dataset.video;
-    const platform = this.dataset.platform;
-    if (!videoId) return;
-    let src = '';
-    if (platform === 'youtube') {
-      src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
-    } else if (platform === 'vimeo') {
-      src = 'https://player.vimeo.com/video/' + videoId + '?autoplay=1&title=0&byline=0&portrait=0';
-    }
-    showreelIframe.src = src;
-    showreelIframe.style.display = 'block';
-    showreelOverlay.style.display = 'none';
-    document.querySelector('.showreel-thumb').style.opacity = '0';
-  });
+  // Showreel: Video-ID hier eintragen wenn bereit
+  // showreelWrap.dataset.video = "DEINE_YOUTUBE_ID";
+  // showreelWrap.dataset.platform = "youtube"; // oder "vimeo"
 </script>
 
 </body>
