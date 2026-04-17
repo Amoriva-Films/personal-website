@@ -164,7 +164,7 @@
     .section-text { font-size: 0.88rem; line-height: 2.05; color: var(--muted); font-weight: 300; }
 
     /* ─── HOOK ───────────────────────────────────── */
-    #hook { padding: 130px 5%; background: var(--cream); }
+    #hook { padding: 160px 5%; background: var(--cream); }
     .hook-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
     .hook-quote { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.5rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 2rem; }
     .hook-img-wrap { position: relative; }
@@ -265,7 +265,7 @@
     .ring-cell:hover img { transform: scale(1.04); }
 
     /* ─── TEAM ───────────────────────────────────── */
-    #about { padding: 130px 5%; background: var(--white); text-align: center; }
+    #about { padding: 160px 5%; background: var(--white); text-align: center; }
     .about-intro { max-width: 680px; margin: 0 auto 5rem; }
     .team-grid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
     .team-card { text-align: left; }
@@ -321,7 +321,7 @@
     .angebot-legal { font-size: 0.68rem; color: rgba(255,255,255,0.18); margin-top: 3rem; text-align: center; letter-spacing: 0.05em; }
 
     /* ─── REFERENZ (Laura & Jakob) ───────────────── */
-    #referenz { background: var(--cream); padding: 130px 5%; }
+    #referenz { background: var(--cream); padding: 160px 5%; }
     .referenz-inner { max-width: 1100px; margin: 0 auto; }
     .referenz-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-top: 4rem; }
     .ref-card { background: var(--white); padding: 2.8rem 2.4rem; }
@@ -331,12 +331,15 @@
     .ref-highlighted { border-left: 2px solid var(--gold); }
 
     /* ─── ABLAUF ─────────────────────────────────── */
-    #ablauf { padding: 130px 5%; background: var(--white); text-align: center; }
+    #ablauf { padding: 160px 5%; background: var(--white); text-align: center; }
     .steps-wrap { max-width: 900px; margin: 5rem auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5rem; position: relative; }
-    .steps-wrap::before { content: ''; position: absolute; top: 1.5rem; left: calc(16.67% + 0.5rem); right: calc(16.67% + 0.5rem); height: 1px; background: var(--beige); }
-    .step-num { width: 3rem; height: 3rem; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-family: var(--serif); font-size: 1.1rem; color: var(--gold); background: var(--white); position: relative; z-index: 1; }
+    .steps-wrap::before { display: none; }
+    .step-num { display: block; font-family: var(--sans); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.35em; color: var(--gold); margin: 0 auto 1.4rem; text-align: center; }
     .step h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 1rem; }
     .step p { font-size: 0.83rem; line-height: 1.95; color: var(--muted); font-weight: 300; }
+
+    /* ─── SECTION DIVIDER ✦ ──────────────────────── */
+    .section-divider { text-align: center; color: var(--gold); font-size: 0.9rem; padding: 0; opacity: 0.7; letter-spacing: 0.5em; }
 
     /* ─── CTA ────────────────────────────────────── */
     #cta { position: relative; padding: 160px 5%; text-align: center; overflow: hidden; }
@@ -439,10 +442,10 @@
 <nav id="navbar">
   <a href="#hero" class="nav-logo"><span class="logo-top">Amoriva</span><span class="logo-bottom">Films</span></a>
   <ul class="nav-links">
-    <li><a href="#about">Team</a></li>
-    <li><a href="#referenz">Referenzen</a></li>
+    <li><a href="#about">Wir</a></li>
+    <li><a href="#referenz">Stimmen</a></li>
     <li><a href="#ablauf">Ablauf</a></li>
-    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Schreibt uns</a></li>
   </ul>
   <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -450,10 +453,10 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMenu()">&#x2715;</button>
-  <a href="#about"    onclick="closeMenu()">Team</a>
-  <a href="#referenz" onclick="closeMenu()">Referenzen</a>
+  <a href="#about"    onclick="closeMenu()">Wir</a>
+  <a href="#referenz" onclick="closeMenu()">Stimmen</a>
   <a href="#ablauf"   onclick="closeMenu()">Ablauf</a>
-  <a href="#kontakt"  onclick="closeMenu()">Kontakt</a>
+  <a href="#kontakt"  onclick="closeMenu()">Schreibt uns</a>
 </div>
 
 <!-- HERO -->
@@ -461,10 +464,10 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="hero-title">Amoriva Films</h1>
+    <h1 class="hero-title">cinematische<br><em>hochzeitsfilme</em></h1>
     <span class="hero-divider"></span>
-    <span class="hero-service">Wedding Videography &nbsp;&#183;&nbsp; Wedding Photography</span>
-    <p class="hero-sub">Eure Geschichte. So erzählt, dass ihr sie immer wieder fühlen könnt.</p>
+    <span class="hero-service">✦ &nbsp; Amoriva Films &nbsp; ✦</span>
+    <p class="hero-sub">Wir fangen die Momente ein, die ihr selbst kaum bemerkt habt.</p>
   </div>
   <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
 </section>
@@ -473,16 +476,16 @@
 <section id="hook">
   <div class="hook-grid">
     <div>
-      <span class="eyebrow reveal">Mehr als ein Video</span>
+      <span class="eyebrow reveal">✦ &nbsp; Mehr als ein Video</span>
       <blockquote class="hook-quote reveal">
         Stellt euch vor: Zehn Jahre später. Eure Kinder schlafen. Ihr drückt Play. Und ihr seid wieder dort.
       </blockquote>
       <p class="section-text reveal">
-        Nicht die Dekoration. Nicht die Uhrzeit. Das Gefühl, wenn dein Vater dich das erste Mal im Brautkleid sieht. Der Blick deines Partners, in dem Moment bevor du um die Ecke kommst. Die Tränen, die niemand geplant hat.
+        Nicht die Dekoration. Nicht die Uhrzeit. Das Gefühl, wenn dein Vater dich das erste Mal im Brautkleid sieht. Der Blick deines Partners, kurz bevor du um die Ecke kommst. Die Tränen, die niemand geplant hat — und die genau deshalb alles bedeuten.
       </p>
       <br>
       <p class="section-text reveal d1">
-        Genau das bewahren wir für euch. Nicht als Aufzeichnung. Als Film, der sich anfühlt, als wäre er nur für euch gemacht worden.
+        Genau diese Momente bewahren wir für euch. Nicht als Aufzeichnung. Als Film, der sich anfühlt, als wäre er nur für euch gemacht worden. Weil er das ist.
       </p>
     </div>
     <div class="hook-img-wrap reveal d2">
@@ -496,8 +499,8 @@
 <!-- CINEMATIC GALLERY -->
 <section id="gallery">
   <div class="gallery-intro reveal">
-    <span class="eyebrow">Cinematische Momente</span>
-    <h2 class="section-title">Bilder, die<br><em>alles sagen.</em></h2>
+    <span class="eyebrow">✦ &nbsp; Was wir festhalten</span>
+    <h2 class="section-title">Echte Momente.<br><em>Echte Paare.</em></h2>
   </div>
 
   <!-- Banner: Kino-breit, volle Breite -->
@@ -545,27 +548,27 @@
 <!-- TEAM -->
 <section id="about">
   <div class="about-intro">
-    <span class="eyebrow reveal">Die Menschen dahinter</span>
-    <h2 class="section-title reveal">Zwei Menschen.<br><em>Eine Vision.</em></h2>
-    <p class="section-text reveal">Wir glauben daran, dass ein Hochzeitsfilm mehr ist als bewegte Bilder. Er ist das Gefühl eines ganzen Tages, für immer eingefangen.</p>
+    <span class="eyebrow reveal">✦ &nbsp; Wir sind Nevio & Danilo</span>
+    <h2 class="section-title reveal">Hey. Schön,<br><em>dass ihr hier seid.</em></h2>
+    <p class="section-text reveal">Wir sind zwei Freunde — 20 und 21 Jahre alt — mit einer echten Leidenschaft fürs Geschichtenerzählen. Keine große Agentur. Kein aufgesetzter Stil. Nur wir, eure Geschichte, und die Kamera.</p>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
       <div class="team-photo nevio-photo"><img src="nevio.jpg" alt="Nevio Mastrogiorgio" loading="lazy"></div>
       <div class="team-name">Nevio, 20</div>
-      <span class="team-role">Founder &nbsp;&#183;&nbsp; Beratung &amp; Kundenkontakt</span>
+      <span class="team-role">Founder &nbsp;✦&nbsp; Beratung &amp; Herz der Sache</span>
       <a href="mailto:nevio.mastrogiorgio@amoriva-films.de" class="team-email">nevio.mastrogiorgio@amoriva-films.de</a>
       <p class="team-text">
-        Nevio ist vom ersten Gespräch an euer fester Ansprechpartner. Er hört zu, stellt die richtigen Fragen und sorgt dafür, dass ihr euch von Anfang an wirklich aufgehoben fühlt. Mit ihm könnt ihr offen reden und einfach ihr sein, damit ihr an eurem Tag ganz präsent seid. Für die Momente, die später zählen.
+        Ich bin derjenige, den ihr zuerst kennenlernt — und das soll sich gut anfühlen. Kein Verkaufsgespräch, kein Druck. Ich höre einfach zu. Was euch wichtig ist, was ihr euch wünscht, was ihr auf keinen Fall verpassen wollt. Damit ihr an eurem Tag einfach ihr sein könnt — und ich den Rest erledige.
       </p>
     </div>
     <div class="team-card reveal d2">
       <div class="team-photo"><img src="danilo.jpg" alt="Danilo Buonafede" loading="lazy"></div>
       <div class="team-name">Danilo, 21</div>
-      <span class="team-role">Co-Founder &nbsp;&#183;&nbsp; Kamera &amp; Kreation</span>
+      <span class="team-role">Co-Founder &nbsp;✦&nbsp; Kamera & Kreation</span>
       <a href="mailto:danilo.buonafede@amoriva-films.de" class="team-email">danilo.buonafede@amoriva-films.de</a>
       <p class="team-text">
-        Danilo lebt für den perfekten Moment hinter der Kamera. Mit seinem ruhigen Blick und seinem natürlichen Gespür für Licht und Emotion entstehen Aufnahmen, die man nicht vergisst. Er sieht Dinge, bevor sie passieren, und hält sie fest, bevor sie verschwinden. Genau das macht den Unterschied in eurem Film.
+        Danilo sieht Dinge, bevor sie passieren. Dieser Blick kurz bevor jemand weint. Das Licht, das nur für drei Sekunden perfekt ist. Er wartet, beobachtet — und drückt genau dann auf Aufnahme. Sein Gespür für echte Momente ist das, was euren Film zu eurem Film macht.
       </p>
     </div>
   </div>
@@ -666,8 +669,8 @@
 <!-- REFERENZEN -->
 <section id="referenz">
   <div class="referenz-inner">
-    <span class="eyebrow reveal">Was Paare sagen</span>
-    <h2 class="section-title reveal">Worte, die<br><em>uns antreiben.</em></h2>
+    <span class="eyebrow reveal">✦ &nbsp; Ehrliche Worte</span>
+    <h2 class="section-title reveal">Was bleibt,<br><em>wenn der Tag vorbei ist.</em></h2>
     <div class="referenz-grid">
 
       <div class="ref-card ref-highlighted reveal">
@@ -700,23 +703,23 @@
 
 <!-- ABLAUF -->
 <section id="ablauf">
-  <span class="eyebrow reveal">So läuft es ab</span>
-  <h2 class="section-title reveal">Drei Schritte.<br><em>Euer Film.</em></h2>
+  <span class="eyebrow reveal">✦ &nbsp; So starten wir zusammen</span>
+  <h2 class="section-title reveal">Einfach.<br><em>Menschlich. Euer Film.</em></h2>
   <div class="steps-wrap">
     <div class="step reveal">
-      <div class="step-num">1</div>
-      <h3>Anfrage</h3>
-      <p>Ihr schreibt uns. Wir melden uns innerhalb von 24 Stunden persönlich. Kein Autoresponder, kein Warten.</p>
+      <div class="step-num">01 /</div>
+      <h3>Ihr meldet euch</h3>
+      <p>Schreibt uns einfach — eine kurze Nachricht reicht. Kein Formular, kein Stress. Wir antworten persönlich, innerhalb von 24 Stunden.</p>
     </div>
     <div class="step reveal d1">
-      <div class="step-num">2</div>
-      <h3>Kennenlernen</h3>
-      <p>Wir sprechen über euch, euren Tag und eure Vorstellungen. Kein Formular. Ein echtes Gespräch.</p>
+      <div class="step-num">02 /</div>
+      <h3>Wir quatschen</h3>
+      <p>Kein Verkaufsgespräch. Wir lernen uns kennen, reden über euren Tag — und schauen, ob wir zusammenpassen. Das ist uns wichtig.</p>
     </div>
     <div class="step reveal d2">
-      <div class="step-num">3</div>
-      <h3>Hochzeit &amp; Film</h3>
-      <p>Wir begleiten euren Tag und liefern euch einen Film, der bleibt. Für immer.</p>
+      <div class="step-num">03 /</div>
+      <h3>Euer Tag. Euer Film.</h3>
+      <p>Wir sind dabei, halten alles fest — und liefern euch am Ende einen Film, den ihr für immer behalten wollt.</p>
     </div>
   </div>
 </section>
@@ -726,19 +729,19 @@
   <div class="cta-bg"></div>
   <div class="cta-overlay"></div>
   <div class="cta-inner reveal">
-    <span class="eyebrow" style="color:var(--gold)">Begrenzte Termine</span>
-    <h2 class="section-title">Wir nehmen pro Jahr<br><em>nur wenige Hochzeiten an.</em></h2>
-    <p>Damit jeder Film die Aufmerksamkeit bekommt, die er verdient.<br>Schreibt uns bevor euer Datum vergeben ist.</p>
-    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Jetzt anfragen</a>
+    <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Euer Datum</span>
+    <h2 class="section-title">Wir sind nicht für<br><em>jede Hochzeit da.</em></h2>
+    <p>Wir nehmen uns bewusst nur wenige Hochzeiten pro Jahr — damit euer Film die volle Aufmerksamkeit bekommt, die er verdient. Wenn ihr denkt, wir passen zusammen: meldet euch. Bevor das Datum weg ist.</p>
+    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Schreibt uns</a>
   </div>
 </section>
 
 <!-- KONTAKT -->
 <section id="kontakt">
   <div class="kontakt-inner">
-    <span class="eyebrow reveal">Wenn ihr denkt, wir passen zusammen</span>
-    <h2 class="section-title reveal">Schreibt<br><em>uns.</em></h2>
-    <p class="section-text reveal">Kein langer Prozess. Einfach eine ehrliche Nachricht, wir melden uns persönlich bei euch.</p>
+    <span class="eyebrow reveal">✦ &nbsp; Kein langer Prozess</span>
+    <h2 class="section-title reveal">Sagt einfach<br><em>Hallo.</em></h2>
+    <p class="section-text reveal">Eine kurze Nachricht reicht. Wir sind echte Menschen — kein Autoresponder, kein Call-Center. Nevio meldet sich persönlich bei euch.</p>
 
     <form action="https://formsubmit.co/nevio.mastrogiorgio@amoriva-films.de" method="POST" class="reveal">
       <input type="hidden" name="_subject" value="Neue Hochzeitsanfrage von der Website">
@@ -794,7 +797,7 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="logo">Amoriva Films</div>
-      <div class="tagline">Hochzeiten wie Filme erzählt.</div>
+      <div class="tagline">Echte Momente. Für immer.</div>
     </div>
     <div class="footer-col">
       <span class="footer-col-title">Navigation</span>
