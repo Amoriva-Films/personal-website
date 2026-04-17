@@ -224,7 +224,7 @@
     .gallery-editorial {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
-      gap: 3px;
+      gap: 0;
       background: var(--black);
     }
     .gallery-main { overflow: hidden; grid-row: span 2; background: var(--black); }
@@ -232,10 +232,9 @@
       width: 100%; height: 100%; display: block;
       object-fit: cover; object-position: center center;
       aspect-ratio: 3 / 4; max-height: 600px;
-      filter: grayscale(100%);
-      transition: transform 0.9s ease, filter 0.6s ease;
+      transition: transform 0.9s ease;
     }
-    .gallery-main:hover img { transform: scale(1.03); filter: grayscale(80%); }
+    .gallery-main:hover img { transform: scale(1.03); }
     .gallery-small { overflow: hidden; background: var(--black); }
     .gallery-small img {
       width: 100%; height: 100%; display: block;
@@ -586,7 +585,7 @@
   <div class="about-inner">
     <span class="eyebrow reveal">Über uns</span>
     <p class="about-statement reveal">
-      Wir arbeiten mit wenigen Paaren.<br>Dafür vollständig.
+      Euer Tag ist einmalig.<br>Wir behandeln ihn auch so.
     </p>
     <p class="about-text reveal">
       Kein Standard, kein Template. Ihr bekommt Nevio und Danilo. Von Anfang bis Ende. Persönlich, zuverlässig und mit einem echten Gespür für das, was zählt.
@@ -704,8 +703,8 @@
   <div class="cta-overlay"></div>
   <div class="cta-inner reveal">
     <span class="eyebrow" style="color:var(--gold)">&#10022; &nbsp; 2025</span>
-    <h2 class="section-title">Noch wenige<br><em>Termine frei.</em></h2>
-    <p class="cta-sub">Wir arbeiten bewusst mit einer kleinen Anzahl an Paaren pro Jahr.</p>
+    <h2 class="section-title">Habt ihr Lust,<br><em>euren Tag mit uns zu teilen?</em></h2>
+    <p class="cta-sub">Schreibt uns einfach an. Kein Stress, keine Verpflichtung.</p>
     <a href="#kontakt" class="cta-btn">Verfügbarkeit prüfen</a>
   </div>
 </section>
