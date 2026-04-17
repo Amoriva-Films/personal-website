@@ -218,41 +218,52 @@
     }
 
     /* ─── GALLERY ────────────────────────────────── */
-    #gallery { background: var(--white); padding: 120px 0; }
+    #gallery { background: var(--black); padding: 120px 0 0; }
     .gallery-header { text-align: center; padding: 0 5% 60px; }
+    .gallery-header .eyebrow { color: var(--gold); }
+    .gallery-header .section-title { color: var(--white); }
     .gallery-editorial {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
-      gap: 0;
+      gap: 3px;
+      background: var(--black);
     }
-    .gallery-main { overflow: hidden; grid-row: span 2; }
+    .gallery-main { overflow: hidden; grid-row: span 2; background: var(--black); }
     .gallery-main img {
       width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: center top;
+      object-fit: cover; object-position: center 25%;
       aspect-ratio: 3 / 4;
       transition: transform 0.9s ease;
     }
     .gallery-main:hover img { transform: scale(1.03); }
-    .gallery-small { overflow: hidden; }
+    .gallery-small { overflow: hidden; background: var(--black); }
     .gallery-small img {
-      width: 100%; display: block;
-      object-fit: cover; aspect-ratio: 4 / 3;
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center center;
+      aspect-ratio: 4 / 3;
       transition: transform 0.9s ease;
     }
     .gallery-small:hover img { transform: scale(1.04); }
-    .gallery-wide { overflow: hidden; }
+    .gallery-wide { overflow: hidden; background: var(--black); }
     .gallery-wide img {
       width: 100%; display: block;
       object-fit: cover; object-position: center 40%;
-      aspect-ratio: 21 / 8; max-height: 420px;
+      aspect-ratio: 21 / 9;
       transition: transform 10s ease;
     }
     .gallery-wide:hover img { transform: scale(1.02); }
     @media (max-width: 860px) {
-      .gallery-editorial { grid-template-columns: 1fr; }
+      .gallery-editorial {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
       .gallery-main { grid-row: span 1; }
-      .gallery-main img { aspect-ratio: 4 / 3; }
-      .gallery-wide img { aspect-ratio: 4 / 3; max-height: none; }
+      .gallery-main img {
+        aspect-ratio: 4 / 5;
+        object-position: center 20%;
+      }
+      .gallery-small img { aspect-ratio: 4 / 3; }
+      .gallery-wide img { aspect-ratio: 4 / 3; }
     }
 
     /* ─── ABOUT (SHORT) ──────────────────────────── */
@@ -558,16 +569,16 @@
   </div>
   <div class="gallery-editorial">
     <div class="gallery-main">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=95" alt="Brautpaar" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=95&crop=faces" alt="Brautpaar" loading="lazy">
     </div>
     <div class="gallery-small">
-      <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=900&q=95" alt="Inniger Moment" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=900&q=95&crop=faces" alt="Inniger Moment" loading="lazy" style="object-position: center 30%;">
     </div>
     <div class="gallery-small">
-      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=95" alt="Haende" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=95" alt="Brautpaar Zeremonie" loading="lazy" style="object-position: center 35%;">
     </div>
   </div>
-  <div class="gallery-wide">
+  <div class="gallery-wide" style="margin-top:3px;">
     <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=2400&q=95" alt="Brautpaar Panorama" loading="lazy">
   </div>
 </section>
