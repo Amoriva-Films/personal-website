@@ -163,25 +163,32 @@
     .section-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
     .section-text { font-size: 0.88rem; line-height: 2.05; color: var(--muted); font-weight: 300; }
 
-    /* ─── HOOK ───────────────────────────────────── */
-    #hook { padding: 160px 5%; background: var(--cream); }
-    .hook-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
-    .hook-quote { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.5rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 2rem; letter-spacing: 0.01em; }
-    .hook-img-wrap { position: relative; }
-    .hook-img-wrap::before { content: ''; position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid var(--gold); pointer-events: none; z-index: 0; }
-    .hook-img-wrap img { position: relative; z-index: 1; width: 100%; height: 560px; object-fit: cover; display: block; }
-
-    /* ─── SHOWREEL ───────────────────────────────── */
-    #showreel { padding: 130px 5%; background: var(--black); text-align: center; }
-    #showreel .section-title { color: #fff; }
-    #showreel .section-text { color: rgba(255,255,255,0.4); max-width: 500px; margin: 0 auto 3.5rem; }
-    .video-outer { max-width: 920px; margin: 0 auto; position: relative; padding-bottom: 56.25%; overflow: hidden; background: #0d0d0d; border: 1px solid rgba(196,168,130,0.15); }
-    .video-outer iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
-    .play-btn { width: 90px; height: 90px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
-    .play-btn:hover { background: rgba(196,168,130,0.1); transform: scale(1.06); }
-    .play-btn::after { content: ''; width: 0; height: 0; border-left: 22px solid var(--gold); border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
-    .video-placeholder p { font-family: var(--serif); font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.3); }
+    /* ─── ABOUT US ───────────────────────────────── */
+    #about-us { padding: 140px 5%; background: var(--white); }
+    .about-us-inner { max-width: 820px; margin: 0 auto; }
+    .about-us-statement {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.55; color: var(--text);
+      margin-bottom: 3rem; padding-bottom: 3rem;
+      border-bottom: 1px solid var(--beige);
+    }
+    .about-us-body { max-width: 640px; }
+    .about-us-body p {
+      font-size: 0.92rem; line-height: 2.1;
+      color: var(--muted); font-weight: 300;
+      margin-bottom: 1.4rem;
+    }
+    .about-us-pull {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+      font-weight: 300; color: var(--text);
+      margin: 3.5rem 0 2rem;
+      padding-left: 1.8rem;
+      border-left: 2px solid var(--gold);
+      line-height: 1.6;
+    }
 
     /* ─── GALLERY (Wakefield Style) ─────────────── */
     #gallery { background: var(--white); padding: 120px 0 0; }
@@ -420,7 +427,7 @@
       .contact-direct { flex-direction: column; align-items: center; gap: 1rem; }
     }
     @media (max-width: 600px) {
-      #hook, #showreel, #about, #angebot, #referenz, #ablauf, #cta, #kontakt { padding: 90px 5%; }
+      #about-us, #about, #referenz, #ablauf, #cta, #kontakt { padding: 90px 5%; }
       #gallery { padding: 70px 0 0; }
       .gallery-intro { padding: 0 5% 50px; }
       .cine-cell { height: 80vw; }
@@ -459,31 +466,35 @@
   <div class="hero-content">
     <h1 class="hero-title">Amoriva Films</h1>
     <span class="hero-divider"></span>
-    <span class="hero-service">Hochzeitsfilme &nbsp;&#183;&nbsp; Deutschland</span>
-    <p class="hero-sub">Wir fangen die Momente ein, die ihr selbst kaum bemerkt habt.</p>
+    <span class="hero-service">Foto &amp; Film &nbsp;&#183;&nbsp; Deutschland</span>
+    <p class="hero-sub">Eure Hochzeit, erzählt in Bildern und Film.</p>
   </div>
   <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
 </section>
 
-<!-- EMOTIONAL HOOK -->
-<section id="hook">
-  <div class="hook-grid">
-    <div>
-      <span class="eyebrow reveal">✦ &nbsp; Was wir tun</span>
-      <h2 class="hook-quote reveal">
-        Wir drehen keine Imagefilme. Wir erzählen eure Geschichte.
-      </h2>
-      <p class="section-text reveal">
-        Nicht die Deko, nicht der Ablaufplan. Den Blick eures Vaters, wenn er euch das erste Mal im Brautkleid sieht. Den Moment kurz bevor ihr um die Ecke kommt. Die Tränen, die niemand geplant hat. Genau das halten wir fest.
+<!-- ABOUT US -->
+<section id="about-us">
+  <div class="about-us-inner">
+    <p class="about-us-statement reveal">
+      Amoriva Films steht für Hochzeitsfilme, die sich nicht wie klassische Videos anfühlen, sondern wie echte Filme.
+    </p>
+    <div class="about-us-body">
+      <p class="reveal">
+        Wir glauben, dass eine Hochzeit mehr ist als ein Ablauf aus Programmpunkten. Es sind die kleinen Blicke, die echten Emotionen und die Momente dazwischen, die eure Geschichte besonders machen.
       </p>
-      <br>
-      <p class="section-text reveal d1">
-        Kein gestelltes Lächeln, keine perfekten Szenen. Nur euer Tag, so wie er sich wirklich angefühlt hat. Als Film, den ihr in zehn Jahren noch genauso fühlt wie heute.
+      <p class="reveal d1">
+        Statt einfach nur zu dokumentieren, erzählen wir eure Hochzeit mit Struktur, Gefühl und einem klaren Storytelling-Ansatz. So entsteht ein Film, der euch auch Jahre später wieder genau in diesen Tag zurückversetzt.
+      </p>
+      <p class="reveal d2">
+        Unser Anspruch ist es nicht, möglichst viel festzuhalten, sondern das Richtige. Authentisch, ästhetisch und mit einem Gespür für Timing und Emotion.
       </p>
     </div>
-    <div class="hook-img-wrap reveal d2">
-      <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=95" alt="Hochzeitspaar" loading="lazy">
-    </div>
+    <p class="about-us-pull reveal">
+      Foto und Film greifen ineinander. Eine visuelle Geschichte, kein Standardprodukt.
+    </p>
+    <p class="about-us-body reveal">
+      <span style="font-size:0.92rem;line-height:2.1;color:var(--muted);font-weight:300;">Für Paare, die nicht einfach nur Erinnerungen wollen, sondern ihre Geschichte wirklich fühlen möchten.</span>
+    </p>
   </div>
 </section>
 
@@ -492,8 +503,8 @@
 <!-- CINEMATIC GALLERY -->
 <section id="gallery">
   <div class="gallery-intro reveal">
-    <span class="eyebrow">✦ &nbsp; Was wir festhalten</span>
-    <h2 class="section-title">Echte Momente.<br><em>Echte Paare.</em></h2>
+    <span class="eyebrow">✦ &nbsp; Ausgewählte Arbeiten</span>
+    <h2 class="section-title">Bilder, die<br><em>für sich sprechen.</em></h2>
   </div>
 
   <!-- Banner: Kino-breit, volle Breite -->
@@ -541,9 +552,9 @@
 <!-- TEAM -->
 <section id="about">
   <div class="about-intro">
-    <span class="eyebrow reveal">✦ &nbsp; Wir sind Nevio & Danilo</span>
-    <h2 class="section-title reveal">Hey. Schön,<br><em>dass ihr hier seid.</em></h2>
-    <p class="section-text reveal">Zwei Freunde, 20 und 21, mit echter Leidenschaft fürs Geschichtenerzählen. Keine große Agentur, kein aufgesetzter Stil. Nur wir, eure Geschichte und die Kamera.</p>
+    <span class="eyebrow reveal">✦ &nbsp; Wer wir sind</span>
+    <h2 class="section-title reveal">Nevio & Danilo.<br><em>Amoriva Films.</em></h2>
+    <p class="section-text reveal">Kein großes Team, keine Agentur. Zwei Personen, die genau wissen was sie tun und warum sie es tun.</p>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
@@ -696,8 +707,8 @@
 
 <!-- ABLAUF -->
 <section id="ablauf">
-  <span class="eyebrow reveal">✦ &nbsp; So starten wir zusammen</span>
-  <h2 class="section-title reveal">Einfach.<br><em>Menschlich. Euer Film.</em></h2>
+  <span class="eyebrow reveal">✦ &nbsp; Wie wir arbeiten</span>
+  <h2 class="section-title reveal">Klar.<br><em>Persönlich. Echt.</em></h2>
   <div class="steps-wrap">
     <div class="step reveal">
       <div class="step-num">01 /</div>
@@ -722,19 +733,19 @@
   <div class="cta-bg"></div>
   <div class="cta-overlay"></div>
   <div class="cta-inner reveal">
-    <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Euer Datum</span>
-    <h2 class="section-title">Wir sind nicht für<br><em>jede Hochzeit da.</em></h2>
-    <p>Wir nehmen uns bewusst nur wenige Hochzeiten pro Jahr. Damit euer Film die Aufmerksamkeit bekommt die er verdient. Wenn ihr denkt wir passen zusammen, meldet euch. Bevor das Datum weg ist.</p>
-    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Schreibt uns</a>
+    <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Verfügbarkeit</span>
+    <h2 class="section-title">Wir arbeiten<br><em>bewusst mit wenigen Paaren.</em></h2>
+    <p>Nicht jede Anfrage passt zu uns. Und das ist gut so. Wenn ihr das Gefühl habt, dass wir zusammenpassen, meldet euch.</p>
+    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Anfrage senden</a>
   </div>
 </section>
 
 <!-- KONTAKT -->
 <section id="kontakt">
   <div class="kontakt-inner">
-    <span class="eyebrow reveal">✦ &nbsp; Kein langer Prozess</span>
-    <h2 class="section-title reveal">Sagt einfach<br><em>Hallo.</em></h2>
-    <p class="section-text reveal">Eine kurze Nachricht reicht. Wir sind echte Menschen, kein Autoresponder, kein Call Center. Nevio meldet sich persönlich bei euch.</p>
+    <span class="eyebrow reveal">✦ &nbsp; Anfrage</span>
+    <h2 class="section-title reveal">Verfügbarkeit<br><em>prüfen.</em></h2>
+    <p class="section-text reveal">Kurze Nachricht genügt. Nevio meldet sich persönlich innerhalb von 24 Stunden.</p>
 
     <form action="https://formsubmit.co/nevio.mastrogiorgio@amoriva-films.de" method="POST" class="reveal">
       <input type="hidden" name="_subject" value="Neue Hochzeitsanfrage von der Website">
