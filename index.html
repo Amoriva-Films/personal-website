@@ -190,10 +190,45 @@
       line-height: 1.6;
     }
 
-    /* ─── GALLERY (Wakefield Style) ─────────────── */
-    #gallery { background: var(--white); padding: 120px 0 0; }
-    .gallery-intro { text-align: center; padding: 0 5% 60px; }
-    .gallery-intro .section-title { color: var(--text); margin-bottom: 0; }
+    /* ─── GALLERY ────────────────────────────────── */
+    #gallery { background: var(--white); padding: 120px 0; }
+    .gallery-header { text-align: center; padding: 0 5% 60px; }
+    .gallery-editorial {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4px;
+    }
+    .gallery-main { overflow: hidden; grid-row: span 2; }
+    .gallery-main img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center top;
+      aspect-ratio: 3 / 4;
+      transition: transform 0.9s ease;
+    }
+    .gallery-main:hover img { transform: scale(1.03); }
+    .gallery-small { overflow: hidden; }
+    .gallery-small img {
+      width: 100%; display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      transition: transform 0.9s ease;
+    }
+    .gallery-small:hover img { transform: scale(1.04); }
+    .gallery-wide { margin-top: 4px; overflow: hidden; }
+    .gallery-wide img {
+      width: 100%; display: block;
+      object-fit: cover; object-position: center 40%;
+      aspect-ratio: 21 / 8;
+      max-height: 420px;
+      transition: transform 10s ease;
+    }
+    .gallery-wide:hover img { transform: scale(1.02); }
+    @media (max-width: 860px) {
+      .gallery-editorial { grid-template-columns: 1fr; }
+      .gallery-main { grid-row: span 1; }
+      .gallery-main img { aspect-ratio: 4 / 3; }
+      .gallery-wide img { aspect-ratio: 4 / 3; max-height: none; }
+    }
 
     .cine-banner {
       width: 100%;
@@ -475,6 +510,7 @@
 <!-- ABOUT US -->
 <section id="about-us">
   <div class="about-us-inner">
+    <span class="eyebrow reveal">✦ &nbsp; About us</span>
     <p class="about-us-statement reveal">
       Amoriva Films steht für Hochzeitsfilme, die sich nicht wie klassische Videos anfühlen, sondern wie echte Filme.
     </p>
@@ -499,12 +535,34 @@
 </section>
 
 
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <span class="eyebrow">✦ &nbsp; Ausgewählte Momente</span>
+    <h2 class="section-title">Ein Eindruck<br><em>unserer Arbeit.</em></h2>
+  </div>
+  <div class="gallery-editorial">
+    <div class="gallery-main">
+      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1200&q=95" alt="Brautpaar" loading="lazy">
+    </div>
+    <div class="gallery-small">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=95" alt="Zeremonie" loading="lazy">
+    </div>
+    <div class="gallery-small">
+      <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=95" alt="Romantischer Moment" loading="lazy">
+    </div>
+  </div>
+  <div class="gallery-wide">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2400&q=95" alt="Erster Tanz" loading="lazy">
+  </div>
+</section>
+
 <!-- TEAM -->
 <section id="about">
   <div class="about-intro">
-    <span class="eyebrow reveal">✦ &nbsp; Wer wir sind</span>
-    <h2 class="section-title reveal">Nevio & Danilo.<br><em>Amoriva Films.</em></h2>
-    <p class="section-text reveal">Kein großes Team, keine Agentur. Zwei Personen, die genau wissen was sie tun und warum sie es tun.</p>
+    <span class="eyebrow reveal">✦ &nbsp; Hinter der Kamera</span>
+    <h2 class="section-title reveal">Das sind<br><em>Nevio & Danilo.</em></h2>
+    <p class="section-text reveal">Kein großes Team, keine Agentur. Zwei Leute, die genau wissen was sie tun und wirklich Bock darauf haben.</p>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
@@ -683,10 +741,10 @@
   <div class="cta-bg"></div>
   <div class="cta-overlay"></div>
   <div class="cta-inner reveal">
-    <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Verfügbarkeit</span>
-    <h2 class="section-title">Wir arbeiten<br><em>bewusst mit wenigen Paaren.</em></h2>
-    <p>Nicht jede Anfrage passt zu uns. Und das ist gut so. Wenn ihr das Gefühl habt, dass wir zusammenpassen, meldet euch.</p>
-    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Anfrage senden</a>
+    <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Meldet euch</span>
+    <h2 class="section-title">Habt ihr Lust,<br><em>euren Tag mit uns zu teilen?</em></h2>
+    <p>Schreibt uns einfach. Kein Stress, keine Verpflichtung. Wir schauen gemeinsam ob es passt und freuen uns auf eure Nachricht.</p>
+    <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Schreibt uns</a>
   </div>
 </section>
 
