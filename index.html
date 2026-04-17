@@ -166,7 +166,7 @@
     /* ─── HOOK ───────────────────────────────────── */
     #hook { padding: 160px 5%; background: var(--cream); }
     .hook-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
-    .hook-quote { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.5rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 2rem; }
+    .hook-quote { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.5rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 2rem; letter-spacing: 0.01em; }
     .hook-img-wrap { position: relative; }
     .hook-img-wrap::before { content: ''; position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid var(--gold); pointer-events: none; z-index: 0; }
     .hook-img-wrap img { position: relative; z-index: 1; width: 100%; height: 560px; object-fit: cover; display: block; }
@@ -183,80 +183,73 @@
     .play-btn::after { content: ''; width: 0; height: 0; border-left: 22px solid var(--gold); border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
     .video-placeholder p { font-family: var(--serif); font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.3); }
 
-    /* ─── CINEMATIC GALLERY (neu) ───────────────── */
-    #gallery { background: #070707; padding: 100px 0 0; }
-    .gallery-intro { text-align: center; padding: 0 5% 70px; }
-    .gallery-intro .section-title { color: #fff; margin-bottom: 0; }
+    /* ─── GALLERY (Wakefield Style) ─────────────── */
+    #gallery { background: var(--white); padding: 120px 0 0; }
+    .gallery-intro { text-align: center; padding: 0 5% 60px; }
+    .gallery-intro .section-title { color: var(--text); margin-bottom: 0; }
 
     .cine-banner {
       width: 100%;
       aspect-ratio: 16 / 7;
-      max-height: 540px;
-      overflow: hidden; position: relative; background: #111;
+      max-height: 560px;
+      overflow: hidden; position: relative; background: #eee;
     }
     .cine-banner img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       object-position: center 100%;
-      filter: contrast(1.05) saturate(1.05) brightness(1.0);
+      filter: none;
       transform: scale(1.0);
       transition: transform 10s ease;
     }
-    .cine-banner:hover img { transform: scale(1.04); }
+    .cine-banner:hover img { transform: scale(1.03); }
 
     .cine-row {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
-      margin-top: 3px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+      margin-top: 6px; padding: 0;
     }
     .cine-cell {
-      overflow: hidden; position: relative; background: #111;
+      overflow: hidden; position: relative; background: #eee;
       aspect-ratio: 4 / 5;
     }
     .cine-cell img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       object-position: center top;
-      filter: contrast(1.03) saturate(1.05) brightness(1.0);
+      filter: none;
       transform: scale(1.0);
-      transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s ease;
+      transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    .cine-cell:hover img {
-      transform: scale(1.05);
-      filter: contrast(1.06) saturate(1.1) brightness(1.05);
-    }
+    .cine-cell:hover img { transform: scale(1.04); }
 
-    /* Vignette filmic overlay */
-    .cine-vignette {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);
-    }
+    .cine-vignette { display: none; }
+
     .cine-caption {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-      background: linear-gradient(transparent, rgba(0,0,0,0.6));
-      padding: 3.5rem 2rem 1.8rem;
-      opacity: 0; transform: translateY(10px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
+      background: linear-gradient(transparent, rgba(0,0,0,0.45));
+      padding: 3rem 1.6rem 1.4rem;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .cine-cell:hover .cine-caption { opacity: 1; transform: translateY(0); }
     .cine-caption span {
-      font-family: var(--serif); font-size: 1.05rem;
-      font-style: italic; color: rgba(255,255,255,0.92);
-      letter-spacing: 0.03em;
+      font-family: var(--serif); font-size: 0.95rem;
+      font-style: italic; color: rgba(255,255,255,0.95);
     }
 
     .cine-wide {
       width: 100%;
       aspect-ratio: 21 / 8;
-      max-height: 420px;
-      overflow: hidden; position: relative; background: #111;
-      margin-top: 3px;
+      max-height: 440px;
+      overflow: hidden; position: relative; background: #eee;
+      margin-top: 6px;
     }
     .cine-wide img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       object-position: center center;
-      filter: contrast(1.03) saturate(1.05) brightness(1.0);
+      filter: none;
       transform: scale(1.0);
       transition: transform 10s ease;
     }
-    .cine-wide:hover img { transform: scale(1.04); }
+    .cine-wide:hover img { transform: scale(1.03); }
 
     /* ─── RING PHOTO STRIP ───────────────────────── */
     #rings { display: grid; grid-template-columns: 1fr 1fr; }
@@ -464,9 +457,9 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="hero-title">cinematische<br><em>hochzeitsfilme</em></h1>
+    <h1 class="hero-title">Amoriva Films</h1>
     <span class="hero-divider"></span>
-    <span class="hero-service">✦ &nbsp; Amoriva Films &nbsp; ✦</span>
+    <span class="hero-service">Hochzeitsfilme &nbsp;&#183;&nbsp; Deutschland</span>
     <p class="hero-sub">Wir fangen die Momente ein, die ihr selbst kaum bemerkt habt.</p>
   </div>
   <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
@@ -476,16 +469,16 @@
 <section id="hook">
   <div class="hook-grid">
     <div>
-      <span class="eyebrow reveal">✦ &nbsp; Mehr als ein Video</span>
-      <blockquote class="hook-quote reveal">
-        Stellt euch vor: Zehn Jahre später. Eure Kinder schlafen. Ihr drückt Play. Und ihr seid wieder dort.
-      </blockquote>
+      <span class="eyebrow reveal">✦ &nbsp; Was wir tun</span>
+      <h2 class="hook-quote reveal">
+        Wir drehen keine Imagefilme. Wir erzählen eure Geschichte.
+      </h2>
       <p class="section-text reveal">
-        Nicht die Dekoration. Nicht die Uhrzeit. Das Gefühl, wenn dein Vater dich das erste Mal im Brautkleid sieht. Der Blick deines Partners, kurz bevor du um die Ecke kommst. Die Tränen, die niemand geplant hat — und die genau deshalb alles bedeuten.
+        Nicht die Deko, nicht der Ablaufplan. Den Blick eures Vaters, wenn er euch das erste Mal im Brautkleid sieht. Den Moment kurz bevor ihr um die Ecke kommt. Die Tränen, die niemand geplant hat. Genau das halten wir fest.
       </p>
       <br>
       <p class="section-text reveal d1">
-        Genau diese Momente bewahren wir für euch. Nicht als Aufzeichnung. Als Film, der sich anfühlt, als wäre er nur für euch gemacht worden. Weil er das ist.
+        Kein gestelltes Lächeln, keine perfekten Szenen. Nur euer Tag, so wie er sich wirklich angefühlt hat. Als Film, den ihr in zehn Jahren noch genauso fühlt wie heute.
       </p>
     </div>
     <div class="hook-img-wrap reveal d2">
@@ -550,25 +543,25 @@
   <div class="about-intro">
     <span class="eyebrow reveal">✦ &nbsp; Wir sind Nevio & Danilo</span>
     <h2 class="section-title reveal">Hey. Schön,<br><em>dass ihr hier seid.</em></h2>
-    <p class="section-text reveal">Wir sind zwei Freunde — 20 und 21 Jahre alt — mit einer echten Leidenschaft fürs Geschichtenerzählen. Keine große Agentur. Kein aufgesetzter Stil. Nur wir, eure Geschichte, und die Kamera.</p>
+    <p class="section-text reveal">Zwei Freunde, 20 und 21, mit echter Leidenschaft fürs Geschichtenerzählen. Keine große Agentur, kein aufgesetzter Stil. Nur wir, eure Geschichte und die Kamera.</p>
   </div>
   <div class="team-grid">
     <div class="team-card reveal">
       <div class="team-photo nevio-photo"><img src="nevio.jpg" alt="Nevio Mastrogiorgio" loading="lazy"></div>
       <div class="team-name">Nevio, 20</div>
-      <span class="team-role">Founder &nbsp;✦&nbsp; Beratung &amp; Herz der Sache</span>
+      <span class="team-role">Founder &nbsp;&#183;&nbsp; Beratung &amp; Herz der Sache</span>
       <a href="mailto:nevio.mastrogiorgio@amoriva-films.de" class="team-email">nevio.mastrogiorgio@amoriva-films.de</a>
       <p class="team-text">
-        Ich bin derjenige, den ihr zuerst kennenlernt — und das soll sich gut anfühlen. Kein Verkaufsgespräch, kein Druck. Ich höre einfach zu. Was euch wichtig ist, was ihr euch wünscht, was ihr auf keinen Fall verpassen wollt. Damit ihr an eurem Tag einfach ihr sein könnt — und ich den Rest erledige.
+        Ich bin derjenige, den ihr zuerst kennenlernt. Kein Verkaufsgespräch, kein Druck. Ich höre einfach zu. Was euch wichtig ist. Was ihr euch wünscht. Was ihr auf keinen Fall verpassen wollt. Damit ihr an eurem Tag ganz bei euch sein könnt.
       </p>
     </div>
     <div class="team-card reveal d2">
       <div class="team-photo"><img src="danilo.jpg" alt="Danilo Buonafede" loading="lazy"></div>
       <div class="team-name">Danilo, 21</div>
-      <span class="team-role">Co-Founder &nbsp;✦&nbsp; Kamera & Kreation</span>
+      <span class="team-role">Co-Founder &nbsp;&#183;&nbsp; Kamera &amp; Kreation</span>
       <a href="mailto:danilo.buonafede@amoriva-films.de" class="team-email">danilo.buonafede@amoriva-films.de</a>
       <p class="team-text">
-        Danilo sieht Dinge, bevor sie passieren. Dieser Blick kurz bevor jemand weint. Das Licht, das nur für drei Sekunden perfekt ist. Er wartet, beobachtet — und drückt genau dann auf Aufnahme. Sein Gespür für echte Momente ist das, was euren Film zu eurem Film macht.
+        Danilo sieht Dinge, bevor sie passieren. Den Blick kurz bevor jemand weint. Das Licht das nur für drei Sekunden perfekt ist. Er wartet, beobachtet und drückt genau dann auf Aufnahme. Sein Gespür für echte Momente macht euren Film zu eurem Film.
       </p>
     </div>
   </div>
@@ -709,17 +702,17 @@
     <div class="step reveal">
       <div class="step-num">01 /</div>
       <h3>Ihr meldet euch</h3>
-      <p>Schreibt uns einfach — eine kurze Nachricht reicht. Kein Formular, kein Stress. Wir antworten persönlich, innerhalb von 24 Stunden.</p>
+      <p>Schreibt uns einfach. Eine kurze Nachricht reicht. Kein Formular, kein Stress. Wir antworten persönlich innerhalb von 24 Stunden.</p>
     </div>
     <div class="step reveal d1">
       <div class="step-num">02 /</div>
       <h3>Wir quatschen</h3>
-      <p>Kein Verkaufsgespräch. Wir lernen uns kennen, reden über euren Tag — und schauen, ob wir zusammenpassen. Das ist uns wichtig.</p>
+      <p>Kein Verkaufsgespräch. Wir lernen uns kennen, reden über euren Tag und schauen ob wir zusammenpassen. Das ist uns wirklich wichtig.</p>
     </div>
     <div class="step reveal d2">
       <div class="step-num">03 /</div>
       <h3>Euer Tag. Euer Film.</h3>
-      <p>Wir sind dabei, halten alles fest — und liefern euch am Ende einen Film, den ihr für immer behalten wollt.</p>
+      <p>Wir sind dabei, halten alles fest und liefern euch am Ende einen Film, den ihr für immer behalten wollt.</p>
     </div>
   </div>
 </section>
@@ -731,7 +724,7 @@
   <div class="cta-inner reveal">
     <span class="eyebrow" style="color:var(--gold)">✦ &nbsp; Euer Datum</span>
     <h2 class="section-title">Wir sind nicht für<br><em>jede Hochzeit da.</em></h2>
-    <p>Wir nehmen uns bewusst nur wenige Hochzeiten pro Jahr — damit euer Film die volle Aufmerksamkeit bekommt, die er verdient. Wenn ihr denkt, wir passen zusammen: meldet euch. Bevor das Datum weg ist.</p>
+    <p>Wir nehmen uns bewusst nur wenige Hochzeiten pro Jahr. Damit euer Film die Aufmerksamkeit bekommt die er verdient. Wenn ihr denkt wir passen zusammen, meldet euch. Bevor das Datum weg ist.</p>
     <a href="#kontakt" class="hero-cta" style="opacity:1;animation:none;">Schreibt uns</a>
   </div>
 </section>
@@ -741,7 +734,7 @@
   <div class="kontakt-inner">
     <span class="eyebrow reveal">✦ &nbsp; Kein langer Prozess</span>
     <h2 class="section-title reveal">Sagt einfach<br><em>Hallo.</em></h2>
-    <p class="section-text reveal">Eine kurze Nachricht reicht. Wir sind echte Menschen — kein Autoresponder, kein Call-Center. Nevio meldet sich persönlich bei euch.</p>
+    <p class="section-text reveal">Eine kurze Nachricht reicht. Wir sind echte Menschen, kein Autoresponder, kein Call Center. Nevio meldet sich persönlich bei euch.</p>
 
     <form action="https://formsubmit.co/nevio.mastrogiorgio@amoriva-films.de" method="POST" class="reveal">
       <input type="hidden" name="_subject" value="Neue Hochzeitsanfrage von der Website">
