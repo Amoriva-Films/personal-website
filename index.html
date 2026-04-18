@@ -167,6 +167,7 @@
     #showreel { background: var(--black); padding: 0; }
     .showreel-wrap {
       position: relative;
+      width: 100%;
       aspect-ratio: 16 / 9;
       max-height: 85vh;
       overflow: hidden;
@@ -176,8 +177,9 @@
     }
     .showreel-thumb {
       position: absolute; inset: 0;
+      width: 100%; height: 100%;
       background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=85');
-      background-size: cover; background-position: center 40%;
+      background-size: cover; background-position: center center;
       opacity: 0.18;
       filter: grayscale(60%);
     }
@@ -519,7 +521,7 @@
     <span class="logo-bottom">Films</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#gallery">Arbeit</a></li>
+    <li><a href="#gallery">Galerie</a></li>
     <li><a href="#about">Über uns</a></li>
     <li><a href="#referenz">Stimmen</a></li>
     <li><a href="#kontakt" class="nav-cta">Schreibt uns</a></li>
@@ -530,7 +532,7 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMenu()">&#x2715;</button>
-  <a href="#gallery"  onclick="closeMenu()">Arbeit</a>
+  <a href="#gallery"  onclick="closeMenu()">Galerie</a>
   <a href="#about"    onclick="closeMenu()">Über uns</a>
   <a href="#referenz" onclick="closeMenu()">Stimmen</a>
   <a href="#kontakt"  onclick="closeMenu()">Schreibt uns einfach an</a>
