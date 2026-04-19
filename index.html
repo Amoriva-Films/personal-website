@@ -225,53 +225,54 @@
     .gallery-header .eyebrow { color: var(--gold); }
     .gallery-header .section-title { color: var(--white); }
 
-    /* Editorial Grid — explizite Zeilenhöhen damit kein Spalt entsteht */
-    .gallery-editorial {
+    /* ── PREMIUM ASYMMETRIC GALLERY ─────────────── */
+    .gallery-premium {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      grid-template-rows: 350px 350px;
-      gap: 0;
+      grid-template-columns: 2.1fr 1fr 1.45fr;
+      grid-template-rows: 360px 260px;
+      gap: 3px;
+      background: var(--black);
     }
-    .gallery-main { overflow: hidden; grid-row: span 2; }
-    .gallery-main img {
-      width: 100%; height: 700px; display: block;
-      object-fit: cover; object-position: center center;
-      transition: transform 0.9s ease;
-    }
-    .gallery-main:hover img { transform: scale(1.03); }
-    .gallery-small { overflow: hidden; }
-    .gallery-small img {
-      width: 100%; height: 350px; display: block;
+    .gp-item { overflow: hidden; position: relative; }
+    .gp-item img {
+      width: 100%; height: 100%; display: block;
       object-fit: cover;
-      transition: transform 0.9s ease;
+      transition: transform 1s ease;
     }
-    .gallery-small:hover img { transform: scale(1.04); }
+    .gp-item:hover img { transform: scale(1.04); }
 
-    /* Diptych unten — zwei gleichgroße Bilder nebeneinander */
-    .gallery-diptych {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin-top: 0;
-    }
-    .gallery-diptych-item { overflow: hidden; }
-    .gallery-diptych-item img {
-      width: 100%; height: 600px; display: block;
-      object-fit: cover; object-position: center center;
-      transition: transform 0.9s ease;
-    }
-    .gallery-diptych-item:hover img { transform: scale(1.03); }
+    /* Dominant: linke Spalte, überspannt beide Zeilen */
+    .gp-1 { grid-column: 1; grid-row: 1 / 3; }
 
+    /* Mittlere Spalte oben */
+    .gp-2 { grid-column: 2; grid-row: 1; }
+
+    /* Rechte Spalte oben — etwas größer */
+    .gp-3 { grid-column: 3; grid-row: 1; }
+
+    /* Mittlere Spalte unten */
+    .gp-4 { grid-column: 2; grid-row: 2; }
+
+    /* Rechte Spalte unten */
+    .gp-5 { grid-column: 3; grid-row: 2; }
+
+    /* Mobile: 2 Spalten, Hauptbild voll breit */
     @media (max-width: 860px) {
-      .gallery-editorial {
-        grid-template-columns: 1fr;
+      .gallery-premium {
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
+        gap: 3px;
       }
-      .gallery-main { grid-row: span 1; }
-      .gallery-main img { height: auto; aspect-ratio: 4 / 3; object-position: center 50%; }
-      .gallery-small img { height: auto; aspect-ratio: 4 / 3; }
-      .gallery-diptych { grid-template-columns: 1fr; }
-      .gallery-diptych-item img { height: auto; aspect-ratio: 4 / 3; }
+      .gp-1 { grid-column: 1 / 3; grid-row: auto; }
+      .gp-1 img { height: auto; aspect-ratio: 3 / 2; }
+      .gp-2, .gp-3, .gp-4, .gp-5 {
+        grid-column: auto; grid-row: auto;
+      }
+      .gp-item img { height: auto; aspect-ratio: 4 / 3; }
+    }
+    @media (max-width: 480px) {
+      .gallery-premium { grid-template-columns: 1fr; }
+      .gp-1 { grid-column: 1; }
     }
 
     /* ─── ABOUT (SHORT) ──────────────────────────── */
@@ -573,24 +574,33 @@
     <span class="eyebrow">&#10022; &nbsp; Ausgewählte Momente</span>
     <h2 class="section-title">Bilder,<br><em>die bleiben.</em></h2>
   </div>
-  <div class="gallery-editorial">
-    <div class="gallery-main">
+  <div class="gallery-premium">
+
+    <!-- 1 · Dominant links — Kirchentür -->
+    <div class="gp-item gp-1">
       <img src="gallery-kirchentuer.png" alt="Brautpaar Kirchentür" loading="lazy" style="object-position: center 48%;">
     </div>
-    <div class="gallery-small">
-      <img src="gallery-kirchengang.png" alt="Brautpaar Kirchengang" loading="lazy" style="object-position: center 38%;">
-    </div>
-    <div class="gallery-small">
-      <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=95" alt="Hochzeit Feier" loading="lazy" style="object-position: center 38%;">
-    </div>
-  </div>
-  <div class="gallery-diptych">
-    <div class="gallery-diptych-item">
-      <img src="gallery-sonnenuntergang.png" alt="Kuss Sonnenuntergang" loading="lazy" style="object-position: center 35%;">
-    </div>
-    <div class="gallery-diptych-item">
+
+    <!-- 2 · Mitte oben — Ringe & Strauss -->
+    <div class="gp-item gp-2">
       <img src="gallery-ringe.png" alt="Ringe und Strauss" loading="lazy" style="object-position: center 55%;">
     </div>
+
+    <!-- 3 · Rechts oben — Kirchengang von oben -->
+    <div class="gp-item gp-3">
+      <img src="gallery-kirchengang.png" alt="Brautpaar Kirchengang" loading="lazy" style="object-position: center 38%;">
+    </div>
+
+    <!-- 4 · Mitte unten — Feier & Kuss -->
+    <div class="gp-item gp-4">
+      <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=95" alt="Hochzeit Feier" loading="lazy" style="object-position: center 38%;">
+    </div>
+
+    <!-- 5 · Rechts unten — Sonnenuntergang Kuss -->
+    <div class="gp-item gp-5">
+      <img src="gallery-sonnenuntergang.png" alt="Kuss Sonnenuntergang" loading="lazy" style="object-position: center 35%;">
+    </div>
+
   </div>
 </section>
 
