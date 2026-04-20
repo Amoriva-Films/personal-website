@@ -755,10 +755,6 @@
     <p class="section-text reveal">Nevio antwortet persönlich, spätestens am nächsten Tag.</p>
 
     <form id="contactForm" class="reveal">
-      <input type="hidden" name="access_key" value="d057ea9f-92b4-4924-a2b4-ff315c545996">
-      <input type="hidden" name="subject" value="Neue Hochzeitsanfrage von der Website">
-      <input type="hidden" name="from_name" value="Amoriva Films Website">
-      <input type="hidden" name="cc" value="booking@amoriva-films.de">
 
       <div class="form-row">
         <div class="form-group">
@@ -856,7 +852,7 @@
     if (window.scrollY < window.innerHeight) heroBg.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
   });
 
-  // Kontaktformular Web3Forms AJAX
+  // Kontaktformular – Brevo API
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -864,11 +860,19 @@
       const btn = document.getElementById('submitBtn');
       btn.textContent = 'Wird gesendet...';
       btn.disabled = true;
-      const formData = new FormData(contactForm);
+      const fd = new FormData(contactForm);
+      const body = {
+        name: fd.get('name'),
+        email: fd.get('email'),
+        hochzeitsdatum: fd.get('Hochzeitsdatum'),
+        location: fd.get('Location'),
+        nachricht: fd.get('Nachricht')
+      };
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/api/contact', {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
         });
         const data = await res.json();
         if (data.success) {
