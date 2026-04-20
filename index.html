@@ -754,10 +754,9 @@
     <h2 class="section-title reveal">Eure Geschichte<br><em>beginnt hier.</em></h2>
     <p class="section-text reveal">Nevio antwortet persönlich, spätestens am nächsten Tag.</p>
 
-    <form action="https://api.web3forms.com/submit" method="POST" class="reveal">
+    <form id="contactForm" class="reveal">
       <input type="hidden" name="access_key" value="d057ea9f-92b4-4924-a2b4-ff315c545996">
       <input type="hidden" name="subject" value="Neue Hochzeitsanfrage von der Website">
-      <input type="hidden" name="redirect" value="https://amoriva-films.de/#kontakt">
       <input type="hidden" name="from_name" value="Amoriva Films Website">
       <input type="hidden" name="cc" value="booking@amoriva-films.de">
 
@@ -785,7 +784,11 @@
         <label for="message">Erzählt uns von euch</label>
         <textarea id="message" name="Nachricht" placeholder="Wo heiratet ihr? Was ist euch wichtig? Was sollen wir auf keinen Fall verpassen?"></textarea>
       </div>
-      <button type="submit" class="btn-submit">Anfrage senden</button>
+      <button type="submit" class="btn-submit" id="submitBtn">Anfrage senden</button>
+      <div id="formSuccess" style="display:none; text-align:center; padding:2rem 0;">
+        <p style="font-family:var(--serif); font-size:1.4rem; font-weight:300; color:var(--text); margin-bottom:0.6rem;">Vielen Dank für eure Anfrage.</p>
+        <p style="font-size:0.82rem; color:var(--muted); font-weight:300;">Nevio meldet sich persönlich bei euch — spätestens am nächsten Tag.</p>
+      </div>
       <p class="form-note">
         Unverbindlich &nbsp;&#183;&nbsp; Antwort innerhalb 24 Stunden<br>
         Oder direkt: <a href="tel:015565559747" style="color:var(--gold-dark)">01556 / 5559747</a>
@@ -852,6 +855,36 @@
   window.addEventListener('scroll', () => {
     if (window.scrollY < window.innerHeight) heroBg.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
   });
+
+  // Kontaktformular Web3Forms AJAX
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Wird gesendet...';
+      btn.disabled = true;
+      const formData = new FormData(contactForm);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+          contactForm.reset();
+          btn.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Fehler – bitte erneut versuchen';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Fehler – bitte erneut versuchen';
+        btn.disabled = false;
+      }
+    });
+  }
 
   // Showreel: Video-ID hier eintragen wenn bereit
   // showreelWrap.dataset.video = "DEINE_YOUTUBE_ID";
