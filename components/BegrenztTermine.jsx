@@ -16,12 +16,12 @@ export default function BegrenztTermine() {
           <div style={{ width: '1px', height: '32px', background: '#C4973A', opacity: 0.5, margin: '0 auto 2rem' }} />
 
           <p style={{ fontFamily: sans, fontSize: '10px', letterSpacing: '0.4em', textTransform: 'uppercase', color: '#B0A498', marginBottom: '1.5rem', fontWeight: 400 }}>
-            Verfügbarkeit 2026
+            Verfügbarkeit 2026 / 2027
           </p>
 
           <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: '1.35rem', fontWeight: 400, color: '#2C1F18', lineHeight: 1.5, marginBottom: '1.25rem' }}>
-            Für 2026 haben wir noch
-            ein paar Termine frei.
+            Für 2026 und 2027 haben wir
+            noch ein paar Termine frei.
           </h2>
 
           <p style={{ fontFamily: sans, fontSize: '15px', lineHeight: 1.85, color: '#9A8C82', marginBottom: '2rem', fontWeight: 300 }}>
