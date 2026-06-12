@@ -20,12 +20,12 @@ export default function BegrenztTermine() {
           </p>
 
           <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: '1.35rem', fontWeight: 400, color: '#2C1F18', lineHeight: 1.5, marginBottom: '1.25rem' }}>
-            Wir begleiten pro Saison bewusst<br />
-            nur eine begrenzte Anzahl an Paaren.
+            Für 2026 haben wir noch
+            ein paar Termine frei.
           </h2>
 
           <p style={{ fontFamily: sans, fontSize: '15px', lineHeight: 1.85, color: '#9A8C82', marginBottom: '2rem', fontWeight: 300 }}>
-            So bekommt jede Hochzeit die Aufmerksamkeit die sie verdient. Schreibt uns an und wir schauen gemeinsam ob euer Termin noch verfügbar ist.
+            Schreibt uns kurz euer Datum und wir schauen ob es passt.
           </p>
 
           <Link
