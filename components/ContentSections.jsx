@@ -23,14 +23,14 @@ export default function ContentSections() {
               Unsere Arbeit
             </p>
             <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 400, color: brown, lineHeight: 1.25, marginBottom: '2rem' }}>
-              Für einen Tag voller Gefühle,<br />den ihr niemals vergessen wollt.
+              Eigentlich passiert auf einer<br />Hochzeit gar nicht so viel.
             </h2>
             <div style={{ width: '2.5rem', height: '1px', background: gold, margin: '0 auto 2rem' }} />
             <p style={{ fontFamily: sans, fontSize: '17px', lineHeight: 1.9, color: soft, marginBottom: '1.5rem', fontWeight: 300 }}>
-              Eure Hochzeit ist mehr als ein Ablauf. Sie ist ein Gefühl. Der Moment bevor ihr euch zum ersten Mal seht. Die Hände die sich halten. Die Stimmen eurer Liebsten. Das Licht, die Musik, die Aufregung und all die kleinen Augenblicke die viel zu schnell vorbeigehen.
+              Ein paar Stunden, Menschen die sich lieben, ein Ja-Wort und ganz viel Aufregung. Und trotzdem ist kein Tag so vollgepackt mit Momenten die man nie wieder vergessen will.
             </p>
             <p style={{ fontFamily: sans, fontSize: '17px', lineHeight: 1.9, color: soft, marginBottom: '2.75rem', fontWeight: 300 }}>
-              Mit Fotos und Filmen halten wir genau diese Momente fest. Ehrlich, emotional und so dass ihr euch auch Jahre später noch mittendrin fühlt.
+              Wir sind da um sie festzuhalten. Nicht weil wir müssen, sondern weil wir genau dafür hier sind.
             </p>
             <Link href="/anfrage" style={{
               display: 'inline-block', padding: '0.9rem 2.5rem',
@@ -93,10 +93,10 @@ export default function ContentSections() {
                 Elegant begleitet.<br />Persönlich erzählt.
               </h2>
               <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '1.25rem', fontWeight: 300 }}>
-                Bevor es losgeht nehmen wir uns Zeit für euch. Wer seid ihr? Was macht euren Tag besonders? Was soll euer Film eines Tages erzählen?
+                Jedes Paar ist anders. Jede Hochzeit auch. Deshalb reden wir vor dem Drehen lieber erstmal miteinander. Nicht über Technik und Pakete, sondern über euch.
               </p>
               <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '2rem', fontWeight: 300 }}>
-                Diese Fragen helfen uns nicht einfach einen Hochzeitsfilm zu drehen, sondern euren Film. Persönlich, stilvoll und mit einem Blick für die Details die euren Tag ausmachen.
+                Was euch wichtig ist, was euch bewegt, was ihr euch vorstellt. Daraus entsteht dann ein Film der sich anfühlt wie euer Tag und nicht wie irgendein anderer.
               </p>
               <Link href="/anfrage" style={{ fontFamily: sans, fontSize: '12px', letterSpacing: '0.15em', textTransform: 'uppercase', color: gold, textDecoration: 'none', borderBottom: '1px solid #C4973A', paddingBottom: '2px', transition: 'opacity 0.2s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.opacity = '0.65'; }}
@@ -108,9 +108,9 @@ export default function ContentSections() {
           <FadeIn delay={0.1}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {[
-                { schritt: 'Vor der Hochzeit', text: 'Wir lernen euch kennen. Was euch bewegt, was euch wichtig ist und welchen Stil ihr euch vorstellt.' },
-                { schritt: 'Am Hochzeitstag', text: 'Wir sind leise dabei. Keine Regie, keine gestellten Momente. Nur ein aufmerksamer Blick für das was wirklich passiert.' },
-                { schritt: 'Danach', text: 'Ihr bekommt einen Film und Fotos die sich anfühlen wie euer Tag. Nicht wie eine Vorlage.' },
+                { schritt: 'Vor der Hochzeit', text: 'Ihr erzählt uns von eurem Tag. Nicht von Abläufen, sondern davon was euch wirklich wichtig ist.' },
+                { schritt: 'Am Hochzeitstag', text: 'Wir sind irgendwo im Hintergrund. Und trotzdem überall. Keine Kommandos, kein Posieren.' },
+                { schritt: 'Danach', text: 'Film und Fotos landen in eurer privaten Galerie. Zum Ansehen, Weinen und nochmal Ansehen.' },
               ].map((item, i) => (
                 <div key={i} style={{ padding: '1.5rem 1.75rem', background: '#FFFFFF', borderRadius: '8px', border: '0.5px solid #E8E2DC' }}>
                   <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: gold, marginBottom: '0.6rem', fontWeight: 500 }}>{item.schritt}</p>

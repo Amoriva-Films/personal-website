@@ -13,7 +13,7 @@ const services = [
     nr: '01',
     title: 'Hochzeitsfilm',
     subtitle: 'Cinematische Videografie Niedersachsen',
-    description: 'Ein cinematic Hochzeitsfilm der sich anfühlt wie ein echtes Kinoerlebnis. Wir fangen die Atmosphäre, die Emotionen und die kleinen Momente ein die euren Tag besonders machen. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
+    description: 'Ein Film der sich anfühlt wie euer Tag und nicht wie irgendein Hochzeitsvideo. Wir drehen so dass ihr euch traut zu weinen wenn ihr ihn Jahre später nochmal anschaut. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
     includes: [
       'Cinematischer Hauptfilm (3 bis 12 Minuten)',
       'Emotionaler Highlights-Clip (60 bis 90 Sekunden)',
@@ -26,7 +26,7 @@ const services = [
     nr: '02',
     title: 'Hochzeitsfotografie',
     subtitle: 'Fine Art Fotografie Niedersachsen',
-    description: 'Hochzeitsfotos die zeitlos sind. Wir arbeiten im Fine Art Stil und achten auf Licht, Tiefe und Authentizität. Keine gestellten Fotos. Nur echte Momente.',
+    description: 'Fotos die ihr nicht inszeniert habt. Keine Kommandos, keine gestellten Posen. Nur echte Momente in schönem Licht.',
     includes: [
       'Vollständige Fotobegleitung vom Getting Ready bis zum Tanz',
       'Bearbeitete Galeriefotos in hoher Auflösung',
@@ -38,7 +38,7 @@ const services = [
     nr: '03',
     title: 'Film und Foto',
     subtitle: 'Das komplette Hochzeitspaket',
-    description: 'Ihr bekommt beides aus einer Hand. Kein zweites Team, keine Koordination zwischen verschiedenen Anbietern. Wir kennen euren Tag und halten ihn vollständig fest. Film und Foto perfekt aufeinander abgestimmt.',
+    description: 'Beides bei uns. Ein Team, eine Bildsprache, keine Abstimmungsprobleme zwischen zwei Fremden an eurem Hochzeitstag.',
     includes: [
       'Alles aus Film und Fotografie-Paket',
       'Perfekte Abstimmung durch ein Team',
@@ -96,7 +96,7 @@ export default function LeistungenSection() {
             Leistungen
           </span>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 4vw, 58px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '680px' }}>
-            Was wir für euch <em style={{ fontStyle: 'italic' }}>tun können.</em>
+            Was wir <em style={{ fontStyle: 'italic' }}>machen.</em>
           </h2>
         </FadeIn>
       </div>

@@ -126,9 +126,7 @@ export default function Founders() {
               color: 'var(--brown)',
             }}
           >
-            Zwei Blicke.<br />
-            Eine gemeinsame{' '}
-            <em style={{ fontStyle: 'italic' }}>Haltung.</em>
+            Wir sind Nevio und Danilo.
           </h2>
         </FadeIn>
 
@@ -144,7 +142,7 @@ export default function Founders() {
           <Portrait
             name="Nevio Mastrogiorgio"
             role="Founder · Beratung & kreative Leitung"
-            bio="Nevio begleitet euch vom ersten Gespräch bis weit über den Hochzeitstag hinaus. Mit seiner ruhigen und klaren Art sorgt er dafür, dass ihr euch verstanden, sicher und vollkommen aufgehoben fühlt."
+            bio="Nevio ist das erste Gesicht das ihr von uns seht. Er hört zu, stellt die richtigen Fragen und sorgt dafür dass ihr euch von Anfang an gut aufgehoben fühlt."
             img="/images/nevio.png"
             imgPosition="center 80%"
             delay={0}
@@ -152,7 +150,7 @@ export default function Founders() {
           <Portrait
             name="Danilo Buonafede"
             role="Co Founder · Cinematography & Bildgestaltung"
-            bio="Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen."
+            bio="Danilo ist der Mann hinter der Kamera. Leise, aufmerksam, mit einem Auge für Momente die andere verpassen."
             img="/images/danilo.png"
             imgPosition="center top"
             delay={0.14}
