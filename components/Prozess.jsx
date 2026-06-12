@@ -19,7 +19,7 @@ const schritte = [
 export default function Prozess() {
   return (
     <section style={{ padding: '6rem 1.5rem', background: '#FAF9F7', borderTop: '0.5px solid #E8E2DC', borderBottom: '0.5px solid #E8E2DC' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <FadeIn>
           <p style={{ textAlign: 'center', fontFamily: sans, fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8A7B6F', marginBottom: '1rem', fontWeight: 300 }}>
             So funktioniert es
@@ -28,10 +28,10 @@ export default function Prozess() {
             Von der ersten Nachricht bis zu eurem Film.
           </h2>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1px', background: '#E8E2DC', borderRadius: '10px', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1px', background: '#E8E2DC', borderRadius: '10px', overflow: 'hidden' }}>
           {schritte.map((s, i) => (
             <FadeIn key={i} delay={i * 0.07}>
-              <div style={{ background: '#FFFFFF', padding: '2rem 1.5rem', height: '100%' }}>
+              <div style={{ background: '#FFFFFF', padding: '2rem 1.8rem', height: '100%' }}>
                 <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.2em', color: gold, marginBottom: '0.75rem', fontWeight: 500 }}>{s.nummer}</p>
                 <h3 style={{ fontFamily: serif, fontSize: '1.05rem', fontWeight: 300, color: brown, marginBottom: '0.6rem' }}>{s.titel}</h3>
                 <p style={{ fontFamily: sans, fontSize: '14px', lineHeight: 1.7, color: soft, margin: 0, fontWeight: 300 }}>{s.text}</p>
