@@ -9,7 +9,7 @@ export default function StructuredData() {
         description: 'Cinematic Hochzeitsfilm und Hochzeitsfotografie in Niedersachsen und deutschlandweit',
         url: 'https://amoriva-films.de',
         telephone: '+4915565559747',
-        email: 'hallo@amoriva-films.de',
+        email: 'booking@amoriva-films.de',
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Wolfsburg',

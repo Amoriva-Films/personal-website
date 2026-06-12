@@ -166,7 +166,7 @@ export default function AngebotePage() {
                   Preis auf Anfrage — individuell für euren Tag
                 </p>
                 <a
-                  href="/#anfrage"
+                  href="/anfrage"
                   style={{
                     display: 'block', textAlign: 'center',
                     padding: '0.85rem 1.5rem', background: 'transparent',
@@ -230,7 +230,7 @@ export default function AngebotePage() {
             ))}
           </div>
           <a
-            href="/#anfrage"
+            href="/anfrage"
             style={{
               display: 'inline-block', padding: '0.9rem 2.5rem',
               background: '#3B2F2A', color: '#FAF9F7',

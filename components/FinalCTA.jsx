@@ -22,7 +22,7 @@ export default function FinalCTA() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="mailto:hallo@amoriva-films.de"
+              href="mailto:booking@amoriva-films.de"
               style={{
                 display: 'inline-block', padding: '0.9rem 2.25rem',
                 background: '#3B2F2A', color: '#FAF9F7',
