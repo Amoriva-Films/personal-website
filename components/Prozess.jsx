@@ -9,11 +9,11 @@ const brown = '#3B2F2A';
 const soft  = '#6B5E57';
 
 const schritte = [
-  { nummer: '01', titel: 'Anfrage stellen', text: 'Schreibt uns kurz. Per Formular, WhatsApp oder Mail. Ganz wie ihr wollt.' },
-  { nummer: '02', titel: 'Kennenlerngespräch', text: 'Wir telefonieren oder zoomen kurz. Keine Agenda, kein Pitch. Einfach kennenlernen.' },
-  { nummer: '03', titel: 'Gemeinsame Filmvision', text: 'Ein zweites Gespräch. Diesmal geht es ums Herzstück: Was soll euer Film eines Tages erzählen?' },
-  { nummer: '04', titel: 'Euer Hochzeitstag', text: 'Wir sind da. Irgendwo im Hintergrund und mit dem Blick für das was zählt.' },
-  { nummer: '05', titel: 'Euer Film und Fotos', text: 'In 6 bis 8 Wochen landet alles in eurer privaten Galerie. Zum Ansehen, Weinen und nochmal Ansehen.' },
+  { nummer: '01', titel: 'Anfrage stellen', text: 'Ihr schreibt uns kurz per Formular oder WhatsApp. Kein Aufwand, keine Verpflichtung.' },
+  { nummer: '02', titel: 'Kennenlerngespräch', text: 'Wir sprechen 20 Minuten per Video oder Telefon. Kein Verkaufsgespräch. Wir wollen euch kennen.' },
+  { nummer: '03', titel: 'Gemeinsame Filmvision', text: 'In einem zweiten Gespräch hören wir genau zu: Was euch bewegt, was ihr euch vorstellt, welche Momente euch wichtig sind.' },
+  { nummer: '04', titel: 'Euer Hochzeitstag', text: 'Wir sind dabei. Ruhig im Hintergrund und mit dem Blick für das was zählt.' },
+  { nummer: '05', titel: 'Euer Film und Fotos', text: 'Innerhalb von 6 bis 8 Wochen erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Galerie.' },
 ];
 
 export default function Prozess() {
@@ -25,7 +25,7 @@ export default function Prozess() {
             So funktioniert es
           </p>
           <h2 style={{ textAlign: 'center', fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 300, color: brown, marginBottom: '3.5rem' }}>
-            So läuft das bei uns.
+            Von der ersten Nachricht bis zu eurem Film.
           </h2>
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1px', background: '#E8E2DC', borderRadius: '10px', overflow: 'hidden' }}>

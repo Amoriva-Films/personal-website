@@ -9,27 +9,27 @@ const sans  = "var(--font-inter), system-ui, sans-serif";
 const fragen = [
   {
     frage: 'Was kostet ein Hochzeitsfilm bei euch?',
-    antwort: 'Film ab 1.600 Euro, Foto ab 1.400 Euro, beides zusammen ab 2.600 Euro. Was genau zu eurem Tag passt, klären wir im Gespräch. Schreibt uns einfach kurz.',
+    antwort: 'Unsere Hochzeitsfilme beginnen ab 1.600 Euro. Hochzeitsfotografie ab 1.400 Euro. Das Kombi-Paket aus Film und Foto ab 2.600 Euro. Was genau in eurem Paket steckt und welches Angebot zu eurem Tag passt besprechen wir gerne persönlich. Schreibt uns einfach an.',
   },
   {
     frage: 'Wie lange dauert es bis wir den Film bekommen?',
-    antwort: 'In der Regel 6 bis 8 Wochen. Manchmal etwas früher. Ihr bekommt alles in einer privaten Galerie die ihr mit wem ihr wollt teilen könnt.',
+    antwort: 'Innerhalb von 6 bis 8 Wochen nach eurer Hochzeit erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.',
   },
   {
     frage: 'Was passiert wenn einer von euch am Hochzeitstag krank wird?',
-    antwort: 'Ja, daran denken wir auch. Falls wirklich etwas passiert haben wir Kollegen in der Region auf die wir zählen können. War noch nie nötig, aber wir haben einen Plan.',
+    antwort: 'Euer Hochzeitstag kann nicht verschoben werden. Das wissen wir. Deshalb haben wir für diesen Fall Kontakte zu erfahrenen Kollegen in Niedersachsen und der Region. Sollte wirklich etwas Unvorhergesehenes passieren sorgen wir dafür dass jemand Vertrauenswürdiges für euch da ist.',
   },
   {
     frage: 'Seid ihr nur in Wolfsburg tätig?',
-    antwort: 'Nein. Wir fahren dahin wo eure Hochzeit ist. Niedersachsen ist unser Zuhause, aber wir sind auch gern woanders. Anreise klären wir offen im Vorfeld.',
+    antwort: 'Nein. Wir begleiten Hochzeiten in ganz Deutschland und sind besonders in Niedersachsen aktiv. Wolfsburg, Braunschweig, Hannover, Magdeburg und darüber hinaus. Anreise und Unterkunft klären wir transparent im Vorfeld.',
   },
   {
     frage: 'Wie viele Hochzeiten begleitet ihr pro Jahr?',
-    antwort: 'Wenige. Das ist Absicht. So arbeiten wir lieber als mehr zu nehmen und weniger zu geben.',
+    antwort: 'Wir halten unsere Buchungen bewusst begrenzt. So bleibt jede Hochzeit eine Einzelanfertigung und keine Routine. Ihr arbeitet direkt mit uns und nicht mit einem großen Agenturteam das euch kurz vor der Hochzeit zum ersten Mal trifft.',
   },
   {
     frage: 'Kann ich die Musik für den Film mitbestimmen?',
-    antwort: 'Klar. Was zu euch passt entscheiden nicht wir alleine. Das besprechen wir gemeinsam bevor es losgeht.',
+    antwort: 'Ja. In unserem zweiten Gespräch vor der Hochzeit besprechen wir zusammen welchen Stil euer Film haben soll und welche Musik dazu passt. Wir haben Zugang zu lizenzierten Musikbibliotheken und können auch auf eure Vorschläge eingehen.',
   },
 ];
 
