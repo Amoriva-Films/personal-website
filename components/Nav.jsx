@@ -14,7 +14,7 @@ export default function Nav() {
 
   const links = [
     { label: 'Leistungen', href: '/#leistungen' },
-    { label: 'Preise',     href: '/preise'       },
+    { label: 'Angebote',   href: '/angebote'     },
     { label: 'Über uns',   href: '/#founders'    },
     { label: 'Anfrage',    href: '/anfrage'      },
   ];
