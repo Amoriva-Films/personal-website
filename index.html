@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Editoriale Hochzeitsfilme und Fotografien für moderne Paare in Deutschland und Europa. Ruhig, cineastisch und zeitlos erzählt.">
+  <title>Amoriva Films – Wedding Films & Photography</title>
+
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://amoriva-films.de">
+  <meta property="og:title"       content="Amoriva Films – Wedding Films & Photography">
+  <meta property="og:description" content="Editoriale Hochzeitsfilme und Fotografien. Emotional. Zeitlos. Cinematic.">
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=85">
+  <meta name="twitter:card"  content="summary_large_image">
+  <meta name="twitter:title" content="Amoriva Films – Wedding Films & Photography">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=85">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ── HOME HERO ────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 44% 56%;
+      min-height: 100vh;
+    }
+    .hero-text {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 200px 7% 100px 10%;
+    }
+    .hero-eyebrow {
+      font-size: 0.69rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: aUp 1.6s var(--ease) .4s forwards;
+    }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 3.8vw, 58px);
+      font-weight: 300;
+      line-height: 1.22;
+      letter-spacing: -0.01em;
+      color: var(--brown);
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: aUp 1.8s var(--ease) .65s forwards;
+    }
+    .hero-h1 em { font-style: italic; }
+    .hero-sub {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--soft);
+      max-width: 360px;
+      opacity: 0;
+      animation: aUp 1.8s var(--ease) .9s forwards;
+    }
+    .hero-scroll-hint {
+      margin-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      opacity: 0;
+      animation: aFade 1.2s ease 2.4s forwards;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.63rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--soft);
+      opacity: .55;
+    }
+    .scroll-line {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .55;
+    }
+
+    .hero-media {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-media video,
+    .hero-media .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 28%;
+      display: block;
+    }
+    .hero-img {
+      background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1400&q=90')
+        center 28% / cover no-repeat;
+      z-index: 0;
+    }
+    .hero-media video { z-index: 1; }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 58vw auto;
+        min-height: auto;
+      }
+      .hero-media { order: -1; min-height: 58vw; }
+      .hero-media .hero-img,
+      .hero-media video { position: absolute; }
+      .hero-text { padding: 60px 6% 80px; justify-content: flex-start; }
+      .hero-h1 { font-size: clamp(42px, 10vw, 62px); }
+    }
+    @media (max-width: 480px) {
+      .hero-media { min-height: 70vw; }
+      .hero-media { grid-template-rows: 70vw auto; }
+    }
+
+    /* ── PHILOSOPHY ───────────────────────────────── */
+    .philosophy {
+      padding: 140px 8%;
+      background: var(--bg);
+    }
+    .phil-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .phil-item {
+      padding: 64px 60px 64px 0;
+      border-top: 1px solid var(--bg3);
+    }
+    .phil-item:nth-child(2),
+    .phil-item:nth-child(4) {
+      padding-left: 60px;
+      padding-right: 0;
+      border-left: 1px solid var(--bg3);
+    }
+    .phil-text {
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.7vw, 24px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--brown);
+      margin-bottom: 1.6rem;
+    }
+    .phil-attr {
+      font-size: 0.67rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 300;
+    }
+    @media (max-width: 768px) {
+      .phil-grid { grid-template-columns: 1fr; }
+      .phil-item { padding: 48px 0; }
+      .phil-item:nth-child(2),
+      .phil-item:nth-child(4) { padding-left: 0; border-left: none; }
+    }
+
+    /* ── MANIFESTO ────────────────────────────────── */
+    .manifesto {
+      padding: 140px 8%;
+      background: var(--bg2);
+    }
+    .manifesto-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* ── FULL IMAGE BREAK ─────────────────────────── */
+    .img-break {
+      position: relative;
+      height: 75vh;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .img-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+      display: block;
+    }
+    .img-break-caption {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3.5rem;
+      font-family: var(--serif);
+      font-size: 0.84rem;
+      font-style: italic;
+      color: rgba(246,241,235,0.65);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FILMS PREVIEW ────────────────────────────── */
+    .films-preview {
+      padding: 140px 8%;
+      background: var(--bg);
+    }
+    .fp-header {
+      max-width: 1280px;
+      margin: 0 auto 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .fp-note {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: var(--soft);
+      max-width: 380px;
+      justify-self: end;
+      align-self: end;
+    }
+    .fp-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .fp-item {}
+    .fp-img {
+      overflow: hidden;
+      height: 480px;
+      margin-bottom: 18px;
+    }
+    .fp-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 2.8s var(--ease);
+    }
+    .fp-img:hover img { transform: scale(1.02); }
+    .fp-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .fp-loc {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brown);
+    }
+    .fp-yr {
+      font-size: 0.67rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 300;
+    }
+    .fp-title {
+      font-size: 0.8rem;
+      color: var(--soft);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+    .fp-link {
+      display: block;
+      margin-top: 60px;
+      text-align: center;
+    }
+    @media (max-width: 960px) {
+      .fp-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .fp-note { justify-self: start; }
+      .fp-grid { grid-template-columns: 1fr; gap: 40px; }
+      .fp-img { height: 70vw; }
+    }
+    @media (max-width: 480px) {
+      .fp-img { height: 78vw; }
+    }
+
+    /* ── EXPERIENCE VALUES ────────────────────────── */
+    .exp-values {
+      padding: 140px 8%;
+      background: var(--bg2);
+    }
+    .ev-header {
+      max-width: 1280px;
+      margin: 0 auto 96px;
+    }
+    .ev-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px 100px;
+    }
+    .ev-item {}
+    .ev-title {
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 300;
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+    .ev-body {
+      font-size: 17px;
+      line-height: 1.82;
+      color: var(--soft);
+    }
+    @media (max-width: 768px) {
+      .ev-grid { grid-template-columns: 1fr; gap: 52px; }
+    }
+
+    /* ── FOUNDER ──────────────────────────────────── */
+    .founder-sec {
+      padding: 140px 8%;
+      background: var(--bg);
+    }
+    .founder-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 52% 48%;
+      gap: 8rem;
+      align-items: start;
+    }
+    .founder-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+    }
+    .founder-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+      transition: transform 3s var(--ease);
+    }
+    .founder-img-wrap:hover img { transform: scale(1.02); }
+    .founder-text { padding-top: 3rem; }
+    .founder-names { margin-top: 3.5rem; }
+    .founder-person {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--bg3);
+    }
+    .founder-person:last-child { border-bottom: none; padding-bottom: 0; }
+    .f-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+    .f-role {
+      font-size: 0.67rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 300;
+    }
+    @media (max-width: 900px) {
+      .founder-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+      .founder-img-wrap { aspect-ratio: 3 / 2; }
+      .founder-text { padding-top: 0; }
+    }
+
+    /* ── TESTIMONIAL ──────────────────────────────── */
+    .testimonial-sec {
+      padding: 140px 8%;
+      background: var(--bg3);
+    }
+    .testi-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testi-quote {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.5vw, 36px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.52;
+      color: var(--brown);
+      margin-bottom: 2.8rem;
+    }
+    .testi-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.8rem;
+    }
+    .testi-attr {
+      font-size: 0.69rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 300;
+    }
+
+    /* ── INQUIRE CLOSING ──────────────────────────── */
+    .inq-close {
+      padding: 140px 8%;
+      background: var(--bg);
+      text-align: center;
+    }
+    .inq-close-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .inq-close-sub {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--soft);
+      max-width: 480px;
+      margin: 2rem auto 3.5rem;
+    }
+
+    /* ── KEYFRAMES ────────────────────────────────── */
+    @keyframes aUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes aFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Amoriva Films</a>
+  <ul class="nav-links">
+    <li><a href="films.html">Films</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="inquire.html" class="nav-active">Inquire</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ────────────────────────────────── -->
+<div id="mob">
+  <button class="mob-close" onclick="closeMenu()">Schließen ×</button>
+  <a href="films.html"      onclick="closeMenu()">Films</a>
+  <a href="experience.html" onclick="closeMenu()">Experience</a>
+  <a href="about.html"      onclick="closeMenu()">About</a>
+  <a href="inquire.html"    onclick="closeMenu()">Inquire</a>
+</div>
+
+
+<!-- ─────────────────────────────────────────────────
+     1. HERO
+───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Wedding Films &amp; Photography</span>
+    <h1 class="hero-h1">
+      Internationale Hochzeitsfilme<br>
+      und <em>Fotografie.</em>
+    </h1>
+    <p class="hero-sub">
+      Für Paare, die ihren Tag nicht dokumentiert,
+      sondern als Gefühl bewahrt wissen möchten.
+      Deutschland und ganz Europa.
+    </p>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+  <div class="hero-media">
+    <div class="hero-img" aria-hidden="true"></div>
+    <video autoplay muted loop playsinline
+           poster="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1400&q=90">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     2. TESTIMONIALS  (authority signals)
+───────────────────────────────────────────────── -->
+<section class="philosophy">
+  <div class="phil-grid">
+
+    <div class="phil-item reveal">
+      <p class="phil-text">
+        „Es ist das Wertvollste, was wir von diesem Tag haben."
+      </p>
+      <span class="phil-attr">Mishelle &amp; Julian &nbsp;·&nbsp; Wolfsburg</span>
+    </div>
+
+    <div class="phil-item reveal d1">
+      <p class="phil-text">
+        „Man fühlt sich mit dem Film komplett zurückversetzt — als wäre es gerade eben."
+      </p>
+      <span class="phil-attr">Laura &amp; Jakob &nbsp;·&nbsp; Wolfsburg</span>
+    </div>
+
+    <div class="phil-item reveal d1">
+      <p class="phil-text">
+        „Kein Druck, keine Inszenierung. Einfach auf Augenhöhe — und trotzdem so cineastisch."
+      </p>
+      <span class="phil-attr">Max &amp; Johanne &nbsp;·&nbsp; Braunschweig</span>
+    </div>
+
+    <div class="phil-item reveal d2">
+      <p class="phil-text">
+        „Wir hatten erst überlegt, ob wir das wirklich brauchen. Heute können wir es uns nicht mehr wegdenken."
+      </p>
+      <span class="phil-attr">Sophie &amp; Finn &nbsp;·&nbsp; Hamburg</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     3. BRAND MANIFESTO
+───────────────────────────────────────────────── -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="reveal">
+      <span class="t-label">Amoriva Films</span>
+      <h2 class="t-h2" style="margin-bottom: 2.4rem;">
+        Das Außergewöhnliche<br>
+        <em>orchestrieren.</em>
+      </h2>
+      <p class="t-body" style="max-width: 580px; font-size: 18px;">
+        Jede Hochzeit beginnt mit einer leeren Seite. Kein Template. Kein Schema. Keine Wiederholung. Wir kommen, um zu verstehen — und gehen, wenn das, was bleibt, eine Form hat, die diesen einen Tag für immer wieder spürbar macht.
+      </p>
+      <p class="t-body" style="max-width: 580px; font-size: 18px; margin-top: 1.6rem; font-style: italic; color: var(--brown); font-family: var(--serif); font-size: 1.05rem; line-height: 1.7;">
+        Wir begleiten jährlich nur eine begrenzte Anzahl an Hochzeiten — um sicherzustellen, dass jedes Paar unsere ungeteilte Aufmerksamkeit erhält.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     4. FULL IMAGE BREAK
+───────────────────────────────────────────────── -->
+<div class="img-break img-r">
+  <img src="gallery-kirchengang.png"
+       alt="Ein leiser Augenblick"
+       style="object-position: center 38%;">
+  <span class="img-break-caption">Ein leiser Augenblick aus einem Tag, der nie zurückkehrt.</span>
+</div>
+
+
+<!-- ─────────────────────────────────────────────────
+     5. FILMS PREVIEW
+───────────────────────────────────────────────── -->
+<section class="films-preview">
+  <div class="fp-header reveal">
+    <div>
+      <span class="t-label">Films</span>
+      <h2 class="t-h2">
+        Jede Geschichte verdient<br>
+        ihre <em>eigene Form.</em>
+      </h2>
+    </div>
+    <p class="fp-note">
+      Unsere Filme folgen keinem Template. Sie entstehen aus Stimme, Bewegung, Musik und dem Rhythmus eines Tages.
+    </p>
+  </div>
+
+  <div class="fp-grid">
+
+    <div class="fp-item reveal">
+      <div class="fp-img">
+        <img src="gallery-kirchengang.png"
+             alt="Hochzeit Wolfsburg"
+             style="object-position: center 30%;">
+      </div>
+      <div class="fp-meta">
+        <span class="fp-loc">Wolfsburg</span>
+        <span class="fp-yr">2025</span>
+      </div>
+      <p class="fp-title">Mishelle &amp; Julian</p>
+    </div>
+
+    <div class="fp-item reveal d1">
+      <div class="fp-img">
+        <img src="gallery-braut.jpg"
+             alt="Hochzeit Toskana"
+             style="object-position: center 22%;">
+      </div>
+      <div class="fp-meta">
+        <span class="fp-loc">Tuscany</span>
+        <span class="fp-yr">2025</span>
+      </div>
+      <p class="fp-title">Editorial Wedding Study</p>
+    </div>
+
+    <div class="fp-item reveal d2">
+      <div class="fp-img">
+        <img src="gallery-sonnenuntergang.png"
+             alt="Hochzeit Braunschweig"
+             style="object-position: center 42%;">
+      </div>
+      <div class="fp-meta">
+        <span class="fp-loc">Braunschweig</span>
+        <span class="fp-yr">2026</span>
+      </div>
+      <p class="fp-title">A Quiet Celebration</p>
+    </div>
+
+  </div>
+
+  <div class="fp-link reveal d2">
+    <a href="films.html" class="btn">Alle Filme ansehen</a>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     6. EXPERIENCE VALUES
+───────────────────────────────────────────────── -->
+<section class="exp-values">
+  <div class="ev-header reveal">
+    <span class="t-label">The Experience</span>
+    <h2 class="t-h2">
+      Eine Begleitung,<br>
+      die sich nicht nach <em>Begleitung</em> anfühlt.
+    </h2>
+  </div>
+
+  <div class="ev-grid">
+    <div class="ev-item reveal">
+      <h3 class="ev-title">Ruhig und entschlossen</h3>
+      <p class="ev-body">Eine Präsenz, die Sicherheit gibt, ohne den Moment zu verändern. Wir kommen früh, arbeiten leise und bringen Ruhe in den Tag.</p>
+    </div>
+    <div class="ev-item reveal d1">
+      <h3 class="ev-title">Erfahren und sensibel</h3>
+      <p class="ev-body">Ein Blick, der Komposition, Licht und Atmosphäre liest — und weiß, wann ein Moment wichtig ist, bevor er offensichtlich wird.</p>
+    </div>
+    <div class="ev-item reveal d1">
+      <h3 class="ev-title">Aufmerksam und einfühlsam</h3>
+      <p class="ev-body">Wir verstehen euren Tag, eure Menschen und die Stimmung, die ihn trägt — lange bevor die Kamera läuft.</p>
+    </div>
+    <div class="ev-item reveal d2">
+      <h3 class="ev-title">Subtil und diskret</h3>
+      <p class="ev-body">Unsere Arbeit ist am stärksten, wenn sie am wenigsten sichtbar ist. Das Ergebnis spricht — nicht wir.</p>
+    </div>
+  </div>
+
+  <div class="reveal d2" style="max-width: 1280px; margin: 80px auto 0; text-align: center;">
+    <h3 style="font-family: var(--serif); font-size: clamp(24px, 2.2vw, 32px); font-weight: 300; font-style: italic; color: var(--brown); margin-bottom: 2.4rem;">Das Außergewöhnliche beginnt hier.</h3>
+    <a href="inquire.html" class="btn">Anfrage stellen</a>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     7. FOUNDER PRESENCE
+───────────────────────────────────────────────── -->
+<section class="founder-sec">
+  <div class="founder-inner">
+
+    <div class="founder-img-wrap img-r">
+      <img src="nevio.png"
+           alt="Nevio Mastrogiorgio, Gründer Amoriva Films">
+    </div>
+
+    <div class="founder-text reveal">
+      <span class="t-label">Creative Direction</span>
+      <h2 class="t-h2" style="margin-bottom: 2rem;">
+        Geführt von einem Blick<br>
+        für das, <em>was bleibt.</em>
+      </h2>
+      <p class="t-body">
+        Amoriva wurde gegründet, um Hochzeiten nicht als Ablauf zu betrachten, sondern als Atmosphäre. Als Zusammenspiel aus Menschen, Licht, Stimmen und Momenten, die erst im Nachhinein ihre ganze Bedeutung zeigen.
+      </p>
+
+      <div class="founder-names">
+        <div class="founder-person">
+          <div class="f-name">Nevio Mastrogiorgio</div>
+          <span class="f-role">Founder &nbsp;·&nbsp; Creative Direction &amp; Client Relations</span>
+        </div>
+        <div class="founder-person">
+          <div class="f-name">Danilo Buonafede</div>
+          <span class="f-role">Co-Founder &nbsp;·&nbsp; Cinematography &amp; Creative</span>
+        </div>
+      </div>
+
+      <a href="about.html" class="link-text" style="margin-top: 1rem; display: inline-block;">Mehr über uns</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     8. TESTIMONIAL
+───────────────────────────────────────────────── -->
+<section class="testimonial-sec">
+  <div class="testi-inner reveal">
+    <p class="testi-quote">
+      „Wir hatten erst überlegt, ob wir überhaupt einen Film brauchen.
+      Heute ist es das Wertvollste, was von diesem Tag geblieben ist."
+    </p>
+    <div class="testi-rule"></div>
+    <span class="testi-attr">Mishelle &amp; Julian &nbsp;·&nbsp; Wolfsburg &nbsp;·&nbsp; 2025</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     9. INQUIRE CLOSING
+───────────────────────────────────────────────── -->
+<section class="inq-close">
+  <div class="inq-close-inner reveal">
+    <span class="t-label" style="text-align:center; display:block;">Inquire</span>
+    <h2 class="t-h2" style="text-align:center;">
+      Beginnt mit<br>
+      eurer <em>Geschichte.</em>
+    </h2>
+    <p class="inq-close-sub">
+      Jede Anfrage wird persönlich gelesen. Erzählt uns von eurer Hochzeit, eurer Vision — und davon, was euer Film später auslösen soll.
+    </p>
+    <a href="inquire.html" class="btn">Anfrage stellen</a>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────────
+     FOOTER
+───────────────────────────────────────────────── -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <span class="ft-brand-name">Amoriva Films</span>
+      <span class="ft-brand-sub">Wedding Films &amp; Photography</span>
+      <span class="ft-brand-sub" style="font-style:normal; font-family:var(--sans); font-size:.72rem; letter-spacing:.12em; color:rgba(246,241,235,.18);">Germany &nbsp;·&nbsp; Europe</span>
+    </div>
+    <div class="ft-col">
+      <h4>Navigation</h4>
+      <ul class="ft-links">
+        <li><a href="films.html">Films</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="inquire.html">Inquire</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Kontakt</h4>
+      <ul class="ft-links">
+        <li><a href="https://www.instagram.com/amorivafilms/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:booking@amoriva-films.de">booking@amoriva-films.de</a></li>
+        <li><a href="tel:015565559747">01556 &nbsp;5559747</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&#169; 2026 Amoriva Films &nbsp;·&nbsp; Nevio Mastrogiorgio</p>
+    <div class="ft-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/4915565559747" target="_blank" rel="noopener" class="wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

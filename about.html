@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Über Amoriva Films – Nevio Mastrogiorgio und Danilo Buonafede. Eine ruhige, cineastische Art, Hochzeiten zu erzählen.">
+  <title>About – Amoriva Films</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── ABOUT PAGE ──────────────────────────────── */
+    .about-hero {
+      padding: 200px 8% 100px;
+      background: var(--bg);
+    }
+    .about-hero-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .about-hero-text { max-width: 720px; }
+
+    /* Full statement image */
+    .about-img-full {
+      height: 65vh;
+      min-height: 420px;
+      overflow: hidden;
+    }
+    .about-img-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    /* Founders section */
+    .founders-sec {
+      padding: 140px 8%;
+      background: var(--bg);
+    }
+    .founders-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .founders-head {
+      margin-bottom: 96px;
+    }
+    .founders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+    }
+
+    .founder-portrait {
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      margin-bottom: 2.8rem;
+    }
+    .founder-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 3s var(--ease);
+    }
+    .founder-portrait:hover img { transform: scale(1.02); }
+    .fp-nevio img  { object-position: center 18%; }
+    .fp-danilo img { object-position: center 26%; }
+
+    .founder-info {}
+    .f-name-lg {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brown);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .f-role-sm {
+      font-size: 0.67rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 300;
+      display: block;
+      margin-bottom: 1.8rem;
+    }
+    .f-bio {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--soft);
+      max-width: 420px;
+    }
+
+    /* Philosophy section */
+    .philosophy-sec {
+      padding: 120px 8% 140px;
+      background: var(--bg2);
+    }
+    .philosophy-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+    }
+    .phil-body {
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--soft);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .founders-grid { grid-template-columns: 1fr; gap: 5rem; }
+      .philosophy-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-full { height: 55vw; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Amoriva Films</a>
+  <ul class="nav-links">
+    <li><a href="films.html">Films</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="about.html" class="nav-active">About</a></li>
+    <li><a href="inquire.html">Inquire</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="mob">
+  <button class="mob-close" onclick="closeMenu()">Schließen ×</button>
+  <a href="films.html"      onclick="closeMenu()">Films</a>
+  <a href="experience.html" onclick="closeMenu()">Experience</a>
+  <a href="about.html"      onclick="closeMenu()">About</a>
+  <a href="inquire.html"    onclick="closeMenu()">Inquire</a>
+</div>
+
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div class="about-hero-text">
+      <span class="t-label reveal">About Amoriva</span>
+      <h1 class="t-h1 reveal d1">
+        Ein Blick für das,<br>
+        was <em>bleibt.</em>
+      </h1>
+      <p class="t-body reveal d2" style="margin-top: 2.4rem; font-size: 18px; max-width: 560px;">
+        Amoriva Films steht für eine ruhige, cineastische Art, Hochzeiten zu erzählen. Gegründet mit dem Anspruch, Erinnerungen nicht zu sammeln, sondern in eine Form zu bringen, die zeitlos bleibt.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FULL IMAGE -->
+<div class="about-img-full img-r">
+  <img src="gallery-kirchengang.png" alt="Amoriva Films" style="object-position: center 32%;">
+</div>
+
+
+<!-- FOUNDERS -->
+<section class="founders-sec">
+  <div class="founders-inner">
+    <div class="founders-head reveal">
+      <span class="t-label">Creative Direction</span>
+      <h2 class="t-h2">
+        Nevio &amp; Danilo.
+      </h2>
+    </div>
+    <div class="founders-grid">
+
+      <div class="reveal">
+        <div class="founder-portrait fp-nevio img-r">
+          <img src="nevio.png" alt="Nevio Mastrogiorgio">
+        </div>
+        <div class="founder-info">
+          <span class="f-name-lg">Nevio Mastrogiorgio</span>
+          <span class="f-role-sm">Founder &nbsp;·&nbsp; Creative Direction &amp; Client Relations</span>
+          <p class="f-bio">
+            Nevio führt die kreative Richtung von Amoriva. Sein Fokus liegt auf Atmosphäre, Vertrauen und der Frage, wie ein Hochzeitstag später wieder fühlbar wird. Vom ersten Gespräch an begleitet er Paare mit Ruhe und Klarheit.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal d1">
+        <div class="founder-portrait fp-danilo img-r">
+          <img src="danilo.png" alt="Danilo Buonafede">
+        </div>
+        <div class="founder-info">
+          <span class="f-name-lg">Danilo Buonafede</span>
+          <span class="f-role-sm">Co-Founder &nbsp;·&nbsp; Cinematography &amp; Creative</span>
+          <p class="f-bio">
+            Danilo arbeitet mit Licht, Bewegung und Komposition. Sein Blick gilt den leisen Momenten, bevor sie offensichtlich werden. Diese Fähigkeit, das Wesentliche zu sehen, bevor es passiert, ist das Fundament jedes Amoriva Films.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-sec">
+  <div class="philosophy-inner">
+    <div class="reveal">
+      <span class="t-label">Philosophie</span>
+      <h2 class="t-h2">
+        Keine Inszenierung.<br>
+        Keine Routine.<br>
+        Nur <em>Aufmerksamkeit.</em>
+      </h2>
+    </div>
+    <div class="reveal d1">
+      <p class="phil-body">
+        Wir glauben, dass echte Erinnerungen nicht entstehen, wenn man sie erzwingt. Sie entstehen, wenn Menschen vergessen, dass sie beobachtet werden.
+      </p>
+      <p class="phil-body">
+        Deshalb kommen wir früh, arbeiten ruhig und bringen keine vorgefertigte Idee davon mit, wie euer Hochzeitstag aussehen soll. Wir folgen dem, was ist — und finden darin die Momente, die bleiben.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <span class="ft-brand-name">Amoriva Films</span>
+      <span class="ft-brand-sub">Wedding Films &amp; Photography</span>
+      <span class="ft-brand-sub" style="font-style:normal; font-family:var(--sans); font-size:.72rem; letter-spacing:.12em; color:rgba(246,241,235,.18);">Germany &nbsp;·&nbsp; Europe</span>
+    </div>
+    <div class="ft-col">
+      <h4>Navigation</h4>
+      <ul class="ft-links">
+        <li><a href="films.html">Films</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="inquire.html">Inquire</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Kontakt</h4>
+      <ul class="ft-links">
+        <li><a href="https://www.instagram.com/amorivafilms/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:booking@amoriva-films.de">booking@amoriva-films.de</a></li>
+        <li><a href="tel:015565559747">01556 &nbsp;5559747</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&#169; 2026 Amoriva Films</p>
+    <div class="ft-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/4915565559747" target="_blank" rel="noopener" class="wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

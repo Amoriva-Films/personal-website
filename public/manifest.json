@@ -1,0 +1,19 @@
+{
+  "name": "Amoriva Films",
+  "short_name": "Amoriva Films",
+  "description": "Hochzeitsfilm & Hochzeitsfotografie in Wolfsburg, Braunschweig, Hannover und ganz Deutschland",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F6F1EB",
+  "theme_color": "#3B2F2A",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["photography", "videography", "wedding"]
+}
