@@ -90,13 +90,13 @@ export default function ContentSections() {
                 Unser Ansatz
               </p>
               <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.6rem, 2.8vw, 2.25rem)', fontWeight: 400, color: brown, lineHeight: 1.3, marginBottom: '1.75rem' }}>
-                Elegant begleitet.<br />Persönlich erzählt.
+                Wir filmen nicht.<br />Wir beobachten.
               </h2>
               <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '1.25rem', fontWeight: 300 }}>
-                Bevor es losgeht nehmen wir uns Zeit für euch. Wer seid ihr? Was macht euren Tag besonders? Was soll euer Film eines Tages erzählen?
+                Wir geben keine Anweisungen. Wir stellen keine Paare in Position. Wir sagen nicht "Schaut euch jetzt an" oder "Lächelt noch mal". Wir sind einfach da und schauen zu was passiert wenn zwei Menschen heiraten.
               </p>
               <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '2rem', fontWeight: 300 }}>
-                Diese Fragen helfen uns nicht einfach einen Hochzeitsfilm zu drehen, sondern euren Film. Persönlich, stilvoll und mit einem Blick für die Details die euren Tag ausmachen.
+                Was dabei entsteht ist kein Hochzeitsfilm und keine Hochzeitsreportage. Es ist euer Tag. So wie er wirklich war.
               </p>
               <Link href="/anfrage" style={{ fontFamily: sans, fontSize: '12px', letterSpacing: '0.15em', textTransform: 'uppercase', color: gold, textDecoration: 'none', borderBottom: '1px solid #C4973A', paddingBottom: '2px', transition: 'opacity 0.2s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.opacity = '0.65'; }}
@@ -108,9 +108,9 @@ export default function ContentSections() {
           <FadeIn delay={0.1}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {[
-                { schritt: 'Vor der Hochzeit', text: 'Wir lernen euch kennen. Was euch bewegt, was euch wichtig ist und welchen Stil ihr euch vorstellt.' },
-                { schritt: 'Am Hochzeitstag', text: 'Wir sind leise dabei. Keine Regie, keine gestellten Momente. Nur ein aufmerksamer Blick für das was wirklich passiert.' },
-                { schritt: 'Danach', text: 'Ihr bekommt einen Film und Fotos die sich anfühlen wie euer Tag. Nicht wie eine Vorlage.' },
+                { schritt: 'Kein Posing', text: 'Wir arrangieren nichts. Jeder Moment den ihr später seht ist genau so passiert.' },
+                { schritt: 'Natürliches Licht', text: 'Wir arbeiten mit dem Licht das da ist. Kein Aufbau, keine Scheinwerfer, kein Kamerateam das den Raum dominiert.' },
+                { schritt: 'Eine Bildsprache', text: 'Film und Foto entstehen bei uns aus demselben Blickwinkel. Kein Stilbruch zwischen euren Videos und Bildern.' },
               ].map((item, i) => (
                 <div key={i} style={{ padding: '1.5rem 1.75rem', background: '#FFFFFF', borderRadius: '8px', border: '0.5px solid #E8E2DC' }}>
                   <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: gold, marginBottom: '0.6rem', fontWeight: 500 }}>{item.schritt}</p>

@@ -21,7 +21,7 @@ const fragen = [
   },
   {
     frage: 'Seid ihr nur in Wolfsburg tätig?',
-    antwort: 'Nein. Wir begleiten Hochzeiten in ganz Deutschland und sind besonders in Niedersachsen aktiv. Wolfsburg, Braunschweig, Hannover, Magdeburg und darüber hinaus. Anreise und Unterkunft klären wir transparent im Vorfeld.',
+    antwort: 'Nein, wir sind international unterwegs. Wolfsburg ist unser Zuhause, aber wir waren schon in Deutschland, Österreich, der Schweiz und südeuropäischen Ländern. Wo eure Hochzeit ist, schauen wir uns gemeinsam an. Anreisekosten sprechen wir offen im Vorfeld ab.',
   },
   {
     frage: 'Wie viele Hochzeiten begleitet ihr pro Jahr?',

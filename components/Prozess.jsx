@@ -11,8 +11,8 @@ const soft  = '#6B5E57';
 const schritte = [
   { nummer: '01', titel: 'Anfrage stellen', text: 'Ihr schreibt uns kurz per Formular oder WhatsApp. Kein Aufwand, keine Verpflichtung.' },
   { nummer: '02', titel: 'Kennenlerngespräch', text: 'Wir sprechen 20 Minuten per Video oder Telefon. Kein Verkaufsgespräch. Wir wollen euch kennen.' },
-  { nummer: '03', titel: 'Gemeinsame Filmvision', text: 'In einem zweiten Gespräch hören wir genau zu: Was euch bewegt, was ihr euch vorstellt, welche Momente euch wichtig sind.' },
-  { nummer: '04', titel: 'Euer Hochzeitstag', text: 'Wir sind dabei. Ruhig im Hintergrund und mit dem Blick für das was zählt.' },
+  { nummer: '03', titel: 'Eure Film und Fotovision', text: 'Was soll euer Film erzählen? Welche Fotos sollen bei euch an der Wand hängen? Wir reden nicht über Technik, sondern darüber was euch wirklich wichtig ist.' },
+  { nummer: '04', titel: 'Euer Hochzeitstag', text: 'Euer Hochzeitstag. Wir sind den ganzen Tag mit dabei. Ohne euch zu stören, ohne Anweisungen. Einfach da.' },
   { nummer: '05', titel: 'Euer Film und Fotos', text: 'Innerhalb von 6 bis 8 Wochen erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Galerie.' },
 ];
 
