@@ -16,8 +16,8 @@ const fragen = [
     antwort: 'Innerhalb von 6 bis 8 Wochen nach eurer Hochzeit erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.',
   },
   {
-    frage: 'Was passiert wenn einer von euch am Hochzeitstag krank wird?',
-    antwort: 'Euer Hochzeitstag kann nicht verschoben werden. Das wissen wir. Deshalb haben wir für diesen Fall Kontakte zu erfahrenen Kollegen in Niedersachsen und der Region. Sollte wirklich etwas Unvorhergesehenes passieren sorgen wir dafür dass jemand Vertrauenswürdiges für euch da ist.',
+    frage: 'Gibt es einen Vertrag und wie läuft die Bezahlung ab?',
+    antwort: 'Ja. Nach der Anfrage erhaltet ihr von uns ein schriftliches Angebot und einen Vertrag. Eine Anzahlung sichert euren Termin. Den Restbetrag zahlt ihr nach der Hochzeit. Alles wird offen und transparent im Vorfeld besprochen.',
   },
   {
     frage: 'Seid ihr nur in Wolfsburg tätig?',
@@ -28,8 +28,8 @@ const fragen = [
     antwort: 'Wir halten unsere Buchungen bewusst begrenzt. So bleibt jede Hochzeit eine Einzelanfertigung und keine Routine. Ihr arbeitet direkt mit uns und nicht mit einem großen Agenturteam das euch kurz vor der Hochzeit zum ersten Mal trifft.',
   },
   {
-    frage: 'Kann ich die Musik für den Film mitbestimmen?',
-    antwort: 'Ja. In unserem zweiten Gespräch vor der Hochzeit besprechen wir zusammen welchen Stil euer Film haben soll und welche Musik dazu passt. Wir haben Zugang zu lizenzierten Musikbibliotheken und können auch auf eure Vorschläge eingehen.',
+    frage: 'In welchem Format erhalten wir den Film und die Fotos?',
+    antwort: 'Euer Film wird als hochauflösende Videodatei geliefert. Die Fotos erhaltet ihr in voller Auflösung mit Druckfreigabe. Alles landet in einer privaten Online-Galerie die ihr jederzeit aufrufen und mit Familie und Freunden teilen könnt.',
   },
 ];
 

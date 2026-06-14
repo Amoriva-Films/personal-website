@@ -11,15 +11,15 @@ const soft  = '#6B5E57';
 const items = [
   {
     quote: 'Wir hatten vom ersten Gespräch an das Gefühl bei Freunden in guten Händen zu sein. Nevio und Danilo haben unsere Hochzeit so festgehalten wie sie sich angefühlt hat. Ruhig, ehrlich und voller Emotion. Unser Film macht uns bis heute sprachlos.',
-    namen: 'Jakob & Laura', datum: 'Hochzeit 2026', init: 'J&L',
+    namen: 'Jakob & Laura', datum: '', init: 'J&L',
   },
   {
     quote: 'Man merkt sofort dass die beiden wirklich für das brennen was sie tun. Sie waren den ganzen Tag da ohne jemals aufzufallen. Und trotzdem haben sie jeden wichtigen Moment eingefangen. Unser Film ist etwas das wir für immer behalten.',
-    namen: 'Mishelle & Julian', datum: 'Hochzeit 2026', init: 'M&J',
+    namen: 'Mishelle & Julian', datum: '', init: 'M&J',
   },
   {
     quote: 'Wir haben uns nie beobachtet gefühlt aber am Ende hatten wir Bilder und einen Film die genau unsere Geschichte erzählen. Ehrlich, warm und zeitlos. Genau so wollten wir das.',
-    namen: 'Lisa & Tom', datum: 'Hochzeit 2026', init: 'L&T',
+    namen: 'Lisa und Andre', datum: '', init: 'L&A',
   },
 ];
 

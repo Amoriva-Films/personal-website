@@ -81,50 +81,8 @@ export default function ContentSections() {
         </div>
       </section>
 
-      {/* ── 4. Unser Ansatz ─────────────────────────────────────────────── */}
-      <section style={{ padding: '7rem 1.5rem', background: '#F5F2ED', borderTop: '0.5px solid #E8E2DC' }}>
-        <div className="ansatz-grid" style={{ maxWidth: '1000px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
-          <FadeIn>
-            <div>
-              <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: muted, marginBottom: '1.5rem', fontWeight: 300 }}>
-                Unser Ansatz
-              </p>
-              <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.6rem, 2.8vw, 2.25rem)', fontWeight: 400, color: brown, lineHeight: 1.3, marginBottom: '1.75rem' }}>
-                Wir filmen nicht.<br />Wir beobachten.
-              </h2>
-              <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '1.25rem', fontWeight: 300 }}>
-                Wir geben keine Anweisungen. Wir stellen keine Paare in Position. Wir sagen nicht "Schaut euch jetzt an" oder "Lächelt noch mal". Wir sind einfach da und schauen zu was passiert wenn zwei Menschen heiraten.
-              </p>
-              <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.9, color: soft, marginBottom: '2rem', fontWeight: 300 }}>
-                Was dabei entsteht ist kein Hochzeitsfilm und keine Hochzeitsreportage. Es ist euer Tag. So wie er wirklich war.
-              </p>
-              <Link href="/anfrage" style={{ fontFamily: sans, fontSize: '12px', letterSpacing: '0.15em', textTransform: 'uppercase', color: gold, textDecoration: 'none', borderBottom: '1px solid #C4973A', paddingBottom: '2px', transition: 'opacity 0.2s ease' }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '0.65'; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}>
-                Anfrage stellen
-              </Link>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {[
-                { schritt: 'Kein Posing', text: 'Wir arrangieren nichts. Jeder Moment den ihr später seht ist genau so passiert.' },
-                { schritt: 'Natürliches Licht', text: 'Wir arbeiten mit dem Licht das da ist. Kein Aufbau, keine Scheinwerfer, kein Kamerateam das den Raum dominiert.' },
-                { schritt: 'Eine Bildsprache', text: 'Film und Foto entstehen bei uns aus demselben Blickwinkel. Kein Stilbruch zwischen euren Videos und Bildern.' },
-              ].map((item, i) => (
-                <div key={i} style={{ padding: '1.5rem 1.75rem', background: '#FFFFFF', borderRadius: '8px', border: '0.5px solid #E8E2DC' }}>
-                  <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: gold, marginBottom: '0.6rem', fontWeight: 500 }}>{item.schritt}</p>
-                  <p style={{ fontFamily: sans, fontSize: '15px', lineHeight: 1.75, color: soft, margin: 0, fontWeight: 300 }}>{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
       <style>{`
         @media (max-width: 768px) {
-          .ansatz-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
           .gallery-grid { grid-template-columns: 1fr !important; grid-template-rows: 260px 200px 200px !important; }
           .gallery-grid > *:first-child { grid-row: auto !important; }
         }
