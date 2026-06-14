@@ -9,7 +9,7 @@ const sans  = "var(--font-inter), system-ui, sans-serif";
 const fragen = [
   {
     frage: 'Was kostet ein Hochzeitsfilm bei euch?',
-    antwort: 'Unsere Hochzeitsfilme beginnen ab 1.600 Euro. Hochzeitsfotografie ab 1.400 Euro. Das Kombi-Paket aus Film und Foto ab 2.600 Euro. Was genau in eurem Paket steckt und welches Angebot zu eurem Tag passt besprechen wir gerne persönlich. Schreibt uns einfach an.',
+    antwort: 'Das hängt von eurem Tag ab. Wo findet die Hochzeit statt, was braucht ihr, wie lange soll der Film sein. Wir erstellen jedem Paar ein individuelles Angebot nach einem kurzen Gespräch. Schreibt uns einfach an.',
   },
   {
     frage: 'Wie lange dauert es bis wir den Film bekommen?',
