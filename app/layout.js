@@ -61,6 +61,7 @@ export default function RootLayout({ children }) {
     <html lang="de" className={`${cormorant.variable} ${inter.variable}`}>
       <head>
         <StructuredData />
+        <link rel="preload" href="/videos/hero.mp4" as="video" type="video/mp4" />
       </head>
       <body style={{ margin: 0, padding: 0, background: '#F6F1EB' }}>
         <Nav />

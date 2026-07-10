@@ -12,7 +12,12 @@ export default function Hero() {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
+    v.style.opacity = '0';
+    v.style.transition = 'opacity 0.6s ease';
+    const show = () => { v.style.opacity = '1'; };
+    v.addEventListener('canplay', show, { once: true });
     v.play().catch(() => {});
+    return () => v.removeEventListener('canplay', show);
   }, []);
 
   return (
@@ -34,7 +39,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster="/images/Bild-5.jpg"
+          preload="auto"
           style={{
             width: '100%',
             height: '100%',
