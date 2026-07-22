@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import { useRef } from 'react';
 import FadeIn from './FadeIn';
 
@@ -28,16 +29,14 @@ function Portrait({ name, role, bio, img, imgPosition, imgFit = 'cover', imgTran
           marginBottom: '2rem',
         }}
       >
-        <img
+        <Image
           src={img}
           alt={name}
+          fill
+          sizes="(max-width: 760px) 100vw, (max-width: 1280px) 40vw, 480px"
           style={{
-            width: '100%',
-            height: '100%',
             objectFit: imgFit,
             objectPosition: imgPosition,
-            display: 'block',
-            background: '#F6F1EB',
             transform: `translateY(${imgTranslate})`,
             filter: 'contrast(1.08) saturate(1.15) brightness(1.02)',
           }}
@@ -145,7 +144,7 @@ export default function Founders() {
             name="Nevio Mastrogiorgio"
             role="Founder · Beratung & kreative Leitung"
             bio="Nevio begleitet euch vom ersten Gespräch bis weit über den Hochzeitstag hinaus. Mit seiner ruhigen und klaren Art sorgt er dafür, dass ihr euch verstanden, sicher und vollkommen aufgehoben fühlt."
-            img="/images/nevio.png"
+            img="/images/nevio.webp"
             imgPosition="center 80%"
             delay={0}
           />
@@ -153,7 +152,7 @@ export default function Founders() {
             name="Danilo Buonafede"
             role="Co Founder · Cinematography & Bildgestaltung"
             bio="Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen."
-            img="/images/danilo.png"
+            img="/images/danilo.webp"
             imgPosition="center top"
             delay={0.14}
           />

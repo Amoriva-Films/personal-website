@@ -21,7 +21,7 @@ const weddings = [
     location: 'Wolfsburg',
     venue: 'Schloss Wolfsburg',
     year: '2026',
-    img: '/images/editorial-couple.png',
+    img: '/images/editorial-couple.webp',
     position: 'center center',
     tag: 'Hochzeitsfilm & Fotografie',
     preview: [
@@ -36,7 +36,7 @@ const weddings = [
     location: 'Braunschweig',
     venue: 'Gewandhaus Braunschweig',
     year: '2026',
-    img: '/images/gallery-left-2.png',
+    img: '/images/gallery-left-2.webp',
     position: '50% center',
     tag: 'Hochzeitsfilm',
     preview: [
@@ -51,7 +51,7 @@ const weddings = [
     location: 'Hannover',
     venue: 'Herrenhäuser Gärten',
     year: '2025',
-    img: '/images/wedding-couple.jpg',
+    img: '/images/wedding-couple.webp',
     position: 'center center',
     tag: 'Hochzeitsfilm & Fotografie',
     preview: [
@@ -66,7 +66,7 @@ const weddings = [
     location: 'Gifhorn',
     venue: 'Schloss Gifhorn',
     year: '2026',
-    img: '/images/veil.png',
+    img: '/images/veil.webp',
     position: '75% 52%',
     tag: 'Hochzeitsfilm',
     preview: [
@@ -81,7 +81,7 @@ const weddings = [
     location: 'Wolfsburg',
     venue: 'Autostadt Wolfsburg',
     year: '2025',
-    img: '/images/wedding-portrait.png',
+    img: '/images/wedding-portrait.webp',
     position: '10% 20%',
     tag: 'Hochzeitsfilm & Fotografie',
     preview: [

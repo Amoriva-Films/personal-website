@@ -10,12 +10,12 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Amoriva Films',
-    logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.png' },
+    logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
   dateModified: '2025-05-13',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/was-kostet-ein-hochzeitsfilm' },
-  image: 'https://amoriva-films.de/images/hero.png',
+  image: 'https://amoriva-films.de/images/hero.webp',
 };
 
 const breadcrumb = {

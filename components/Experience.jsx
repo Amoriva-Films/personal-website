@@ -93,7 +93,7 @@ export default function Experience() {
             style={{ position: 'absolute', inset: 0 }}
           >
             <Image
-              src="/images/Bild-101.jpg"
+              src="/images/Bild-101.webp"
               alt="Ruhiger Hochzeitsmoment"
               fill
               style={{

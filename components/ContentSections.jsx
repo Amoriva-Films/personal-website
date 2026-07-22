@@ -59,21 +59,21 @@ export default function ContentSections() {
         }}>
           <FadeIn style={{ gridRow: '1 / 3', overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
             <div style={{ gridRow: '1 / 3', overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-33.jpg" alt="Brautpaar Champagner Hochzeitsmoment Fine Art – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center 20%', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
+              <Image src="/images/Bild-33.webp" alt="Brautpaar Champagner Hochzeitsmoment Fine Art – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center 20%', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
             </div>
           </FadeIn>
           <FadeIn delay={0.1} style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
             <div style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-101.jpg" alt="Brautpaar emotionaler Hochzeitsfilm Niedersachsen – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
+              <Image src="/images/Bild-101.webp" alt="Brautpaar emotionaler Hochzeitsfilm Niedersachsen – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
             </div>
           </FadeIn>
           <FadeIn delay={0.15} style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
             <div style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-67.jpg" alt="Hochzeitsmoment cinematic Hannover Braunschweig – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
+              <Image src="/images/Bild-67.webp" alt="Hochzeitsmoment cinematic Hannover Braunschweig – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
             </div>
