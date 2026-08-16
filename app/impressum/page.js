@@ -73,6 +73,7 @@ export default function Impressum() {
         <Divider />
 
         <Section title="Umsatzsteuer">
+          <p>Steuernummer: 13/128/13447</p>
           <p>Kein Ausweis der Umsatzsteuer gemäß § 19 UStG (Kleinunternehmerregelung).</p>
         </Section>
 
