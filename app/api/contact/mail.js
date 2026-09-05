@@ -110,25 +110,39 @@ export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
   };
 }
 
-/** Benachrichtigung an uns, mit direktem Antworten-Knopf. */
+/** Benachrichtigung an uns. Gleiches Layout wie die Mail an das Paar, nur mit anderen Daten. */
 export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht }) {
+  const paar = esc(String(name || '').trim());
   const details = [zeile('Paar', name), zeile('E-Mail', email), zeile('Datum', datumSchoen(hochzeitsdatum)), zeile('Location', location), zeile('Nachricht', nachricht, { mehrzeilig: true })].join('');
   const betreffAntwort = encodeURIComponent('Eure Hochzeit mit Amoriva Films');
   const inhalt = `
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 30px;">${details}</table>
+    ${absatz('Hallo Nevio,')}
+    ${absatz(`${paar} haben euch gerade über die Website geschrieben. Hier ist alles auf einen Blick.`)}
+    ${absatz('Die Eingangsbestätigung an das Paar ist schon raus. Jetzt bist du dran, in der Regel innerhalb von 24 Stunden.')}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 30px;background:${F.creme};">
+      <tr><td style="padding:10px 24px 12px;">
+        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};padding:8px 0 4px;">Das hat das Paar geschickt</div>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${details}</table>
+      </td></tr>
+    </table>
     <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
       <td style="background:${F.dunkel};">
         <a href="mailto:${esc(email)}?subject=${betreffAntwort}" style="display:inline-block;padding:15px 30px;font-family:${sans};font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:${F.creme};text-decoration:none;">Jetzt antworten</a>
       </td>
     </tr></table>
-    <p style="margin:18px 0 0;font-family:${sans};font-size:12.5px;line-height:1.7;color:${F.gedaempft};">Oder einfach auf diese Mail antworten, die Antwort geht direkt an das Paar. Die Eingangsbestätigung an das Paar ist schon raus.</p>`;
+    ${absatz(`<span style="font-size:13px;color:${F.gedaempft};">Oder einfach auf diese Mail antworten, die Antwort geht direkt an das Paar.</span>`).replace('margin:0 0 18px', 'margin:18px 0 0')}
+    <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
+      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Automatisch weitergeleitet vom Kontaktformular</div>
+      <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">amoriva-films.de</div>
+      <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gold};margin-top:8px;">Amoriva Films</div>
+    </div>`;
   return {
     subject: `Neue Anfrage von ${name}`,
     html: rahmen({
       titelZeile: `Neue Anfrage von ${name}`,
       preheader: `${name}${location ? ', ' + location : ''}${hochzeitsdatum ? ', ' + datumSchoen(hochzeitsdatum) : ''}`,
       eyebrow: 'Neue Anfrage',
-      titel: esc(name),
+      titel: 'Eine neue Anfrage ist<br>angekommen.',
       inhalt,
     }),
   };
