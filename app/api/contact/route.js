@@ -108,7 +108,7 @@ export async function POST(request) {
       const zeile = (titel, wert) => (wert
         ? `<tr><td style="padding: 10px 0; border-bottom: 1px solid #E7DED3; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #B79B72; width: 130px;">${titel}</td><td style="padding: 10px 0; border-bottom: 1px solid #E7DED3;">${esc(wert)}</td></tr>`
         : '');
-      await fetch('https://api.resend.com/emails', {
+      const bRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,6 +134,10 @@ export async function POST(request) {
         `,
         }),
       });
+      if (!bRes.ok) {
+        const bTxt = await bRes.text();
+        console.error('Bestaetigung an das Paar abgelehnt:', bRes.status, bTxt.slice(0, 300));
+      }
     } catch (e) {
       console.error('Bestaetigung an das Paar fehlgeschlagen:', e);
     }
