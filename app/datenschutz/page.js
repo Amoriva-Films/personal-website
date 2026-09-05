@@ -153,7 +153,7 @@ export default function Datenschutz() {
             Deine Anfrage wird zusätzlich in <strong>Amoriva</strong> gespeichert, unserer eigenen Software für Hochzeitsdienstleister (Anbieter: Amoriva, Nevio Mastrogiorgio, Grafhorster Str. 16b, 38458 Velpke). Dort verwalten wir eure Anfrage, das Angebot und die weitere Zusammenarbeit an einem Ort, statt in verstreuten E-Mails.
           </p>
           <p>
-            Gespeichert werden dieselben Angaben wie oben (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (Rechenzentrum Frankfurt) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
+            Gespeichert werden dieselben Angaben wie oben (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (EU-Region Irland) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
             <a href="https://amoriva.app/datenschutz" target="_blank" rel="noopener" style={linkStyle}>Datenschutzerklärung von Amoriva</a>.
           </p>
         </Section>
