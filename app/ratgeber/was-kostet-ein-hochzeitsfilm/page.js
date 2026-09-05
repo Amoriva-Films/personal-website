@@ -15,7 +15,7 @@ const jsonLd = {
   datePublished: '2025-05-01',
   dateModified: '2025-05-13',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/was-kostet-ein-hochzeitsfilm' },
-  image: 'https://amoriva-films.de/images/hero.webp',
+  image: 'https://amoriva-films.de/images/og-image.jpg',
 };
 
 const breadcrumb = {
