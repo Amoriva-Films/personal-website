@@ -148,7 +148,19 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="5. Kommunikation über WhatsApp">
+        <Section title="5. Anfrageverwaltung mit Amoriva">
+          <p>
+            Deine Anfrage wird zusätzlich in <strong>Amoriva</strong> gespeichert, unserer eigenen Software für Hochzeitsdienstleister (Anbieter: Amoriva, Nevio Mastrogiorgio, Grafhorster Str. 16b, 38458 Velpke). Dort verwalten wir eure Anfrage, das Angebot und die weitere Zusammenarbeit an einem Ort, statt in verstreuten E-Mails.
+          </p>
+          <p>
+            Gespeichert werden dieselben Angaben wie oben (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (Rechenzentrum Frankfurt) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
+            <a href="https://amoriva.app/datenschutz" target="_blank" rel="noopener" style={linkStyle}>Datenschutzerklärung von Amoriva</a>.
+          </p>
+        </Section>
+
+        <Divider />
+
+        <Section title="6. Kommunikation über WhatsApp">
           <p>
             Du kannst uns alternativ über WhatsApp kontaktieren. Dabei wird deine Telefonnummer verarbeitet. WhatsApp ist ein Dienst der Meta Platforms Ireland Ltd. Die Nutzung erfolgt freiwillig und auf eigene Verantwortung. Weitere Informationen findest du in der{' '}
             <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener" style={linkStyle}>
@@ -159,7 +171,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="6. Online-Meetings (Zoom / Google Meet)">
+        <Section title="7. Online-Meetings (Zoom / Google Meet)">
           <p>
             Für Kennenlerngespräche nutzen wir Videocall-Dienste. Dabei können Name, E-Mail-Adresse und Kommunikationsdaten verarbeitet werden. Die Nutzung erfolgt auf Basis deiner Einwilligung.
           </p>
@@ -167,7 +179,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="7. Cookies">
+        <Section title="8. Cookies">
           <p>
             Diese Website verwendet keine Tracking-Cookies. Es werden ausschließlich technisch notwendige Cookies eingesetzt, die für den Betrieb der Website erforderlich sind. Du kannst Cookies in deinem Browser jederzeit deaktivieren.
           </p>
@@ -175,7 +187,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="8. Deine Rechte">
+        <Section title="9. Deine Rechte">
           <p>Du hast jederzeit das Recht auf:</p>
           <ul style={{ margin: '0.4rem 0 0.4rem 1.4rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
             <li>Auskunft über deine bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -194,7 +206,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="9. SSL-Verschlüsselung">
+        <Section title="10. SSL-Verschlüsselung">
           <p>
             Diese Website nutzt aus Sicherheitsgründen eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennst du daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt.
           </p>
@@ -202,7 +214,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="10. Speicherdauer">
+        <Section title="11. Speicherdauer">
           <p>
             Deine Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungsfristen dies verlangen. Anfragen werden nach Abschluss der Korrespondenz gelöscht, sofern keine gesetzlichen Pflichten entgegenstehen.
           </p>
@@ -210,7 +222,7 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <Section title="11. Änderungen dieser Datenschutzerklärung">
+        <Section title="12. Änderungen dieser Datenschutzerklärung">
           <p>
             Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie stets den aktuellen rechtlichen Anforderungen entsprechend zu halten. Stand: Mai 2026.
           </p>

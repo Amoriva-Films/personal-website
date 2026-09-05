@@ -6,6 +6,43 @@ import { mailAnPaar, mailAnUns } from './mail.js';
 const FROM = 'Amoriva Films <booking@amoriva-films.de>';
 const AN_UNS = 'mastrogiorgio.nevio@gmail.com';
 
+// Persönliche Empfangsadresse aus dem Amoriva-Dashboard (Formular → Website-Eingang).
+// Ist sie nicht gesetzt, läuft alles wie bisher, nur ohne Eintrag im Dashboard.
+const AMORIVA_EINGANG = (process.env.AMORIVA_EINGANG_URL || '').trim();
+const EINGANG_OK = /^https:\/\/(www\.)?amoriva\.app\/api\/anfragen\/eingang\/ws_[a-f0-9]{24}$/.test(AMORIVA_EINGANG);
+
+/**
+ * Schickt die Anfrage zusätzlich in Nevios eigenes Amoriva-Dashboard, wo sie mit
+ * der Rückfrage „übernehmen? Ja / Nein" landet. Bewusst ohne await im Hauptpfad
+ * und mit kurzem Zeitlimit: Wenn Amoriva langsam oder nicht erreichbar ist, darf
+ * das die Anfrage des Paares niemals aufhalten. Die E-Mails sind der sichere Weg,
+ * das Dashboard die Bequemlichkeit.
+ */
+async function anAmoriva(daten) {
+  if (!EINGANG_OK) {
+    if (AMORIVA_EINGANG) console.error('AMORIVA_EINGANG_URL sieht nicht wie eine gültige Empfangsadresse aus.');
+    return;
+  }
+  const abbruch = new AbortController();
+  const uhr = setTimeout(() => abbruch.abort(), 6000);
+  try {
+    const res = await fetch(AMORIVA_EINGANG, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...daten, formular: 'amoriva-films.de' }),
+      signal: abbruch.signal,
+    });
+    if (!res.ok) {
+      const txt = await res.text();
+      console.error('Amoriva-Eingang abgelehnt:', res.status, txt.slice(0, 200));
+    }
+  } catch (e) {
+    console.error('Amoriva-Eingang nicht erreichbar:', e?.name === 'AbortError' ? 'Zeitlimit' : e);
+  } finally {
+    clearTimeout(uhr);
+  }
+}
+
 // Einfache Bremse gegen Missbrauch: seit der Eingangsbestätigung geht eine Mail
 // auch an die vom Absender eingetippte Adresse. Ohne Bremse könnte jemand damit
 // Fremde zumüllen und unsere Absender-Reputation beschädigen. Der Zähler lebt
@@ -61,7 +98,10 @@ export async function POST(request) {
       return Response.json({ error: `E-Mail konnte nicht gesendet werden (${msg}). Bitte schreibt uns direkt an booking@amoriva-films.de.` }, { status: 500 });
     }
 
-    // 2) Eingangsbestätigung an das Paar. Bewusst kurz: sie ersetzt die persönliche
+    // 2) Anfrage zusätzlich ins eigene Amoriva-Dashboard. Fire and forget.
+    void anAmoriva({ name, email, hochzeitsdatum, location, nachricht });
+
+    // 3) Eingangsbestätigung an das Paar. Bewusst kurz: sie ersetzt die persönliche
     // Antwort nicht, sie kündigt sie an. Schlägt sie fehl, ist die Anfrage trotzdem
     // bei uns, deshalb nur protokollieren.
     try {
