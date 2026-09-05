@@ -135,8 +135,14 @@ export default function Datenschutz() {
             Wenn du uns über das Kontaktformular oder per E-Mail kontaktierst, werden die von dir übermittelten Daten (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht) zur Bearbeitung deiner Anfrage gespeichert. Die Daten werden nicht ohne deine Einwilligung an Dritte weitergegeben.
           </p>
           <p>
-            Das Formular wird über den Dienst <strong>FormSubmit</strong> verarbeitet. Dabei werden deine Daten an unsere E-Mail-Adresse weitergeleitet. Weitere Informationen unter{' '}
-            <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener" style={linkStyle}>formsubmit.co/privacy</a>.
+            Für den Versand dieser E-Mails nutzen wir den Dienst <strong>Resend</strong> (Resend Inc., 2261 Market Street, San Francisco, CA 94114, USA), der seinerseits Amazon SES in der EU-Region Irland für die Zustellung einsetzt. Dabei werden deine E-Mail-Adresse, der Inhalt deiner Anfrage sowie technische Zustellinformationen verarbeitet. Weitere Informationen findest du in der{' '}
+            <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener" style={linkStyle}>Datenschutzerklärung von Resend</a>.
+          </p>
+          <p>
+            Direkt nach dem Absenden schicken wir dir automatisch eine kurze Eingangsbestätigung an die von dir angegebene E-Mail-Adresse. Sie bestätigt nur, dass deine Anfrage angekommen ist. Die persönliche Antwort schreiben wir dir danach selbst.
+          </p>
+          <p>
+            Um Missbrauch des Formulars zu verhindern, speichern wir für maximal zehn Minuten, wie oft von einer IP-Adresse abgeschickt wurde. Danach wird dieser Zählwert automatisch verworfen.
           </p>
         </Section>
 

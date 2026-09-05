@@ -1,7 +1,42 @@
+const BASIS = 'https://amoriva-films.de';
+
+/** Referenz-Detailseiten. Neue Hochzeit ergänzt? Hier die Kennung nachtragen. */
+const REFERENZEN = [
+  'anna-thomas-2025',
+  'basti-chiara-2025',
+  'katharina-ben-2025',
+  'laura-jakob-2026',
+  'mishelle-julian-2026',
+  'raffaele-caterina-2026',
+];
+
+/** Ratgeber-Artikel (jeweils ein eigener Ordner unter app/ratgeber). */
+const RATGEBER = [
+  'was-kostet-ein-hochzeitsfilm',
+  'cinematic-hochzeitsfilm',
+  'hochzeitsfilmer-wann-buchen',
+  'same-day-edit-hochzeit',
+];
+
 export default function sitemap() {
+  const jetzt = new Date();
+  const eintrag = (pfad, prioritaet, takt = 'monthly') => ({
+    url: pfad ? `${BASIS}/${pfad}` : BASIS,
+    lastModified: jetzt,
+    changeFrequency: takt,
+    priority: prioritaet,
+  });
+
   return [
-    { url: 'https://amoriva-films.de',        lastModified: new Date(), changeFrequency: 'monthly', priority: 1 },
-    { url: 'https://amoriva-films.de/preise',  lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
-    { url: 'https://amoriva-films.de/anfrage', lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.8 },
+    eintrag('', 1),
+    eintrag('angebote', 0.9),
+    eintrag('leistungen', 0.8),
+    eintrag('referenzen', 0.8),
+    eintrag('anfrage', 0.8, 'yearly'),
+    eintrag('ratgeber', 0.7),
+    ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),
+    ...REFERENZEN.map((r) => eintrag(`referenzen/${r}`, 0.5)),
+    eintrag('impressum', 0.2, 'yearly'),
+    eintrag('datenschutz', 0.2, 'yearly'),
   ];
 }
