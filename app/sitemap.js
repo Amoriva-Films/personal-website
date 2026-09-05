@@ -1,15 +1,6 @@
 const BASIS = 'https://amoriva-films.de';
 
 /** Referenz-Detailseiten. Neue Hochzeit ergänzt? Hier die Kennung nachtragen. */
-const REFERENZEN = [
-  'anna-thomas-2025',
-  'basti-chiara-2025',
-  'katharina-ben-2025',
-  'laura-jakob-2026',
-  'mishelle-julian-2026',
-  'raffaele-caterina-2026',
-];
-
 /** Ratgeber-Artikel (jeweils ein eigener Ordner unter app/ratgeber). */
 const RATGEBER = [
   'was-kostet-ein-hochzeitsfilm',
@@ -35,7 +26,6 @@ export default function sitemap() {
     eintrag('anfrage', 0.8, 'yearly'),
     eintrag('ratgeber', 0.7),
     ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),
-    ...REFERENZEN.map((r) => eintrag(`referenzen/${r}`, 0.5)),
     eintrag('impressum', 0.2, 'yearly'),
     eintrag('datenschutz', 0.2, 'yearly'),
   ];

@@ -1,7 +1,8 @@
 export const metadata = {
-  title: 'Referenzen | Unsere Hochzeitsfilme & Fotos | Amoriva Films',
+  // Das Wurzel-Layout haengt automatisch " | Amoriva Films" an, deshalb hier ohne.
+  title: 'Unsere Arbeiten — Hochzeitsfilm & Fotografie',
   description:
-    'Hochzeitsfilme und Fotografie von Amoriva Films. Paare aus Wolfsburg, Braunschweig, Hannover und ganz Deutschland. Cinematic, emotional, zeitlos.',
+    'Ein Ausschnitt aus der Arbeit von Amoriva Films: Hochzeitsfilm und Hochzeitsfotografie in Niedersachsen. Cinematic, emotional, zeitlos.',
   alternates: {
     canonical: 'https://amoriva-films.de/referenzen',
   },
