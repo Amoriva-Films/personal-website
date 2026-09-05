@@ -1,7 +1,37 @@
+// Hilfsmittel fuer den Versand.
+// esc(): Nutzereingaben werden in HTML-Mails eingesetzt, deshalb Sonderzeichen entschaerfen.
+function esc(v) {
+  return String(v ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Einfache Bremse gegen Missbrauch: seit der Eingangsbestaetigung geht eine Mail
+// auch an die vom Absender eingetippte Adresse. Ohne Bremse koennte jemand damit
+// Fremde zumuellen und unsere Absender-Reputation beschaedigen. Der Zaehler lebt
+// im Arbeitsspeicher, das reicht gegen einfache Fluten.
+const versuche = new Map();
+function zuVieleAnfragen(ip) {
+  const jetzt = Date.now();
+  const fenster = 10 * 60 * 1000;
+  const liste = (versuche.get(ip) || []).filter((t) => jetzt - t < fenster);
+  liste.push(jetzt);
+  versuche.set(ip, liste);
+  if (versuche.size > 500) versuche.clear();
+  return liste.length > 5;
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
     const { name, email, hochzeitsdatum, location, nachricht } = body;
+
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unbekannt';
+    if (zuVieleAnfragen(ip)) {
+      return Response.json({ error: 'Zu viele Anfragen in kurzer Zeit. Bitte versucht es gleich noch einmal oder schreibt uns direkt an booking@amoriva-films.de.' }, { status: 429 });
+    }
 
     if (!name) {
       return Response.json({ error: 'Bitte gebt euren Namen an.' }, { status: 400 });
@@ -69,6 +99,43 @@ export async function POST(request) {
       return Response.json({
         error: `E-Mail konnte nicht gesendet werden (${msg}). Bitte schreibt uns direkt an booking@amoriva-films.de.`,
       }, { status: 500 });
+    }
+
+    // Eingangsbestaetigung an das Paar. Bewusst kurz gehalten: sie ersetzt die
+    // persoenliche Antwort nicht, sie kuendigt sie an. Schlaegt sie fehl, ist das
+    // nicht schlimm, die Anfrage ist ja schon bei uns angekommen.
+    try {
+      const zeile = (titel, wert) => (wert
+        ? `<tr><td style="padding: 10px 0; border-bottom: 1px solid #E7DED3; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #B79B72; width: 130px;">${titel}</td><td style="padding: 10px 0; border-bottom: 1px solid #E7DED3;">${esc(wert)}</td></tr>`
+        : '');
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: 'Amoriva Films <booking@amoriva-films.de>',
+          to: [email],
+          reply_to: 'booking@amoriva-films.de',
+          subject: 'Eure Anfrage ist angekommen',
+          html: `
+          <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 24px; background: #F6F1EB; color: #3B2F2A; line-height: 1.8;">
+            <h1 style="font-size: 1.4rem; font-weight: 300; margin-bottom: 28px;">Eure Anfrage ist angekommen</h1>
+            <p style="margin: 0 0 20px;">Hallo ${esc(name)},</p>
+            <p style="margin: 0 0 20px;">schön, dass ihr euch bei uns gemeldet habt. Eure Anfrage ist gerade reingekommen und wir schauen sie uns in Ruhe an.</p>
+            <p style="margin: 0 0 28px;">Nevio meldet sich persönlich bei euch, in der Regel innerhalb von 24 Stunden. Wenn euch bis dahin noch etwas einfällt, antwortet einfach auf diese Mail.</p>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 28px;">
+              ${zeile('Datum', hochzeitsdatum)}
+              ${zeile('Location', location)}
+            </table>
+            <p style="margin: 0;">Liebe Grüße<br>Amoriva Films</p>
+          </div>
+        `,
+        }),
+      });
+    } catch (e) {
+      console.error('Bestaetigung an das Paar fehlgeschlagen:', e);
     }
 
     return Response.json({ ok: true });

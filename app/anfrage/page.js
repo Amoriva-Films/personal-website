@@ -388,8 +388,9 @@ export default function InquirePage() {
                     lineHeight: 1.8,
                   }}
                 >
-                  Keine automatische Antwort. Nevio meldet sich persönlich,
-                  in der Regel innerhalb von 24 Stunden.
+                  Ihr bekommt sofort eine kurze Eingangsbestätigung. Die
+                  richtige Antwort schreibt Nevio persönlich, in der Regel
+                  innerhalb von 24 Stunden.
                 </p>
               </form>
             )}
