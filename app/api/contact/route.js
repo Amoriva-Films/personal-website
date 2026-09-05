@@ -25,7 +25,9 @@ export async function POST(request) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Amoriva Films <onboarding@resend.dev>',
+        // Eigene, bei Resend verifizierte Domain als Absender. Die Testadresse
+        // onboarding@resend.dev konnte nur an das eigene Konto zustellen.
+        from: 'Amoriva Films <booking@amoriva-films.de>',
         to: ['mastrogiorgio.nevio@gmail.com'],
         reply_to: email,
         subject: `Neue Anfrage von ${name}`,
