@@ -10,16 +10,16 @@ const soft  = '#6B5E57';
 
 const items = [
   {
-    quote: 'Wir hatten vom ersten Gespräch an das Gefühl bei Freunden in guten Händen zu sein. Nevio und Danilo haben unsere Hochzeit so festgehalten wie sie sich angefühlt hat. Ruhig, ehrlich und voller Emotion. Unser Film macht uns bis heute sprachlos.',
-    namen: 'Jakob & Laura', datum: '', init: 'J&L',
+    quote: 'Wir wollten eigentlich nur ein paar schöne Fotos vom Standesamt. Bekommen haben wir Bilder, die genau so aussehen wie sich der Tag angefühlt hat. Nichts gestellt, nichts gekünstelt. Wir schauen sie uns immer noch ständig an.',
+    namen: 'Celine & Alex', datum: 'Hochzeitsfotografie · 2026', init: 'C&A',
   },
   {
-    quote: 'Man merkt sofort dass die beiden wirklich für das brennen was sie tun. Sie waren den ganzen Tag da ohne jemals aufzufallen. Und trotzdem haben sie jeden wichtigen Moment eingefangen. Unser Film ist etwas das wir für immer behalten.',
-    namen: 'Mishelle & Julian', datum: '', init: 'M&J',
+    quote: 'Nevio und Danilo waren den ganzen Tag da und trotzdem haben wir sie kaum bemerkt. Als wir den Film dann gesehen haben, mussten wir beide weinen. Da war alles drin, sogar Momente, die wir selbst gar nicht mitbekommen hatten.',
+    namen: 'Laura & Jakob', datum: 'Hochzeitsfilm · 2026', init: 'L&J',
   },
   {
-    quote: 'Wir haben uns nie beobachtet gefühlt aber am Ende hatten wir Bilder und einen Film die genau unsere Geschichte erzählen. Ehrlich, warm und zeitlos. Genau so wollten wir das.',
-    namen: 'Lisa und Andre', datum: '', init: 'L&A',
+    quote: 'Film und Fotos aus einer Hand war für uns die beste Entscheidung. Kein Abstimmen zwischen zwei Teams, einfach zwei Leute, die wussten was sie tun. Der Film und die Bilder passen perfekt zusammen und erzählen unseren Tag genau so, wie er war.',
+    namen: 'Diana & Mattia', datum: 'Hochzeitsfilm und Fotografie · 2026', init: 'D&M',
   },
 ];
 
