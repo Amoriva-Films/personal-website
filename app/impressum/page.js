@@ -44,7 +44,7 @@ export default function Impressum() {
           color: 'rgba(246,241,235,0.35)',
           marginTop: '1rem',
         }}>
-          Angaben gemäß § 5 TMG
+          Angaben gemäß § 5 DDG
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default function Impressum() {
         background: '#F6F1EB',
       }}>
 
-        <Section title="Angaben gemäß § 5 TMG">
+        <Section title="Angaben gemäß § 5 DDG">
           <p><strong>Amoriva Films</strong></p>
           <p>Inhaber: Nevio Mastrogiorgio</p>
           <p>Grafhorster Str. 16b<br />38458 Velpke<br />Deutschland</p>
@@ -79,7 +79,7 @@ export default function Impressum() {
 
         <Divider />
 
-        <Section title="Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV">
+        <Section title="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
           <p>Nevio Mastrogiorgio<br />Grafhorster Str. 16b<br />38458 Velpke</p>
         </Section>
 
@@ -99,7 +99,7 @@ export default function Impressum() {
 
         <Section title="Haftung für Inhalte">
           <p>
-            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
           </p>
         </Section>
 
