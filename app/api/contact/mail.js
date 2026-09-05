@@ -77,7 +77,9 @@ const absatz = (t) => `<p style="margin:0 0 18px;font-family:${sans};font-size:1
 
 /** Eingangsbestätigung an das Paar. Kündigt die persönliche Antwort an, ersetzt sie nicht. */
 export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
-  const vorname = esc(String(name || '').trim().split(/\s+/)[0] || name);
+  // Anrede: bei Paaren ("Laura und Tim", "Laura & Tim") der ganze Name, sonst nur der Vorname.
+  const roh = String(name || '').trim();
+  const vorname = esc(/\b(und|&|\+)\b|,/i.test(roh) ? roh : (roh.split(/\s+/)[0] || roh));
   const details = [zeile('Datum', datumSchoen(hochzeitsdatum)), zeile('Location', location), zeile('Nachricht', nachricht, { mehrzeilig: true })].join('');
   const inhalt = `
     ${absatz(`Hallo ${vorname},`)}
