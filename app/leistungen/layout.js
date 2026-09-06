@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Leistungen | Hochzeitsfilm & Fotografie International | Amoriva Films',
+  title: 'Leistungen | Hochzeitsfilm & Fotografie International',
   description:
     'Cinematic Hochzeitsfilm & Hochzeitsfotografie international. Amoriva Films begleitet euch weltweit. Alle Pakete & Leistungen im Überblick.',
   keywords: [

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Impressum | Amoriva Films',
+  title: 'Impressum',
 };
 
 const serif = "var(--font-cormorant), Georgia, serif";

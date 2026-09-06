@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Datenschutz | Amoriva Films',
+  title: 'Datenschutz',
 };
 
 const serif = "var(--font-cormorant), Georgia, serif";
