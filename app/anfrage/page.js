@@ -243,8 +243,9 @@ export default function InquirePage() {
                 {/* Row 1 */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
                   <div>
-                    <label style={labelStyle}>Eure Namen</label>
+                    <label htmlFor="feld-namen" style={labelStyle}>Eure Namen</label>
                     <input
+                      id="feld-namen"
                       type="text"
                       name="name"
                       placeholder="Lena & Thomas"
@@ -255,8 +256,9 @@ export default function InquirePage() {
                     />
                   </div>
                   <div>
-                    <label style={labelStyle}>E-Mail Adresse</label>
+                    <label htmlFor="feld-email" style={labelStyle}>E-Mail Adresse</label>
                     <input
+                      id="feld-email"
                       type="email"
                       name="email"
                       placeholder="eure@email.de"
@@ -271,8 +273,9 @@ export default function InquirePage() {
                 {/* Row 2 */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
                   <div>
-                    <label style={labelStyle}>Telefonnummer</label>
+                    <label htmlFor="feld-telefon" style={labelStyle}>Telefonnummer</label>
                     <input
+                      id="feld-telefon"
                       type="tel"
                       name="Telefon"
                       placeholder="+49 …"
@@ -282,8 +285,9 @@ export default function InquirePage() {
                     />
                   </div>
                   <div>
-                    <label style={labelStyle}>Hochzeitsdatum</label>
+                    <label htmlFor="feld-datum" style={labelStyle}>Hochzeitsdatum</label>
                     <input
+                      id="feld-datum"
                       type="date"
                       name="Hochzeitsdatum"
                       required
@@ -297,8 +301,9 @@ export default function InquirePage() {
                 {/* Row 3 */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
                   <div>
-                    <label style={labelStyle}>Wo findet die Hochzeit statt?</label>
+                    <label htmlFor="feld-ort" style={labelStyle}>Wo findet die Hochzeit statt?</label>
                     <input
+                      id="feld-ort"
                       type="text"
                       name="Location"
                       placeholder="Hamburg, Toskana …"
@@ -308,8 +313,9 @@ export default function InquirePage() {
                     />
                   </div>
                   <div>
-                    <label style={labelStyle}>Ungefähre Gästeanzahl</label>
+                    <label htmlFor="feld-gaeste" style={labelStyle}>Ungefähre Gästeanzahl</label>
                     <select
+                      id="feld-gaeste"
                       name="Gaeste"
                       style={selectStyle}
                       onChange={e => e.target.style.color = '#1A1A1A'}
@@ -325,8 +331,9 @@ export default function InquirePage() {
 
                 {/* Budget */}
                 <div style={{ marginBottom: '2.8rem' }}>
-                  <label style={labelStyle}>Euer Budgetrahmen</label>
+                  <label htmlFor="feld-budget" style={labelStyle}>Euer Budgetrahmen</label>
                   <select
+                      id="feld-budget"
                     name="Budget"
                     style={selectStyle}
                     onChange={e => e.target.style.color = '#1A1A1A'}
@@ -341,8 +348,9 @@ export default function InquirePage() {
 
                 {/* Vision */}
                 <div style={{ marginBottom: '2.8rem' }}>
-                  <label style={labelStyle}>Erzählt uns von eurer Vision</label>
+                  <label htmlFor="feld-vision" style={labelStyle}>Erzählt uns von eurer Vision</label>
                   <textarea
+                      id="feld-vision"
                     name="Vision"
                     rows={4}
                     placeholder="Wie stellt ihr euch euren Tag vor? Was soll festgehalten werden?"
@@ -354,8 +362,9 @@ export default function InquirePage() {
 
                 {/* Feeling */}
                 <div style={{ marginBottom: '3.5rem' }}>
-                  <label style={labelStyle}>Was soll euer Film später auslösen?</label>
+                  <label htmlFor="feld-wirkung" style={labelStyle}>Was soll euer Film später auslösen?</label>
                   <textarea
+                      id="feld-wirkung"
                     name="Gefuehl"
                     rows={4}
                     placeholder="Ein Gefühl, eine Stimmung, ein Bild. Beschreibt es so, wie es euch in den Sinn kommt."
