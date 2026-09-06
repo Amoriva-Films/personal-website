@@ -36,6 +36,7 @@ const leistungen = [
       'Private Online-Galerie mit Download',
       'Druckfreigabe inklusive',
       'Einheitliche Bildsprache durch ein Team',
+      'Lieferung innerhalb von 6 bis 8 Wochen',
     ],
     highlight: true,
   },
