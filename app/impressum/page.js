@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Impressum',
+  alternates: { canonical: 'https://amoriva-films.de/impressum' },
 };
 
 const serif = "var(--font-cormorant), Georgia, serif";
