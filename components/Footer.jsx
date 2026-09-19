@@ -51,9 +51,10 @@ export default function Footer() {
             href="mailto:booking@amoriva-films.de"
             style={{
               display: 'block',
-              fontFamily: serif,
-              fontSize: 'clamp(16px, 1.6vw, 22px)',
-              fontWeight: 300,
+              fontFamily: sans,
+              fontSize: 'clamp(15px, 1.2vw, 18px)',
+              fontWeight: 400,
+              letterSpacing: '0.01em',
               color: brown,
               textDecoration: 'none',
               marginBottom: '0.6rem',
@@ -265,7 +266,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 900px) {
           .footer-main-grid {
             grid-template-columns: 1fr !important;
@@ -283,7 +284,7 @@ export default function Footer() {
             text-align: center !important;
           }
         }
-      `}</style>
+      ` }} />
     </footer>
   );
 }

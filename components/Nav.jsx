@@ -181,7 +181,7 @@ export default function Nav() {
         </a>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 768px) {
           .nav-links { display: none !important; }
           .nav-phone { display: none !important; }
@@ -190,7 +190,7 @@ export default function Nav() {
         @media (min-width: 769px) {
           .nav-overlay { display: none !important; }
         }
-      `}</style>
+      ` }} />
     </nav>
   );
 }

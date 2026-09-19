@@ -8,7 +8,7 @@ import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 const brown = '#2A1F1B';
 const gruen  = '#687850';
 const soft  = '#5E5148';
@@ -304,14 +304,14 @@ export default function LeistungenPage() {
 
       <Footer />
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 760px) {
           .service-row {
             grid-template-columns: 1fr !important;
             gap: 1.6rem !important;
           }
         }
-      `}</style>
+      ` }} />
     </SmoothScroll>
   );
 }

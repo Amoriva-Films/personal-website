@@ -28,19 +28,24 @@ export default function BegrenztTermine() {
             Schreibt uns kurz euer Datum und wir schauen ob es passt.
           </p>
 
+          {/* Derselbe Knopf wie oben auf der Seite. Vorher stand hier nur ein
+              kleiner Textlink - ausgerechnet an der Stelle, an der ein Paar
+              nach der freien Terminlage fragt, war der Weg dorthin das
+              Leiseste auf dem Bildschirm. */}
           <Link
             href="/anfrage"
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '6px',
-              fontFamily: sans, fontSize: '12px', letterSpacing: '0.15em',
-              textTransform: 'uppercase', color: '#687850', textDecoration: 'none',
-              fontWeight: 400, transition: 'opacity 0.2s ease',
+              display: 'inline-block', padding: '0.9rem 2.5rem',
+              background: 'transparent', border: '1px solid #3B2F2A',
+              color: '#3B2F2A', fontFamily: sans, fontSize: '12px',
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              textDecoration: 'none', fontWeight: 300,
+              transition: 'background 0.25s ease, color 0.25s ease',
             }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = '0.6'; }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#3B2F2A'; e.currentTarget.style.color = '#FFFFFF'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#3B2F2A'; }}
           >
             Termin anfragen
-            <span style={{ fontSize: '14px', lineHeight: 1 }}>→</span>
           </Link>
 
           {/* Vertikale gruen-Linie unten */}

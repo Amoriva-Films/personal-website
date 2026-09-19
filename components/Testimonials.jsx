@@ -55,7 +55,7 @@ export default function Testimonials() {
                 <div>
                   <div style={{ width: '2rem', height: '1px', background: gruen, marginBottom: '1rem' }} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#F5ECD7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 500, color: '#8A6420', flexShrink: 0 }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#687850', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 500, color: '#F6F1EB', flexShrink: 0 }}>
                       {t.init}
                     </div>
                     <div>

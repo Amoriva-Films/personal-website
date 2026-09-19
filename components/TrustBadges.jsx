@@ -51,11 +51,11 @@ export default function TrustBadges() {
             </div>
           </div>
         ))}
-        <style>{`
+        <style dangerouslySetInnerHTML={{ __html: `
           .trust-raster { grid-template-columns: 1fr; }
           @media (min-width: 620px)  { .trust-raster { grid-template-columns: repeat(2, 1fr); } }
           @media (min-width: 1024px) { .trust-raster { grid-template-columns: repeat(4, 1fr); } }
-        `}</style>
+        ` }} />
       </div>
     </FadeIn>
   );

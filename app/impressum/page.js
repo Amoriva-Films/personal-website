@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 
 export default function Impressum() {
   return (
@@ -39,10 +39,11 @@ export default function Impressum() {
           Impressum
         </h1>
         <p style={{
-          fontFamily: serif,
-          fontStyle: 'italic',
-          fontSize: '1rem',
-          color: 'rgba(246,241,235,0.35)',
+          fontFamily: sans,
+          fontSize: '0.9rem',
+          fontWeight: 300,
+          lineHeight: 1.7,
+          color: 'rgba(246,241,235,0.62)',
           marginTop: '1rem',
         }}>
           Angaben gemäß § 5 DDG
@@ -159,7 +160,7 @@ function Section({ title, children }) {
         {title}
       </h2>
       <div style={{
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "var(--font-inter), system-ui, sans-serif",
         fontSize: '0.88rem',
         lineHeight: 1.95,
         color: '#5E5148',

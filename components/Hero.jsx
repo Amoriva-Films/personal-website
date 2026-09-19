@@ -84,7 +84,7 @@ export default function Hero() {
         <span
           style={{
             display: 'block',
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
             fontSize: '11px',
             letterSpacing: '0.44em',
             textTransform: 'uppercase',
@@ -113,15 +113,18 @@ export default function Hero() {
         </h1>
 
         {/* Kursive Subline */}
+        {/* Fliesstext, deshalb Inter. Cormorant ist eine Display-Schrift:
+            unter 40 px werden die feinen Striche grau, auf dem Handy
+            ueber dem hellen Video war die Zeile kaum zu lesen. */}
         <p
           style={{
-            fontFamily: "var(--font-cormorant), Georgia, serif",
-            fontSize: 'clamp(17px, 1.8vw, 26px)',
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
+            fontSize: 'clamp(15px, 1.35vw, 19px)',
             fontWeight: 300,
-            fontStyle: 'italic',
-            color: 'rgba(246,241,235,0.82)',
+            color: 'rgba(246,241,235,0.88)',
             letterSpacing: '0.02em',
-            maxWidth: '620px',
+            lineHeight: 1.7,
+            maxWidth: '520px',
           }}
         >
           Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
@@ -148,7 +151,7 @@ export default function Hero() {
       >
         <span
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
             fontSize: '9px',
             letterSpacing: '0.40em',
             textTransform: 'uppercase',

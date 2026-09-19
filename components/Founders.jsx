@@ -47,7 +47,7 @@ function Portrait({ name, role, bio, img, imgPosition, imgFit = 'cover', imgTran
       <div style={{ maxWidth: '480px' }}>
         <div
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
             fontSize: '0.62rem',
             fontWeight: 300,
             letterSpacing: '0.22em',
@@ -73,7 +73,7 @@ function Portrait({ name, role, bio, img, imgPosition, imgFit = 'cover', imgTran
         </h3>
         <p
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
             fontSize: 'clamp(14px, 1.1vw, 17px)',
             fontWeight: 300,
             lineHeight: 1.85,
@@ -105,7 +105,7 @@ export default function Founders() {
           <span
             style={{
               display: 'block',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: '0.66rem',
               fontWeight: 300,
               letterSpacing: '0.28em',
@@ -159,7 +159,7 @@ export default function Founders() {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 760px) {
           .founders-grid {
             grid-template-columns: 1fr !important;
@@ -181,7 +181,7 @@ export default function Founders() {
             margin: 0 auto;
           }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }

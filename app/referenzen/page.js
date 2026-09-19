@@ -10,7 +10,7 @@ import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 const ease  = [0.22, 1, 0.36, 1];
 
 // Nur eigene Aufnahmen. Frueher standen hier sechs Hochzeiten mit Paarnamen,
@@ -209,7 +209,7 @@ export default function ReferenzenPage() {
       <Footer />
       <Lichtkasten index={index} setIndex={setIndex} />
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 760px) {
           .ref-grid { grid-template-columns: 1fr !important; }
         }
@@ -218,7 +218,7 @@ export default function ReferenzenPage() {
         }
         .ref-card:hover .ref-card-overlay { opacity: 1 !important; }
         .ref-card:hover .ref-card-img { transform: scale(1.04); }
-      `}</style>
+      ` }} />
     </SmoothScroll>
   );
 }

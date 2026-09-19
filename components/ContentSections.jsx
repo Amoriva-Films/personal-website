@@ -81,12 +81,12 @@ export default function ContentSections() {
         </div>
       </section>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 768px) {
           .gallery-grid { grid-template-columns: 1fr !important; grid-template-rows: 260px 200px 200px !important; }
           .gallery-grid > *:first-child { grid-row: auto !important; }
         }
-      `}</style>
+      ` }} />
     </>
   );
 }

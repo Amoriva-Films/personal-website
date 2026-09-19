@@ -7,7 +7,7 @@ import SmoothScroll from './SmoothScroll';
 import FadeIn from './FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 const brown = '#2A1F1B';
 const gruen  = '#687850';
 const soft  = '#5E5148';
@@ -114,7 +114,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
 
       <Footer />
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .article-body h2 {
           font-family: var(--font-cormorant), Georgia, serif;
           font-size: clamp(22px, 2.2vw, 32px);
@@ -125,7 +125,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           line-height: 1.15;
         }
         .article-body h3 {
-          font-family: 'Inter', sans-serif;
+          font-family: var(--font-inter), system-ui, sans-serif;
           font-size: clamp(13px, 1vw, 15px);
           font-weight: 400;
           text-transform: uppercase;
@@ -150,7 +150,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
         @media (max-width: 760px) {
           .related-grid { grid-template-columns: 1fr !important; }
         }
-      `}</style>
+      ` }} />
     </SmoothScroll>
   );
 }

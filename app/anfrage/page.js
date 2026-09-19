@@ -16,7 +16,7 @@ const selectStyle = {
   border: 'none',
   borderBottom: '1px solid #C8BDB5',
   padding: '0.8rem 0',
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "var(--font-inter), system-ui, sans-serif",
   fontSize: '1rem',
   fontWeight: 300,
   color: '#1A1A1A',
@@ -72,7 +72,7 @@ export default function InquirePage() {
 
   const labelStyle = {
     display: 'block',
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "var(--font-inter), system-ui, sans-serif",
     fontSize: '0.78rem',
     letterSpacing: '0.22em',
     textTransform: 'uppercase',
@@ -87,7 +87,7 @@ export default function InquirePage() {
     border: 'none',
     borderBottom: '1px solid #C8BDB5',
     padding: '0.8rem 0',
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "var(--font-inter), system-ui, sans-serif",
     fontSize: '1rem',
     fontWeight: 300,
     color: '#1A1A1A',
@@ -129,7 +129,7 @@ export default function InquirePage() {
             <span
               style={{
                 display: 'block',
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
                 fontSize: '0.68rem',
                 fontWeight: 300,
                 letterSpacing: '0.32em',
@@ -158,7 +158,7 @@ export default function InquirePage() {
             </h1>
             <p
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
                 fontSize: 'clamp(15px, 1.2vw, 17px)',
                 fontWeight: 300,
                 lineHeight: 1.88,
@@ -175,7 +175,7 @@ export default function InquirePage() {
               <a
                 href="mailto:booking@amoriva-films.de"
                 style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
                   fontSize: '0.84rem',
                   fontWeight: 300,
                   color: '#5E5148',
@@ -190,7 +190,7 @@ export default function InquirePage() {
               <a
                 href="tel:015565559747"
                 style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
                   fontSize: '0.84rem',
                   fontWeight: 300,
                   color: '#5E5148',
@@ -227,7 +227,7 @@ export default function InquirePage() {
                 </p>
                 <p
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "var(--font-inter), system-ui, sans-serif",
                     fontSize: '1rem',
                     fontWeight: 300,
                     lineHeight: 1.85,
@@ -375,7 +375,33 @@ export default function InquirePage() {
                 </div>
 
                 {error && (
-                  <p style={{ color: '#c0392b', fontSize: '0.84rem', marginBottom: '1.5rem' }}>{error}</p>
+                  <div
+                    role="alert"
+                    style={{
+                      display: 'flex', alignItems: 'flex-start', gap: '0.7rem',
+                      background: '#F5F2ED', border: '1px solid #C8BDB5',
+                      borderRadius: '10px', padding: '0.9rem 1.1rem',
+                      marginBottom: '1.5rem',
+                    }}
+                  >
+                    <svg
+                      width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="#2A1F1B" strokeWidth="1.8" strokeLinecap="round"
+                      strokeLinejoin="round" aria-hidden="true"
+                      style={{ flexShrink: 0, marginTop: '1px' }}
+                    >
+                      <path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z" />
+                      <line x1="12" y1="9" x2="12" y2="13" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    <p style={{
+                      fontFamily: "var(--font-inter), system-ui, sans-serif",
+                      fontSize: '0.88rem', fontWeight: 500, lineHeight: 1.6,
+                      color: '#2A1F1B', margin: 0,
+                    }}>
+                      {error}
+                    </p>
+                  </div>
                 )}
 
                 <button
@@ -389,7 +415,7 @@ export default function InquirePage() {
 
                 <p
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "var(--font-inter), system-ui, sans-serif",
                     fontSize: '0.7rem',
                     color: '#5E5148',
                     fontWeight: 300,
@@ -410,7 +436,7 @@ export default function InquirePage() {
       <Footer />
       <WhatsApp />
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 900px) {
           .inq-grid {
             grid-template-columns: 1fr !important;
@@ -424,7 +450,7 @@ export default function InquirePage() {
         @media (max-width: 600px) {
           .form-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
         }
-      `}</style>
+      ` }} />
     </SmoothScroll>
   );
 }

@@ -69,7 +69,7 @@ body {
 
 /* Eyebrow label */
 .label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 300;
   letter-spacing: 0.32em;
@@ -82,7 +82,7 @@ body {
   display: inline-block;
   border: 1px solid currentColor;
   padding: 13px 28px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 300;
   letter-spacing: 0.18em;
@@ -150,7 +150,7 @@ img {
   border: none;
   border-bottom: 1px solid var(--bg3);
   padding: 0.8rem 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 300;
   color: #1A1A1A;

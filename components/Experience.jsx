@@ -30,7 +30,7 @@ export default function Experience() {
           <span
             style={{
               display: 'block',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: '0.66rem',
               fontWeight: 300,
               letterSpacing: '0.28em',
@@ -59,7 +59,7 @@ export default function Experience() {
           </h2>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: 'clamp(15px, 1.2vw, 18px)',
               fontWeight: 300,
               lineHeight: 1.82,

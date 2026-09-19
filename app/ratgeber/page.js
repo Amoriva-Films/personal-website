@@ -7,7 +7,7 @@ import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 const brown = '#2A1F1B';
 const gruen  = '#687850';
 const soft  = '#5E5148';
@@ -93,11 +93,11 @@ export default function RatgeberPage() {
 
       <Footer />
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 640px) {
           .article-row { grid-template-columns: 1fr !important; gap: 0.8rem !important; }
         }
-      `}</style>
+      ` }} />
     </SmoothScroll>
   );
 }

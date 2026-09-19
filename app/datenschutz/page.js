@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 
 const linkStyle = {
   color: '#687850',
@@ -77,10 +77,11 @@ export default function Datenschutz() {
           Datenschutzerklärung
         </h1>
         <p style={{
-          fontFamily: serif,
-          fontStyle: 'italic',
-          fontSize: '1rem',
-          color: 'rgba(246,241,235,0.35)',
+          fontFamily: sans,
+          fontSize: '0.9rem',
+          fontWeight: 300,
+          lineHeight: 1.7,
+          color: 'rgba(246,241,235,0.62)',
           marginTop: '1rem',
         }}>
           Transparenz ist uns wichtig.

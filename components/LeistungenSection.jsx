@@ -105,11 +105,11 @@ export default function LeistungenSection() {
           {services.map((s) => <ServiceRow key={s.nr} s={s} />)}
         </div>
       </div>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 760px) {
           .service-row { grid-template-columns: 1fr !important; gap: 1.4rem !important; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }
