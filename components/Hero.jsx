@@ -58,13 +58,20 @@ export default function Hero() {
           Stelle bei 1,5 zu 1 - der Titel war dort praktisch unlesbar.
           Gerechnet braucht es 60 % Deckkraft, damit auch Video-Weiss
           noch 4,5 zu 1 traegt; 65 % geben etwas Reserve. Weil der
-          Schleier radial ausläuft, bleibt das Bild am Rand offen. */}
+          Schleier radial ausläuft, bleibt das Bild am Rand offen.
+
+          Nachgezogen am 19.09.2026: Eine Messung an fuenf Stellen ergab
+          viermal ueber 15, einmal nur 5,8 - dort, wo der Titel ueber ein
+          helles Gesicht laeuft. Das bestand zwar, aber knapp, und
+          gemessen war nur ein einziges Videobild. Verlauf und Schleier
+          sind deshalb kraeftiger: rechnerisch 9,6 zu 1 selbst bei
+          reinweissem Bild hinter der Schrift. */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(14,14,13,0.55) 0%, rgba(14,14,13,0.18) 30%, rgba(14,14,13,0.22) 60%, rgba(14,14,13,0.72) 100%)',
+            'linear-gradient(to bottom, rgba(14,14,13,0.60) 0%, rgba(14,14,13,0.26) 30%, rgba(14,14,13,0.28) 60%, rgba(14,14,13,0.76) 100%)',
         }}
       />
       <div
@@ -72,7 +79,7 @@ export default function Hero() {
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'radial-gradient(ellipse 78% 52% at 50% 48%, rgba(14,14,13,0.65) 0%, rgba(14,14,13,0.52) 45%, rgba(14,14,13,0.16) 75%, transparent 100%)',
+            'radial-gradient(ellipse 82% 56% at 50% 48%, rgba(14,14,13,0.72) 0%, rgba(14,14,13,0.60) 45%, rgba(14,14,13,0.20) 78%, transparent 100%)',
         }}
       />
 
