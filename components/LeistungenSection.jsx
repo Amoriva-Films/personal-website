@@ -1,12 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import FadeIn from './FadeIn';
 
-const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
-const gruen  = '#687850';
-const brown = '#3B2F2A';
-const soft  = '#6B5E57';
+/* Keine Preise, keine Ab-Preise, keine Zahlen. Eine Zahl macht
+   vergleichbar und zieht die Anfragen an, die nur auf den Preis
+   schauen. Das Budgetfeld im Anfrageformular bleibt. */
 
 const services = [
   {
@@ -47,69 +46,64 @@ const services = [
   },
 ];
 
-function ServiceRow({ s }) {
-  return (
-    <FadeIn>
-      <div className="service-row" style={{
-        borderTop: '1px solid rgba(59,47,42,0.10)',
-        paddingTop: 'clamp(36px, 4.5vw, 60px)',
-        paddingBottom: 'clamp(36px, 4.5vw, 60px)',
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        gap: 'clamp(28px, 4vw, 80px)',
-      }}>
-        <div>
-          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: gruen, fontWeight: 300, marginBottom: '1rem' }}>
-            {s.nr}
-          </p>
-          <h3 style={{ fontFamily: serif, fontSize: 'clamp(24px, 2.6vw, 38px)', fontWeight: 300, color: brown, lineHeight: 1.1, marginBottom: '0.5rem' }}>
-            {s.title}
-          </h3>
-          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.20em', textTransform: 'uppercase', color: soft, fontWeight: 300, opacity: 0.65 }}>
-            {s.subtitle}
-          </p>
-        </div>
-        <div>
-          <p style={{ fontFamily: sans, fontSize: 'clamp(14px, 1.2vw, 16px)', fontWeight: 300, color: soft, lineHeight: 1.85, marginBottom: '2rem' }}>
-            {s.description}
-          </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
-            {s.includes.map((item, i) => (
-              <li key={i} style={{ fontFamily: sans, fontSize: '13px', fontWeight: 300, color: soft, display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                <span style={{ color: gruen, flexShrink: 0, marginTop: '2px' }}>›</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </FadeIn>
-  );
-}
-
 export default function LeistungenSection() {
   return (
-    <section id="leistungen" style={{ background: '#F6F1EB' }}>
-      <div style={{ padding: 'clamp(64px, 7vw, 96px) 8% 0' }}>
+    <section id="leistungen" className="abschnitt hell">
+      <div className="mitte">
         <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '11px', fontWeight: 300, letterSpacing: '0.40em', textTransform: 'uppercase', color: gruen, marginBottom: '1.4rem' }}>
-            Leistungen
-          </span>
-          <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 4vw, 58px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '680px' }}>
-            Was wir für euch <em style={{ fontStyle: 'italic' }}>tun können.</em>
+          <p className="t-label" style={{ marginBottom: '1.5rem' }}>Leistungen</p>
+          <h2 className="t-gross" style={{ maxWidth: '18ch', marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+            Was wir für euch tun können.
           </h2>
         </FadeIn>
+
+        {services.map((s) => (
+          <FadeIn key={s.nr}>
+            {/* Grosse ruhige Bloecke. Keine Karten mit Rahmen und Schatten,
+                getrennt wird durch eine Linie und durch Raum. */}
+            <div className="zwei-spalten" style={{
+              borderTop: '1px solid var(--linie)',
+              padding: 'clamp(2.5rem, 5vw, 4rem) 0',
+            }}>
+              <div>
+                <p className="t-label" style={{ marginBottom: '1rem' }}>{s.nr}</p>
+                <h3 className="t-gross" style={{ marginBottom: '0.5rem' }}>{s.title}</h3>
+                <p className="t-fein">{s.subtitle}</p>
+              </div>
+              <div>
+                <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>{s.description}</p>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  {s.includes.map((item, i) => (
+                    <li key={i} style={{
+                      display: 'flex', gap: '0.9rem', alignItems: 'flex-start',
+                      fontSize: 'var(--schrift-fein)', color: 'var(--grau-2)', lineHeight: 1.6,
+                    }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                           stroke="var(--gruen)" strokeWidth="2" strokeLinecap="round"
+                           strokeLinejoin="round" aria-hidden="true"
+                           style={{ flexShrink: 0, marginTop: '4px' }}>
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+
+        <FadeIn>
+          <div style={{ paddingTop: 'clamp(2.5rem, 5vw, 4rem)', borderTop: '1px solid var(--linie)' }}>
+            <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>
+              Jede Hochzeit ist anders. Was zu eurem Tag passt, besprechen wir
+              in einem kurzen Gespräch und ihr bekommt ein Angebot, das wirklich
+              zu euch passt.
+            </p>
+            <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>
+          </div>
+        </FadeIn>
       </div>
-      <div style={{ padding: '0 8% clamp(48px, 6vw, 80px)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          {services.map((s) => <ServiceRow key={s.nr} s={s} />)}
-        </div>
-      </div>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 760px) {
-          .service-row { grid-template-columns: 1fr !important; gap: 1.4rem !important; }
-        }
-      ` }} />
     </section>
   );
 }

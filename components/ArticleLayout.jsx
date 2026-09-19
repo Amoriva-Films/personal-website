@@ -8,9 +8,9 @@ import FadeIn from './FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const brown = '#2A1F1B';
-const gruen  = '#687850';
-const soft  = '#5E5148';
+const brown = 'var(--tinte)';
+const gruen  = 'var(--gruen)';
+const soft  = 'var(--grau-2)';
 
 const related_articles = [
   { href: '/ratgeber/was-kostet-ein-hochzeitsfilm',  label: 'Was kostet ein Hochzeitsfilm?',               cat: 'Kosten & Pakete'  },
@@ -30,7 +30,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       <Nav />
 
       {/* ── Article Header ───────────────────────────────── */}
-      <header style={{ background: '#F6F1EB', padding: 'clamp(120px,14vw,180px) 8% 0' }}>
+      <header style={{ background: 'var(--papier)', padding: 'clamp(120px,14vw,180px) 8% 0' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <FadeIn>
             {/* Breadcrumb */}
@@ -50,7 +50,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
               {title}
             </h1>
 
-            <div style={{ display: 'flex', gap: '1.6rem', alignItems: 'center', paddingBottom: 'clamp(40px,5vw,64px)', borderBottom: '1px solid rgba(59,47,42,0.1)' }}>
+            <div style={{ display: 'flex', gap: '1.6rem', alignItems: 'center', paddingBottom: 'clamp(40px,5vw,64px)', borderBottom: '1px solid var(--linie)' }}>
               <span style={{ fontFamily: sans, fontSize: '12px', color: soft, fontWeight: 300, opacity: 0.65 }}>{date}</span>
               <span style={{ width: '1px', height: '12px', background: 'rgba(59,47,42,0.2)' }} />
               <span style={{ fontFamily: sans, fontSize: '12px', color: soft, fontWeight: 300, opacity: 0.65 }}>{readTime} Lesezeit</span>
@@ -62,7 +62,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       </header>
 
       {/* ── Article Body ─────────────────────────────────── */}
-      <article style={{ background: '#F6F1EB', padding: 'clamp(48px,6vw,80px) 8% clamp(64px,8vw,100px)' }}>
+      <article style={{ background: 'var(--papier)', padding: 'clamp(48px,6vw,80px) 8% clamp(64px,8vw,100px)' }}>
         <div
           className="article-body"
           style={{ maxWidth: '760px', margin: '0 auto', fontFamily: sans, fontSize: 'clamp(15px,1.1vw,17px)', fontWeight: 300, color: soft, lineHeight: 1.85 }}
@@ -72,7 +72,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       </article>
 
       {/* ── CTA ──────────────────────────────────────────── */}
-      <section style={{ background: '#EFE7DD', padding: 'clamp(52px,6vw,80px) 8%', textAlign: 'center' }}>
+      <section style={{ background: 'var(--papier-2)', padding: 'clamp(52px,6vw,80px) 8%', textAlign: 'center' }}>
         <FadeIn>
           <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, marginBottom: '1rem' }}>Amoriva Films · Wolfsburg</p>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(26px,3vw,44px)', fontWeight: 300, color: brown, marginBottom: '1rem' }}>
@@ -83,9 +83,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           </p>
           <Link
             href="/anfrage"
-            style={{ display: 'inline-block', border: '1px solid #3B2F2A', padding: '14px 40px', fontFamily: sans, fontSize: '0.68rem', fontWeight: 300, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3B2F2A', textDecoration: 'none', transition: 'background 500ms, color 500ms' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#3B2F2A'; e.currentTarget.style.color = '#F6F1EB'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#3B2F2A'; }}
+            className="knopf knopf-voll"
           >
             Jetzt anfragen
           </Link>
@@ -93,13 +91,13 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       </section>
 
       {/* ── Related Articles ─────────────────────────────── */}
-      <section style={{ background: '#F6F1EB', padding: 'clamp(52px,6vw,80px) 8%' }}>
+      <section style={{ background: 'var(--papier)', padding: 'clamp(52px,6vw,80px) 8%' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <FadeIn>
             <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, marginBottom: '2rem' }}>Weitere Artikel</p>
             <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2rem' }}>
               {others.map(a => (
-                <Link key={a.href} href={a.href} style={{ textDecoration: 'none', borderTop: '1px solid rgba(59,47,42,0.12)', paddingTop: '1.4rem', display: 'block' }}
+                <Link key={a.href} href={a.href} style={{ textDecoration: 'none', borderTop: '1px solid var(--linie)', paddingTop: '1.4rem', display: 'block' }}
                   onMouseEnter={e => e.currentTarget.querySelector('h3').style.opacity = '0.5'}
                   onMouseLeave={e => e.currentTarget.querySelector('h3').style.opacity = '1'}
                 >
@@ -119,7 +117,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           font-family: var(--font-cormorant), Georgia, serif;
           font-size: clamp(22px, 2.2vw, 32px);
           font-weight: 300;
-          color: #2A1F1B;
+          color: var(--tinte);
           margin-top: 3rem;
           margin-bottom: 1rem;
           line-height: 1.15;
@@ -139,12 +137,12 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
         .article-body ul li { display: flex; gap: 0.8rem; align-items: flex-start; }
         .article-body ul li::before { content: '›'; color: #687850; flex-shrink: 0; margin-top: 2px; }
         .article-body a { color: #687850; text-decoration: underline; text-underline-offset: 3px; }
-        .article-body strong { font-weight: 400; color: #2A1F1B; }
+        .article-body strong { font-weight: 400; color: var(--tinte); }
         .article-body .highlight-box {
           border-left: 2px solid #687850;
           padding: 1rem 1.4rem;
           margin: 2rem 0;
-          background: rgba(183,155,114,0.07);
+          background: rgba(104,120,80,0.07);
           font-style: italic;
         }
         @media (max-width: 760px) {

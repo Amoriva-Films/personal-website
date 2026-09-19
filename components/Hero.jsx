@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -11,13 +12,10 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+    // muted muss zusaetzlich am Element gesetzt werden, sonst verweigern
+    // manche Browser das automatische Abspielen.
     v.muted = true;
-    v.style.opacity = '0';
-    v.style.transition = 'opacity 0.6s ease';
-    const show = () => { v.style.opacity = '1'; };
-    v.addEventListener('canplay', show, { once: true });
     v.play().catch(() => {});
-    return () => v.removeEventListener('canplay', show);
   }, []);
 
   return (
@@ -25,13 +23,12 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        minHeight: '600px',
+        height: '100svh',
+        minHeight: '560px',
         overflow: 'hidden',
-        background: '#0a0806',
+        background: 'var(--leinwand)',
       }}
     >
-      {/* Background Video */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <video
           ref={videoRef}
@@ -40,135 +37,106 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
+          poster="/images/hero-poster.jpg"
+          aria-hidden="true"
           style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            display: 'block',
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center center',
           }}
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* Overlay — dunkler oben/unten, offen in der Mitte */}
+      {/* Zwei Schichten Abdunklung.
+
+          Unten: Verlauf fuer Wortmarke oben und Verlauf unten.
+
+          Darueber: ein weicher Schleier hinter dem Textblock. Der ist
+          noetig, weil im Video reinweisse Stellen vorkommen. Gemessen
+          ueber die ganze Laufzeit lag der Kontrast an der hellsten
+          Stelle bei 1,5 zu 1 - der Titel war dort praktisch unlesbar.
+          Gerechnet braucht es 60 % Deckkraft, damit auch Video-Weiss
+          noch 4,5 zu 1 traegt; 65 % geben etwas Reserve. Weil der
+          Schleier radial ausläuft, bleibt das Bild am Rand offen. */}
       <div
+        aria-hidden="true"
         style={{
-          position: 'absolute',
-          inset: 0,
+          position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0.70) 100%)',
-          zIndex: 1,
+            'linear-gradient(to bottom, rgba(14,14,13,0.55) 0%, rgba(14,14,13,0.18) 30%, rgba(14,14,13,0.22) 60%, rgba(14,14,13,0.72) 100%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute', inset: 0, zIndex: 1,
+          background:
+            'radial-gradient(ellipse 78% 52% at 50% 48%, rgba(14,14,13,0.65) 0%, rgba(14,14,13,0.52) 45%, rgba(14,14,13,0.16) 75%, transparent 100%)',
         }}
       />
 
-      {/* Zentrierter Inhalt — Wakefield-Stil */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 1.8, ease }}
+      <div
         style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          position: 'absolute', inset: 0, zIndex: 2,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
           textAlign: 'center',
-          padding: '0 8%',
+          padding: '0 var(--rand)',
         }}
       >
-        {/* Klein oben: Kategorie */}
-        <span
-          style={{
-            display: 'block',
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-            fontSize: '11px',
-            letterSpacing: '0.44em',
-            textTransform: 'uppercase',
-            color: 'rgba(246,241,235,0.75)',
-            fontWeight: 300,
-            marginBottom: '2.2rem',
-          }}
+        {/* Der Name steht oben links als Wortmarke. Hier steht deshalb das,
+            was ein Paar bekommt, nicht noch einmal der Name. */}
+        <motion.h1
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease }}
+          className="t-display"
+          style={{ color: 'var(--auf-dunkel)', maxWidth: '16ch', marginBottom: '1.5rem' }}
         >
-          Wedding Videography &amp; Photography
-        </span>
+          Euer Tag, wie er sich angefühlt hat.
+        </motion.h1>
 
-        {/* Riesiger Markenname */}
-        <h1
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.12, duration: 0.9, ease }}
           style={{
-            fontFamily: "var(--font-cormorant), Georgia, serif",
-            fontSize: 'clamp(38px, 6.5vw, 92px)',
-            lineHeight: 0.9,
-            letterSpacing: '0.03em',
-            fontWeight: 300,
-            color: '#F6F1EB',
-            textTransform: 'uppercase',
-            marginBottom: '2.2rem',
-          }}
-        >
-          Amoriva Films
-        </h1>
-
-        {/* Kursive Subline */}
-        {/* Fliesstext, deshalb Inter. Cormorant ist eine Display-Schrift:
-            unter 40 px werden die feinen Striche grau, auf dem Handy
-            ueber dem hellen Video war die Zeile kaum zu lesen. */}
-        <p
-          style={{
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-            fontSize: 'clamp(15px, 1.35vw, 19px)',
-            fontWeight: 300,
-            color: 'rgba(246,241,235,0.88)',
-            letterSpacing: '0.02em',
-            lineHeight: 1.7,
-            maxWidth: '520px',
+            fontSize: 'var(--schrift-text)',
+            lineHeight: 1.6,
+            color: 'rgba(244,244,242,0.82)',
+            maxWidth: '44ch',
+            marginBottom: '2.75rem',
           }}
         >
           Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
-        </p>
-      </motion.div>
+        </motion.p>
 
-      {/* Scroll-Indikator */}
+        {/* Ein Handlungsaufruf, nicht zwei. */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.24, duration: 0.9, ease }}
+        >
+          <Link href="/filme" className="knopf knopf-voll">
+            Filme ansehen
+          </Link>
+        </motion.div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 1.2, ease }}
+        transition={{ delay: 0.9, duration: 0.8, ease }}
+        aria-hidden="true"
         style={{
-          position: 'absolute',
-          bottom: '40px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 3,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '10px',
+          position: 'absolute', bottom: '2rem', left: '50%',
+          transform: 'translateX(-50%)', zIndex: 3,
+          width: '1px', height: '48px',
+          background: 'linear-gradient(to bottom, rgba(244,244,242,0.45), transparent)',
           pointerEvents: 'none',
         }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-            fontSize: '9px',
-            letterSpacing: '0.40em',
-            textTransform: 'uppercase',
-            color: 'rgba(246,241,235,0.55)',
-            fontWeight: 300,
-          }}
-        >
-          Scroll
-        </span>
-        <div
-          style={{
-            width: '1px',
-            height: '56px',
-            background: 'rgba(246,241,235,0.38)',
-          }}
-        />
-      </motion.div>
+      />
     </section>
   );
 }

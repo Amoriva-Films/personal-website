@@ -8,9 +8,9 @@ import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const brown = '#2A1F1B';
-const gruen  = '#687850';
-const soft  = '#5E5148';
+const brown = 'var(--tinte)';
+const gruen  = 'var(--gruen)';
+const soft  = 'var(--grau-2)';
 
 const articles = [
   {
@@ -49,7 +49,7 @@ export default function RatgeberPage() {
       <Nav />
 
       {/* Hero */}
-      <section style={{ background: '#F6F1EB', padding: 'clamp(120px,14vw,180px) 8% clamp(52px,6vw,80px)' }}>
+      <section style={{ background: 'var(--papier)', padding: 'clamp(120px,14vw,180px) 8% clamp(52px,6vw,80px)' }}>
         <FadeIn>
           <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gruen, marginBottom: '1.4rem' }}>
             Wissen & Tipps
@@ -65,13 +65,13 @@ export default function RatgeberPage() {
       </section>
 
       {/* Articles */}
-      <section style={{ background: '#F6F1EB', padding: '0 8% clamp(80px,10vw,120px)' }}>
+      <section style={{ background: 'var(--papier)', padding: '0 8% clamp(80px,10vw,120px)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
           {articles.map((a, i) => (
             <FadeIn key={i}>
               <Link
                 href={a.href}
-                style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px,4vw,64px)', borderTop: '1px solid rgba(59,47,42,0.1)', padding: 'clamp(36px,4vw,56px) 0', textDecoration: 'none', alignItems: 'start' }}
+                style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px,4vw,64px)', borderTop: '1px solid var(--linie)', padding: 'clamp(36px,4vw,56px) 0', textDecoration: 'none', alignItems: 'start' }}
                 className="article-row"
                 onMouseEnter={e => { e.currentTarget.querySelector('h2').style.opacity = '0.5'; }}
                 onMouseLeave={e => { e.currentTarget.querySelector('h2').style.opacity = '1'; }}

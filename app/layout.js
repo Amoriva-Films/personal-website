@@ -13,7 +13,7 @@ const cormorant = Cormorant_Garamond({
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['400', '500'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
       <head>
         <StructuredData />
       </head>
-      <body style={{ margin: 0, padding: 0, background: '#F6F1EB' }}>
+      <body style={{ margin: 0, padding: 0, background: '#FBFBFA' }}>
         <Nav />
         {children}
       </body>

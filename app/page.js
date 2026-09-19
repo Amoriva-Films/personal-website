@@ -9,20 +9,24 @@ import FAQ from '@/components/FAQ';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
-import FadeIn from '@/components/FadeIn';
+
+/* Reihenfolge nach dem Wechsel hell/dunkel:
+   Hero dunkel, Film dunkel, Arbeit hell, Vertrauen hell, Bilder dunkel,
+   Ablauf hell-2, Leistungen hell, Stimmen hell, Termine hell,
+   Ueber uns hell-2, Fragen hell, Abschluss dunkel, Fuss dunkel. */
 
 export default function Home() {
   return (
     <>
       <Hero />
       <ContentSections />
-      <FadeIn><Prozess /></FadeIn>
-      <FadeIn><LeistungenSection /></FadeIn>
-      <FadeIn><Testimonials /></FadeIn>
-      <FadeIn><BegrenztTermine /></FadeIn>
-      <FadeIn><Founders /></FadeIn>
-      <FadeIn><FAQ /></FadeIn>
-      <FadeIn><FinalCTA /></FadeIn>
+      <Prozess />
+      <LeistungenSection />
+      <Testimonials />
+      <BegrenztTermine />
+      <Founders />
+      <FAQ />
+      <FinalCTA />
       <Footer />
       <WhatsApp />
     </>

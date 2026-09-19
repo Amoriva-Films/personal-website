@@ -20,9 +20,11 @@ export default function sitemap() {
 
   return [
     eintrag('', 1),
+    // Filme sind das Wichtigste, was die Seite zeigt.
+    eintrag('filme', 0.95),
     eintrag('angebote', 0.9),
     eintrag('leistungen', 0.8),
-    eintrag('referenzen', 0.8),
+    eintrag('referenzen', 0.9),
     eintrag('anfrage', 0.8, 'yearly'),
     eintrag('ratgeber', 0.7),
     ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),

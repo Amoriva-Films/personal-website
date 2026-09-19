@@ -9,12 +9,12 @@ const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
 
 const linkStyle = {
-  color: '#687850',
+  color: 'var(--grau-dunkel)',
   textDecoration: 'none',
 };
 
 function Divider() {
-  return <hr style={{ border: 'none', borderTop: '1px solid rgba(59,47,42,0.12)', margin: '2.8rem 0' }} />;
+  return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', margin: '2.8rem 0' }} />;
 }
 
 function Section({ title, children }) {
@@ -24,7 +24,7 @@ function Section({ title, children }) {
         fontFamily: serif,
         fontSize: '1.4rem',
         fontWeight: 300,
-        color: '#2A1F1B',
+        color: 'var(--tinte)',
         marginBottom: '0.9rem',
         marginTop: '2.4rem',
       }}>
@@ -34,7 +34,7 @@ function Section({ title, children }) {
         fontFamily: sans,
         fontSize: '0.88rem',
         lineHeight: 1.95,
-        color: '#5E5148',
+        color: 'var(--grau-2)',
         fontWeight: 300,
         display: 'flex',
         flexDirection: 'column',
@@ -51,7 +51,7 @@ export default function Datenschutz() {
     <>
       {/* Header */}
       <div style={{
-        background: '#2A1F1B',
+        background: 'var(--leinwand)',
         padding: '140px 8% 80px',
         textAlign: 'center',
       }}>
@@ -61,7 +61,7 @@ export default function Datenschutz() {
           fontWeight: 300,
           letterSpacing: '0.30em',
           textTransform: 'uppercase',
-          color: '#687850',
+          color: 'var(--grau-dunkel)',
           marginBottom: '1.6rem',
         }}>
           Rechtliches
@@ -70,7 +70,7 @@ export default function Datenschutz() {
           fontFamily: serif,
           fontSize: 'clamp(36px, 5vw, 68px)',
           fontWeight: 300,
-          color: '#F6F1EB',
+          color: 'var(--auf-dunkel)',
           lineHeight: 1.05,
           letterSpacing: '-0.02em',
         }}>
@@ -81,7 +81,7 @@ export default function Datenschutz() {
           fontSize: '0.9rem',
           fontWeight: 300,
           lineHeight: 1.7,
-          color: 'rgba(246,241,235,0.62)',
+          color: 'var(--grau-dunkel)',
           marginTop: '1rem',
         }}>
           Transparenz ist uns wichtig.
@@ -93,7 +93,7 @@ export default function Datenschutz() {
         maxWidth: '760px',
         margin: '0 auto',
         padding: '80px 8% 120px',
-        background: '#F6F1EB',
+        background: 'var(--papier)',
       }}>
 
         <Section title="1. Verantwortlicher">
@@ -239,7 +239,7 @@ export default function Datenschutz() {
             fontWeight: 300,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: '#687850',
+            color: 'var(--grau-dunkel)',
             textDecoration: 'none',
           }}>
             ← Zurück zur Startseite

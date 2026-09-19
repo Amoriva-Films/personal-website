@@ -2,186 +2,426 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ════════════════════════════════════════════════════════════════════
+   Amoriva Films — Design 2026
+   Leitbild: Kinosaal, nicht Brautmagazin. Die Seite ist die Leinwand.
+   Gegliedert wird durch den Wechsel hell/dunkel und durch Raum,
+   nicht durch Linien, Kaesten oder Schatten.
+   ════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --bg:    #F6F1EB;
-  --bg2:   #EFE7DD;
-  --bg3:   #E7DED3;
-  --brown: #3B2F2A;
-  --soft:  #5E5148;
-  /* Markenfarbe aus der Wortmarke ausgelesen (public/brand/). Vorher stand
-     hier ein Altgold - das ist der Branchen-Standard, aber nicht unsere Marke.
-     Die Schwesternmarke Amoriva nutzt #6E7D54, praktisch derselbe Ton. */
-  --gruen: #687850;
-  --gruen-hell: #8A9A72;
-  /* Alter Name, damit nichts bricht, was ihn noch benutzt. Zeigt jetzt
-     ebenfalls auf das Markengruen. Bei Gelegenheit ganz entfernen. */
-  --gold:  #687850;
-  --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+  /* ── Farben ──────────────────────────────────────────────────────
+     Regel (Nevio, 19.09.2026): nie Gelb, nie Rot. Gruen, Schwarz,
+     Weiss, Grau, Naturfarben. Gruen ist der einzige Akzent und
+     markiert genau eine Sache pro Bildschirm.                        */
+
+  --leinwand:      #0E0E0D;   /* dunkle Abschnitte: Filme, Galerie, Hero */
+  --tinte:         #141413;   /* Text auf hell */
+  --papier:        #FBFBFA;   /* helle Abschnitte, neutral statt Creme */
+  --papier-2:      #F2F2F0;   /* zweite Ebene auf hell */
+  --linie:         #E2E2DF;   /* nur wo eine Linie wirklich noetig ist */
+  --grau-2:        #6E6E69;   /* Text zweite Ebene */
+  --grau-3:        #9A9A94;   /* Text dritte Ebene */
+  --auf-dunkel:    #F4F4F2;   /* Text auf dunkel */
+  --grau-dunkel:   #A8A8A2;   /* Grau auf dunkel */
+  --gruen:         #687850;   /* Markenfarbe, aus der Wortmarke */
+  --gruen-hell:    #8FA275;   /* auf dunklem Grund */
+
+  /* ── Schrift ─────────────────────────────────────────────────────
+     Drei Stufen fuer Ueberschriften, zwei fuer Text. Mehr nicht.
+     Cormorant erst ab 40 px, darunter werden die Striche grau.       */
+
+  --schrift-display: clamp(2.75rem, 6.5vw, 5.25rem);  /* 44 – 84 px, Cormorant */
+  --schrift-gross:   clamp(2.5rem, 4vw, 3.25rem);     /* 40 – 52 px, Cormorant */
+  --schrift-klein:   1.25rem;                          /* 20 px, Inter 500     */
+  --schrift-text:    1.0625rem;                        /* 17 px                */
+  --schrift-fein:    0.9375rem;                        /* 15 px                */
+
+  --zeile-text: 1.7;
+  --zeile-eng:  1.15;
+  --zeilenlaenge: 68ch;
+
+  /* ── Raum und Bewegung ─────────────────────────────────────────── */
+  --rand:     clamp(1.5rem, 6vw, 6rem);
+  --luft:     clamp(5rem, 11vw, 10rem);   /* Abstand zwischen Abschnitten */
+  --luft-eng: clamp(3rem, 6vw, 5rem);
+  --radius:   2px;                         /* wenn Radius, dann klein und ueberall gleich */
+  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Global text overflow prevention */
-p, span, a, li, div {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-/* Headings: never hyphenate words */
-h1, h2, h3, h4, h5, h6,
-h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
-  -webkit-hyphens: none !important;
-  -moz-hyphens: none !important;
-  -ms-hyphens: none !important;
-  hyphens: none !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
-
-/* Ensure nothing bleeds past viewport */
-section, div {
-  max-width: 100%;
-}
-
-html {
-  scroll-behavior: auto;
-}
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: var(--bg);
-  color: #1A1A1A;
+  background: var(--papier);
+  color: var(--tinte);
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-weight: 300;
+  font-size: var(--schrift-text);
+  font-weight: 400;
+  line-height: var(--zeile-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Typography utilities */
-.font-serif    { font-family: var(--font-cormorant), Georgia, serif; }
-.font-sans     { font-family: var(--font-inter), system-ui, sans-serif; }
+img, video { max-width: 100%; display: block; }
 
-/* Eyebrow label */
-.label {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 300;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gruen);
+/* Ueberschriften nie trennen */
+h1, h2, h3, h4 {
+  hyphens: none;
+  overflow-wrap: normal;
+  font-weight: 400;
 }
 
-/* Luxury button */
-.btn-outline {
-  display: inline-block;
-  border: 1px solid currentColor;
-  padding: 13px 28px;
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 0.7rem;
+/* Fliesstext darf umbrechen, aber keine Wortmitte zerreissen */
+p, li { overflow-wrap: break-word; }
+
+::selection { background: var(--gruen); color: #FFFFFF; }
+
+:focus-visible {
+  outline: 2px solid var(--gruen);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ── Abschnitte ──────────────────────────────────────────────────── */
+
+.abschnitt {
+  padding: var(--luft) var(--rand);
+}
+.abschnitt-eng {
+  padding: var(--luft-eng) var(--rand);
+}
+
+/* Der Hell-Dunkel-Wechsel ist das Gestaltungsprinzip der Seite. */
+.hell  { background: var(--papier);   color: var(--tinte); }
+.hell-2{ background: var(--papier-2); color: var(--tinte); }
+.dunkel{ background: var(--leinwand); color: var(--auf-dunkel); }
+
+.mitte   { max-width: 1320px; margin: 0 auto; }
+.mitte-schmal { max-width: 760px; margin: 0 auto; }
+
+/* ── Typografie-Bausteine ────────────────────────────────────────── */
+
+.t-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: var(--schrift-display);
   font-weight: 300;
-  letter-spacing: 0.18em;
+  line-height: var(--zeile-eng);
+  letter-spacing: -0.015em;
+}
+
+.t-gross {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: var(--schrift-gross);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.t-klein {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-klein);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+
+.t-text {
+  font-size: var(--schrift-text);
+  line-height: var(--zeile-text);
+  max-width: var(--zeilenlaenge);
+}
+
+.t-fein {
+  font-size: var(--schrift-fein);
+  line-height: 1.65;
+  color: var(--grau-2);
+  max-width: var(--zeilenlaenge);
+}
+
+/* Kleines Label. Der einzige Ort, an dem noch gesperrt wird. */
+.t-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: background 500ms ease, color 500ms ease;
+  color: var(--grau-3);
+}
+.dunkel .t-label { color: var(--grau-dunkel); }
+
+.t-grau   { color: var(--grau-2); }
+.dunkel .t-grau { color: var(--grau-dunkel); }
+.t-gruen  { color: var(--gruen); }
+.dunkel .t-gruen { color: var(--gruen-hell); }
+
+/* ── Knoepfe ─────────────────────────────────────────────────────── */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
   cursor: pointer;
+  transition: background 220ms var(--ease), color 220ms var(--ease),
+              border-color 220ms var(--ease);
 }
 
-.btn-outline:hover {
-  background: var(--brown);
-  color: var(--bg);
-  border-color: var(--brown);
+/* Der eine Handlungsaufruf pro Bildschirm. Hier darf das Gruen hin. */
+.knopf-voll {
+  background: var(--gruen);
+  color: #FFFFFF;
+  border-color: var(--gruen);
+}
+.knopf-voll:hover { background: #5A6845; border-color: #5A6845; }
+
+.knopf-linie {
+  background: transparent;
+  color: var(--tinte);
+  border-color: var(--tinte);
+}
+.knopf-linie:hover { background: var(--tinte); color: var(--papier); }
+
+.dunkel .knopf-linie {
+  color: var(--auf-dunkel);
+  border-color: rgba(244, 244, 242, 0.45);
+}
+.dunkel .knopf-linie:hover {
+  background: var(--auf-dunkel);
+  color: var(--leinwand);
+  border-color: var(--auf-dunkel);
 }
 
-.btn-outline-light {
-  color: rgba(246,241,235,0.85);
-  border-color: rgba(246,241,235,0.4);
+/* Textlink mit Unterlinie, die beim Zeigen mitgeht */
+.link-fein {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie);
+  padding-bottom: 2px;
+  transition: border-color 220ms var(--ease);
 }
+.link-fein:hover { border-bottom-color: currentColor; }
 
-.btn-outline-light:hover {
-  background: rgba(246,241,235,0.92);
-  color: var(--brown);
-  border-color: rgba(246,241,235,0.92);
-}
+/* ── Formular ────────────────────────────────────────────────────── */
 
-/* Lenis smooth scroll */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-/* Prevent images from causing horizontal overflow */
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* Image object-fit helper */
-.img-cover {
+.feld {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Nav active */
-.nav-active {
-  color: var(--brown) !important;
-  border-bottom: 1px solid var(--gruen);
-}
-
-/* Form elements */
-.form-input {
-  width: 100%;
+  min-height: 48px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--bg3);
-  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--linie);
+  padding: 0.75rem 0;
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  color: #1A1A1A;
-  outline: none;
+  font-size: 1rem;           /* 16 px: darunter zoomt iOS beim Antippen hinein */
+  font-weight: 400;
+  color: var(--tinte);
   border-radius: 0;
+  outline: none;
+  transition: border-color 220ms var(--ease);
+}
+.feld:focus { border-bottom-color: var(--gruen); }
+.feld::placeholder { color: var(--grau-3); }
+
+select.feld {
   -webkit-appearance: none;
-  transition: border-color 0.5s ease;
-}
-.form-input:focus {
-  border-bottom-color: var(--brown);
-}
-.form-input::placeholder {
-  color: rgba(94,81,72,0.55);
-}
-.form-select {
+  appearance: none;
   cursor: pointer;
-  color: rgba(94,81,72,0.55);
-}
-.form-select.filled {
-  color: #1A1A1A;
-}
-.form-textarea {
-  resize: none;
-  line-height: 1.9;
-  min-height: 80px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--grau-2) 50%),
+                    linear-gradient(135deg, var(--grau-2) 50%, transparent 50%);
+  background-position: calc(100% - 14px) center, calc(100% - 9px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
 }
 
-/* Mobile menu */
-#mob-menu {
-  display: none;
+textarea.feld {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
 }
-#mob-menu.open {
+
+.feld-label {
+  display: block;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  color: var(--tinte);
+  margin-bottom: 0.5rem;
+}
+
+/* Meldung ohne Rot. Traegt ihre Bedeutung ueber Symbol, Fettung und
+   Kasten, nicht ueber Farbe — sonst geht sie bei Farbenblindheit
+   vollstaendig verloren. */
+.meldung {
   display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--papier-2);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+}
+.meldung p {
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  color: var(--tinte);
+  line-height: 1.6;
+}
+
+/* ── Raster ──────────────────────────────────────────────────────── */
+
+.galerie-raster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.filme-raster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.zwei-spalten {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+/* Ablauf: grosse Ziffer links, Text rechts, viel Luft */
+.schritt {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid var(--linie);
+  align-items: start;
+}
+.schritt-ziffer {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 2.75rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--grau-3);
+}
+
+/* ── Lenis (weiches Scrollen) ────────────────────────────────────── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Mobil ───────────────────────────────────────────────────────
+   Alle Umbrueche stehen hier und nicht in <style>-Bloecken in den
+   Komponenten. Dort schreibt React beim Server-Rendern ">" als
+   "&gt;", was in einem <style> nicht zurueckuebersetzt wird: die
+   Regel wird ungueltig und die Seite hydriert fehlerhaft.          */
+
+@media (max-width: 900px) {
+  .zwei-spalten { grid-template-columns: 1fr; }
+  .filme-raster { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .galerie-raster { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .schritt { grid-template-columns: 3rem 1fr; gap: 1.25rem; }
+  .schritt-ziffer { font-size: 1.85rem; }
+}
+
+@media (max-width: 480px) {
+  .galerie-raster { grid-template-columns: 1fr; }
+}
+
+
+/* ── Raster, die erst durch die Komponenten dazukamen ─────────────── */
+
+.vertrauen-raster {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.stimmen-raster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+}
+
+.fuss-raster {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.fuss-leiste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Bild wandert beim Zeigen leicht heran. Nur am Rechner, auf dem Handy
+   gibt es kein Zeigen. */
+@media (hover: hover) {
+  .filmkachel:hover .filmkachel-bild,
+  .galerie-kachel:hover .galerie-bild { transform: scale(1.03); }
+  .filmkachel:hover .filmkachel-knopf { background: rgba(104,120,80,0.85); }
+}
+
+/* Kopfzeile: ab hier Menueschalter statt Linkleiste */
+@media (max-width: 1024px) {
+  .nav-telefon { display: none !important; }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none !important; }
+  .nav-schalter { display: block !important; }
+}
+
+@media (max-width: 900px) {
+  .vertrauen-raster { grid-template-columns: repeat(2, 1fr); }
+  .stimmen-raster   { grid-template-columns: 1fr; }
+  .fuss-raster      { grid-template-columns: 1fr 1fr; }
+  .fuss-raster > *:first-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .vertrauen-raster { grid-template-columns: 1fr; }
+  .fuss-raster      { grid-template-columns: 1fr; }
+  .fuss-leiste      { flex-direction: column; align-items: flex-start; }
+}
+
+
+.anfrage-raster {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: start;
+}
+.anfrage-links { position: sticky; top: 120px; }
+
+@media (max-width: 900px) {
+  .anfrage-raster { grid-template-columns: 1fr; gap: 3rem; }
+  .anfrage-links  { position: static; }
+}
+
+/* ── Bewegung nur, wenn erwuenscht ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -19,7 +19,6 @@ export default function StructuredData() {
         },
         geo: { '@type': 'GeoCoordinates', latitude: 52.4227, longitude: 10.7865 },
         areaServed: ['Wolfsburg','Braunschweig','Hannover','Niedersachsen','Deutschland'],
-        priceRange: 'ab 1.400 Euro',
         serviceType: ['Hochzeitsfilm','Hochzeitsfotografie','Videografie'],
         knowsLanguage: 'de',
         sameAs: ['https://www.instagram.com/amoriva.films'],
