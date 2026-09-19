@@ -8,7 +8,14 @@
   --bg3:   #E7DED3;
   --brown: #3B2F2A;
   --soft:  #5E5148;
-  --gold:  #B79B72;
+  /* Markenfarbe aus der Wortmarke ausgelesen (public/brand/). Vorher stand
+     hier ein Altgold - das ist der Branchen-Standard, aber nicht unsere Marke.
+     Die Schwesternmarke Amoriva nutzt #6E7D54, praktisch derselbe Ton. */
+  --gruen: #687850;
+  --gruen-hell: #8A9A72;
+  /* Alter Name, damit nichts bricht, was ihn noch benutzt. Zeigt jetzt
+     ebenfalls auf das Markengruen. Bei Gelegenheit ganz entfernen. */
+  --gold:  #687850;
   --ease:  cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -67,7 +74,7 @@ body {
   font-weight: 300;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gruen);
 }
 
 /* Luxury button */
@@ -133,7 +140,7 @@ img {
 /* Nav active */
 .nav-active {
   color: var(--brown) !important;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gruen);
 }
 
 /* Form elements */

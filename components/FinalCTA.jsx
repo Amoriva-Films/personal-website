@@ -16,7 +16,7 @@ export default function FinalCTA() {
           <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', fontWeight: 300, color: '#3B2F2A', lineHeight: 1.3, marginBottom: '1.5rem' }}>
             Euer Tag verdient mehr als schöne Bilder.
           </h2>
-          <div style={{ width: '2.5rem', height: '1px', background: '#C4973A', margin: '0 auto 1.75rem' }} />
+          <div style={{ width: '2.5rem', height: '1px', background: '#687850', margin: '0 auto 1.75rem' }} />
           <p style={{ fontFamily: sans, fontSize: '16px', lineHeight: 1.85, color: '#6B5E57', marginBottom: '2.5rem', fontWeight: 300 }}>
             Schreibt uns kurz, erzählt uns von eurem Tag und wir schauen ob wir zueinander passen. Kein Druck, kein Verkaufsgespräch.
           </p>

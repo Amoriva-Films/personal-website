@@ -13,7 +13,7 @@ module.exports = {
         'text-primary': '#1A1A1A',
         soft:   '#5E5148',
         brown:  '#3B2F2A',
-        gold:   '#B79B72',
+        gruen:   '#687850',
       },
       fontFamily: {
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],

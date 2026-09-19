@@ -52,7 +52,7 @@ function Portrait({ name, role, bio, img, imgPosition, imgFit = 'cover', imgTran
             fontWeight: 300,
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
-            color: 'var(--gold)',
+            color: 'var(--gruen)',
             marginBottom: '0.7rem',
           }}
         >
@@ -110,7 +110,7 @@ export default function Founders() {
               fontWeight: 300,
               letterSpacing: '0.28em',
               textTransform: 'uppercase',
-              color: 'var(--gold)',
+              color: 'var(--gruen)',
               marginBottom: '1.4rem',
             }}
           >

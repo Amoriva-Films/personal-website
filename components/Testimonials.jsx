@@ -4,7 +4,7 @@ import FadeIn from './FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
+const gruen  = '#687850';
 const brown = '#3B2F2A';
 const soft  = '#6B5E57';
 
@@ -43,7 +43,7 @@ export default function Testimonials() {
                 <div>
                   <div style={{ display: 'flex', gap: '3px', marginBottom: '1.25rem' }}>
                     {[1,2,3,4,5].map(s => (
-                      <svg key={s} width="13" height="13" viewBox="0 0 14 14" fill={gold}>
+                      <svg key={s} width="13" height="13" viewBox="0 0 14 14" fill={gruen}>
                         <polygon points="7,1 8.8,5.4 13.5,5.7 10,8.8 11.1,13.3 7,10.7 2.9,13.3 4,8.8 0.5,5.7 5.2,5.4"/>
                       </svg>
                     ))}
@@ -53,7 +53,7 @@ export default function Testimonials() {
                   </p>
                 </div>
                 <div>
-                  <div style={{ width: '2rem', height: '1px', background: gold, marginBottom: '1rem' }} />
+                  <div style={{ width: '2rem', height: '1px', background: gruen, marginBottom: '1rem' }} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#F5ECD7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 500, color: '#8A6420', flexShrink: 0 }}>
                       {t.init}

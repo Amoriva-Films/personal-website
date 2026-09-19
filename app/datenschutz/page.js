@@ -9,7 +9,7 @@ const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "'Inter', sans-serif";
 
 const linkStyle = {
-  color: '#B79B72',
+  color: '#687850',
   textDecoration: 'none',
 };
 
@@ -61,7 +61,7 @@ export default function Datenschutz() {
           fontWeight: 300,
           letterSpacing: '0.30em',
           textTransform: 'uppercase',
-          color: '#B79B72',
+          color: '#687850',
           marginBottom: '1.6rem',
         }}>
           Rechtliches
@@ -238,7 +238,7 @@ export default function Datenschutz() {
             fontWeight: 300,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: '#B79B72',
+            color: '#687850',
             textDecoration: 'none',
           }}>
             ← Zurück zur Startseite

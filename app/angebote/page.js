@@ -80,7 +80,7 @@ export default function AngebotePage() {
           }}>
             Kein Angebot ist wie das andere.
           </h1>
-          <div style={{ width: '2.5rem', height: '1px', background: '#C4973A', margin: '0 auto 1.75rem' }} />
+          <div style={{ width: '2.5rem', height: '1px', background: '#687850', margin: '0 auto 1.75rem' }} />
           <p style={{ fontSize: '17px', lineHeight: 1.9, color: '#6B5E57', marginBottom: '1.25rem' }}>
             Jede Hochzeit ist einzigartig. Deshalb erstellen wir für jedes Paar ein
             Angebot das wirklich zu ihrem Tag passt. Nicht mehr, nicht weniger.
@@ -111,13 +111,13 @@ export default function AngebotePage() {
               {l.highlight && (
                 <div style={{
                   position: 'absolute', top: '-1px', left: 0, right: 0,
-                  height: '2px', background: '#C4973A', borderRadius: '10px 10px 0 0',
+                  height: '2px', background: '#687850', borderRadius: '10px 10px 0 0',
                 }} />
               )}
               <div style={{ flex: 1 }}>
                 <p style={{
                   fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase',
-                  color: '#C4973A', marginBottom: '0.5rem', opacity: 0.8,
+                  color: '#687850', marginBottom: '0.5rem', opacity: 0.8,
                 }}>
                   {l.nummer} — {l.subline}
                 </p>
@@ -147,7 +147,7 @@ export default function AngebotePage() {
                       borderBottom: `0.5px solid ${l.highlight ? 'rgba(255,255,255,0.06)' : '#F0EDE8'}`,
                       alignItems: 'flex-start',
                     }}>
-                      <span style={{ color: '#C4973A', flexShrink: 0, marginTop: '2px', fontSize: '12px' }}>
+                      <span style={{ color: '#687850', flexShrink: 0, marginTop: '2px', fontSize: '12px' }}>
                         ✓
                       </span>
                       {e}
@@ -172,7 +172,7 @@ export default function AngebotePage() {
                     display: 'block', textAlign: 'center',
                     padding: '0.85rem 1.5rem', background: 'transparent',
                     border: l.highlight ? '1px solid rgba(196,151,58,0.4)' : '1px solid #3B2F2A',
-                    color: l.highlight ? '#C4973A' : '#3B2F2A',
+                    color: l.highlight ? '#687850' : '#3B2F2A',
                     fontSize: '11px', letterSpacing: '0.18em',
                     textTransform: 'uppercase', textDecoration: 'none',
                     transition: 'all 0.2s ease',
@@ -219,7 +219,7 @@ export default function AngebotePage() {
             ].map((s, i) => (
               <div key={i}>
                 <p style={{
-                  fontSize: '10px', color: '#C4973A', letterSpacing: '0.2em',
+                  fontSize: '10px', color: '#687850', letterSpacing: '0.2em',
                   marginBottom: '0.4rem', fontWeight: 500,
                 }}>
                   {s.num}

@@ -10,7 +10,7 @@ import FadeIn from '../../components/FadeIn';
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "'Inter', sans-serif";
 const brown = '#2A1F1B';
-const gold  = '#B79B72';
+const gruen  = '#687850';
 const soft  = '#5E5148';
 
 const services = [
@@ -116,7 +116,7 @@ function ServiceCard({ s, i }) {
             fontSize: '0.6rem',
             letterSpacing: '0.28em',
             textTransform: 'uppercase',
-            color: gold,
+            color: gruen,
             fontWeight: 300,
             marginBottom: '1rem',
           }}>{s.nr}</p>
@@ -141,7 +141,7 @@ function ServiceCard({ s, i }) {
           <p style={{
             fontFamily: sans,
             fontSize: '11px',
-            color: gold,
+            color: gruen,
             fontWeight: 300,
             letterSpacing: '0.04em',
           }}>{s.keywords}</p>
@@ -169,7 +169,7 @@ function ServiceCard({ s, i }) {
                 alignItems: 'flex-start',
                 gap: '0.8rem',
               }}>
-                <span style={{ color: gold, marginTop: '2px', flexShrink: 0 }}>›</span>
+                <span style={{ color: gruen, marginTop: '2px', flexShrink: 0 }}>›</span>
                 {item}
               </li>
             ))}
@@ -207,7 +207,7 @@ export default function LeistungenPage() {
             fontWeight: 300,
             letterSpacing: '0.28em',
             textTransform: 'uppercase',
-            color: gold,
+            color: gruen,
             marginBottom: '1.4rem',
           }}>
             Unsere Leistungen

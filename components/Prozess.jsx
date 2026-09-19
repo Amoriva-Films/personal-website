@@ -4,7 +4,7 @@ import FadeIn from './FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
+const gruen  = '#687850';
 const brown = '#3B2F2A';
 const soft  = '#6B5E57';
 
@@ -32,8 +32,8 @@ export default function Prozess() {
           {schritte.map((s, i) => (
             <FadeIn key={i} delay={i * 0.07}>
               <div style={{ background: '#FFFFFF', padding: '2rem 1.8rem', height: '100%' }}>
-                <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.2em', color: gold, marginBottom: '0.75rem', fontWeight: 500 }}>{s.nummer}</p>
-                <h3 style={{ fontFamily: serif, fontSize: '1.05rem', fontWeight: 300, color: brown, marginBottom: '0.6rem' }}>{s.titel}</h3>
+                <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.2em', color: gruen, marginBottom: '0.75rem', fontWeight: 500 }}>{s.nummer}</p>
+                <h3 style={{ fontFamily: serif, fontSize: '1.25rem', fontWeight: 400, color: brown, marginBottom: '0.6rem' }}>{s.titel}</h3>
                 <p style={{ fontFamily: sans, fontSize: '14px', lineHeight: 1.7, color: soft, margin: 0, fontWeight: 300 }}>{s.text}</p>
               </div>
             </FadeIn>

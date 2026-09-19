@@ -134,7 +134,7 @@ export default function InquirePage() {
                 fontWeight: 300,
                 letterSpacing: '0.32em',
                 textTransform: 'uppercase',
-                color: '#B79B72',
+                color: '#687850',
                 marginBottom: '1.6rem',
               }}
             >

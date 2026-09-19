@@ -4,7 +4,7 @@ import FadeIn from './FadeIn';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
+const gruen  = '#687850';
 const brown = '#3B2F2A';
 const soft  = '#6B5E57';
 
@@ -59,7 +59,7 @@ function ServiceRow({ s }) {
         gap: 'clamp(28px, 4vw, 80px)',
       }}>
         <div>
-          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: gold, fontWeight: 300, marginBottom: '1rem' }}>
+          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: gruen, fontWeight: 300, marginBottom: '1rem' }}>
             {s.nr}
           </p>
           <h3 style={{ fontFamily: serif, fontSize: 'clamp(24px, 2.6vw, 38px)', fontWeight: 300, color: brown, lineHeight: 1.1, marginBottom: '0.5rem' }}>
@@ -76,7 +76,7 @@ function ServiceRow({ s }) {
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
             {s.includes.map((item, i) => (
               <li key={i} style={{ fontFamily: sans, fontSize: '13px', fontWeight: 300, color: soft, display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                <span style={{ color: gold, flexShrink: 0, marginTop: '2px' }}>›</span>
+                <span style={{ color: gruen, flexShrink: 0, marginTop: '2px' }}>›</span>
                 {item}
               </li>
             ))}
@@ -92,7 +92,7 @@ export default function LeistungenSection() {
     <section id="leistungen" style={{ background: '#F6F1EB' }}>
       <div style={{ padding: 'clamp(64px, 7vw, 96px) 8% 0' }}>
         <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '11px', fontWeight: 300, letterSpacing: '0.40em', textTransform: 'uppercase', color: gold, marginBottom: '1.4rem' }}>
+          <span style={{ display: 'block', fontFamily: sans, fontSize: '11px', fontWeight: 300, letterSpacing: '0.40em', textTransform: 'uppercase', color: gruen, marginBottom: '1.4rem' }}>
             Leistungen
           </span>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 4vw, 58px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '680px' }}>

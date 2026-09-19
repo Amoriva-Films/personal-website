@@ -35,7 +35,7 @@ export default function Experience() {
               fontWeight: 300,
               letterSpacing: '0.28em',
               textTransform: 'uppercase',
-              color: 'var(--gold)',
+              color: 'var(--gruen)',
               marginBottom: '2rem',
             }}
           >

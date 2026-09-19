@@ -142,7 +142,7 @@ export default function ReferenzenPage() {
           <span style={{
             display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300,
             letterSpacing: '0.28em', textTransform: 'uppercase',
-            color: '#B79B72', marginBottom: '1.4rem',
+            color: '#687850', marginBottom: '1.4rem',
           }}>
             Unsere Arbeiten
           </span>

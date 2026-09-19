@@ -9,7 +9,7 @@ import FadeIn from '../../components/FadeIn';
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "'Inter', sans-serif";
 const brown = '#2A1F1B';
-const gold  = '#B79B72';
+const gruen  = '#687850';
 const soft  = '#5E5148';
 
 const articles = [
@@ -51,7 +51,7 @@ export default function RatgeberPage() {
       {/* Hero */}
       <section style={{ background: '#F6F1EB', padding: 'clamp(120px,14vw,180px) 8% clamp(52px,6vw,80px)' }}>
         <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gold, marginBottom: '1.4rem' }}>
+          <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gruen, marginBottom: '1.4rem' }}>
             Wissen & Tipps
           </span>
           <h1 style={{ fontFamily: serif, fontSize: 'clamp(36px,5vw,72px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '700px', hyphens: 'none', wordBreak: 'keep-all' }}>
@@ -77,13 +77,13 @@ export default function RatgeberPage() {
                 onMouseLeave={e => { e.currentTarget.querySelector('h2').style.opacity = '1'; }}
               >
                 <div>
-                  <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: gold, fontWeight: 300 }}>{a.cat}</span>
+                  <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: gruen, fontWeight: 300 }}>{a.cat}</span>
                   <p style={{ fontFamily: sans, fontSize: '11px', color: soft, opacity: 0.5, fontWeight: 300, marginTop: '0.4rem' }}>{a.readTime} Lesezeit</p>
                 </div>
                 <div>
                   <h2 style={{ fontFamily: serif, fontSize: 'clamp(22px,2.4vw,36px)', fontWeight: 300, color: brown, lineHeight: 1.15, marginBottom: '0.8rem', transition: 'opacity 0.3s' }}>{a.title}</h2>
                   <p style={{ fontFamily: sans, fontSize: 'clamp(13px,1vw,15px)', fontWeight: 300, color: soft, lineHeight: 1.75, opacity: 0.85 }}>{a.excerpt}</p>
-                  <span style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gold, fontWeight: 300, display: 'inline-block', marginTop: '1.2rem' }}>Lesen →</span>
+                  <span style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, display: 'inline-block', marginTop: '1.2rem' }}>Lesen →</span>
                 </div>
               </Link>
             </FadeIn>

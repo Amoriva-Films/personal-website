@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
@@ -159,18 +160,15 @@ export default function Footer() {
             <line x1="34.63" y1="9.37" x2="9.37" y2="34.63" stroke={brown} strokeWidth="0.4" />
           </svg>
 
-          <span style={{
-            fontFamily: serif,
-            fontSize: 'clamp(17px, 1.8vw, 24px)',
-            fontWeight: 400,
-            letterSpacing: '0.20em',
-            textTransform: 'uppercase',
-            color: brown,
-            marginBottom: '24px',
-            whiteSpace: 'nowrap',
-          }}>
-            Amoriva Films
-          </span>
+          {/* Die echte Wortmarke statt des nachgetippten Namens. */}
+          <Image
+            src="/brand/wortmarke-gruen.png"
+            alt="Amoriva Films"
+            width={188}
+            height={72}
+            sizes="188px"
+            style={{ width: 'clamp(140px, 14vw, 188px)', height: 'auto', marginBottom: '24px' }}
+          />
 
           <div style={{ width: '1px', height: '48px', background: 'rgba(59,47,42,0.18)' }} />
         </div>

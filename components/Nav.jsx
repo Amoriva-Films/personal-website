@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const LINKS = [
   { label: 'Leistungen', href: '/#leistungen' },
@@ -13,6 +14,10 @@ const LINKS = [
 const CREME = '#F6F1EB';
 const DUNKEL = '#3B2F2A';
 const TELEFON = '+49 155 6555 9747';
+// Seitenverhaeltnis der Wortmarke ist 1116:427. Die Hoehe bestimmt den
+// Auftritt, die Breite folgt daraus - sonst wird die Marke verzerrt.
+const LOGO_HOEHE = 38;
+const LOGO_BREITE = Math.round(LOGO_HOEHE * 1116 / 427);
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,6 +46,8 @@ export default function Nav() {
 
   const color = scrolled ? DUNKEL : 'rgba(246,241,235,0.88)';
   const markeFarbe = offen ? DUNKEL : (scrolled ? DUNKEL : CREME);
+  // Helle Wortmarke nur, solange sie ueber dem dunklen Video steht.
+  const markeHell = !offen && !scrolled;
 
   return (
     <nav style={{
@@ -53,14 +60,34 @@ export default function Nav() {
       borderBottom: scrolled ? '1px solid rgba(59,47,42,0.07)' : '1px solid transparent',
       transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)',
     }}>
-      <Link href="/" onClick={() => setOffen(false)} style={{
-        fontFamily: 'var(--font-cormorant), Georgia, serif',
-        fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.28em',
-        textTransform: 'uppercase', color: markeFarbe,
-        textDecoration: 'none', transition: 'color 0.6s ease',
-        whiteSpace: 'nowrap', position: 'relative', zIndex: 102,
+      {/* Die echte Wortmarke, nicht mehr der Name in Versalien nachgetippt.
+          Zwei Fassungen liegen uebereinander und werden ineinander geblendet:
+          ueber dem Hero-Video die helle, ab dem Scrollen die gruene. Ein
+          Farbwechsel per CSS geht bei einem Bild nicht, und Umfaerben per
+          Filter macht aus dem Markengruen einen anderen Ton. */}
+      <Link href="/" onClick={() => setOffen(false)} aria-label="Amoriva Films, zur Startseite" style={{
+        display: 'block', position: 'relative', zIndex: 102,
+        width: LOGO_BREITE, height: LOGO_HOEHE, flexShrink: 0,
       }}>
-        Amoriva Films
+        {[
+          { datei: '/brand/wortmarke-hell.png',  sichtbar: markeHell },
+          { datei: '/brand/wortmarke-gruen.png', sichtbar: !markeHell },
+        ].map(({ datei, sichtbar }) => (
+          <Image
+            key={datei}
+            src={datei}
+            alt=""
+            width={LOGO_BREITE}
+            height={LOGO_HOEHE}
+            priority
+            sizes={`${LOGO_BREITE}px`}
+            style={{
+              position: 'absolute', inset: 0, width: '100%', height: '100%',
+              objectFit: 'contain', objectPosition: 'left center',
+              opacity: sichtbar ? 1 : 0, transition: 'opacity 0.6s ease',
+            }}
+          />
+        ))}
       </Link>
 
       <div className="nav-links" style={{ display: 'flex', gap: 'clamp(1.2rem, 2.5vw, 2.5rem)', alignItems: 'center' }}>

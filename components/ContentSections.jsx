@@ -7,7 +7,7 @@ import TrustBadges from './TrustBadges';
 
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
+const gruen  = '#687850';
 const brown = '#3B2F2A';
 const soft  = '#6B5E57';
 const muted = '#8A7B6F';
@@ -25,7 +25,7 @@ export default function ContentSections() {
             <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 400, color: brown, lineHeight: 1.25, marginBottom: '2rem' }}>
               Für einen Tag voller Gefühle,<br />den ihr niemals vergessen wollt.
             </h2>
-            <div style={{ width: '2.5rem', height: '1px', background: gold, margin: '0 auto 2rem' }} />
+            <div style={{ width: '2.5rem', height: '1px', background: gruen, margin: '0 auto 2rem' }} />
             <p style={{ fontFamily: sans, fontSize: '17px', lineHeight: 1.9, color: soft, marginBottom: '1.5rem', fontWeight: 300 }}>
               Eure Hochzeit ist mehr als ein Ablauf. Sie ist ein Gefühl. Der Moment bevor ihr euch zum ersten Mal seht. Die Hände die sich halten. Die Stimmen eurer Liebsten. Das Licht, die Musik, die Aufregung und all die kleinen Augenblicke die viel zu schnell vorbeigehen.
             </p>

@@ -26,9 +26,13 @@ const badges = [
 export default function TrustBadges() {
   return (
     <FadeIn>
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-        gap: '0.75rem', padding: '3rem 1.5rem',
+      {/* Raster statt umbrechender Flex-Zeile. Vorher waren die vier Pillen
+          unterschiedlich breit und zentriert - auf dem Handy stand jede in
+          einer eigenen Zeile und die linke Kante zackte hin und her. Im Raster
+          sind sie gleich breit, damit steht die Kante ruhig. */}
+      <div className="trust-raster" style={{
+        display: 'grid', gap: '0.75rem', padding: '3rem 1.5rem',
+        maxWidth: '1100px', margin: '0 auto',
         borderTop: '0.5px solid #E8E2DC', borderBottom: '0.5px solid #E8E2DC',
         background: '#FAF9F7',
       }}>
@@ -38,7 +42,7 @@ export default function TrustBadges() {
             padding: '0.7rem 1.25rem', background: '#FFFFFF',
             border: '0.5px solid #E8E2DC', borderRadius: '100px',
           }}>
-            <span style={{ color: '#C4973A', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+            <span style={{ color: '#687850', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
               {b.icon}
             </span>
             <div>
@@ -47,6 +51,11 @@ export default function TrustBadges() {
             </div>
           </div>
         ))}
+        <style>{`
+          .trust-raster { grid-template-columns: 1fr; }
+          @media (min-width: 620px)  { .trust-raster { grid-template-columns: repeat(2, 1fr); } }
+          @media (min-width: 1024px) { .trust-raster { grid-template-columns: repeat(4, 1fr); } }
+        `}</style>
       </div>
     </FadeIn>
   );

@@ -63,7 +63,7 @@ export default function FAQ() {
                     {f.frage}
                   </span>
                   <span style={{
-                    fontSize: '20px', color: '#C4973A', flexShrink: 0,
+                    fontSize: '20px', color: '#687850', flexShrink: 0,
                     transition: 'transform 0.25s ease',
                     transform: offen === i ? 'rotate(45deg)' : 'rotate(0deg)',
                     display: 'inline-block', lineHeight: 1,

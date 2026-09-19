@@ -9,7 +9,7 @@ import FadeIn from './FadeIn';
 const serif = "var(--font-cormorant), Georgia, serif";
 const sans  = "'Inter', sans-serif";
 const brown = '#2A1F1B';
-const gold  = '#B79B72';
+const gruen  = '#687850';
 const soft  = '#5E5148';
 
 const related_articles = [
@@ -35,14 +35,14 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           <FadeIn>
             {/* Breadcrumb */}
             <nav style={{ marginBottom: '2.4rem', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <Link href="/" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gold, fontWeight: 300, textDecoration: 'none' }}>Startseite</Link>
-              <span style={{ color: gold, fontSize: '0.6rem' }}>›</span>
-              <Link href="/ratgeber" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gold, fontWeight: 300, textDecoration: 'none' }}>Ratgeber</Link>
-              <span style={{ color: gold, fontSize: '0.6rem' }}>›</span>
+              <Link href="/" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Startseite</Link>
+              <span style={{ color: gruen, fontSize: '0.6rem' }}>›</span>
+              <Link href="/ratgeber" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Ratgeber</Link>
+              <span style={{ color: gruen, fontSize: '0.6rem' }}>›</span>
               <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: soft, fontWeight: 300, opacity: 0.6 }}>{category}</span>
             </nav>
 
-            <span style={{ display: 'block', fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gold, fontWeight: 300, marginBottom: '1.2rem' }}>
+            <span style={{ display: 'block', fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, fontWeight: 300, marginBottom: '1.2rem' }}>
               {category}
             </span>
 
@@ -55,7 +55,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
               <span style={{ width: '1px', height: '12px', background: 'rgba(59,47,42,0.2)' }} />
               <span style={{ fontFamily: sans, fontSize: '12px', color: soft, fontWeight: 300, opacity: 0.65 }}>{readTime} Lesezeit</span>
               <span style={{ width: '1px', height: '12px', background: 'rgba(59,47,42,0.2)' }} />
-              <span style={{ fontFamily: sans, fontSize: '12px', color: gold, fontWeight: 300 }}>Amoriva Films</span>
+              <span style={{ fontFamily: sans, fontSize: '12px', color: gruen, fontWeight: 300 }}>Amoriva Films</span>
             </div>
           </FadeIn>
         </div>
@@ -74,7 +74,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       {/* ── CTA ──────────────────────────────────────────── */}
       <section style={{ background: '#EFE7DD', padding: 'clamp(52px,6vw,80px) 8%', textAlign: 'center' }}>
         <FadeIn>
-          <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gold, marginBottom: '1rem' }}>Amoriva Films · Wolfsburg</p>
+          <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, marginBottom: '1rem' }}>Amoriva Films · Wolfsburg</p>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(26px,3vw,44px)', fontWeight: 300, color: brown, marginBottom: '1rem' }}>
             Euer Hochzeitsfilm wartet auf euch.
           </h2>
@@ -96,14 +96,14 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       <section style={{ background: '#F6F1EB', padding: 'clamp(52px,6vw,80px) 8%' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <FadeIn>
-            <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gold, marginBottom: '2rem' }}>Weitere Artikel</p>
+            <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, marginBottom: '2rem' }}>Weitere Artikel</p>
             <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2rem' }}>
               {others.map(a => (
                 <Link key={a.href} href={a.href} style={{ textDecoration: 'none', borderTop: '1px solid rgba(59,47,42,0.12)', paddingTop: '1.4rem', display: 'block' }}
                   onMouseEnter={e => e.currentTarget.querySelector('h3').style.opacity = '0.5'}
                   onMouseLeave={e => e.currentTarget.querySelector('h3').style.opacity = '1'}
                 >
-                  <span style={{ fontFamily: sans, fontSize: '0.58rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gold, fontWeight: 300, display: 'block', marginBottom: '0.6rem' }}>{a.cat}</span>
+                  <span style={{ fontFamily: sans, fontSize: '0.58rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gruen, fontWeight: 300, display: 'block', marginBottom: '0.6rem' }}>{a.cat}</span>
                   <h3 style={{ fontFamily: serif, fontSize: 'clamp(18px,1.6vw,24px)', fontWeight: 300, color: brown, lineHeight: 1.2, transition: 'opacity 0.3s' }}>{a.label}</h3>
                 </Link>
               ))}
@@ -130,18 +130,18 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           font-weight: 400;
           text-transform: uppercase;
           letter-spacing: 0.14em;
-          color: #B79B72;
+          color: #687850;
           margin-top: 2rem;
           margin-bottom: 0.6rem;
         }
         .article-body p { margin-bottom: 1.4rem; }
         .article-body ul { margin: 0 0 1.4rem 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
         .article-body ul li { display: flex; gap: 0.8rem; align-items: flex-start; }
-        .article-body ul li::before { content: '›'; color: #B79B72; flex-shrink: 0; margin-top: 2px; }
-        .article-body a { color: #B79B72; text-decoration: underline; text-underline-offset: 3px; }
+        .article-body ul li::before { content: '›'; color: #687850; flex-shrink: 0; margin-top: 2px; }
+        .article-body a { color: #687850; text-decoration: underline; text-underline-offset: 3px; }
         .article-body strong { font-weight: 400; color: #2A1F1B; }
         .article-body .highlight-box {
-          border-left: 2px solid #B79B72;
+          border-left: 2px solid #687850;
           padding: 1rem 1.4rem;
           margin: 2rem 0;
           background: rgba(183,155,114,0.07);

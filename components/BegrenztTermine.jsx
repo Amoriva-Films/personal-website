@@ -12,8 +12,8 @@ export default function BegrenztTermine() {
       <FadeIn>
         <div style={{ maxWidth: '560px', margin: '0 auto' }}>
 
-          {/* Vertikale gold-Linie oben */}
-          <div style={{ width: '1px', height: '32px', background: '#C4973A', opacity: 0.5, margin: '0 auto 2rem' }} />
+          {/* Vertikale gruen-Linie oben */}
+          <div style={{ width: '1px', height: '32px', background: '#687850', opacity: 0.5, margin: '0 auto 2rem' }} />
 
           <p style={{ fontFamily: sans, fontSize: '10px', letterSpacing: '0.4em', textTransform: 'uppercase', color: '#B0A498', marginBottom: '1.5rem', fontWeight: 400 }}>
             Verfügbarkeit 2026 / 2027
@@ -33,7 +33,7 @@ export default function BegrenztTermine() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px',
               fontFamily: sans, fontSize: '12px', letterSpacing: '0.15em',
-              textTransform: 'uppercase', color: '#C4973A', textDecoration: 'none',
+              textTransform: 'uppercase', color: '#687850', textDecoration: 'none',
               fontWeight: 400, transition: 'opacity 0.2s ease',
             }}
             onMouseEnter={e => { e.currentTarget.style.opacity = '0.6'; }}
@@ -43,8 +43,8 @@ export default function BegrenztTermine() {
             <span style={{ fontSize: '14px', lineHeight: 1 }}>→</span>
           </Link>
 
-          {/* Vertikale gold-Linie unten */}
-          <div style={{ width: '1px', height: '32px', background: '#C4973A', opacity: 0.5, margin: '2rem auto 0' }} />
+          {/* Vertikale gruen-Linie unten */}
+          <div style={{ width: '1px', height: '32px', background: '#687850', opacity: 0.5, margin: '2rem auto 0' }} />
 
         </div>
       </FadeIn>
