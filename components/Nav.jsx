@@ -52,8 +52,7 @@ export default function Nav() {
       <nav
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: gescrollt ? '0.9rem var(--rand)' : '1.4rem var(--rand)',
+          paddingBlock: gescrollt ? '0.9rem' : '1.4rem',
           background: gescrollt ? 'rgba(251,251,250,0.94)' : 'transparent',
           backdropFilter: gescrollt ? 'blur(16px)' : 'none',
           WebkitBackdropFilter: gescrollt ? 'blur(16px)' : 'none',
@@ -61,6 +60,9 @@ export default function Nav() {
           transition: 'padding 400ms var(--ease), background 400ms var(--ease), border-color 400ms var(--ease)',
         }}
       >
+        <div className="bahn" style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
         <Link href="/" aria-label="Amoriva Films, zur Startseite" style={{
           position: 'relative', display: 'block', flexShrink: 0,
           width: LOGO_BREITE, height: LOGO_HOEHE,
@@ -126,6 +128,7 @@ export default function Nav() {
               : (<><line x1="3" y1="8" x2="21" y2="8" /><line x1="3" y1="16" x2="21" y2="16" /></>)}
           </svg>
         </button>
+        </div>
       </nav>
 
       {offen && (

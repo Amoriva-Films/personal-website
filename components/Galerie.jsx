@@ -106,7 +106,11 @@ export default function Galerie({ bilder, grenze }) {
             className="galerie-kachel"
             style={{
               position: 'relative', width: '100%',
-              aspectRatio: bild.hoch ? '3 / 4' : '4 / 3',
+              /* Ein Seitenverhaeltnis fuer alle Kacheln. Vorher trugen hohe und
+                 quere Bilder ihr eigenes: in einer Reihe endeten die einen
+                 195 px tiefer als die anderen, die Unterkante war eine
+                 Treppe. Der Ausschnitt uebernimmt das objectFit: cover. */
+              aspectRatio: '4 / 5',
               overflow: 'hidden', border: 'none', padding: 0,
               cursor: 'zoom-in', background: '#000', display: 'block',
             }}
