@@ -486,6 +486,17 @@ textarea.feld {
   .vertrauen-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* Trennt in der Kopfzeile das Menue vom Kontaktteil. Ohne ihn liest
+   sich die Telefonnummer wie ein weiterer Menuepunkt.                */
+.nav-trenner {
+  display: block;
+  width: 1px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.22;
+  flex-shrink: 0;
+}
+
 .fragen-raster {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -581,6 +592,7 @@ html.lenis, html.lenis body { height: auto; }
 
 @media (max-width: 1024px) {
   .nav-telefon { display: none !important; }
+  .nav-trenner { display: none !important; }
 }
 
 @media (max-width: 900px) {
