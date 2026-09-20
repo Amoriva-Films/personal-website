@@ -23,8 +23,11 @@ async function anAmoriva(daten) {
     if (AMORIVA_EINGANG) console.error('AMORIVA_EINGANG_URL sieht nicht wie eine gültige Empfangsadresse aus.');
     return;
   }
+  // Vier Sekunden. Die Gegenstelle antwortet gemessen in 0,3 bis 0,7
+  // Sekunden; vier Sekunden sind grosszuegig und begrenzen zugleich,
+  // wie lange das Paar im schlimmsten Fall zusaetzlich wartet.
   const abbruch = new AbortController();
-  const uhr = setTimeout(() => abbruch.abort(), 6000);
+  const uhr = setTimeout(() => abbruch.abort(), 4000);
   try {
     const res = await fetch(AMORIVA_EINGANG, {
       method: 'POST',
@@ -98,17 +101,33 @@ export async function POST(request) {
       return Response.json({ error: `E-Mail konnte nicht gesendet werden (${msg}). Bitte schreibt uns direkt an booking@amoriva-films.de.` }, { status: 500 });
     }
 
-    // 2) Anfrage zusätzlich ins eigene Amoriva-Dashboard. Fire and forget.
-    void anAmoriva({ name, email, hochzeitsdatum, location, nachricht });
+    // 2) und 3) laufen nebeneinander: der Eintrag im eigenen Amoriva-Dashboard
+    // und die Eingangsbestätigung an das Paar.
+    //
+    // Beide werden abgewartet, aber gleichzeitig gestartet. Das kostet keine
+    // zusätzliche Zeit, weil die langsamere von beiden die Dauer bestimmt und
+    // das Dashboard mit unter einer Sekunde ohnehin schneller ist als der
+    // Mailversand.
+    //
+    // Das Abwarten ist wichtig: Vorher lief der Dashboard-Aufruf ohne await
+    // nebenher. Auf Vercel wird eine Serverfunktion aber eingefroren, sobald
+    // die Antwort raus ist - ein noch laufender Aufruf kann dabei einfach
+    // verschwinden. Lokal faellt das nie auf, live schon.
+    //
+    // Fehlschlagen darf beides: Die Anfrage selbst ist mit Schritt 1 bereits
+    // sicher bei uns. Deshalb allSettled und nur protokollieren.
+    const [dashboard, bestaetigung] = await Promise.allSettled([
+      anAmoriva({ name, email, hochzeitsdatum, location, nachricht }),
+      senden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name, hochzeitsdatum, location, nachricht }) }),
+    ]);
 
-    // 3) Eingangsbestätigung an das Paar. Bewusst kurz: sie ersetzt die persönliche
-    // Antwort nicht, sie kündigt sie an. Schlägt sie fehl, ist die Anfrage trotzdem
-    // bei uns, deshalb nur protokollieren.
-    try {
-      const anPaar = await senden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name, hochzeitsdatum, location, nachricht }) });
-      if (!anPaar.ok) console.error('Bestätigung an das Paar abgelehnt:', anPaar.status, JSON.stringify(anPaar.data).slice(0, 300));
-    } catch (e) {
-      console.error('Bestätigung an das Paar fehlgeschlagen:', e);
+    if (dashboard.status === 'rejected') {
+      console.error('Dashboard-Eintrag fehlgeschlagen:', dashboard.reason);
+    }
+    if (bestaetigung.status === 'rejected') {
+      console.error('Bestätigung an das Paar fehlgeschlagen:', bestaetigung.reason);
+    } else if (!bestaetigung.value.ok) {
+      console.error('Bestätigung an das Paar abgelehnt:', bestaetigung.value.status, JSON.stringify(bestaetigung.value.data).slice(0, 300));
     }
 
     return Response.json({ ok: true });
