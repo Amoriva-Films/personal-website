@@ -12,11 +12,11 @@ const schritte = [
 
 export default function Prozess() {
   return (
-    <section className="abschnitt hell-2">
-      <div className="mitte-schmal">
+    <section className="abschnitt hell">
+      <div className="bahn lesebreite">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: '1.5rem' }}>So funktioniert es</p>
-          <h2 className="t-gross" style={{ marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>So funktioniert es</p>
+          <h2 className="t-gross" style={{ marginBottom: 'var(--luft-5)' }}>
             Von der ersten Nachricht bis zu eurem Film.
           </h2>
         </FadeIn>
@@ -29,7 +29,7 @@ export default function Prozess() {
               <div className="schritt">
                 <span className="schritt-ziffer" aria-hidden="true">{s.nummer}</span>
                 <div>
-                  <h3 className="t-klein" style={{ marginBottom: '0.6rem' }}>{s.titel}</h3>
+                  <h3 className="t-klein" style={{ marginBottom: 'var(--luft-1)' }}>{s.titel}</h3>
                   <p className="t-text t-grau">{s.text}</p>
                 </div>
               </div>

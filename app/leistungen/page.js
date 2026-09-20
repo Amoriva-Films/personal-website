@@ -87,10 +87,10 @@ export default function LeistungenPage() {
       <Nav />
 
       <main className="hell" style={{ minHeight: '100vh' }}>
-        <section className="abschnitt" style={{ paddingTop: 'clamp(9rem, 16vw, 13rem)' }}>
-          <div className="mitte-schmal">
-            <p className="t-label" style={{ marginBottom: '1.5rem' }}>Unsere Leistungen</p>
-            <h1 className="t-display" style={{ marginBottom: '1.75rem' }}>
+        <section className="abschnitt-kopf">
+          <div className="bahn">
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Leistungen</p>
+            <h1 className="t-display" style={{ marginBottom: 'var(--luft-3)' }}>
               Hochzeitsfilm, Fotografie und mehr.
             </h1>
             <p className="t-text t-grau">
@@ -101,24 +101,24 @@ export default function LeistungenPage() {
         </section>
 
         <section className="abschnitt" style={{ paddingTop: 0 }}>
-          <div className="mitte">
+          <div className="bahn">
             {services.map((s) => (
               <div key={s.nr} className="zwei-spalten" style={{
                 borderTop: '1px solid var(--linie)',
-                padding: 'clamp(2.5rem, 5vw, 4rem) 0',
+                paddingBlock: 'var(--luft-5)',
               }}>
                 <div>
-                  <p className="t-label" style={{ marginBottom: '1rem' }}>{s.nr}</p>
-                  <h2 className="t-gross" style={{ marginBottom: '0.5rem' }}>{s.title}</h2>
-                  <p className="t-fein" style={{ marginBottom: '0.3rem' }}>{s.subtitle}</p>
+                  <p className="t-label" style={{ marginBottom: 'var(--luft-2)' }}>{s.nr}</p>
+                  <h2 className="t-gross" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h2>
+                  <p className="t-fein" style={{ marginBottom: 'var(--luft-1)' }}>{s.subtitle}</p>
                   <p className="t-fein t-gruen">{s.keywords}</p>
                 </div>
                 <div>
-                  <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>{s.description}</p>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>{s.description}</p>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                     {s.includes.map((item, i) => (
                       <li key={i} style={{
-                        display: 'flex', gap: '0.9rem', alignItems: 'flex-start',
+                        display: 'flex', gap: 'var(--luft-1)', alignItems: 'flex-start',
                         fontSize: 'var(--schrift-fein)', color: 'var(--grau-2)', lineHeight: 1.6,
                       }}>
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -138,9 +138,9 @@ export default function LeistungenPage() {
         </section>
 
         <section className="abschnitt hell-2">
-          <div className="mitte-schmal" style={{ textAlign: 'center' }}>
-            <h2 className="t-gross" style={{ marginBottom: '1.25rem' }}>Bereit für euren Film?</h2>
-            <p className="t-text t-grau" style={{ margin: '0 auto 2.5rem' }}>
+          <div className="bahn" style={{ textAlign: 'center' }}>
+            <h2 className="t-gross" style={{ marginBottom: 'var(--luft-3)' }}>Bereit für euren Film?</h2>
+            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
               Erzählt uns von eurer Hochzeit, wir melden uns innerhalb von 24 Stunden.
             </p>
             <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>

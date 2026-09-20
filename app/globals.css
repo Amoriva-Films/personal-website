@@ -27,6 +27,32 @@
   --gruen:         #687850;   /* Markenfarbe, aus der Wortmarke */
   --gruen-hell:    #8FA275;   /* auf dunklem Grund */
 
+  /* ── Raster ──────────────────────────────────────────────────────
+     Eine einzige linke Textkante auf der ganzen Seite. Vorher gab es
+     drei (0, 86 und 340 px bei 1440 px Fenster): beim Scrollen rueckte
+     die Kante zweimal um 254 px nach rechts und wieder zurueck. Das
+     Auge sucht eine senkrechte Linie und fand keine.                  */
+
+  --rand:   24px;     /* Handy */
+  --spalte: 1180px;   /* Inhaltsbreite, maximal */
+  --lese:   720px;    /* Fliesstext, maximal */
+
+  /* ── Abstandsskala ───────────────────────────────────────────────
+     Nur diese Werte, keine Zwischenstufen. Wer einen anderen Abstand
+     braucht, braucht in Wahrheit einen anderen Inhalt.               */
+
+  --luft-1:  8px;
+  --luft-2: 16px;
+  --luft-3: 24px;
+  --luft-4: 40px;
+  --luft-5: 64px;
+  --luft-6: 96px;    /* Abschnittsabstand */
+  --luft-7: 144px;
+
+  /* Abstand unter der fest stehenden Kopfzeile. Eigener Wert, weil er
+     nicht Abschnittsabstand ist, sondern Platz fuer die Navigation. */
+  --kopf-luft: 144px;
+
   /* ── Schrift ─────────────────────────────────────────────────────
      Drei Stufen fuer Ueberschriften, zwei fuer Text. Mehr nicht.
      Cormorant erst ab 40 px, darunter werden die Striche grau.       */
@@ -39,15 +65,13 @@
 
   --zeile-text: 1.7;
   --zeile-eng:  1.15;
-  --zeilenlaenge: 68ch;
 
-  /* ── Raum und Bewegung ─────────────────────────────────────────── */
-  --rand:     clamp(1.5rem, 6vw, 6rem);
-  --luft:     clamp(5rem, 11vw, 10rem);   /* Abstand zwischen Abschnitten */
-  --luft-eng: clamp(3rem, 6vw, 5rem);
-  --radius:   2px;                         /* wenn Radius, dann klein und ueberall gleich */
-  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+  --radius: 2px;      /* wenn Radius, dann klein und ueberall gleich */
+  --ease:   cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+@media (min-width: 768px)  { :root { --rand: 48px; --kopf-luft: 176px; } }
+@media (min-width: 1280px) { :root { --rand: 80px; } }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -67,14 +91,12 @@ body {
 
 img, video { max-width: 100%; display: block; }
 
-/* Ueberschriften nie trennen */
 h1, h2, h3, h4 {
   hyphens: none;
   overflow-wrap: normal;
   font-weight: 400;
 }
 
-/* Fliesstext darf umbrechen, aber keine Wortmitte zerreissen */
 p, li { overflow-wrap: break-word; }
 
 ::selection { background: var(--gruen); color: #FFFFFF; }
@@ -85,22 +107,53 @@ p, li { overflow-wrap: break-word; }
   border-radius: var(--radius);
 }
 
-/* ── Abschnitte ──────────────────────────────────────────────────── */
+/* ── Die Bahn ────────────────────────────────────────────────────
+   Der einzige Container der Seite. Jeder Abschnitt benutzt ihn,
+   dadurch beginnt jeder Text an derselben Kante.                   */
 
-.abschnitt {
-  padding: var(--luft) var(--rand);
+.bahn {
+  width: 100%;
+  max-width: var(--spalte);
+  margin-inline: auto;
+  padding-inline: var(--rand);
 }
-.abschnitt-eng {
-  padding: var(--luft-eng) var(--rand);
+
+/* Schmale Textblöcke werden LINKS BEGRENZT, nicht zentriert. So
+   beginnen Ablauf und Fragen an derselben Kante wie alles andere,
+   sie hoeren nur frueher auf.
+
+   Wichtig: .lesebreite darf die Bahn selbst nicht schmaler machen.
+   Sonst zentriert deren margin-inline:auto die schmale Breite, und
+   die Kante springt wieder nach rechts (gemessen: von 130 auf 360).
+   Die Bahn bleibt breit, nur ihr Inhalt wird begrenzt.              */
+.lesebreite { max-width: var(--lese); }
+
+.bahn.lesebreite     { max-width: var(--spalte); }
+.bahn.lesebreite > * { max-width: var(--lese); }
+
+/* Wenn ein schmaler Block doch mittig stehen soll (Abschluss-Aufruf),
+   dann mittig im Text, aber weiterhin an der Bahn ausgerichtet.     */
+.mittig { text-align: center; }
+
+/* ── Abschnitte ──────────────────────────────────────────────────
+   Ein Abstandswert fuer alle. Vorher: 158,4 px oben und unten, also
+   316 px an jeder Nahtstelle. Ueber elf Abschnitte rund 3.500 px
+   Leerraum, dreieinhalb Bildschirme.                                */
+
+.abschnitt { padding-block: var(--luft-6); }
+
+/* Erster Abschnitt einer Unterseite: mehr Luft oben, weil die Kopfzeile
+   fest ueber dem Inhalt steht. */
+.abschnitt-kopf { padding-top: var(--kopf-luft); padding-bottom: var(--luft-6); }
+
+@media (max-width: 767px) {
+  .abschnitt { padding-block: var(--luft-5); }
+  .abschnitt-kopf { padding-bottom: var(--luft-5); }
 }
 
-/* Der Hell-Dunkel-Wechsel ist das Gestaltungsprinzip der Seite. */
-.hell  { background: var(--papier);   color: var(--tinte); }
-.hell-2{ background: var(--papier-2); color: var(--tinte); }
-.dunkel{ background: var(--leinwand); color: var(--auf-dunkel); }
-
-.mitte   { max-width: 1320px; margin: 0 auto; }
-.mitte-schmal { max-width: 760px; margin: 0 auto; }
+.hell   { background: var(--papier);   color: var(--tinte); }
+.hell-2 { background: var(--papier-2); color: var(--tinte); }
+.dunkel { background: var(--leinwand); color: var(--auf-dunkel); }
 
 /* ── Typografie-Bausteine ────────────────────────────────────────── */
 
@@ -131,17 +184,16 @@ p, li { overflow-wrap: break-word; }
 .t-text {
   font-size: var(--schrift-text);
   line-height: var(--zeile-text);
-  max-width: var(--zeilenlaenge);
+  max-width: var(--lese);
 }
 
 .t-fein {
   font-size: var(--schrift-fein);
   line-height: 1.65;
   color: var(--grau-2);
-  max-width: var(--zeilenlaenge);
+  max-width: var(--lese);
 }
 
-/* Kleines Label. Der einzige Ort, an dem noch gesperrt wird. */
 .t-label {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.75rem;
@@ -152,10 +204,18 @@ p, li { overflow-wrap: break-word; }
 }
 .dunkel .t-label { color: var(--grau-dunkel); }
 
-.t-grau   { color: var(--grau-2); }
+.t-grau { color: var(--grau-2); }
 .dunkel .t-grau { color: var(--grau-dunkel); }
-.t-gruen  { color: var(--gruen); }
+.t-gruen { color: var(--gruen); }
 .dunkel .t-gruen { color: var(--gruen-hell); }
+
+/* Abstaende innerhalb der Abschnitte, nur aus der Skala */
+.ab-1 { margin-bottom: var(--luft-1); }
+.ab-2 { margin-bottom: var(--luft-2); }
+.ab-3 { margin-bottom: var(--luft-3); }
+.ab-4 { margin-bottom: var(--luft-4); }
+.ab-5 { margin-bottom: var(--luft-5); }
+.ab-6 { margin-bottom: var(--luft-6); }
 
 /* ── Knoepfe ─────────────────────────────────────────────────────── */
 
@@ -177,7 +237,6 @@ p, li { overflow-wrap: break-word; }
               border-color 220ms var(--ease);
 }
 
-/* Der eine Handlungsaufruf pro Bildschirm. Hier darf das Gruen hin. */
 .knopf-voll {
   background: var(--gruen);
   color: #FFFFFF;
@@ -202,7 +261,6 @@ p, li { overflow-wrap: break-word; }
   border-color: var(--auf-dunkel);
 }
 
-/* Textlink mit Unterlinie, die beim Zeigen mitgeht */
 .link-fein {
   color: inherit;
   text-decoration: none;
@@ -211,6 +269,8 @@ p, li { overflow-wrap: break-word; }
   transition: border-color 220ms var(--ease);
 }
 .link-fein:hover { border-bottom-color: currentColor; }
+
+.dunkel .link-fein { border-bottom-color: rgba(244, 244, 242, 0.25); }
 
 /* ── Formular ────────────────────────────────────────────────────── */
 
@@ -256,12 +316,11 @@ textarea.feld {
   font-size: var(--schrift-fein);
   font-weight: 500;
   color: var(--tinte);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--luft-1);
 }
 
 /* Meldung ohne Rot. Traegt ihre Bedeutung ueber Symbol, Fettung und
-   Kasten, nicht ueber Farbe — sonst geht sie bei Farbenblindheit
-   vollstaendig verloren. */
+   Kasten, nicht ueber Farbe. */
 .meldung {
   display: flex;
   align-items: flex-start;
@@ -278,41 +337,105 @@ textarea.feld {
   line-height: 1.6;
 }
 
-/* ── Raster ──────────────────────────────────────────────────────── */
+.formular-felder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--luft-4);
+}
+
+/* ── Raster innerhalb der Abschnitte ─────────────────────────────── */
 
 .galerie-raster {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: var(--luft-1);
 }
 
 .filme-raster {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  gap: var(--luft-4);
 }
 
 .zwei-spalten {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
+  gap: var(--luft-5);
 }
 
-/* Ablauf: grosse Ziffer links, Text rechts, viel Luft */
+.vertrauen-raster {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--luft-4);
+}
+
+.stimmen-raster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--luft-5);
+  align-items: stretch;
+}
+
+.fuss-raster {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--luft-5);
+}
+
+.fuss-leiste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--luft-2);
+  flex-wrap: wrap;
+}
+
+.anfrage-raster {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: var(--luft-6);
+  align-items: start;
+}
+.anfrage-links { position: sticky; top: 120px; }
+
+/* Ablauf: grosse Ziffer links, Text rechts */
 .schritt {
   display: grid;
-  grid-template-columns: 5.5rem 1fr;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  padding: clamp(2rem, 4vw, 3rem) 0;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--luft-4);
+  padding-block: var(--luft-3);
   border-top: 1px solid var(--linie);
   align-items: start;
 }
 .schritt-ziffer {
   font-family: var(--font-cormorant), Georgia, serif;
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   font-weight: 300;
   line-height: 1;
   color: var(--grau-3);
+}
+
+.liste-haken {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--luft-2);
+}
+.liste-haken li {
+  display: flex;
+  gap: var(--luft-2);
+  align-items: flex-start;
+  font-size: var(--schrift-fein);
+  color: var(--grau-2);
+  line-height: 1.6;
+}
+.liste-haken svg { flex-shrink: 0; margin-top: 4px; }
+
+/* Bild wandert beim Zeigen leicht heran. Nur am Rechner. */
+@media (hover: hover) {
+  .filmkachel:hover .filmkachel-bild,
+  .galerie-kachel:hover .galerie-bild { transform: scale(1.03); }
+  .filmkachel:hover .filmkachel-knopf { background: rgba(104,120,80,0.85); }
 }
 
 /* ── Lenis (weiches Scrollen) ────────────────────────────────────── */
@@ -327,73 +450,30 @@ html.lenis, html.lenis body { height: auto; }
    "&gt;", was in einem <style> nicht zurueckuebersetzt wird: die
    Regel wird ungueltig und die Seite hydriert fehlerhaft.          */
 
-@media (max-width: 900px) {
-  .zwei-spalten { grid-template-columns: 1fr; }
-  .filme-raster { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 760px) {
-  .galerie-raster { grid-template-columns: repeat(2, 1fr); gap: 4px; }
-  .schritt { grid-template-columns: 3rem 1fr; gap: 1.25rem; }
-  .schritt-ziffer { font-size: 1.85rem; }
-}
-
-@media (max-width: 480px) {
-  .galerie-raster { grid-template-columns: 1fr; }
-}
-
-
-/* ── Raster, die erst durch die Komponenten dazukamen ─────────────── */
-
-.vertrauen-raster {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1.5rem, 3vw, 3rem);
-}
-
-.stimmen-raster {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: stretch;
-}
-
-.fuss-raster {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
-}
-
-.fuss-leiste {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-/* Bild wandert beim Zeigen leicht heran. Nur am Rechner, auf dem Handy
-   gibt es kein Zeigen. */
-@media (hover: hover) {
-  .filmkachel:hover .filmkachel-bild,
-  .galerie-kachel:hover .galerie-bild { transform: scale(1.03); }
-  .filmkachel:hover .filmkachel-knopf { background: rgba(104,120,80,0.85); }
-}
-
-/* Kopfzeile: ab hier Menueschalter statt Linkleiste */
 @media (max-width: 1024px) {
   .nav-telefon { display: none !important; }
 }
+
+@media (max-width: 900px) {
+  .zwei-spalten     { grid-template-columns: 1fr; gap: var(--luft-4); }
+  .filme-raster     { grid-template-columns: 1fr; }
+  .vertrauen-raster { grid-template-columns: repeat(2, 1fr); }
+  .stimmen-raster   { grid-template-columns: 1fr; gap: var(--luft-5); }
+  .fuss-raster      { grid-template-columns: 1fr 1fr; }
+  .fuss-raster > *:first-child { grid-column: 1 / -1; }
+  .anfrage-raster   { grid-template-columns: 1fr; gap: var(--luft-5); }
+  .anfrage-links    { position: static; }
+}
+
 @media (max-width: 860px) {
-  .nav-links { display: none !important; }
+  .nav-links    { display: none !important; }
   .nav-schalter { display: block !important; }
 }
 
-@media (max-width: 900px) {
-  .vertrauen-raster { grid-template-columns: repeat(2, 1fr); }
-  .stimmen-raster   { grid-template-columns: 1fr; }
-  .fuss-raster      { grid-template-columns: 1fr 1fr; }
-  .fuss-raster > *:first-child { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .galerie-raster  { grid-template-columns: repeat(2, 1fr); }
+  .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
+  .schritt-ziffer  { font-size: 1.75rem; }
 }
 
 @media (max-width: 560px) {
@@ -402,18 +482,8 @@ html.lenis, html.lenis body { height: auto; }
   .fuss-leiste      { flex-direction: column; align-items: flex-start; }
 }
 
-
-.anfrage-raster {
-  display: grid;
-  grid-template-columns: 42% 1fr;
-  gap: clamp(3rem, 7vw, 8rem);
-  align-items: start;
-}
-.anfrage-links { position: sticky; top: 120px; }
-
-@media (max-width: 900px) {
-  .anfrage-raster { grid-template-columns: 1fr; gap: 3rem; }
-  .anfrage-links  { position: static; }
+@media (max-width: 480px) {
+  .galerie-raster { grid-template-columns: 1fr; }
 }
 
 /* ── Bewegung nur, wenn erwuenscht ───────────────────────────────── */

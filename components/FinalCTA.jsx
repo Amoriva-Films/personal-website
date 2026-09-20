@@ -7,12 +7,12 @@ export default function FinalCTA() {
   return (
     <section id="anfrage" className="abschnitt dunkel">
       <FadeIn>
-        <div className="mitte-schmal" style={{ textAlign: 'center' }}>
-          <p className="t-label" style={{ marginBottom: '1.5rem' }}>Anfrage stellen</p>
-          <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)', marginBottom: '1.5rem' }}>
+        <div className="bahn lesebreite">
+          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Anfrage stellen</p>
+          <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)' }}>
             Euer Tag verdient mehr als schöne Bilder.
           </h2>
-          <p className="t-text" style={{ color: 'var(--grau-dunkel)', margin: '0 auto 2.75rem' }}>
+          <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginBottom: 'var(--luft-4)' }}>
             Schreibt uns kurz, erzählt uns von eurem Tag und wir schauen ob
             wir zueinander passen. Kein Druck, kein Verkaufsgespräch.
           </p>
@@ -21,8 +21,8 @@ export default function FinalCTA() {
           <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>
 
           <div style={{
-            display: 'flex', gap: '2rem', justifyContent: 'center',
-            flexWrap: 'wrap', marginTop: '2.25rem',
+            display: 'flex', gap: 'var(--luft-4)', justifyContent: 'center',
+            flexWrap: 'wrap', marginTop: 'var(--luft-4)',
           }}>
             <a href="mailto:booking@amoriva-films.de" style={{
               fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)',

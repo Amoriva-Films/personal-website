@@ -11,52 +11,22 @@ const sans  = "var(--font-inter), system-ui, sans-serif";
 export default function Impressum() {
   return (
     <>
-      {/* Header */}
-      <div style={{
-        background: 'var(--leinwand)',
-        padding: '140px 8% 80px',
-        textAlign: 'center',
-      }}>
-        <p style={{
-          fontFamily: sans,
-          fontSize: '0.66rem',
-          fontWeight: 300,
-          letterSpacing: '0.30em',
-          textTransform: 'uppercase',
-          color: 'var(--grau-dunkel)',
-          marginBottom: '1.6rem',
-        }}>
-          Rechtliches
-        </p>
-        <h1 style={{
-          fontFamily: serif,
-          fontSize: 'clamp(36px, 5vw, 68px)',
-          fontWeight: 300,
-          color: 'var(--auf-dunkel)',
-          lineHeight: 1.05,
-          letterSpacing: '-0.02em',
-        }}>
-          Impressum
-        </h1>
-        <p style={{
-          fontFamily: sans,
-          fontSize: '0.9rem',
-          fontWeight: 300,
-          lineHeight: 1.7,
-          color: 'var(--grau-dunkel)',
-          marginTop: '1rem',
-        }}>
-          Angaben gemäß § 5 DDG
-        </p>
-      </div>
+      {/* Kopf */}
+      <section className="abschnitt-kopf dunkel">
+        <div className="bahn">
+          <p className="t-label ab-3">Rechtliches</p>
+          <h1 className="t-display" style={{ color: 'var(--auf-dunkel)' }}>
+            Impressum
+          </h1>
+          <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginTop: 'var(--luft-3)' }}>
+            Angaben gemäß § 5 DDG
+          </p>
+        </div>
+      </section>
 
-      {/* Content */}
-      <div style={{
-        maxWidth: '760px',
-        margin: '0 auto',
-        padding: '80px 8% 120px',
-        background: 'var(--papier)',
-      }}>
+      {/* Inhalt */}
+      <section className="abschnitt hell">
+        <div className="bahn lesebreite">
 
         <Section title="Angaben gemäß § 5 DDG">
           <p><strong>Amoriva Films</strong></p>
@@ -119,7 +89,7 @@ export default function Impressum() {
 
         <Divider />
 
-        <div style={{ marginTop: '3rem' }}>
+        <div style={{ marginTop: 'var(--luft-5)' }}>
           <Link href="/" style={{
             fontFamily: sans,
             fontSize: '0.72rem',
@@ -131,8 +101,9 @@ export default function Impressum() {
           }}>
             ← Zurück zur Startseite
           </Link>
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
@@ -143,19 +114,19 @@ const linkStyle = {
 };
 
 function Divider() {
-  return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', margin: '2.8rem 0' }} />;
+  return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', marginBlock: 'var(--luft-5)' }} />;
 }
 
 function Section({ title, children }) {
   return (
-    <div style={{ marginBottom: '1.6rem' }}>
+    <div style={{ marginBottom: 'var(--luft-3)' }}>
       <h2 style={{
         fontFamily: "var(--font-cormorant), Georgia, serif",
         fontSize: '1.4rem',
         fontWeight: 300,
         color: 'var(--tinte)',
-        marginBottom: '0.9rem',
-        marginTop: '2.4rem',
+        marginBottom: 'var(--luft-2)',
+        marginTop: 'var(--luft-4)',
       }}>
         {title}
       </h2>
@@ -167,7 +138,7 @@ function Section({ title, children }) {
         fontWeight: 300,
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.4rem',
+        gap: 'var(--luft-1)',
       }}>
         {children}
       </div>

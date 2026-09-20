@@ -24,24 +24,21 @@ const punkte = [
 export default function TrustBadges() {
   return (
     <FadeIn>
-      {/* Keine Pillen mehr mit Rahmen und Radius. Vier Spalten, nur durch
-          Raum getrennt, oben und unten eine feine Linie. */}
-      <section className="abschnitt-eng hell" style={{
-        borderTop: '1px solid var(--linie)',
-        borderBottom: '1px solid var(--linie)',
-      }}>
-        <div className="mitte vertrauen-raster">
+      {/* Kein eigener Abschnitt mehr: die vier Punkte gehoeren zu
+          "Unsere Arbeit" und stehen in deren Bahn. Das spart eine
+          Nahtstelle und liest sich als ein Gedanke. */}
+      <div className="vertrauen-raster" style={{ marginTop: 'var(--luft-6)' }}>
           {punkte.map((p, i) => (
             <div key={i}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                    stroke="var(--gruen)" strokeWidth="1.4" strokeLinecap="round"
                    strokeLinejoin="round" aria-hidden="true"
-                   style={{ marginBottom: '0.9rem' }}>
+                   style={{ marginBottom: 'var(--luft-2)' }}>
                 {p.icon}
               </svg>
               <p style={{
                 fontSize: 'var(--schrift-fein)', fontWeight: 500,
-                color: 'var(--tinte)', lineHeight: 1.4, marginBottom: '0.25rem',
+                color: 'var(--tinte)', lineHeight: 1.4, marginBottom: 'var(--luft-1)',
               }}>
                 {p.label}
               </p>
@@ -50,8 +47,7 @@ export default function TrustBadges() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
+      </div>
     </FadeIn>
   );
 }

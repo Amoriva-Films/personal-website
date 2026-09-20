@@ -130,10 +130,10 @@ export function Filmkachel({ film, gross = false }) {
           )}
         </button>
 
-        <div style={{ marginTop: '1rem' }}>
+        <div style={{ marginTop: 'var(--luft-2)' }}>
           <p className="t-klein" style={{ color: 'var(--auf-dunkel)' }}>{film.paar}</p>
           {film.ort && (
-            <p style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)', marginTop: 'var(--luft-1)' }}>
               {film.ort}
             </p>
           )}
@@ -150,15 +150,15 @@ export function KeineFilme({ knapp = false }) {
     <div style={{
       border: '1px solid rgba(244,244,242,0.14)',
       borderRadius: 'var(--radius)',
-      padding: knapp ? 'clamp(2.5rem, 6vw, 4rem)' : 'clamp(3.5rem, 9vw, 7rem)',
+      padding: knapp ? 'var(--luft-5)' : 'var(--luft-6)',
       textAlign: 'center',
     }}>
-      <p className="t-klein" style={{ color: 'var(--auf-dunkel)', marginBottom: '0.75rem' }}>
+      <p className="t-klein" style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-1)' }}>
         Die Filme kommen in Kürze
       </p>
       <p style={{
         fontSize: 'var(--schrift-text)', color: 'var(--grau-dunkel)',
-        maxWidth: '46ch', margin: '0 auto', lineHeight: 1.7,
+        maxWidth: '46ch', margin: 0, lineHeight: 1.7,
       }}>
         Wir stellen gerade eine Auswahl unserer Arbeiten zusammen. Wenn ihr
         vorher etwas sehen wollt, schreibt uns kurz. Wir schicken euch gerne

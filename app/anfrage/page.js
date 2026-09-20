@@ -51,21 +51,21 @@ export default function AnfragePage() {
       <Nav />
 
       <main className="hell" style={{ minHeight: '100vh' }}>
-        <section className="abschnitt" style={{ paddingTop: 'clamp(9rem, 16vw, 13rem)' }}>
-          <div className="mitte anfrage-raster">
+        <section className="abschnitt-kopf">
+          <div className="bahn anfrage-raster">
 
             {/* Links: worum es geht */}
             <div className="anfrage-links">
-              <p className="t-label" style={{ marginBottom: '1.5rem' }}>Jetzt anfragen</p>
-              <h1 className="t-display" style={{ marginBottom: '1.75rem' }}>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Jetzt anfragen</p>
+              <h1 className="t-display" style={{ marginBottom: 'var(--luft-3)' }}>
                 Beginnt mit eurer Geschichte.
               </h1>
-              <p className="t-text t-grau" style={{ marginBottom: '2.5rem' }}>
+              <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
                 Jede Nachricht wird persönlich gelesen. Erzählt uns von eurer
                 Hochzeit, eurer Vision und davon, was euer Film und eure Bilder
                 später auslösen sollen.
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                 <a href="mailto:booking@amoriva-films.de" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
                   booking@amoriva-films.de
                 </a>
@@ -79,7 +79,7 @@ export default function AnfragePage() {
             <div>
               {gesendet ? (
                 <div>
-                  <h2 className="t-gross" style={{ marginBottom: '1rem' }}>Vielen Dank.</h2>
+                  <h2 className="t-gross" style={{ marginBottom: 'var(--luft-2)' }}>Vielen Dank.</h2>
                   <p className="t-text t-grau">
                     Eure Nachricht ist angekommen. Nevio meldet sich persönlich,
                     spätestens am nächsten Tag.
@@ -175,14 +175,14 @@ export default function AnfragePage() {
                     {/* Hier werden Name, E-Mail, Telefon, Datum, Ort und
                         Budget erhoben. Der Hinweis gehoert an die Stelle,
                         an der die Daten abgeschickt werden. */}
-                    <p className="t-fein" style={{ marginTop: '1.25rem', fontSize: '0.8125rem' }}>
+                    <p className="t-fein" style={{ marginTop: 'var(--luft-3)', fontSize: '0.8125rem' }}>
                       Mit dem Absenden schickt ihr uns die angegebenen Daten,
                       damit wir eure Anfrage beantworten können. Mehr dazu in
                       unserer{' '}
                       <Link href="/datenschutz" className="link-fein">Datenschutzerklärung</Link>.
                     </p>
 
-                    <p className="t-fein" style={{ marginTop: '0.9rem', fontSize: '0.8125rem' }}>
+                    <p className="t-fein" style={{ marginTop: 'var(--luft-2)', fontSize: '0.8125rem' }}>
                       Ihr bekommt sofort eine kurze Eingangsbestätigung. Die
                       richtige Antwort schreibt Nevio persönlich, in der Regel
                       innerhalb von 24 Stunden.

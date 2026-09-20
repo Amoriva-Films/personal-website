@@ -49,24 +49,26 @@ export default function RatgeberPage() {
       <Nav />
 
       {/* Hero */}
-      <section style={{ background: 'var(--papier)', padding: 'clamp(120px,14vw,180px) 8% clamp(52px,6vw,80px)' }}>
+      <section className="abschnitt-kopf hell">
+        <div className="bahn lesebreite">
         <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gruen, marginBottom: '1.4rem' }}>
+          <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gruen, marginBottom: 'var(--luft-3)' }}>
             Wissen & Tipps
           </span>
-          <h1 style={{ fontFamily: serif, fontSize: 'clamp(36px,5vw,72px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '700px', hyphens: 'none', wordBreak: 'keep-all' }}>
+          <h1 style={{ fontFamily: serif, fontSize: 'clamp(36px,5vw,72px)', fontWeight: 300, lineHeight: 1.05, color: brown, hyphens: 'none', wordBreak: 'keep-all' }}>
             Der Hochzeitsfilm{' '}
             <em style={{ fontStyle: 'italic' }}>Ratgeber.</em>
           </h1>
-          <p style={{ fontFamily: sans, fontSize: 'clamp(14px,1.1vw,16px)', fontWeight: 300, color: soft, maxWidth: '520px', lineHeight: 1.8, marginTop: '1.6rem' }}>
+          <p style={{ fontFamily: sans, fontSize: 'clamp(14px,1.1vw,16px)', fontWeight: 300, color: soft, lineHeight: 1.8, marginTop: 'var(--luft-3)' }}>
             Alles was ihr über Hochzeitsfilme und Fotografie wissen müsst: Kosten, Buchungszeitpunkte, Stile und mehr.
           </p>
         </FadeIn>
+        </div>
       </section>
 
       {/* Articles */}
-      <section style={{ background: 'var(--papier)', padding: '0 8% clamp(80px,10vw,120px)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+      <section className="abschnitt hell" style={{ paddingTop: 0 }}>
+        <div className="bahn" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {articles.map((a, i) => (
             <FadeIn key={i}>
               <Link
@@ -78,12 +80,12 @@ export default function RatgeberPage() {
               >
                 <div>
                   <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: gruen, fontWeight: 300 }}>{a.cat}</span>
-                  <p style={{ fontFamily: sans, fontSize: '11px', color: soft, opacity: 0.5, fontWeight: 300, marginTop: '0.4rem' }}>{a.readTime} Lesezeit</p>
+                  <p style={{ fontFamily: sans, fontSize: '11px', color: soft, opacity: 0.5, fontWeight: 300, marginTop: 'var(--luft-1)' }}>{a.readTime} Lesezeit</p>
                 </div>
                 <div>
-                  <h2 style={{ fontFamily: serif, fontSize: 'clamp(22px,2.4vw,36px)', fontWeight: 300, color: brown, lineHeight: 1.15, marginBottom: '0.8rem', transition: 'opacity 0.3s' }}>{a.title}</h2>
+                  <h2 style={{ fontFamily: serif, fontSize: 'clamp(22px,2.4vw,36px)', fontWeight: 300, color: brown, lineHeight: 1.15, marginBottom: 'var(--luft-1)', transition: 'opacity 0.3s' }}>{a.title}</h2>
                   <p style={{ fontFamily: sans, fontSize: 'clamp(13px,1vw,15px)', fontWeight: 300, color: soft, lineHeight: 1.75, opacity: 0.85 }}>{a.excerpt}</p>
-                  <span style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, display: 'inline-block', marginTop: '1.2rem' }}>Lesen →</span>
+                  <span style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, display: 'inline-block', marginTop: 'var(--luft-2)' }}>Lesen →</span>
                 </div>
               </Link>
             </FadeIn>

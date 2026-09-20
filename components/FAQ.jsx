@@ -34,11 +34,11 @@ export default function FAQ() {
   const [offen, setOffen] = useState(null);
 
   return (
-    <section className="abschnitt hell">
-      <div className="mitte-schmal">
+    <section className="abschnitt hell-2">
+      <div className="bahn lesebreite">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: '1.5rem' }}>Häufige Fragen</p>
-          <h2 className="t-gross" style={{ marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
+          <h2 className="t-gross" style={{ marginBottom: 'var(--luft-5)' }}>
             Was ihr wissen wollt.
           </h2>
         </FadeIn>
@@ -54,9 +54,9 @@ export default function FAQ() {
                       onClick={() => setOffen(auf ? null : i)}
                       aria-expanded={auf}
                       style={{
-                        width: '100%', display: 'flex', gap: '1.5rem',
+                        width: '100%', display: 'flex', gap: 'var(--luft-3)',
                         justifyContent: 'space-between', alignItems: 'center',
-                        padding: '1.5rem 0', background: 'none', border: 'none',
+                        paddingBlock: 'var(--luft-2)', background: 'none', border: 'none',
                         cursor: 'pointer', textAlign: 'left',
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
                         fontSize: 'var(--schrift-klein)', fontWeight: 500,
@@ -85,7 +85,7 @@ export default function FAQ() {
                     </button>
                   </h3>
                   {auf && (
-                    <p className="t-text t-grau" style={{ paddingBottom: '1.75rem' }}>
+                    <p className="t-text t-grau" style={{ paddingBottom: 'var(--luft-2)' }}>
                       {f.antwort}
                     </p>
                   )}

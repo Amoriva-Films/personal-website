@@ -25,11 +25,11 @@ const leute = [
 
 export default function Founders() {
   return (
-    <section id="founders" className="abschnitt hell-2">
-      <div className="mitte">
+    <section id="founders" className="abschnitt hell">
+      <div className="bahn">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: '1.5rem' }}>Wer wir sind</p>
-          <h2 className="t-gross" style={{ maxWidth: '16ch', marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)' }}>
+          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Wer wir sind</p>
+          <h2 className="t-gross" style={{ maxWidth: '16ch', marginBottom: 'var(--luft-5)' }}>
             Zwei Blicke. Eine gemeinsame Haltung.
           </h2>
         </FadeIn>
@@ -40,8 +40,8 @@ export default function Founders() {
               <div>
                 <div style={{
                   position: 'relative', width: '100%',
-                  aspectRatio: '4 / 5', overflow: 'hidden',
-                  marginBottom: '1.75rem', background: 'var(--papier)',
+                  aspectRatio: '3 / 2', overflow: 'hidden',
+                  marginBottom: 'var(--luft-3)', background: 'var(--papier)',
                 }}>
                   <Image
                     src={p.bild}
@@ -51,8 +51,8 @@ export default function Founders() {
                     style={{ objectFit: 'cover', objectPosition: p.position }}
                   />
                 </div>
-                <p className="t-label" style={{ marginBottom: '0.6rem' }}>{p.rolle}</p>
-                <h3 className="t-gross" style={{ marginBottom: '1rem' }}>{p.name}</h3>
+                <p className="t-label" style={{ marginBottom: 'var(--luft-1)' }}>{p.rolle}</p>
+                <h3 className="t-gross" style={{ marginBottom: 'var(--luft-2)' }}>{p.name}</h3>
                 <p className="t-text t-grau">{p.bio}</p>
               </div>
             </FadeIn>

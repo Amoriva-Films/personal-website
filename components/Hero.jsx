@@ -23,7 +23,7 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100svh',
+        height: '82svh',
         minHeight: '560px',
         overflow: 'hidden',
         background: 'var(--leinwand)',
@@ -99,7 +99,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease }}
           className="t-display"
-          style={{ color: 'var(--auf-dunkel)', maxWidth: '16ch', marginBottom: '1.5rem' }}
+          style={{ color: 'var(--auf-dunkel)', maxWidth: '16ch', marginBottom: 'var(--luft-3)' }}
         >
           Euer Tag, wie er sich angefühlt hat.
         </motion.h1>
@@ -113,7 +113,7 @@ export default function Hero() {
             lineHeight: 1.6,
             color: 'rgba(244,244,242,0.82)',
             maxWidth: '44ch',
-            marginBottom: '2.75rem',
+            marginBottom: 'var(--luft-4)',
           }}
         >
           Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.

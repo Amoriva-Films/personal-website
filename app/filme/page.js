@@ -18,13 +18,13 @@ export default function FilmePage() {
       <Nav />
 
       <main className="dunkel" style={{ minHeight: '100vh' }}>
-        <section className="abschnitt" style={{ paddingTop: 'clamp(9rem, 16vw, 14rem)' }}>
-          <div className="mitte">
-            <p className="t-label" style={{ marginBottom: '1.5rem' }}>Unsere Filme</p>
+        <section className="abschnitt-kopf">
+          <div className="bahn">
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Filme</p>
             <h1 className="t-display" style={{ color: 'var(--auf-dunkel)', maxWidth: '14ch' }}>
               Seht selbst.
             </h1>
-            <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginTop: '1.75rem' }}>
+            <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginTop: 'var(--luft-3)' }}>
               Ein Hochzeitsfilm lässt sich nicht beschreiben. Man muss ihn
               sehen. Deshalb steht hier unsere Arbeit und nicht, was wir über
               sie sagen könnten.
@@ -33,7 +33,7 @@ export default function FilmePage() {
         </section>
 
         <section className="abschnitt" style={{ paddingTop: 0 }}>
-          <div className="mitte">
+          <div className="bahn">
             {filme.length === 0 ? (
               <KeineFilme />
             ) : (
@@ -46,14 +46,14 @@ export default function FilmePage() {
           </div>
         </section>
 
-        <section className="abschnitt-eng" style={{
+        <section className="abschnitt" style={{
           borderTop: '1px solid rgba(244,244,242,0.14)',
         }}>
-          <div className="mitte-schmal" style={{ textAlign: 'center' }}>
-            <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)', marginBottom: '1.25rem' }}>
+          <div className="bahn lesebreite">
+            <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)' }}>
               Soll euer Tag der nächste sein?
             </h2>
-            <p className="t-text" style={{ color: 'var(--grau-dunkel)', margin: '0 auto 2.5rem' }}>
+            <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginBottom: 'var(--luft-4)' }}>
               Schreibt uns kurz, erzählt uns von eurem Tag und wir schauen ob
               wir zueinander passen. Kein Druck, kein Verkaufsgespräch.
             </p>

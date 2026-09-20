@@ -14,12 +14,12 @@ export default function ContentSections() {
       {/* ── Ein Film, direkt unter dem Hero ──────────────────────────
           Das ist die Arbeit. Sie kommt vor jedem Text ueber die Arbeit. */}
       <section className="abschnitt dunkel">
-        <div className="mitte">
+        <div className="bahn">
           <FadeIn>
             {startseitenFilm ? (
               <>
                 <Filmkachel film={startseitenFilm} gross />
-                <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+                <div style={{ marginTop: 'var(--luft-4)', textAlign: 'center' }}>
                   <Link href="/filme" className="knopf knopf-linie">Alle Filme ansehen</Link>
                 </div>
               </>
@@ -33,37 +33,36 @@ export default function ContentSections() {
       {/* ── Unsere Arbeit ───────────────────────────────────────────── */}
       <section className="abschnitt hell">
         <FadeIn>
-          <div className="mitte-schmal">
-            <p className="t-label" style={{ marginBottom: '1.75rem' }}>Unsere Arbeit</p>
-            <h2 className="t-gross" style={{ marginBottom: '2rem' }}>
+          <div className="bahn">
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Arbeit</p>
+            <h2 className="t-gross" style={{ marginBottom: 'var(--luft-4)' }}>
               Für einen Tag voller Gefühle, den ihr niemals vergessen wollt.
             </h2>
-            <p className="t-text t-grau" style={{ marginBottom: '1.5rem' }}>
+            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-3)' }}>
               Eure Hochzeit ist mehr als ein Ablauf. Sie ist ein Gefühl. Der
               Moment bevor ihr euch zum ersten Mal seht. Die Hände die sich
               halten. Die Stimmen eurer Liebsten. Das Licht, die Musik, die
               Aufregung und all die kleinen Augenblicke die viel zu schnell
               vorbeigehen.
             </p>
-            <p className="t-text t-grau" style={{ marginBottom: '2.75rem' }}>
+            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
               Mit Fotos und Filmen halten wir genau diese Momente fest.
               Ehrlich, emotional und so dass ihr euch auch Jahre später noch
               mittendrin fühlt.
             </p>
             <Link href="/anfrage" className="knopf knopf-linie">Anfrage stellen</Link>
+            <TrustBadges />
           </div>
         </FadeIn>
       </section>
 
-      <TrustBadges />
-
       {/* ── Bilder ──────────────────────────────────────────────────── */}
       <section className="abschnitt dunkel">
-        <div className="mitte">
+        <div className="bahn">
           <FadeIn>
             <div style={{
               display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-              gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2.5rem',
+              gap: 'var(--luft-3)', flexWrap: 'wrap', marginBottom: 'var(--luft-4)',
             }}>
               <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)' }}>Bilder</h2>
               <Link href="/referenzen" className="t-fein" style={{
@@ -73,7 +72,7 @@ export default function ContentSections() {
                 Zur Galerie
               </Link>
             </div>
-            <Galerie bilder={galerie} grenze={6} />
+            <Galerie bilder={galerie} grenze={3} />
           </FadeIn>
         </div>
       </section>

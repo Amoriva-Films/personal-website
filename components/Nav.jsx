@@ -134,7 +134,7 @@ export default function Nav() {
           background: 'var(--papier)',
           display: 'flex', flexDirection: 'column',
           justifyContent: 'center', alignItems: 'flex-start',
-          gap: '1.5rem', padding: '0 var(--rand)',
+          gap: 'var(--luft-3)', padding: '0 var(--rand)',
         }}>
           {LINKS.map(({ label, href }) => (
             <Link key={label} href={href} onClick={() => setOffen(false)} style={{
@@ -146,7 +146,7 @@ export default function Nav() {
             </Link>
           ))}
           <a href="tel:+4915565559747" onClick={() => setOffen(false)} style={{
-            marginTop: '1.5rem', fontSize: 'var(--schrift-text)',
+            marginTop: 'var(--luft-3)', fontSize: 'var(--schrift-text)',
             color: 'var(--grau-2)', textDecoration: 'none',
           }}>
             {TELEFON}

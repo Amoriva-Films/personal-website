@@ -48,11 +48,11 @@ const services = [
 
 export default function LeistungenSection() {
   return (
-    <section id="leistungen" className="abschnitt hell">
-      <div className="mitte">
+    <section id="leistungen" className="abschnitt hell-2">
+      <div className="bahn">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: '1.5rem' }}>Leistungen</p>
-          <h2 className="t-gross" style={{ maxWidth: '18ch', marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Leistungen</p>
+          <h2 className="t-gross" style={{ maxWidth: '18ch', marginBottom: 'var(--luft-5)' }}>
             Was wir für euch tun können.
           </h2>
         </FadeIn>
@@ -63,19 +63,19 @@ export default function LeistungenSection() {
                 getrennt wird durch eine Linie und durch Raum. */}
             <div className="zwei-spalten" style={{
               borderTop: '1px solid var(--linie)',
-              padding: 'clamp(2.5rem, 5vw, 4rem) 0',
+              paddingBlock: 'var(--luft-4)',
             }}>
               <div>
-                <p className="t-label" style={{ marginBottom: '1rem' }}>{s.nr}</p>
-                <h3 className="t-gross" style={{ marginBottom: '0.5rem' }}>{s.title}</h3>
+                <p className="t-label" style={{ marginBottom: 'var(--luft-2)' }}>{s.nr}</p>
+                <h3 className="t-gross" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
                 <p className="t-fein">{s.subtitle}</p>
               </div>
               <div>
-                <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>{s.description}</p>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>{s.description}</p>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                   {s.includes.map((item, i) => (
                     <li key={i} style={{
-                      display: 'flex', gap: '0.9rem', alignItems: 'flex-start',
+                      display: 'flex', gap: 'var(--luft-1)', alignItems: 'flex-start',
                       fontSize: 'var(--schrift-fein)', color: 'var(--grau-2)', lineHeight: 1.6,
                     }}>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -94,8 +94,8 @@ export default function LeistungenSection() {
         ))}
 
         <FadeIn>
-          <div style={{ paddingTop: 'clamp(2.5rem, 5vw, 4rem)', borderTop: '1px solid var(--linie)' }}>
-            <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>
+          <div style={{ paddingTop: 'var(--luft-4)', borderTop: '1px solid var(--linie)' }}>
+            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
               Jede Hochzeit ist anders. Was zu eurem Tag passt, besprechen wir
               in einem kurzen Gespräch und ihr bekommt ein Angebot, das wirklich
               zu euch passt.

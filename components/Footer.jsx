@@ -29,8 +29,8 @@ const linkStil = {
 export default function Footer() {
   return (
     <footer className="dunkel" style={{ borderTop: '1px solid rgba(244,244,242,0.12)' }}>
-      <div className="abschnitt-eng">
-        <div className="mitte fuss-raster">
+      <div className="abschnitt">
+        <div className="bahn fuss-raster">
           {/* Marke und Kontakt */}
           <div>
             <Image
@@ -39,7 +39,7 @@ export default function Footer() {
               width={LOGO_BREITE}
               height={LOGO_HOEHE}
               sizes={`${LOGO_BREITE}px`}
-              style={{ objectFit: 'contain', marginBottom: '1.75rem' }}
+              style={{ objectFit: 'contain', marginBottom: 'var(--luft-3)' }}
             />
             <p style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)', lineHeight: 1.7 }}>
               Hochzeitsfilm und Fotografie<br />
@@ -49,8 +49,8 @@ export default function Footer() {
 
           {/* Wege durch die Seite */}
           <nav aria-label="Fußzeile">
-            <p className="t-label" style={{ marginBottom: '1.25rem' }}>Seiten</p>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Seiten</p>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
               {wege.map(({ label, href }) => (
                 <li key={label}>
                   <Link href={href} style={linkStil}
@@ -65,8 +65,8 @@ export default function Footer() {
 
           {/* Kontaktwege */}
           <div>
-            <p className="t-label" style={{ marginBottom: '1.25rem' }}>Kontakt</p>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Kontakt</p>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
               <li>
                 <a href="mailto:booking@amoriva-films.de" style={linkStil}
                   onMouseEnter={e => { e.currentTarget.style.color = 'var(--auf-dunkel)'; }}
@@ -97,11 +97,11 @@ export default function Footer() {
         borderTop: '1px solid rgba(244,244,242,0.12)',
         padding: '1.5rem var(--rand)',
       }}>
-        <div className="mitte fuss-leiste">
+        <div className="bahn fuss-leiste">
           <span style={{ fontSize: '0.8125rem', color: 'var(--grau-dunkel)' }}>
             © 2026 Amoriva Films
           </span>
-          <div style={{ display: 'flex', gap: '1.75rem' }}>
+          <div style={{ display: 'flex', gap: 'var(--luft-3)' }}>
             {rechtliches.map(({ label, href }) => (
               <Link key={label} href={href} style={{ ...linkStil, fontSize: '0.8125rem' }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--auf-dunkel)'; }}

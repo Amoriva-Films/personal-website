@@ -72,13 +72,13 @@ export default function AngebotePage() {
       <Nav />
 
       <main className="hell" style={{ minHeight: '100vh' }}>
-        <section className="abschnitt" style={{ paddingTop: 'clamp(9rem, 16vw, 13rem)' }}>
-          <div className="mitte-schmal">
-            <p className="t-label" style={{ marginBottom: '1.5rem' }}>Unsere Leistungen</p>
-            <h1 className="t-display" style={{ marginBottom: '1.75rem' }}>
+        <section className="abschnitt-kopf">
+          <div className="bahn">
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Leistungen</p>
+            <h1 className="t-display" style={{ marginBottom: 'var(--luft-3)' }}>
               Kein Angebot ist wie das andere.
             </h1>
-            <p className="t-text t-grau" style={{ marginBottom: '1.25rem' }}>
+            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-3)' }}>
               Jede Hochzeit ist einzigartig. Deshalb erstellen wir für jedes
               Paar ein Angebot das wirklich zu ihrem Tag passt. Nicht mehr,
               nicht weniger.
@@ -91,23 +91,23 @@ export default function AngebotePage() {
         </section>
 
         <section className="abschnitt" style={{ paddingTop: 0 }}>
-          <div className="mitte">
+          <div className="bahn">
             {leistungen.map((l) => (
               <div key={l.nummer} className="zwei-spalten" style={{
                 borderTop: '1px solid var(--linie)',
-                padding: 'clamp(2.5rem, 5vw, 4rem) 0',
+                paddingBlock: 'var(--luft-5)',
               }}>
                 <div>
-                  <p className="t-label" style={{ marginBottom: '1rem' }}>{l.nummer}</p>
-                  <h2 className="t-gross" style={{ marginBottom: '0.5rem' }}>{l.name}</h2>
+                  <p className="t-label" style={{ marginBottom: 'var(--luft-2)' }}>{l.nummer}</p>
+                  <h2 className="t-gross" style={{ marginBottom: 'var(--luft-1)' }}>{l.name}</h2>
                   <p className="t-fein">{l.subline}</p>
                 </div>
                 <div>
-                  <p className="t-text t-grau" style={{ marginBottom: '2rem' }}>{l.beschreibung}</p>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>{l.beschreibung}</p>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                     {l.enthalten.map((e, i) => (
                       <li key={i} style={{
-                        display: 'flex', gap: '0.9rem', alignItems: 'flex-start',
+                        display: 'flex', gap: 'var(--luft-1)', alignItems: 'flex-start',
                         fontSize: 'var(--schrift-fein)', color: 'var(--grau-2)', lineHeight: 1.6,
                       }}>
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -127,9 +127,9 @@ export default function AngebotePage() {
         </section>
 
         <section className="abschnitt hell-2">
-          <div className="mitte-schmal">
-            <p className="t-label" style={{ marginBottom: '1.5rem' }}>Wie bekommt ihr euer Angebot?</p>
-            <h2 className="t-gross" style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+          <div className="bahn">
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Wie bekommt ihr euer Angebot?</p>
+            <h2 className="t-gross" style={{ marginBottom: 'var(--luft-4)' }}>
               Einfach. Persönlich. Unverbindlich.
             </h2>
             <ol style={{ listStyle: 'none', marginBottom: '3rem' }}>

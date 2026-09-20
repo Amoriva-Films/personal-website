@@ -25,9 +25,9 @@ const stimmen = [
 export default function Testimonials() {
   return (
     <section className="abschnitt hell">
-      <div className="mitte">
+      <div className="bahn">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <p className="t-label" style={{ marginBottom: 'var(--luft-5)' }}>
             Das sagen unsere Paare
           </p>
         </FadeIn>
@@ -38,7 +38,7 @@ export default function Testimonials() {
               {/* Kein Kasten, kein Rahmen, kein Schatten. Nur Zitat,
                   feine Linie, Name. */}
               <figure style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <blockquote style={{ flex: 1, marginBottom: '2rem' }}>
+                <blockquote style={{ flex: 1, marginBottom: 'var(--luft-4)' }}>
                   <p style={{
                     fontFamily: 'var(--font-cormorant), Georgia, serif',
                     fontSize: '1.5rem', fontWeight: 300, fontStyle: 'italic',
@@ -47,7 +47,7 @@ export default function Testimonials() {
                     {t.quote}
                   </p>
                 </blockquote>
-                <figcaption style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                <figcaption style={{ display: 'flex', alignItems: 'center', gap: 'var(--luft-2)' }}>
                   <span
                     aria-hidden="true"
                     style={{
