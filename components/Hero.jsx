@@ -125,8 +125,10 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.24, duration: 0.9, ease }}
         >
-          <Link href="/filme" className="knopf knopf-voll">
-            Filme ansehen
+          {/* Zeigte auf /filme. Solange es dort nichts zu sehen gibt,
+              fuehrt der einzige Knopf des Hero auf die Bilder. */}
+          <Link href="/referenzen" className="knopf knopf-voll">
+            Bilder ansehen
           </Link>
         </motion.div>
       </div>

@@ -20,8 +20,9 @@ export default function sitemap() {
 
   return [
     eintrag('', 1),
-    // Filme sind das Wichtigste, was die Seite zeigt.
-    eintrag('filme', 0.95),
+    // Filme sind das Wichtigste, was die Seite zeigt - deshalb meldet
+    // sie sich erst bei Google an, wenn dort auch Filme liegen.
+    // eintrag('filme', 0.95),
     eintrag('angebote', 0.9),
     eintrag('leistungen', 0.8),
     eintrag('referenzen', 0.9),

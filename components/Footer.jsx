@@ -7,7 +7,7 @@ const LOGO_HOEHE = 40;
 const LOGO_BREITE = Math.round(LOGO_HOEHE * 1116 / 427);
 
 const wege = [
-  { label: 'Filme',      href: '/filme'       },
+  // { label: 'Filme', href: '/filme' },   // wieder rein, sobald es Filme gibt
   { label: 'Galerie',    href: '/referenzen'     },
   { label: 'Leistungen', href: '/#leistungen' },
   { label: 'Über uns',   href: '/#founders'   },

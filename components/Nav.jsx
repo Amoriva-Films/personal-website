@@ -7,7 +7,7 @@ import Image from 'next/image';
 // Filme stehen an erster Stelle. Wer einen Hochzeitsfilmer sucht,
 // will Filme sehen, nicht Leistungen lesen.
 const LINKS = [
-  { label: 'Filme',      href: '/filme'        },
+  // { label: 'Filme', href: '/filme' },   // wieder rein, sobald es Filme gibt
   { label: 'Galerie',    href: '/referenzen'      },
   { label: 'Leistungen', href: '/#leistungen'  },
   { label: 'Über uns',   href: '/#founders'    },

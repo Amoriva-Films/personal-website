@@ -4,15 +4,25 @@ import Link from 'next/link';
 import FadeIn from './FadeIn';
 import Galerie from './Galerie';
 import TrustBadges from './TrustBadges';
-import { Filmkachel, KeineFilme } from './Filmspieler';
+// import { Filmkachel, KeineFilme } from './Filmspieler';   // s. u., ausgehaengt
 import { galerie } from '@/data/galerie';
-import { startseitenFilm } from '@/data/filme';
+// import { startseitenFilm } from '@/data/filme';           // s. u., ausgehaengt
 
 export default function ContentSections() {
   return (
     <>
       {/* ── Ein Film, direkt unter dem Hero ──────────────────────────
-          Das ist die Arbeit. Sie kommt vor jedem Text ueber die Arbeit. */}
+          AUSGEHAENGT, bis es Filme zu zeigen gibt (Nevio, 20.09.2026).
+          Ein Abschnitt, der nur sagt "hier kommen bald Filme", kostet
+          Vertrauen statt es aufzubauen.
+
+          Wieder einhaengen: diesen Block entkommentieren, die Importe
+          fuer Filmkachel/KeineFilme/startseitenFilm oben wieder
+          aktivieren, den Link "Filme" in Nav.jsx und Footer.jsx wieder
+          eintragen, den Hero-Knopf auf /filme zurueckstellen und
+          'filme' wieder in app/sitemap.js aufnehmen. Die Filme selbst
+          kommen in data/filme.js, dort steht die Anleitung.
+
       <section className="abschnitt dunkel">
         <div className="bahn">
           <FadeIn>
@@ -29,6 +39,7 @@ export default function ContentSections() {
           </FadeIn>
         </div>
       </section>
+      */}
 
       {/* ── Unsere Arbeit ───────────────────────────────────────────── */}
       <section className="abschnitt hell">
