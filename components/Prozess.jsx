@@ -13,25 +13,36 @@ const schritte = [
 export default function Prozess() {
   return (
     <section className="abschnitt hell">
-      <div className="bahn lesebreite">
+      <div className="bahn">
+        {/* Kopf als Paar: links die Ueberschrift, rechts der Satz, der
+            die Sorge nimmt. Genau dieses Paar traegt auf amoriva.app
+            die halbe Startseite.                                      */}
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>So funktioniert es</p>
-          <h2 className="t-gross" style={{ marginBottom: 'var(--luft-5)' }}>
-            Von der ersten Nachricht bis zu eurem Film.
-          </h2>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>So funktioniert es</p>
+              <h2 className="t-gross">
+                Von der ersten Nachricht bis zu <span className="kursiv">eurem Film.</span>
+              </h2>
+            </div>
+            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
+              Kein Verkaufsgespräch, keine Vertragsfalle, keine Technikvorträge.
+              Fünf Schritte, die ihr von Anfang an überblickt.
+            </p>
+          </div>
         </FadeIn>
 
-        {/* Untereinander statt in fuenf engen Spalten. Die Ziffer steht
-            links, der Text rechts, dazwischen Luft. */}
-        <div>
+        {/* Die Schritte standen als lange Liste untereinander und zogen
+            den Abschnitt in die Laenge. Jetzt Kacheln nebeneinander mit
+            grosser, heller Ziffer - das Muster der Schritt-Kacheln von
+            amoriva.app.                                               */}
+        <div className="schritt-raster">
           {schritte.map((s) => (
             <FadeIn key={s.nummer}>
-              <div className="schritt">
+              <div className="kachel kachel-heb" style={{ height: '100%' }}>
                 <span className="schritt-ziffer" aria-hidden="true">{s.nummer}</span>
-                <div>
-                  <h3 className="t-klein" style={{ marginBottom: 'var(--luft-1)' }}>{s.titel}</h3>
-                  <p className="t-text t-grau">{s.text}</p>
-                </div>
+                <h3 className="t-klein" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.titel}</h3>
+                <p className="t-fein">{s.text}</p>
               </div>
             </FadeIn>
           ))}

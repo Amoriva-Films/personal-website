@@ -71,7 +71,8 @@ export default function Hero() {
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(14,14,13,0.60) 0%, rgba(14,14,13,0.26) 30%, rgba(14,14,13,0.28) 60%, rgba(14,14,13,0.76) 100%)',
+            'linear-gradient(to bottom, rgba(14,14,13,0.58) 0%, rgba(14,14,13,0.24) 30%, rgba(14,14,13,0.30) 60%, rgba(14,14,13,0.78) 100%), '
+            + 'linear-gradient(to right, rgba(14,14,13,0.55) 0%, rgba(14,14,13,0.18) 46%, transparent 72%)',
         }}
       />
       <div
@@ -79,58 +80,84 @@ export default function Hero() {
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'radial-gradient(ellipse 82% 56% at 50% 48%, rgba(14,14,13,0.72) 0%, rgba(14,14,13,0.60) 45%, rgba(14,14,13,0.20) 78%, transparent 100%)',
+            // Der Schleier sass mittig, solange der Titel mittig stand. Jetzt
+            // steht der Titel links, also liegt auch der dunkelste Punkt
+            // links - sonst schuetzt die Abdunklung leeres Bild und laesst
+            // die Schrift ungeschuetzt.
+            'radial-gradient(ellipse 70% 78% at 26% 50%, rgba(14,14,13,0.80) 0%, rgba(14,14,13,0.62) 42%, rgba(14,14,13,0.18) 76%, transparent 100%)',
         }}
       />
 
+      {/* Der Titel stand mittig, wie auf jeder zweiten Hochzeitsseite.
+          Jetzt steht er links auf derselben Kante wie alles darunter -
+          die senkrechte Linie beginnt schon im ersten Bild und laeuft
+          durch bis zur Fusszeile. Der Schnitt ist von amoriva.app. */}
       <div
         style={{
           position: 'absolute', inset: 0, zIndex: 2,
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center',
-          textAlign: 'center',
-          padding: '0 var(--rand)',
+          display: 'flex', alignItems: 'center',
         }}
       >
-        {/* Der Name steht oben links als Wortmarke. Hier steht deshalb das,
-            was ein Paar bekommt, nicht noch einmal der Name. */}
-        <motion.h1
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease }}
-          className="t-display"
-          style={{ color: 'var(--auf-dunkel)', maxWidth: '16ch', marginBottom: 'var(--luft-3)' }}
-        >
-          Euer Tag, wie er sich angefühlt hat.
-        </motion.h1>
+        <div className="bahn" style={{ width: '100%' }}>
+          {/* Breite in Pixeln, nicht in ch: ch rechnet auf der Schriftgroesse
+              DIESES Kastens (17 px), nicht auf der der Ueberschrift. Mit
+              15ch stand hier ein Wort pro Zeile.                        */}
+          <div style={{ maxWidth: 'min(640px, 58%)' }}>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.05, duration: 0.8, ease }}
+              className="t-label"
+              style={{ color: 'rgba(244,244,242,0.62)', marginBottom: 'var(--luft-3)' }}
+            >
+              Hochzeitsfilm &amp; Fotografie
+            </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, duration: 0.9, ease }}
-          style={{
-            fontSize: 'var(--schrift-text)',
-            lineHeight: 1.6,
-            color: 'rgba(244,244,242,0.82)',
-            maxWidth: '44ch',
-            marginBottom: 'var(--luft-4)',
-          }}
-        >
-          Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
-        </motion.p>
+            {/* Der Name steht oben links als Wortmarke. Hier steht deshalb das,
+                was ein Paar bekommt, nicht noch einmal der Name. */}
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease }}
+              className="t-display"
+              style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)' }}
+            >
+              Euer Tag, wie er sich <span className="kursiv">angefühlt hat.</span>
+            </motion.h1>
 
-        {/* Ein Handlungsaufruf, nicht zwei. */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.24, duration: 0.9, ease }}
-        >
-          {/* Zeigte auf /filme. Solange es dort nichts zu sehen gibt,
-              fuehrt der einzige Knopf des Hero auf die Bilder. */}
-          <Link href="/referenzen" className="knopf knopf-voll">
-            Bilder ansehen
-          </Link>
-        </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, duration: 0.9, ease }}
+              style={{
+                fontSize: 'var(--schrift-text)',
+                lineHeight: 1.6,
+                color: 'rgba(244,244,242,0.82)',
+                maxWidth: '42ch',
+                marginBottom: 'var(--luft-4)',
+              }}
+            >
+              Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
+            </motion.p>
+
+            {/* Ein gefuellter Weg und ein leiser daneben, wie auf
+                amoriva.app. Zwei Knoepfe, aber nur einer faellt auf. */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.24, duration: 0.9, ease }}
+              style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--luft-2)' }}
+            >
+              <Link href="/anfrage" className="knopf knopf-voll">
+                Termin anfragen
+              </Link>
+              <Link href="/referenzen" className="knopf knopf-linie"
+                    style={{ color: 'var(--auf-dunkel)', borderColor: 'rgba(244,244,242,0.35)' }}>
+                Bilder ansehen
+              </Link>
+            </motion.div>
+          </div>
+        </div>
       </div>
 
       <motion.div

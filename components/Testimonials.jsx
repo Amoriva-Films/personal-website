@@ -26,21 +26,29 @@ export default function Testimonials() {
   return (
     <section className="abschnitt hell">
       <div className="bahn">
+        {/* Stand nur eine Augenbraue ohne Ueberschrift - der Abschnitt
+            begann damit im Nichts. Jetzt derselbe Paar-Kopf wie ueberall. */}
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: 'var(--luft-5)' }}>
-            Das sagen unsere Paare
-          </p>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Das sagen unsere Paare</p>
+              <h2 className="t-gross">
+                Was danach <span className="kursiv">übrig bleibt.</span>
+              </h2>
+            </div>
+          </div>
         </FadeIn>
 
         <div className="stimmen-raster">
           {stimmen.map((t, i) => (
             <FadeIn key={i}>
-              {/* Kein Kasten, kein Rahmen, kein Schatten. Nur Zitat,
-                  feine Linie, Name. */}
-              <figure style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              {/* Zitat, Trennung durch die Kachel, darunter das Paar mit
+                  Datum. Die Kachel haelt die drei Stimmen auf einer Hoehe,
+                  auch wenn die Zitate verschieden lang sind.          */}
+              <figure className="kachel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <blockquote style={{ flex: 1, marginBottom: 'var(--luft-4)' }}>
                   <p style={{
-                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontFamily: 'var(--font-display), Georgia, serif',
                     fontSize: '1.5rem', fontWeight: 300, fontStyle: 'italic',
                     lineHeight: 1.45, color: 'var(--tinte)',
                   }}>

@@ -35,20 +35,31 @@ export default function FAQ() {
 
   return (
     <section className="abschnitt hell-2">
-      <div className="bahn lesebreite">
+      <div className="bahn">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
-          <h2 className="t-gross" style={{ marginBottom: 'var(--luft-5)' }}>
-            Was ihr wissen wollt.
-          </h2>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
+              <h2 className="t-gross">
+                Was ihr <span className="kursiv">wissen wollt.</span>
+              </h2>
+            </div>
+            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
+              Steht eure Frage nicht dabei, schreibt uns einfach. Wir antworten
+              innerhalb von 24 Stunden, auch per WhatsApp.
+            </p>
+          </div>
         </FadeIn>
 
-        <div>
+        {/* Die Fragen liefen als Linienliste ueber die halbe Seitenbreite.
+            Jetzt zwei Spalten aus Kacheln: kuerzere Wege fuers Auge und
+            der Abschnitt wird nur noch halb so hoch.                   */}
+        <div className="fragen-raster">
           {fragen.map((f, i) => {
             const auf = offen === i;
             return (
               <FadeIn key={i}>
-                <div style={{ borderTop: '1px solid var(--linie)' }}>
+                <div className="kachel" style={{ paddingBlock: 'var(--luft-2)' }}>
                   <h3>
                     <button
                       onClick={() => setOffen(auf ? null : i)}

@@ -95,7 +95,9 @@ export default function Footer() {
 
       <div style={{
         borderTop: '1px solid rgba(244,244,242,0.12)',
-        padding: '1.5rem var(--rand)',
+        /* Trug denselben Rand wie die Bahn darin: der Text stand dadurch
+           bei 120 statt 60 px. Der Rand gehoert der Bahn, nicht hier. */
+        paddingBlock: '1.5rem',
       }}>
         <div className="bahn fuss-leiste">
           <span style={{ fontSize: '0.8125rem', color: 'var(--grau-dunkel)' }}>

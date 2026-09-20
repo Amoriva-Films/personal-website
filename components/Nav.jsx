@@ -52,16 +52,32 @@ export default function Nav() {
       <nav
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          paddingBlock: gescrollt ? '0.9rem' : '1.4rem',
-          background: gescrollt ? 'rgba(251,251,250,0.94)' : 'transparent',
-          backdropFilter: gescrollt ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: gescrollt ? 'blur(16px)' : 'none',
-          borderBottom: gescrollt ? '1px solid var(--linie)' : '1px solid transparent',
-          transition: 'padding 400ms var(--ease), background 400ms var(--ease), border-color 400ms var(--ease)',
+          paddingBlock: gescrollt ? '0.75rem' : '1.25rem',
+          transition: 'padding 400ms var(--ease)',
         }}
       >
-        <div className="bahn" style={{
+        {/* Die Navigation liegt als Pille auf der Seite statt als Balken
+            quer darueber. Ueber dem Video bleibt sie durchsichtig, sobald
+            man scrollt legt sie sich als milchiges Glas darunter - so
+            bleibt oben das Bild die Hauptsache. Wie auf amoriva.app.   */}
+        <div className="bahn">
+        <div className="nav-pille" style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          gap: 'var(--luft-3)',
+          /* Die Pille braucht Innenabstand, damit das Glas nicht an der
+             Schrift klebt. Derselbe Wert geht als negativer Aussenabstand
+             wieder ab: so liegt das Glas etwas ueber der Bahn, die Marke
+             darin steht aber exakt auf der Textkante von 60 px. Ohne das
+             sass das Logo 23 px weiter rechts als jede Ueberschrift.   */
+          padding: '0.6rem 1.1rem',
+          marginInline: '-1.1rem',
+          borderRadius: 'var(--radius-pille)',
+          background: gescrollt ? 'rgba(251,251,250,0.82)' : 'transparent',
+          backdropFilter: gescrollt ? 'blur(20px) saturate(140%)' : 'none',
+          WebkitBackdropFilter: gescrollt ? 'blur(20px) saturate(140%)' : 'none',
+          border: gescrollt ? '1px solid rgba(20,20,19,0.08)' : '1px solid transparent',
+          boxShadow: gescrollt ? '0 8px 30px rgba(20,20,19,0.07)' : 'none',
+          transition: 'background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease), padding 400ms var(--ease)',
         }}>
         <Link href="/" aria-label="Amoriva Films, zur Startseite" style={{
           position: 'relative', display: 'block', flexShrink: 0,
@@ -100,15 +116,15 @@ export default function Nav() {
               {label}
             </Link>
           ))}
-          <a href="tel:+4915565559747" className="nav-telefon" style={{
-            fontSize: 'var(--schrift-fein)', fontWeight: 400, color: textFarbe,
-            textDecoration: 'none', whiteSpace: 'nowrap',
-            transition: 'color 400ms var(--ease), opacity 200ms var(--ease)',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '0.55'; }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}>
-            {TELEFON}
-          </a>
+          {/* Die Telefonnummer stand als nackter Text ganz aussen und sah
+              aus wie ein Menuepunkt, den niemand anklickt. Jetzt ist sie
+              der eine gefuellte Knopf der Leiste - der Abschluss der
+              Zeile, nicht ihr Anhaengsel.                              */}
+          <Link href="/anfrage" className="knopf knopf-voll nav-knopf" style={{
+            minHeight: 42, padding: '0.55rem 1.2rem', fontSize: '0.875rem',
+          }}>
+            Anfrage stellen
+          </Link>
         </div>
 
         <button
@@ -129,6 +145,7 @@ export default function Nav() {
           </svg>
         </button>
         </div>
+        </div>
       </nav>
 
       {offen && (
@@ -141,15 +158,19 @@ export default function Nav() {
         }}>
           {LINKS.map(({ label, href }) => (
             <Link key={label} href={href} onClick={() => setOffen(false)} style={{
-              fontFamily: 'var(--font-cormorant), Georgia, serif',
+              fontFamily: 'var(--font-display), Georgia, serif',
               fontSize: '2.5rem', fontWeight: 300, lineHeight: 1.1,
               color: 'var(--tinte)', textDecoration: 'none',
             }}>
               {label}
             </Link>
           ))}
+          <Link href="/anfrage" onClick={() => setOffen(false)}
+                className="knopf knopf-voll" style={{ marginTop: 'var(--luft-3)' }}>
+            Anfrage stellen
+          </Link>
           <a href="tel:+4915565559747" onClick={() => setOffen(false)} style={{
-            marginTop: 'var(--luft-3)', fontSize: 'var(--schrift-text)',
+            marginTop: 'var(--luft-2)', fontSize: 'var(--schrift-text)',
             color: 'var(--grau-2)', textDecoration: 'none',
           }}>
             {TELEFON}

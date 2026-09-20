@@ -9,8 +9,17 @@ export default function FinalCTA() {
       <FadeIn>
         <div className="bahn lesebreite">
           <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Anfrage stellen</p>
-          <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)' }}>
-            Euer Tag verdient mehr als schöne Bilder.
+          {/* Die Schlusszeile ist die einzige Stelle, an der die Schrift
+              ganz gross werden darf. Auf amoriva.app steht dort 80 px.
+              Wenn jede Ueberschrift gross ist, ist keine gross.        */}
+          <h2 style={{
+            fontFamily: 'var(--font-display), Georgia, serif',
+            fontSize: 'var(--schrift-riesig)', fontWeight: 400,
+            lineHeight: 0.98, letterSpacing: 'var(--laufweite-eng)',
+            color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)',
+            textWrap: 'balance',
+          }}>
+            Euer Tag verdient mehr als <span className="kursiv">schöne Bilder.</span>
           </h2>
           <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginBottom: 'var(--luft-4)' }}>
             Schreibt uns kurz, erzählt uns von eurem Tag und wir schauen ob
@@ -21,7 +30,7 @@ export default function FinalCTA() {
           <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>
 
           <div style={{
-            display: 'flex', gap: 'var(--luft-4)', justifyContent: 'center',
+            display: 'flex', gap: 'var(--luft-4)', justifyContent: 'flex-start',
             flexWrap: 'wrap', marginTop: 'var(--luft-4)',
           }}>
             <a href="mailto:booking@amoriva-films.de" style={{

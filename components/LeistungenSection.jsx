@@ -51,23 +51,34 @@ export default function LeistungenSection() {
     <section id="leistungen" className="abschnitt hell-2">
       <div className="bahn">
         <FadeIn>
-          <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Leistungen</p>
-          <h2 className="t-gross" style={{ maxWidth: '18ch', marginBottom: 'var(--luft-5)' }}>
-            Was wir für euch tun können.
-          </h2>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Leistungen</p>
+              <h2 className="t-gross">
+                Was wir für euch <span className="kursiv">tun können.</span>
+              </h2>
+            </div>
+            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
+              Drei Wege, einer davon passt zu euch. Was ihr am Ende bekommt,
+              steht bei jedem dabei, Punkt für Punkt.
+            </p>
+          </div>
         </FadeIn>
 
         {services.map((s) => (
           <FadeIn key={s.nr}>
             {/* Grosse ruhige Bloecke. Keine Karten mit Rahmen und Schatten,
                 getrennt wird durch eine Linie und durch Raum. */}
-            <div className="zwei-spalten" style={{
-              borderTop: '1px solid var(--linie)',
-              paddingBlock: 'var(--luft-4)',
+            {/* Vorher getrennt durch eine Linie ueber die volle Breite.
+                Jetzt eine Kachel je Leistung, wie die Funktionsbloecke
+                auf amoriva.app: der Block wird zum Gegenstand, den man
+                anschauen kann, statt zu einem Absatz in einer Liste. */}
+            <div className="kachel zwei-spalten" style={{
+              marginBottom: 'var(--luft-3)',
             }}>
               <div>
-                <p className="t-label" style={{ marginBottom: 'var(--luft-2)' }}>{s.nr}</p>
-                <h3 className="t-gross" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
+                <span className="schritt-ziffer" aria-hidden="true">{s.nr}</span>
+                <h3 className="t-mittel" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
                 <p className="t-fein">{s.subtitle}</p>
               </div>
               <div>

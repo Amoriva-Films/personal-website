@@ -27,15 +27,25 @@ export default function TrustBadges() {
       {/* Kein eigener Abschnitt mehr: die vier Punkte gehoeren zu
           "Unsere Arbeit" und stehen in deren Bahn. Das spart eine
           Nahtstelle und liest sich als ein Gedanke. */}
+      {/* Die vier Punkte standen als nackte Spalten im Weissraum und
+          verschwanden darin. Jetzt tragen sie eine Kachel, wie auf
+          amoriva.app: feine Linie, 12 px Radius, kein Schatten. Das
+          Zeichen sitzt in einem runden Feld in Markengruen.          */}
       <div className="vertrauen-raster" style={{ marginTop: 'var(--luft-6)' }}>
           {punkte.map((p, i) => (
-            <div key={i}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                   stroke="var(--gruen)" strokeWidth="1.4" strokeLinecap="round"
-                   strokeLinejoin="round" aria-hidden="true"
-                   style={{ marginBottom: 'var(--luft-2)' }}>
-                {p.icon}
-              </svg>
+            <div key={i} className="kachel kachel-heb">
+              <span aria-hidden="true" style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 38, height: 38, borderRadius: 'var(--radius-pille)',
+                background: 'rgba(104,120,80,0.10)',
+                marginBottom: 'var(--luft-3)',
+              }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                     stroke="var(--gruen)" strokeWidth="1.5" strokeLinecap="round"
+                     strokeLinejoin="round">
+                  {p.icon}
+                </svg>
+              </span>
               <p style={{
                 fontSize: 'var(--schrift-fein)', fontWeight: 500,
                 color: 'var(--tinte)', lineHeight: 1.4, marginBottom: 'var(--luft-1)',
