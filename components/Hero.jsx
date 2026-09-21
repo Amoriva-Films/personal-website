@@ -33,16 +33,40 @@ const ease = [0.22, 1, 0.36, 1];
 export default function Hero() {
   const videoRef = useRef(null);
 
+  /* Nevio am 21.09.2026: "Das video soll direkt losgehen und nicht
+     5 sekunden spaeter."
+
+     Die Verzoegerung war hausgemacht. Vorher stand hier: Video auf
+     unsichtbar setzen, auf 'canplay' warten, dann ueber 0,6 Sekunden
+     einblenden. Das hiess in dieser Reihenfolge:
+
+       HTML da -> Javascript laden -> Javascript versteckt das Video
+       -> genug Video geladen -> 0,6 Sekunden einblenden
+
+     Jeder dieser Schritte kostet Zeit, und bis zum letzten sah man die
+     dunkle Flaeche des Abschnitts. Nichts davon war noetig: das
+     <video>-Element startet mit autoplay/muted/playsInline von selbst,
+     ganz ohne Javascript, und zeigt bis dahin sein Standbild.
+
+     Geblieben sind zwei Anstoesse, die beide nichts verzoegern:      */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
-    v.style.opacity = '0';
-    v.style.transition = 'opacity 0.6s ease';
-    const show = () => { v.style.opacity = '1'; };
-    v.addEventListener('canplay', show, { once: true });
-    v.play().catch(() => {});
-    return () => v.removeEventListener('canplay', show);
+
+    const starten = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    starten();
+
+    /* Wer die Seite in einem Hintergrund-Tab oeffnet (Mittelklick,
+       "in neuem Tab oeffnen"), bekommt vom Browser kein Autoplay -
+       versteckte Tabs spielen nichts ab. Ohne das hier bliebe das
+       Video fuer denjenigen fuer immer stehen, auch nachdem er
+       hingewechselt ist. Gemessen genau so aufgetreten.              */
+    const beiSichtbar = () => {
+      if (document.visibilityState === 'visible' && v.paused) starten();
+    };
+    document.addEventListener('visibilitychange', beiSichtbar);
+    return () => document.removeEventListener('visibilitychange', beiSichtbar);
   }, []);
 
   return (
@@ -66,9 +90,16 @@ export default function Hero() {
           playsInline
           preload="auto"
           /* Standbild, bis das Video laeuft. Ohne das sieht man beim
-             Aufbau der Seite eine schwarze Flaeche - der erste Eindruck
-             ist dann die Ladezeit statt das Bild. Die Datei lag
-             ungenutzt im Ordner. */
+             Aufbau der Seite eine dunkle Flaeche - der erste Eindruck
+             waere dann die Ladezeit statt das Bild.
+
+             Es ist das ERSTE BILD DES VIDEOS, mit ffmpeg daraus
+             geschnitten. Vorher lag hier eine andere Stelle aus der
+             Hochzeit: man sah erst diesen einen Moment und dann sprang
+             es auf eine voellig andere Szene. Genau dieses Springen ist
+             Nevio ganz am Anfang aufgefallen ("zeigt irgendein Bild an,
+             was dort garnicht sein soll"). Jetzt ist der Uebergang vom
+             Standbild zum Video unsichtbar.                          */
           poster="/images/hero-poster.jpg"
           style={{
             width: '100%',
