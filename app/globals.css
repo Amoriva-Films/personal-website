@@ -923,6 +923,15 @@ html.lenis, html.lenis body { height: auto; }
   .leistungs-raster{ grid-template-columns: 1fr; }
   .fragen-raster   { grid-template-columns: 1fr; }
   .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
+  /* Ohne diese drei Zeilen fliessen die Kinder frei: Ziffer und
+     Ueberschrift fuellen Zeile 1, der Absatz rutscht in Zeile 2 - und
+     landet dort in der 3rem schmalen Ziffernspalte. Gemessen 48 px
+     breit, der Text brach mitten im Wort ("Formu lar", "Verpfli
+     chtun g"). Der ganze Ablauf-Abschnitt war auf dem Handy
+     unlesbar. Die Ziffer gehoert links, Titel und Text nach rechts. */
+  .schritt-ziffer  { grid-column: 1; grid-row: 1; }
+  .schritt h3      { grid-column: 2; grid-row: 1; }
+  .schritt .t-fein { grid-column: 2; grid-row: 2; }
   .schritt-ziffer  { font-size: 1.75rem; }
 }
 
