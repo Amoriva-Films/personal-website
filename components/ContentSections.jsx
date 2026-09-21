@@ -80,10 +80,10 @@ export default function ContentSections() {
               <FadeIn richtung="rechts" delay={0.1}>
                 <div className="arbeit-bild">
                   <Image
-                    src="/images/Bild-33.webp"
-                    alt="Brautpaar am Hochzeitstag, aufgenommen von Amoriva Films"
-                    width={1920}
-                    height={2879}
+                    src="/images/paare/paar-gehen.webp"
+                    alt="Ein Brautpaar geht Hand in Hand durch den Schlossgarten"
+                    width={1024}
+                    height={1536}
                     sizes="(max-width: 900px) 100vw, 44vw"
                     className="arbeit-bild-inner"
                   />

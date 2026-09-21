@@ -398,6 +398,51 @@ p, li { overflow-wrap: break-word; }
   align-items: start;
 }
 
+/* Ein Bild ueber die volle Breite als Atempause zwischen zwei
+   Textabschnitten. Flach, damit es den Lesefluss unterbricht statt eine
+   eigene Bildschirmseite zu fuellen. */
+.bildband {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: var(--leinwand);
+}
+.bildband-bild {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  transition: transform 1400ms var(--ease);
+}
+@media (hover: hover) {
+  .bildband:hover .bildband-bild { transform: scale(1.03); }
+}
+@media (max-width: 720px) {
+  .bildband { aspect-ratio: 4 / 3; }
+}
+
+/* Bild in der Leistungskachel. Alle drei im selben Zuschnitt, sonst
+   waere es wieder ein Bilderraster. */
+.leistung-bild {
+  position: relative;
+  width: calc(100% + 2 * clamp(1.5rem, 2.6vw, 2.25rem));
+  margin: calc(-1 * clamp(1.5rem, 2.6vw, 2.25rem)) 0 var(--luft-3)
+          calc(-1 * clamp(1.5rem, 2.6vw, 2.25rem));
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+.leistung-bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 900ms var(--ease);
+}
+@media (hover: hover) {
+  .leistung:hover .leistung-bild img { transform: scale(1.05); }
+}
+
 /* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,
    nicht als erste Zeile. So beginnt die Kachel mit dem Namen der
    Leistung - dem einzigen, wonach jemand sucht. */
