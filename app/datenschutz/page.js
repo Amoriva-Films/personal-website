@@ -5,7 +5,7 @@ export const metadata = {
   alternates: { canonical: 'https://amoriva-films.de/datenschutz' },
 };
 
-const serif = "var(--font-cormorant), Georgia, serif";
+const serif = "var(--font-display), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
 
 const linkStyle = {

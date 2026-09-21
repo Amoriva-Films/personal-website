@@ -6,7 +6,7 @@ import Footer from './Footer';
 import SmoothScroll from './SmoothScroll';
 import FadeIn from './FadeIn';
 
-const serif = "var(--font-cormorant), Georgia, serif";
+const serif = "var(--font-display), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
 const brown = 'var(--tinte)';
 const gruen  = 'var(--gruen)';
@@ -114,7 +114,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
 
       <style dangerouslySetInnerHTML={{ __html: `
         .article-body h2 {
-          font-family: var(--font-cormorant), Georgia, serif;
+          font-family: var(--font-display), Georgia, serif;
           font-size: clamp(22px, 2.2vw, 32px);
           font-weight: 300;
           color: var(--tinte);

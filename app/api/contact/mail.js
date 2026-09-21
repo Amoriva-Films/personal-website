@@ -15,7 +15,12 @@ const F = {
   creme: '#F6F1EB', karte: '#FFFFFF', text: '#3B2F2A', weich: '#5E5148',
   gedaempft: '#8A7B6F', gruen: '#687850', linie: '#E7DED3', dunkel: '#2A1F1B', gruen: '#687850',
 };
-const serif = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+/* In E-Mails gibt es kein next/font: Mailprogramme laden keine
+   Schriften nach. Hier MUESSEN echte Namen stehen, und die Kette muss
+   mit etwas enden, das jedes Geraet hat. Georgia ist auf Windows, macOS
+   und Android vorhanden - die Mail sieht damit ueberall gleich aus,
+   auch wenn sie nicht nach Fraunces aussieht. */
+const serif = "Georgia, 'Times New Roman', serif";
 const sans = "Inter, Helvetica, Arial, sans-serif";
 
 const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];

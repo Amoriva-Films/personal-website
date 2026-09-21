@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
-const serif = "var(--font-cormorant), Georgia, serif";
+const serif = "var(--font-display), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
 const brown = 'var(--tinte)';
 const gruen  = 'var(--gruen)';

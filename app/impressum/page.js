@@ -5,7 +5,7 @@ export const metadata = {
   alternates: { canonical: 'https://amoriva-films.de/impressum' },
 };
 
-const serif = "var(--font-cormorant), Georgia, serif";
+const serif = "var(--font-display), Georgia, serif";
 const sans  = "var(--font-inter), system-ui, sans-serif";
 
 export default function Impressum() {
@@ -121,7 +121,7 @@ function Section({ title, children }) {
   return (
     <div style={{ marginBottom: 'var(--luft-3)' }}>
       <h2 style={{
-        fontFamily: "var(--font-cormorant), Georgia, serif",
+        fontFamily: "var(--font-display), Georgia, serif",
         fontSize: '1.4rem',
         fontWeight: 300,
         color: 'var(--tinte)',
