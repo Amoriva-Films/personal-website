@@ -65,6 +65,11 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
+          /* Standbild, bis das Video laeuft. Ohne das sieht man beim
+             Aufbau der Seite eine schwarze Flaeche - der erste Eindruck
+             ist dann die Ladezeit statt das Bild. Die Datei lag
+             ungenutzt im Ordner. */
+          poster="/images/hero-poster.jpg"
           style={{
             width: '100%',
             height: '100%',

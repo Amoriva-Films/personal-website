@@ -2,12 +2,24 @@
 
 import FadeIn from './FadeIn';
 
+/* Fuenf Schritte in drei Spalten hiessen: drei oben, zwei unten, rechts
+   ein Loch. Genau das, was Nevio als unsymmetrisch aufgefallen ist.
+
+   Jetzt fuenf Spalten mit einer feinen Linie darueber, die sie
+   verbindet. Ein Ablauf ist eine Folge - die soll man als Linie sehen,
+   nicht als Kachelhaufen. Und bewusst OHNE Kacheln: die stehen schon
+   bei den Leistungen, zwei Kachelabschnitte hintereinander sehen aus
+   wie dieselbe Sache zweimal.
+
+   Dafuer musste jeder Text auf einen Satz. In fuenf schmalen Spalten
+   liest ohnehin niemand vier Zeilen. */
+
 const schritte = [
-  { nummer: '01', titel: 'Anfrage stellen', text: 'Ihr schreibt uns kurz per Formular oder WhatsApp. Kein Aufwand, keine Verpflichtung.' },
-  { nummer: '02', titel: 'Kennenlerngespräch', text: 'Wir sprechen 20 Minuten per Video oder Telefon. Kein Verkaufsgespräch. Wir wollen euch kennen.' },
-  { nummer: '03', titel: 'Eure Film und Fotovision', text: 'Was soll euer Film erzählen? Welche Fotos sollen bei euch an der Wand hängen? Wir reden nicht über Technik, sondern darüber was euch wirklich wichtig ist.' },
-  { nummer: '04', titel: 'Euer Hochzeitstag', text: 'Euer Hochzeitstag. Wir sind den ganzen Tag mit dabei. Ohne euch zu stören, ohne Anweisungen. Einfach da.' },
-  { nummer: '05', titel: 'Euer Film und Fotos', text: 'Innerhalb von 6 bis 8 Wochen erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Galerie.' },
+  { nummer: '01', titel: 'Anfrage',        text: 'Kurz per Formular oder WhatsApp. Keine Verpflichtung.' },
+  { nummer: '02', titel: 'Kennenlernen',   text: '20 Minuten per Video oder Telefon. Kein Verkaufsgespräch.' },
+  { nummer: '03', titel: 'Eure Vision',    text: 'Was euer Film erzählen soll. Kein Wort über Technik.' },
+  { nummer: '04', titel: 'Euer Tag',       text: 'Wir sind den ganzen Tag da. Ohne zu stören, ohne Anweisungen.' },
+  { nummer: '05', titel: 'Film und Fotos', text: 'In sechs bis acht Wochen in eurer privaten Galerie.' },
 ];
 
 export default function Prozess() {
@@ -35,9 +47,9 @@ export default function Prozess() {
         <div className="schritt-raster">
           {schritte.map((s, i) => (
             <FadeIn key={s.nummer} index={i}>
-              <div className="kachel kachel-heb" style={{ height: '100%' }}>
+              <div className="schritt">
                 <span className="schritt-ziffer" aria-hidden="true">{s.nummer}</span>
-                <h3 className="t-klein" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.titel}</h3>
+                <h3 className="t-klein">{s.titel}</h3>
                 <p className="t-fein">{s.text}</p>
               </div>
             </FadeIn>

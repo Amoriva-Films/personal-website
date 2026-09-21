@@ -115,10 +115,19 @@ p, li { overflow-wrap: break-word; }
 
 ::selection { background: var(--gruen); color: #FFFFFF; }
 
+/* Die gruene Umrandung, die Nevio aufgefallen ist. Sie zeigt, wo man
+   steht, wenn man mit der Tabulatortaste durch die Seite geht - ohne sie
+   ist die Seite fuer Tastaturnutzer unbedienbar. Sie erscheint NUR bei
+   Tastaturbedienung; die Ausnahme sind Sprungmarken auf derselben Seite,
+   dort setzt der Browser den Fokus selbst.
+
+   Das border-radius war der Fehler: es hat die FORM des Elements
+   veraendert, solange es den Fokus hatte. Dadurch sah ein Menuepunkt
+   ploetzlich aus wie ein Kasten. Ohne die Zeile folgt die Umrandung der
+   Form, die das Element ohnehin hat. */
 :focus-visible {
   outline: 2px solid var(--gruen);
   outline-offset: 3px;
-  border-radius: var(--radius);
 }
 
 /* ── Die Bahn ────────────────────────────────────────────────────
@@ -466,7 +475,7 @@ p, li { overflow-wrap: break-word; }
 /* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,
    nicht als erste Zeile. So beginnt die Kachel mit dem Namen der
    Leistung - dem einzigen, wonach jemand sucht. */
-.leistung { position: relative; overflow: hidden; }
+.leistung { position: relative; overflow: hidden; display: grid; }
 /* Die Ziffer lief bei allen drei Kacheln hinter dem Titel durch,
    gemessen 53 bis 64 px Ueberschneidung. Der Titel bekommt deshalb
    rechts Platz, und die Ziffer rueckt etwas hoeher und wird kleiner -
@@ -712,11 +721,38 @@ textarea.feld {
 
 /* Drei Leistungen nebeneinander. Untereinander war der Abschnitt der
    laengste der Seite. */
+/* Nevio: "das sieht ein bisschen unsymmetrisch aus". Stimmt, und zwar
+   messbar: weil "Hochzeits-fotografie" zweizeilig umbricht, sass in
+   dieser Kachel alles darunter 42 px tiefer, und die Trennlinien standen
+   auf drei verschiedenen Hoehen.
+
+   subgrid loest das: die Kacheln teilen sich die Zeilen des aeusseren
+   Rasters, also beginnen Titel, Untertitel, Text, Linie und Liste
+   ueberall auf derselben Hoehe. Weil zwischen Raster und Kachel noch
+   die Einblend-Huelle sitzt, muss die Kette ueber zwei Ebenen laufen. */
 .leistungs-raster {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto auto auto auto 1fr;
   gap: var(--luft-3);
-  align-items: stretch;
+}
+
+.leistungs-raster > * {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+}
+
+.leistung {
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+/* Browser ohne subgrid bekommen wenigstens gleich hohe Titel. */
+@supports not (grid-template-rows: subgrid) {
+  .leistungs-raster > *, .leistung { display: block; grid-row: auto; }
+  .leistung h3 { min-height: 2.2em; }
 }
 
 .fragen-raster {
@@ -759,16 +795,50 @@ textarea.feld {
 /* Fuenf Schritte in drei Spalten: die letzten beiden fallen in die
    zweite Zeile und stehen dort bewusst breiter. Besser als fuenf
    duenne Saeulen, in denen jedes Wort umbricht.                      */
+/* Fuenf Schritte, fuenf Spalten, darueber eine Linie, die sie
+   verbindet. Der Strich sitzt auf Hoehe der Ziffern und laeuft
+   durch - ein Ablauf ist eine Folge, keine Sammlung. */
 .schritt-raster {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--luft-3);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: auto auto 1fr;
+  gap: var(--luft-4) var(--luft-3);
+  position: relative;
+  padding-top: var(--luft-3);
+}
+.schritt-raster::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--luft-3) + 0.9rem);
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--linie);
+}
+.schritt-raster > * {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  position: relative;
+}
+.schritt {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: var(--luft-2);
+  background: var(--papier);
+}
+.schritt h3 { align-self: start; }
+.schritt .t-fein { align-self: start; }
+
+@supports not (grid-template-rows: subgrid) {
+  .schritt-raster > *, .schritt { display: block; grid-row: auto; }
+  .schritt h3 { margin: var(--luft-2) 0 var(--luft-1); }
 }
 
 .schritt-ziffer {
   display: block;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 3rem;
+  font-size: 1.75rem;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -849,6 +919,7 @@ html.lenis, html.lenis body { height: auto; }
   .galerie-raster  { grid-template-columns: repeat(2, 1fr); }
   .paar            { grid-template-columns: 1fr; gap: var(--luft-4); }
   .schritt-raster  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .schritt-raster::before { display: none; }
   .leistungs-raster{ grid-template-columns: 1fr; }
   .fragen-raster   { grid-template-columns: 1fr; }
   .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
