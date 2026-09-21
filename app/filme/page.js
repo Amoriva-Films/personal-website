@@ -6,7 +6,7 @@ import { Filmkachel, KeineFilme } from '@/components/Filmspieler';
 import { filme } from '@/data/filme';
 
 export const metadata = {
-  title: 'Filme – Hochzeitsfilme aus Niedersachsen',
+  title: 'Hochzeitsfilme aus Niedersachsen',
   description:
     'Ausgewählte Hochzeitsfilme von Amoriva Films. Cinematische Hochzeitsfilme aus Wolfsburg, Braunschweig, Hannover und international.',
   alternates: { canonical: 'https://amoriva-films.de/filme' },

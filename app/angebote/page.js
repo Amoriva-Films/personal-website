@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
 
 export const metadata = {
-  title: 'Angebote – Hochzeitsfilm und Fotografie individuell',
+  title: 'Angebote für Film & Fotografie',
   description: 'Jede Hochzeit ist einzigartig. Deshalb erstellen wir für jedes Paar ein individuelles Angebot. Hochzeitsfilm und Fine Art Fotografie in Deutschland.',
   alternates: { canonical: 'https://amoriva-films.de/angebote' },
 };

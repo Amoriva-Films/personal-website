@@ -1,6 +1,6 @@
 export const metadata = {
   // Das Wurzel-Layout haengt automatisch " | Amoriva Films" an, deshalb hier ohne.
-  title: 'Unsere Arbeiten — Hochzeitsfilm & Fotografie',
+  title: 'Unsere Arbeiten: Film & Fotografie',
   description:
     'Ein Ausschnitt aus der Arbeit von Amoriva Films: Hochzeitsfilm und Hochzeitsfotografie in Niedersachsen. Cinematic, emotional, zeitlos.',
   alternates: {

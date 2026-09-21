@@ -30,7 +30,7 @@ export const metadata = {
      einen richtigen Namen und die Markenfarbe in der Browserleiste. */
   manifest: '/manifest.json',
   title: {
-    default: 'Amoriva Films – Hochzeitsfilm und Hochzeitsfotografie Niedersachsen',
+    default: 'Hochzeitsfilm & Fotografie Niedersachsen | Amoriva Films',
     template: '%s | Amoriva Films',
   },
   description: 'Cinematic Hochzeitsfilm und Hochzeitsfotografie in Niedersachsen. Wolfsburg, Braunschweig, Hannover. Persönlich, ehrlich, zeitlos. Jetzt anfragen.',
