@@ -67,8 +67,8 @@ export default function LeistungenSection() {
             eine Auswahl, und eine Auswahl vergleicht man, statt sie zu
             durchscrollen. */}
         <div className="leistungs-raster">
-          {services.map((s) => (
-            <FadeIn key={s.nr}>
+          {services.map((s, i) => (
+            <FadeIn key={s.nr} index={i}>
               <div className="kachel" style={{ height: '100%' }}>
                 <span className="schritt-ziffer" aria-hidden="true">{s.nr}</span>
                 <h3 className="t-klein" style={{ marginTop: 'var(--luft-2)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>

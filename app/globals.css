@@ -398,6 +398,64 @@ p, li { overflow-wrap: break-word; }
   align-items: start;
 }
 
+/* ── Bewegung ────────────────────────────────────────────────────
+   Nevio am 21.09.2026: "packe ueberall coole und stylische Animationen
+   rein". Die Regel: nur dort, wo eine Bewegung etwas sagt. Ein Bild, das
+   beim Zeigen naeher kommt, sagt "hier kannst du hinschauen". Ein Knopf,
+   der den Pfeil vorschiebt, sagt "hier geht es weiter". Alles andere ist
+   Zappeln.
+
+   Alle Zeiten liegen zwischen 300 und 700 ms. Darunter wirkt es hektisch,
+   darueber wartet man.                                                 */
+
+/* Portraits kommen beim Zeigen leicht naeher. */
+.portraet-bild { transition: transform 900ms var(--ease); }
+@media (hover: hover) {
+  .portraet:hover .portraet-bild { transform: scale(1.04); }
+}
+
+/* Die Augenbraue zieht ihren Strich auf, wenn der Abschnitt erscheint.
+   Kleine Geste, aber sie markiert jeden Abschnittsanfang gleich. */
+.t-label::before {
+  animation: strich-auf 700ms var(--ease) both;
+}
+@keyframes strich-auf {
+  from { width: 0; opacity: 0; }
+  to   { width: 28px; opacity: 0.55; }
+}
+
+/* Kacheln heben sich beim Zeigen, Schatten statt nur Rahmenfarbe. */
+@media (hover: hover) {
+  .kachel-heb:hover {
+    box-shadow: 0 18px 40px -28px rgba(20,20,19,0.45);
+  }
+}
+
+/* Links in der Kopfzeile bekommen einen Strich, der von links aufzieht. */
+.nav-links a:not(.knopf) {
+  position: relative;
+}
+.nav-links a:not(.knopf)::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -5px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 320ms var(--ease);
+}
+@media (hover: hover) {
+  .nav-links a:not(.knopf):hover::after { transform: scaleX(1); }
+}
+
+/* Wer Bewegung reduziert hat, bekommt nichts davon. */
+@media (prefers-reduced-motion: reduce) {
+  .portraet-bild,
+  .nav-links a:not(.knopf)::after { transition: none !important; }
+  .t-label::before { animation: none !important; width: 28px; opacity: 0.55; }
+}
+
 /* ── Formular ────────────────────────────────────────────────────── */
 
 .feld {

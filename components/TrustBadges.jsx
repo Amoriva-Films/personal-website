@@ -33,7 +33,8 @@ export default function TrustBadges() {
           Zeichen sitzt in einem runden Feld in Markengruen.          */}
       <div className="vertrauen-raster" style={{ marginTop: 'var(--luft-6)' }}>
           {punkte.map((p, i) => (
-            <div key={i} className="kachel kachel-heb">
+            <FadeIn key={i} index={i}>
+            <div className="kachel kachel-heb" style={{ height: '100%' }}>
               <span aria-hidden="true" style={{
                 display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                 width: 38, height: 38, borderRadius: 'var(--radius-pille)',
@@ -56,6 +57,7 @@ export default function TrustBadges() {
                 {p.sub}
               </p>
             </div>
+            </FadeIn>
           ))}
       </div>
     </FadeIn>

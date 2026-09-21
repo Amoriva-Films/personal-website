@@ -33,8 +33,8 @@ export default function Prozess() {
             grosser, heller Ziffer - das Muster der Schritt-Kacheln von
             amoriva.app.                                               */}
         <div className="schritt-raster">
-          {schritte.map((s) => (
-            <FadeIn key={s.nummer}>
+          {schritte.map((s, i) => (
+            <FadeIn key={s.nummer} index={i}>
               <div className="kachel kachel-heb" style={{ height: '100%' }}>
                 <span className="schritt-ziffer" aria-hidden="true">{s.nummer}</span>
                 <h3 className="t-klein" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.titel}</h3>
