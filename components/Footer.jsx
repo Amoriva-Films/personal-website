@@ -40,7 +40,7 @@ export default function Footer() {
               height={LOGO_HOEHE}
               sizes={`${LOGO_BREITE}px`}
               style={{ objectFit: 'contain', marginBottom: 'var(--luft-3)' }}
-            quality={90}
+            quality={85}
             />
             <p style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)', lineHeight: 1.7 }}>
               Hochzeitsfilm und Fotografie<br />

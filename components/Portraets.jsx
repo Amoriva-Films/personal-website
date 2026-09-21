@@ -53,7 +53,7 @@ export default function Portraets() {
                   alt={b.alt}
                   width={b.b}
                   height={b.h}
-                  quality={90}
+                  quality={85}
                   sizes="(max-width: 860px) 46vw, 240px"
                 />
               </div>

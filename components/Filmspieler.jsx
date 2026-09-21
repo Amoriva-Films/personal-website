@@ -91,7 +91,7 @@ export function Filmkachel({ film, gross = false }) {
               className="filmkachel-bild"
               sizes={gross ? '(max-width: 900px) 100vw, 90vw' : '(max-width: 900px) 100vw, 45vw'}
               style={{ objectFit: 'cover', transition: 'transform 600ms var(--ease)' }}
-            quality={90}
+            quality={85}
             />
           )}
           <span

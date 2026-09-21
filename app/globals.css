@@ -935,6 +935,20 @@ html.lenis, html.lenis body { height: auto; }
   .schritt-ziffer  { font-size: 1.75rem; }
 }
 
+/* Tippflaechen in der Fusszeile. Gemessen bei 375 px waren die Links
+   dort nur 18 px hoch, die Mail- und WhatsApp-Zeile 28 px - mit dem
+   Daumen trifft man das schlecht, empfohlen sind 44 px. Der negative
+   Aussenabstand nimmt den groessten Teil des neuen Innenabstands
+   optisch wieder zurueck, damit die Fusszeile nicht auseinanderfaellt.
+   Nur auf Geraeten mit grobem Zeiger: mit der Maus stoert es nur. */
+@media (pointer: coarse) {
+  .fuss-raster a, .fuss-leiste a {
+    display: inline-block;
+    padding-block: 0.8rem;
+    margin-block: -0.5rem;
+  }
+}
+
 @media (max-width: 560px) {
   .vertrauen-raster { grid-template-columns: 1fr; }
   .schritt-raster   { grid-template-columns: 1fr; }

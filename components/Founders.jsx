@@ -76,7 +76,7 @@ export default function Founders() {
                       height: p.hoehe, width: 'auto',
                       top: p.oben, left: p.links,
                     }}
-            quality={90}
+            quality={85}
                   />
                 </div>
                 <p className="t-label" style={{ marginBottom: 'var(--luft-1)' }}>{p.rolle}</p>

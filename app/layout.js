@@ -25,6 +25,10 @@ const inter = Inter({
 
 export const metadata = {
   metadataBase: new URL('https://amoriva-films.de'),
+  /* public/manifest.json lag da, war aber nirgends eingebunden und tat
+     deshalb nichts. Eingehaengt gibt es der Seite auf Android-Handys
+     einen richtigen Namen und die Markenfarbe in der Browserleiste. */
+  manifest: '/manifest.json',
   title: {
     default: 'Amoriva Films – Hochzeitsfilm und Hochzeitsfotografie Niedersachsen',
     template: '%s | Amoriva Films',
