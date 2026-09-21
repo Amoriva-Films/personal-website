@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FadeIn from './FadeIn';
 // import Galerie from './Galerie';        // s. u., ausgehaengt
-import TrustBadges from './TrustBadges';
 // import { Filmkachel, KeineFilme } from './Filmspieler';   // s. u., ausgehaengt
 // import { galerie } from '@/data/galerie';  // s. u., ausgehaengt
 // import { startseitenFilm } from '@/data/filme';           // s. u., ausgehaengt
@@ -91,8 +90,6 @@ export default function ContentSections() {
                 </div>
               </FadeIn>
             </div>
-
-            <TrustBadges />
           </div>
         </FadeIn>
       </section>

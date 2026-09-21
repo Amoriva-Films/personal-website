@@ -66,10 +66,23 @@
   /* Der Hero-Titel steht links und muss neben dem Bild atmen koennen.
      amoriva.app faehrt dort 56 px, nicht 104 - die ganz grossen Stufen
      sind auf der App Zahlen und Schlusszeilen, keine Titel.           */
-  --schrift-display: clamp(2.5rem, 5vw, 4.25rem);   /* 40 –  68 px */
-  --schrift-riesig:  clamp(3.5rem, 8vw, 6.5rem);    /* 56 – 104 px, Schlusszeile */
-  --schrift-gross:   clamp(2.25rem, 4.2vw, 3.5rem); /* 36 –  56 px */
-  --schrift-mittel:  clamp(1.75rem, 2.8vw, 2.375rem);/* 28 –  38 px */
+  /* Nevio am 21.09.2026: "in der Handy sectionen sind manche texte und
+     saetze zu gross".
+
+     Gemessen bei 375 px war der Befund eindeutig: die Schlusszeile
+     "Euer Tag verdient mehr als schoene Bilder." stand mit 56 px ueber
+     VIER Zeilen, die Abschnitts-Ueberschriften mit 36 px ueber drei.
+     Auf einem 375 px breiten Bildschirm ist das kein Auftritt mehr,
+     sondern eine Wand.
+
+     Geaendert ist nur der ERSTE Wert jeder clamp-Angabe, also die
+     Untergrenze fuer schmale Bildschirme. Der letzte Wert, den grosse
+     Bildschirme erreichen, ist unveraendert - der Desktop sieht
+     rechnerisch exakt aus wie vorher, nachgemessen bei 1440 px.       */
+  --schrift-display: clamp(2.125rem, 5vw, 4.25rem);  /* 34 –  68 px */
+  --schrift-riesig:  clamp(2.5rem, 8vw, 6.5rem);     /* 40 – 104 px, Schlusszeile */
+  --schrift-gross:   clamp(1.875rem, 4.2vw, 3.5rem); /* 30 –  56 px */
+  --schrift-mittel:  clamp(1.5rem, 2.8vw, 2.375rem); /* 24 –  38 px */
   --schrift-klein:   1.1875rem;                      /* 19 px, Inter 500 */
   --schrift-text:    1.0625rem;                      /* 17 px */
   --schrift-fein:    0.9375rem;                      /* 15 px */

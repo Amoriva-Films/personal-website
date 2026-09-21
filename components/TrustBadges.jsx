@@ -24,14 +24,14 @@ const punkte = [
 export default function TrustBadges() {
   return (
     <FadeIn>
-      {/* Kein eigener Abschnitt mehr: die vier Punkte gehoeren zu
-          "Unsere Arbeit" und stehen in deren Bahn. Das spart eine
-          Nahtstelle und liest sich als ein Gedanke. */}
+      {/* Kein eigener Abschnitt: die vier Punkte stehen in der Bahn des
+          Leistungs-Abschnitts, zwischen den Paketen und dem Knopf. Das
+          spart eine Nahtstelle und liest sich als ein Gedanke. */}
       {/* Die vier Punkte standen als nackte Spalten im Weissraum und
           verschwanden darin. Jetzt tragen sie eine Kachel, wie auf
           amoriva.app: feine Linie, 12 px Radius, kein Schatten. Das
           Zeichen sitzt in einem runden Feld in Markengruen.          */}
-      <div className="vertrauen-raster" style={{ marginTop: 'var(--luft-6)' }}>
+      <div className="vertrauen-raster" style={{ marginTop: 'var(--luft-5)', marginBottom: 'var(--luft-5)' }}>
           {punkte.map((p, i) => (
             <FadeIn key={i} index={i}>
             <div className="kachel kachel-heb" style={{ height: '100%' }}>

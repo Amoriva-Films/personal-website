@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import FadeIn from './FadeIn';
+import TrustBadges from './TrustBadges';
 
 /* Keine Preise, keine Ab-Preise, keine Zahlen. Eine Zahl macht
    vergleichbar und zieht die Anfragen an, die nur auf den Preis
@@ -101,6 +102,15 @@ export default function LeistungenSection() {
             </FadeIn>
           ))}
         </div>
+
+        {/* Nevio am 21.09.2026: die Vertrauens-Punkte gehoeren unter das
+            Leistungspaket. Sie standen vorher oben bei "Unsere Arbeit",
+            also bevor ueberhaupt klar war, was man bekommt.
+
+            Hier ergeben sie eine Reihenfolge: das ist drin, darum koennt
+            ihr uns trauen, jetzt fragt an. Genau in dieser Folge liest
+            man eine Leistungsseite ohnehin.                            */}
+        <TrustBadges />
 
         <FadeIn>
           <div style={{ paddingTop: 'var(--luft-4)', borderTop: '1px solid var(--linie)' }}>

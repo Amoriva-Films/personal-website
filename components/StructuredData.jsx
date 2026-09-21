@@ -60,7 +60,12 @@ export default function StructuredData() {
           { '@type': 'Person', name: 'Danilo Buonafede', jobTitle: 'Co Founder, Cinematography und Bildgestaltung' },
         ],
         knowsLanguage: ['de', 'en'],
-        sameAs: ['https://www.instagram.com/amoriva.films'],
+        /* Die Adresse hier stand als "amoriva.films" mit Punkt drin -
+           das Konto heisst aber "amorivafilms" ohne. Google konnte die
+           Website damit nicht mit dem Instagram-Profil verknuepfen; beides
+           galt als zwei fremde Dinge. Im Impressum, in der Fusszeile und
+           in den Mails stand immer schon die richtige Adresse.          */
+        sameAs: ['https://www.instagram.com/amorivafilms'],
       },
       {
         '@type': 'WebSite',
