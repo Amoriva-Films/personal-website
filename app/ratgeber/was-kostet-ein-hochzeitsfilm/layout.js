@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Was kostet ein Hochzeitsfilm? Preise und Pakete | Amoriva Films',
+  title: 'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt | Amoriva Films',
   description:
     'Was einen Hochzeitsfilm teurer oder günstiger macht, was in ein gutes Paket gehört und woran ihr Qualität erkennt.',
   keywords: [

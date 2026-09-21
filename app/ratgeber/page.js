@@ -15,9 +15,9 @@ const soft  = 'var(--grau-2)';
 const articles = [
   {
     href:     '/ratgeber/was-kostet-ein-hochzeitsfilm',
-    cat:      'Kosten & Pakete',
-    title:    'Was kostet ein Hochzeitsfilm? Preise und Pakete',
-    excerpt:  'Hochzeitsfilm Preise variieren stark. Wir erklären, welche Faktoren den Preis beeinflussen und was ein gutes Paket enthalten sollte.',
+    cat:      'Kosten',
+    title:    'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt',
+    excerpt:  'Den einen Preis gibt es nicht. Wir erklären, welche Faktoren ihn bestimmen und woran ihr ein gutes Paket erkennt.',
     readTime: '5 Min.',
   },
   {
