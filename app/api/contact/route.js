@@ -1,7 +1,7 @@
 // Kontaktformular der Films-Seite: schickt die Anfrage an uns und eine kurze
 // Eingangsbestätigung an das Paar. Beide Mails kommen von der bei Resend
 // verifizierten Domain booking@amoriva-films.de. Vorlagen liegen in ./mail.js.
-import { mailAnPaar, mailAnUns } from './mail.js';
+import { mailAnPaar, mailAnUns, mailAlarm } from './mail.js';
 
 const FROM = 'Amoriva Films <booking@amoriva-films.de>';
 const AN_UNS = 'mastrogiorgio.nevio@gmail.com';
@@ -13,18 +13,30 @@ const EINGANG_OK = /^https:\/\/(www\.)?amoriva\.app\/api\/anfragen\/eingang\/ws_
 
 /**
  * Schickt die Anfrage zusätzlich in Nevios eigenes Amoriva-Dashboard, wo sie mit
- * der Rückfrage „übernehmen? Ja / Nein" landet. Bewusst ohne await im Hauptpfad
- * und mit kurzem Zeitlimit: Wenn Amoriva langsam oder nicht erreichbar ist, darf
- * das die Anfrage des Paares niemals aufhalten. Die E-Mails sind der sichere Weg,
- * das Dashboard die Bequemlichkeit.
+ * der Rückfrage „übernehmen? Ja / Nein" landet.
+ *
+ * Gibt zurück, ob es geklappt hat. Früher hat diese Funktion Fehler nur ins
+ * Protokoll geschrieben und nichts zurückgegeben - damit konnte der Aufrufer
+ * nicht unterscheiden, ob der Eintrag gelungen ist. Genau das braucht der
+ * Wächter aber, um Nevio zu melden, was fehlt.
  */
 async function anAmoriva(daten) {
   if (!EINGANG_OK) {
-    if (AMORIVA_EINGANG) console.error('AMORIVA_EINGANG_URL sieht nicht wie eine gültige Empfangsadresse aus.');
-    return;
+    return {
+      ok: false,
+      grund: AMORIVA_EINGANG
+        ? 'Die hinterlegte Empfangsadresse sieht nicht wie eine gültige Amoriva-Adresse aus.'
+        : 'Es ist keine Empfangsadresse hinterlegt (AMORIVA_EINGANG_URL fehlt).',
+      // Ohne hinterlegte Adresse ist das kein Ausfall, sondern der
+      // abgeschaltete Zustand. Dafür darf keine Störmeldung rausgehen.
+      abgeschaltet: !AMORIVA_EINGANG,
+    };
   }
+  // Vier Sekunden. Die Gegenstelle antwortet gemessen in 0,3 bis 0,7
+  // Sekunden; vier Sekunden sind grosszuegig und begrenzen zugleich,
+  // wie lange das Paar im schlimmsten Fall zusaetzlich wartet.
   const abbruch = new AbortController();
-  const uhr = setTimeout(() => abbruch.abort(), 6000);
+  const uhr = setTimeout(() => abbruch.abort(), 4000);
   try {
     const res = await fetch(AMORIVA_EINGANG, {
       method: 'POST',
@@ -35,9 +47,18 @@ async function anAmoriva(daten) {
     if (!res.ok) {
       const txt = await res.text();
       console.error('Amoriva-Eingang abgelehnt:', res.status, txt.slice(0, 200));
+      return { ok: false, grund: `Das Dashboard hat den Eintrag abgelehnt (Status ${res.status}).` };
     }
+    return { ok: true };
   } catch (e) {
-    console.error('Amoriva-Eingang nicht erreichbar:', e?.name === 'AbortError' ? 'Zeitlimit' : e);
+    const zeitlimit = e?.name === 'AbortError';
+    console.error('Amoriva-Eingang nicht erreichbar:', zeitlimit ? 'Zeitlimit' : e);
+    return {
+      ok: false,
+      grund: zeitlimit
+        ? 'Das Dashboard hat nicht innerhalb von vier Sekunden geantwortet.'
+        : 'Das Dashboard war nicht erreichbar.',
+    };
   } finally {
     clearTimeout(uhr);
   }
@@ -69,6 +90,54 @@ async function senden(payload) {
   return { ok: res.ok, status: res.status, data };
 }
 
+/** Kurzer Klartext aus einer Resend-Antwort oder einem geworfenen Fehler. */
+function grundAus(ergebnis) {
+  if (ergebnis.status === 'rejected') {
+    return `Der Mailversand hat abgebrochen: ${String(ergebnis.reason?.message || ergebnis.reason).slice(0, 160)}`;
+  }
+  const w = ergebnis.value;
+  if (w.ok) return '';
+  const text = w.data?.message || w.data?.name || 'kein Grund genannt';
+  return `Resend hat die Mail abgelehnt (Status ${w.status}): ${String(text).slice(0, 160)}`;
+}
+
+/**
+ * Die Sofortmeldung an Nevio.
+ *
+ * Ehrliche Grenze, die man kennen muss: diese Meldung geht denselben Weg
+ * wie die Mail, deren Ausfall sie meldet. Wenn Resend insgesamt ausfällt,
+ * kommt auch die Meldung nicht an. Deshalb zwei Dinge:
+ *
+ * 1. Sie wird zweimal versucht. Die meisten Resend-Fehler sind kurze
+ *    Aussetzer, und ein zweiter Versuch nach einer Sekunde kommt durch.
+ * 2. Sie ist nicht die einzige Absicherung. Wenn der Mailweg bricht, aber
+ *    das Dashboard trägt, steht die Anfrage dort - und umgekehrt. Erst
+ *    wenn beide Wege gleichzeitig ausfallen, hängt alles an dieser Mail,
+ *    und genau dann sagt ihr Betreff auch das.
+ */
+async function alarmAnNevio({ wege, anfrage, verloren }) {
+  const vorlage = mailAlarm({ wege, anfrage, verloren });
+  for (let versuch = 1; versuch <= 2; versuch++) {
+    try {
+      const res = await senden({
+        from: FROM,
+        to: [AN_UNS],
+        reply_to: anfrage?.email || 'booking@amoriva-films.de',
+        ...vorlage,
+      });
+      if (res.ok) return true;
+      console.error(`Störmeldung Versuch ${versuch} abgelehnt:`, res.status, JSON.stringify(res.data).slice(0, 200));
+    } catch (e) {
+      console.error(`Störmeldung Versuch ${versuch} abgebrochen:`, e);
+    }
+    if (versuch === 1) await new Promise((r) => setTimeout(r, 1000));
+  }
+  // Letzte Zuflucht: ins Protokoll, vollständig. Die Vercel-Protokolle
+  // halten die Anfrage dann noch fest, auch wenn keine Mail rausging.
+  console.error('STÖRMELDUNG KAM NICHT RAUS. Anfrage im Klartext:', JSON.stringify(anfrage));
+  return false;
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -85,30 +154,56 @@ export async function POST(request) {
       return Response.json({ error: 'Bitte eine gültige E-Mail-Adresse eingeben.' }, { status: 400 });
     }
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY ist nicht gesetzt.');
-      return Response.json({ error: 'Serverkonfigurationsfehler. Bitte schreibt uns direkt an booking@amoriva-films.de.' }, { status: 500 });
+    const anfrage = { name, email, hochzeitsdatum, location, nachricht };
+    const schluessel = Boolean(process.env.RESEND_API_KEY);
+    if (!schluessel) console.error('RESEND_API_KEY ist nicht gesetzt.');
+
+    /* Alle drei Wege gleichzeitig.
+     *
+     * Vorher lief die Mail an uns zuerst und allein: schlug sie fehl, kehrte
+     * die Funktion sofort mit 500 zurück - der Eintrag ins Dashboard wurde
+     * dann gar nicht mehr versucht. Ein Aussetzer bei Resend von einer halben
+     * Minute hat die Anfrage damit vollständig gelöscht: keine Mail, kein
+     * Dashboard-Eintrag, und das Paar sah einen Fehler.
+     *
+     * Jetzt sind Mail und Dashboard zwei unabhängige Empfangswege. Die
+     * Anfrage gilt als angekommen, sobald EINER von beiden trägt. Nur wenn
+     * beide gleichzeitig ausfallen, bekommt das Paar einen Fehler zu sehen. */
+    const leer = { ok: false, status: 0, data: { message: 'RESEND_API_KEY ist nicht gesetzt.' } };
+    const [anUns, dashboard, bestaetigung] = await Promise.allSettled([
+      schluessel ? senden({ from: FROM, to: [AN_UNS], reply_to: email, ...mailAnUns(anfrage) }) : Promise.resolve(leer),
+      anAmoriva(anfrage),
+      schluessel ? senden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name, hochzeitsdatum, location, nachricht }) }) : Promise.resolve(leer),
+    ]);
+
+    const dash = dashboard.status === 'fulfilled' ? dashboard.value : { ok: false, grund: 'Der Dashboard-Aufruf hat abgebrochen.' };
+
+    const wege = [
+      { name: 'Benachrichtigung an dich', ok: anUns.status === 'fulfilled' && anUns.value.ok, grund: grundAus(anUns) },
+      { name: 'Eintrag im Amoriva-Dashboard', ok: dash.ok, grund: dash.grund, abgeschaltet: dash.abgeschaltet },
+      { name: 'Eingangsbestätigung an das Paar', ok: bestaetigung.status === 'fulfilled' && bestaetigung.value.ok, grund: grundAus(bestaetigung) },
+    ];
+    for (const w of wege) if (!w.ok) console.error(`Weg gebrochen - ${w.name}: ${w.grund}`);
+
+    // Ein nicht eingerichtetes Dashboard ist kein Ausfall, sondern der
+    // bewusst abgeschaltete Zustand. Sonst käme bei jeder einzelnen
+    // Anfrage eine Störmeldung, und eine Meldung, die immer kommt, liest
+    // nach zwei Wochen niemand mehr.
+    const meldenswert = wege.filter((w) => !w.ok && !w.abgeschaltet);
+    const angekommen = wege[0].ok || wege[1].ok;
+
+    if (meldenswert.length > 0) {
+      // Fehlschlagen darf auch die Meldung. Sie darf aber niemals eine
+      // Anfrage, die angekommen ist, nachträglich in einen Fehler drehen.
+      try {
+        await alarmAnNevio({ wege: meldenswert, anfrage, verloren: !angekommen });
+      } catch (e) {
+        console.error('Störmeldung selbst fehlgeschlagen:', e);
+      }
     }
 
-    // 1) Anfrage an uns. Antworten gehen per Reply-To direkt an das Paar.
-    const anUns = await senden({ from: FROM, to: [AN_UNS], reply_to: email, ...mailAnUns({ name, email, hochzeitsdatum, location, nachricht }) });
-    if (!anUns.ok) {
-      console.error('Resend error:', JSON.stringify(anUns.data));
-      const msg = anUns.data?.message || anUns.data?.name || 'Unbekannter Fehler';
-      return Response.json({ error: `E-Mail konnte nicht gesendet werden (${msg}). Bitte schreibt uns direkt an booking@amoriva-films.de.` }, { status: 500 });
-    }
-
-    // 2) Anfrage zusätzlich ins eigene Amoriva-Dashboard. Fire and forget.
-    void anAmoriva({ name, email, hochzeitsdatum, location, nachricht });
-
-    // 3) Eingangsbestätigung an das Paar. Bewusst kurz: sie ersetzt die persönliche
-    // Antwort nicht, sie kündigt sie an. Schlägt sie fehl, ist die Anfrage trotzdem
-    // bei uns, deshalb nur protokollieren.
-    try {
-      const anPaar = await senden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name, hochzeitsdatum, location, nachricht }) });
-      if (!anPaar.ok) console.error('Bestätigung an das Paar abgelehnt:', anPaar.status, JSON.stringify(anPaar.data).slice(0, 300));
-    } catch (e) {
-      console.error('Bestätigung an das Paar fehlgeschlagen:', e);
+    if (!angekommen) {
+      return Response.json({ error: 'Eure Anfrage konnte gerade nicht übermittelt werden. Bitte schreibt uns direkt an booking@amoriva-films.de oder ruft an: 0155 6555 9747.' }, { status: 500 });
     }
 
     return Response.json({ ok: true });

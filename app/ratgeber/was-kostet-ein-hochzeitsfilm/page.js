@@ -4,8 +4,8 @@ import Link from 'next/link';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Was kostet ein Hochzeitsfilm? Preise & Pakete 2025',
-  description: 'Hochzeitsfilm Kosten 2025: Faktoren, Preisrahmen und was in einem guten Paket enthalten sein sollte.',
+  headline: 'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt',
+  description: 'Hochzeitsfilm Kosten: welche Faktoren den Preis bestimmen und was in einem guten Paket enthalten sein sollte.',
   author: { '@type': 'Organization', name: 'Amoriva Films', url: 'https://amoriva-films.de' },
   publisher: {
     '@type': 'Organization',
@@ -13,7 +13,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
-  dateModified: '2025-05-13',
+  dateModified: '2026-09-21',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/was-kostet-ein-hochzeitsfilm' },
   image: 'https://amoriva-films.de/images/og-image.jpg',
 };
@@ -31,7 +31,7 @@ const breadcrumb = {
 export default function Page() {
   return (
     <ArticleLayout
-      title="Was kostet ein Hochzeitsfilm? Preise & Pakete 2025"
+      title="Was kostet ein Hochzeitsfilm? Was den Preis bestimmt"
       category="Kosten & Pakete"
       date="Mai 2025"
       readTime="5 Min."
@@ -44,7 +44,7 @@ export default function Page() {
       </p>
 
       <div className="highlight-box">
-        Kurze Antwort: Ein professioneller Hochzeitsfilm kostet im Jahr 2025 typischerweise zwischen <strong>1.200 € und 3.500 €</strong>, je nach Umfang und Qualitätsniveau.
+        Kurze Antwort: Den einen Preis gibt es nicht. Was ein Hochzeitsfilm kostet, hängt an <strong>Drehzeit, Anzahl der Kameras und Schnittaufwand</strong>. Wer euch ohne ein Gespräch eine Zahl nennt, kennt euren Tag noch gar nicht.
       </div>
 
       <h2>Warum ein Hochzeitsfilm eine lohnende Investition ist</h2>
@@ -57,7 +57,7 @@ export default function Page() {
 
       <h2>Welche Faktoren beeinflussen den Preis?</h2>
       <p>
-        Die Unterschiede zwischen einem 800-Euro-Angebot und einem 3.000-Euro-Paket sind erheblich. Diese Faktoren entscheiden über den Preis:
+        Zwischen dem günstigsten und dem teuersten Angebot, das ihr bekommen werdet, liegen oft mehrere Tausend Euro. Diese Faktoren entscheiden darüber:
       </p>
       <ul>
         <li><strong>Drehtag & Stunden:</strong> Wie lange wird gefilmt? Von der Vorbereitung bis zur Party oder nur Trauung bis Dinner?</li>
@@ -68,21 +68,21 @@ export default function Page() {
         <li><strong>Zusatzleistungen:</strong> Separater Trailer, Rohschnitt-Material oder besondere Formate.</li>
       </ul>
 
-      <h2>Hochzeitsfilm Preise 2025: Was ist realistisch?</h2>
+      <h2>Woran ihr die Unterschiede erkennt</h2>
 
-      <h3>Einsteiger (unter 1.200 €)</h3>
+      <h3>Das günstigste Angebot</h3>
       <p>
-        In diesem Preisbereich findet ihr meist Einsteiger oder Hobby-Filmemacher. Die Qualität kann überraschen, aber auch enttäuschen. Oft fehlt es an Erfahrung mit Hochzeitsabläufen, professionellem Equipment oder einem strukturierten Schnittprozess. Für eine Hochzeit, die ihr euer Leben lang erinnern wollt, ist das Risiko oft zu hoch.
+        Ganz unten findet ihr meist Einsteiger oder Hobby-Filmemacher. Die Qualität kann überraschen, aber auch enttäuschen. Oft fehlt es an Erfahrung mit Hochzeitsabläufen, professionellem Equipment oder einem strukturierten Schnittprozess. Für eine Hochzeit, die ihr euer Leben lang erinnern wollt, ist das Risiko oft zu hoch. Und anders als beim Catering könnt ihr den Tag nicht wiederholen.
       </p>
 
-      <h3>Mittelklasse (1.200 bis 2.200 €)</h3>
+      <h3>Erfahrene Videografen</h3>
       <p>
-        Hier findet ihr erfahrene Videografen mit gutem Equipment und einem durchdachten Workflow. Ihr bekommt einen Hauptfilm, einen Trailer und professionelle Nachbearbeitung. Für die meisten Paare ist das der optimale Bereich.
+        In der breiten Mitte arbeiten erfahrene Videografen mit gutem Equipment und einem durchdachten Ablauf. Ihr bekommt einen Hauptfilm, einen Trailer und professionelle Nachbearbeitung. Für die meisten Paare ist das genau richtig.
       </p>
 
-      <h3>Premium (ab 2.200 €)</h3>
+      <h3>Premium</h3>
       <p>
-        In diesem Segment arbeiten Videografen mit zwei Kameras, cinematischem Ansatz, ausgeprägtem Stilgefühl und oft exklusiver Verfügbarkeit. Die Lieferergebnisse sind häufig filmreif, das ist auch der Anspruch.
+        Ganz oben wird mit zwei Kameras gearbeitet, mit cinematischem Ansatz, ausgeprägtem Stilgefühl und oft mit nur wenigen Hochzeiten im Jahr. Die Ergebnisse sind filmreif, das ist auch der Anspruch. Hier arbeiten wir.
       </p>
 
       <h2>Was sollte in einem guten Paket enthalten sein?</h2>

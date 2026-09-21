@@ -2,179 +2,947 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ════════════════════════════════════════════════════════════════════
+   Amoriva Films — Design 2026
+   Leitbild: Kinosaal, nicht Brautmagazin. Die Seite ist die Leinwand.
+   Gegliedert wird durch den Wechsel hell/dunkel und durch Raum,
+   nicht durch Linien, Kaesten oder Schatten.
+   ════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --bg:    #F6F1EB;
-  --bg2:   #EFE7DD;
-  --bg3:   #E7DED3;
-  --brown: #3B2F2A;
-  --soft:  #5E5148;
-  --gold:  #B79B72;
-  --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+  /* ── Farben ──────────────────────────────────────────────────────
+     Regel (Nevio, 19.09.2026): nie Gelb, nie Rot. Gruen, Schwarz,
+     Weiss, Grau, Naturfarben. Gruen ist der einzige Akzent und
+     markiert genau eine Sache pro Bildschirm.                        */
+
+  --leinwand:      #0E0E0D;   /* dunkle Abschnitte: Filme, Galerie, Hero */
+  --tinte:         #141413;   /* Text auf hell */
+  --papier:        #FBFBFA;   /* helle Abschnitte, neutral statt Creme */
+  --papier-2:      #F2F2F0;   /* zweite Ebene auf hell */
+  --linie:         #E2E2DF;   /* nur wo eine Linie wirklich noetig ist */
+  --grau-2:        #6E6E69;   /* Text zweite Ebene */
+  --grau-3:        #9A9A94;   /* Text dritte Ebene */
+  --auf-dunkel:    #F4F4F2;   /* Text auf dunkel */
+  --grau-dunkel:   #A8A8A2;   /* Grau auf dunkel */
+  --gruen:         #687850;   /* Markenfarbe, aus der Wortmarke */
+  --gruen-hell:    #8FA275;   /* auf dunklem Grund */
+
+  /* ── Raster ──────────────────────────────────────────────────────
+     Eine einzige linke Textkante auf der ganzen Seite. Vorher gab es
+     drei (0, 86 und 340 px bei 1440 px Fenster): beim Scrollen rueckte
+     die Kante zweimal um 254 px nach rechts und wieder zurueck. Das
+     Auge sucht eine senkrechte Linie und fand keine.                  */
+
+  --rand:   24px;     /* Handy */
+  --spalte: 1440px;   /* Bahn aussen; abzueglich Rand bleiben 1320 Inhalt */
+  --lese:   760px;    /* Fliesstext, maximal */
+
+  /* ── Abstandsskala ───────────────────────────────────────────────
+     Nur diese Werte, keine Zwischenstufen. Wer einen anderen Abstand
+     braucht, braucht in Wahrheit einen anderen Inhalt.               */
+
+  --luft-1:  8px;
+  --luft-2: 16px;
+  --luft-3: 24px;
+  --luft-4: 40px;
+  --luft-5: 64px;
+  /* Abschnittsabstand. Stand auf 112 (der Wert von amoriva.app). Nevio
+     am 21.09.2026: zu viel. Gemessen waren es 1.792 px reines Polster auf
+     der Startseite, also zwei von zehn Bildschirmen nur Luft. Mit 80
+     bleibt die Gliederung deutlich, ohne dass man sich durchscrollt.
+     amoriva.app ist eine Software-Seite mit langen Erklaertexten, hier
+     stehen Bilder und kurze Bloecke - die brauchen weniger Anlauf. */
+  --luft-6: 80px;
+  --luft-7: 144px;
+
+  /* Abstand unter der fest stehenden Kopfzeile. Eigener Wert, weil er
+     nicht Abschnittsabstand ist, sondern Platz fuer die Navigation. */
+  --kopf-luft: 124px;
+
+  /* ── Schrift ─────────────────────────────────────────────────────
+     Drei Stufen fuer Ueberschriften, zwei fuer Text. Mehr nicht.
+     Cormorant erst ab 40 px, darunter werden die Striche grau.       */
+
+  /* Der Hero-Titel steht links und muss neben dem Bild atmen koennen.
+     amoriva.app faehrt dort 56 px, nicht 104 - die ganz grossen Stufen
+     sind auf der App Zahlen und Schlusszeilen, keine Titel.           */
+  --schrift-display: clamp(2.5rem, 5vw, 4.25rem);   /* 40 –  68 px */
+  --schrift-riesig:  clamp(3.5rem, 8vw, 6.5rem);    /* 56 – 104 px, Schlusszeile */
+  --schrift-gross:   clamp(2.25rem, 4.2vw, 3.5rem); /* 36 –  56 px */
+  --schrift-mittel:  clamp(1.75rem, 2.8vw, 2.375rem);/* 28 –  38 px */
+  --schrift-klein:   1.1875rem;                      /* 19 px, Inter 500 */
+  --schrift-text:    1.0625rem;                      /* 17 px */
+  --schrift-fein:    0.9375rem;                      /* 15 px */
+
+  --zeile-text: 1.65;
+  --zeile-eng:  1.02;    /* Display steht eng, wie auf amoriva.app */
+  --laufweite-eng: -0.018em;
+
+  --radius:       12px;   /* Kacheln und Felder, wie amoriva.app */
+  --radius-klein:  8px;
+  --radius-pille: 999px;  /* Knoepfe und Marken sind Pillen */
+  --ease:   cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@media (min-width: 768px)  { :root { --rand: 40px; --kopf-luft: 150px; } }
+@media (min-width: 1280px) { :root { --rand: 60px; } }
 
-/* Global text overflow prevention */
-p, span, a, li, div {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Headings: never hyphenate words */
-h1, h2, h3, h4, h5, h6,
-h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
-  -webkit-hyphens: none !important;
-  -moz-hyphens: none !important;
-  -ms-hyphens: none !important;
-  hyphens: none !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
-
-/* Ensure nothing bleeds past viewport */
-section, div {
-  max-width: 100%;
-}
-
-html {
-  scroll-behavior: auto;
-}
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: var(--bg);
-  color: #1A1A1A;
+  background: var(--papier);
+  color: var(--tinte);
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-weight: 300;
+  font-size: var(--schrift-text);
+  font-weight: 400;
+  line-height: var(--zeile-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Typography utilities */
-.font-serif    { font-family: var(--font-cormorant), Georgia, serif; }
-.font-sans     { font-family: var(--font-inter), system-ui, sans-serif; }
+img, video { max-width: 100%; display: block; }
 
-/* Eyebrow label */
-.label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 300;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gold);
+h1, h2, h3, h4 {
+  hyphens: none;
+  overflow-wrap: normal;
+  font-weight: 400;
 }
 
-/* Luxury button */
-.btn-outline {
-  display: inline-block;
-  border: 1px solid currentColor;
-  padding: 13px 28px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 300;
-  letter-spacing: 0.18em;
+p, li { overflow-wrap: break-word; }
+
+::selection { background: var(--gruen); color: #FFFFFF; }
+
+/* Die gruene Umrandung, die Nevio aufgefallen ist. Sie zeigt, wo man
+   steht, wenn man mit der Tabulatortaste durch die Seite geht - ohne sie
+   ist die Seite fuer Tastaturnutzer unbedienbar. Sie erscheint NUR bei
+   Tastaturbedienung; die Ausnahme sind Sprungmarken auf derselben Seite,
+   dort setzt der Browser den Fokus selbst.
+
+   Das border-radius war der Fehler: es hat die FORM des Elements
+   veraendert, solange es den Fokus hatte. Dadurch sah ein Menuepunkt
+   ploetzlich aus wie ein Kasten. Ohne die Zeile folgt die Umrandung der
+   Form, die das Element ohnehin hat. */
+:focus-visible {
+  outline: 2px solid var(--gruen);
+  outline-offset: 3px;
+}
+
+/* ── Die Bahn ────────────────────────────────────────────────────
+   Der einzige Container der Seite. Jeder Abschnitt benutzt ihn,
+   dadurch beginnt jeder Text an derselben Kante.                   */
+
+.bahn {
+  width: 100%;
+  max-width: var(--spalte);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+/* Schmale Textblöcke werden LINKS BEGRENZT, nicht zentriert. So
+   beginnen Ablauf und Fragen an derselben Kante wie alles andere,
+   sie hoeren nur frueher auf.
+
+   Wichtig: .lesebreite darf die Bahn selbst nicht schmaler machen.
+   Sonst zentriert deren margin-inline:auto die schmale Breite, und
+   die Kante springt wieder nach rechts (gemessen: von 130 auf 360).
+   Die Bahn bleibt breit, nur ihr Inhalt wird begrenzt.              */
+.lesebreite { max-width: var(--lese); }
+
+.bahn.lesebreite     { max-width: var(--spalte); }
+.bahn.lesebreite > * { max-width: var(--lese); }
+
+/* Wenn ein schmaler Block doch mittig stehen soll (Abschluss-Aufruf),
+   dann mittig im Text, aber weiterhin an der Bahn ausgerichtet.     */
+.mittig { text-align: center; }
+
+/* ── Abschnitte ──────────────────────────────────────────────────
+   Ein Abstandswert fuer alle. Vorher: 158,4 px oben und unten, also
+   316 px an jeder Nahtstelle. Ueber elf Abschnitte rund 3.500 px
+   Leerraum, dreieinhalb Bildschirme.                                */
+
+.abschnitt { padding-block: var(--luft-6); }
+
+/* Auf dem Handy ist jeder Abschnitt ohnehin eine eigene Bildschirmseite,
+   da traegt schon weniger Abstand die Trennung. */
+@media (max-width: 720px) {
+  .abschnitt { padding-block: var(--luft-5); }
+}
+
+/* Erster Abschnitt einer Unterseite: mehr Luft oben, weil die Kopfzeile
+   fest ueber dem Inhalt steht. */
+.abschnitt-kopf { padding-top: var(--kopf-luft); padding-bottom: var(--luft-6); }
+
+@media (max-width: 767px) {
+  .abschnitt { padding-block: var(--luft-5); }
+  .abschnitt-kopf { padding-bottom: var(--luft-5); }
+}
+
+.hell   { background: var(--papier);   color: var(--tinte); }
+.hell-2 { background: var(--papier-2); color: var(--tinte); }
+.dunkel { background: var(--leinwand); color: var(--auf-dunkel); }
+
+/* ── Typografie-Bausteine ────────────────────────────────────────── */
+
+.t-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--schrift-display);
+  font-weight: 500;
+  line-height: var(--zeile-eng);
+  letter-spacing: var(--laufweite-eng);
+  text-wrap: balance;
+}
+
+.t-gross {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--schrift-gross);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: var(--laufweite-eng);
+  text-wrap: balance;
+}
+
+.t-mittel {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--schrift-mittel);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+}
+
+/* Der zweite Teil einer Ueberschrift steht kursiv. Das ist der eine
+   Handgriff, an dem man amoriva.app auf jedem Bildschirm wiedererkennt:
+   "Alles, was dein Betrieb braucht, an einem Ort."                    */
+.kursiv {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+}
+
+.t-klein {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-klein);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+
+.t-text {
+  font-size: var(--schrift-text);
+  line-height: var(--zeile-text);
+  max-width: var(--lese);
+}
+
+.t-fein {
+  font-size: var(--schrift-fein);
+  line-height: 1.65;
+  color: var(--grau-2);
+  max-width: var(--lese);
+}
+
+.t-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  transition: background 500ms ease, color 500ms ease;
+  color: var(--grau-3);
+}
+
+/* Der kurze Strich vor der Augenbraue. Er setzt den Abschnitt an, ohne
+   eine Ueberschrift mehr zu sein, und wiederholt sich auf jeder Seite
+   an derselben Stelle - daran haengt sich das Auge beim Scrollen auf. */
+.t-label::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+.dunkel .t-label { color: var(--grau-dunkel); }
+
+.t-grau { color: var(--grau-2); }
+.dunkel .t-grau { color: var(--grau-dunkel); }
+.t-gruen { color: var(--gruen); }
+.dunkel .t-gruen { color: var(--gruen-hell); }
+
+/* Abstaende innerhalb der Abschnitte, nur aus der Skala */
+.ab-1 { margin-bottom: var(--luft-1); }
+.ab-2 { margin-bottom: var(--luft-2); }
+.ab-3 { margin-bottom: var(--luft-3); }
+.ab-4 { margin-bottom: var(--luft-4); }
+.ab-5 { margin-bottom: var(--luft-5); }
+.ab-6 { margin-bottom: var(--luft-6); }
+
+/* ── Knoepfe ─────────────────────────────────────────────────────── */
+
+/* Knoepfe sind Pillen, wie auf amoriva.app. Der Pfeil steht im CSS und
+   nicht im Text: so hat jeder Knopf ihn, keiner vergisst ihn, und beim
+   Zeigen ruckt er ein Stueck nach rechts - die einzige Bewegung, die
+   die Seite sich erlaubt.                                              */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 50px;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pille);
   cursor: pointer;
+  transition: background 220ms var(--ease), color 220ms var(--ease),
+              border-color 220ms var(--ease);
 }
 
-.btn-outline:hover {
-  background: var(--brown);
-  color: var(--bg);
-  border-color: var(--brown);
+.knopf::after {
+  content: '\2192';
+  font-size: 1.05em;
+  line-height: 1;
+  transition: transform 220ms var(--ease);
+}
+.knopf:hover::after { transform: translateX(4px); }
+.knopf-ohne-pfeil::after { content: none; }
+
+.knopf-voll {
+  background: var(--tinte);
+  color: var(--papier);
+  border-color: var(--tinte);
+}
+.knopf-voll:hover { background: var(--gruen); border-color: var(--gruen); color: #FFFFFF; }
+
+.dunkel .knopf-voll {
+  background: var(--auf-dunkel);
+  color: var(--leinwand);
+  border-color: var(--auf-dunkel);
+}
+.dunkel .knopf-voll:hover { background: var(--gruen-hell); border-color: var(--gruen-hell); }
+
+.knopf-linie {
+  background: transparent;
+  color: var(--tinte);
+  border-color: var(--linie);
+}
+.knopf-linie:hover { border-color: var(--tinte); }
+
+.dunkel .knopf-linie {
+  color: var(--auf-dunkel);
+  border-color: rgba(244, 244, 242, 0.45);
+}
+.dunkel .knopf-linie:hover {
+  background: var(--auf-dunkel);
+  color: var(--leinwand);
+  border-color: var(--auf-dunkel);
 }
 
-.btn-outline-light {
-  color: rgba(246,241,235,0.85);
-  border-color: rgba(246,241,235,0.4);
+.link-fein {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie);
+  padding-bottom: 2px;
+  transition: border-color 220ms var(--ease);
+}
+.link-fein:hover { border-bottom-color: currentColor; }
+
+.dunkel .link-fein { border-bottom-color: rgba(244, 244, 242, 0.25); }
+
+/* ── Kacheln ─────────────────────────────────────────────────────
+   Auf amoriva.app steht fast jeder Inhalt in einer ruhigen Kachel:
+   heller Grund, eine feine Linie, 12 px Radius, kein Schatten. Das
+   ordnet, ohne laut zu werden - und es traegt hell wie dunkel.       */
+
+.kachel {
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  transition: border-color 300ms var(--ease), transform 300ms var(--ease);
 }
 
-.btn-outline-light:hover {
-  background: rgba(246,241,235,0.92);
-  color: var(--brown);
-  border-color: rgba(246,241,235,0.92);
+.kachel-2 { background: var(--papier-2); }
+
+.dunkel .kachel {
+  background: rgba(244, 244, 242, 0.035);
+  border-color: rgba(244, 244, 242, 0.11);
 }
 
-/* Lenis smooth scroll */
-html.lenis,
-html.lenis body {
-  height: auto;
+@media (hover: hover) {
+  .kachel-heb:hover { border-color: var(--gruen); transform: translateY(-3px); }
+  .dunkel .kachel-heb:hover { border-color: var(--gruen-hell); }
 }
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+
+/* Die Pille: kleine Auszeichnung ueber einer Ueberschrift, Ort,
+   Laufzeit, Kategorie. Nie mehr als drei nebeneinander.              */
+.pille {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-pille);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--grau-2);
+  white-space: nowrap;
 }
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+.dunkel .pille { border-color: rgba(244,244,242,0.18); color: var(--grau-dunkel); }
+
+/* Zwei Spalten, in denen links die Ueberschrift steht und rechts der
+   Text. Auf amoriva.app traegt dieses Paar die halbe Startseite.     */
+.paar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
 }
-.lenis.lenis-stopped {
+
+/* Ein Bild ueber die volle Breite als Atempause zwischen zwei
+   Textabschnitten. Flach, damit es den Lesefluss unterbricht statt eine
+   eigene Bildschirmseite zu fuellen. */
+.bildband {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
   overflow: hidden;
+  background: var(--leinwand);
 }
-
-/* Prevent images from causing horizontal overflow */
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* Image object-fit helper */
-.img-cover {
+.bildband-bild {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  object-position: center 42%;
+  transition: transform 1400ms var(--ease);
+}
+@media (hover: hover) {
+  .bildband:hover .bildband-bild { transform: scale(1.03); }
+}
+@media (max-width: 720px) {
+  .bildband { aspect-ratio: 4 / 3; }
 }
 
-/* Nav active */
-.nav-active {
-  color: var(--brown) !important;
-  border-bottom: 1px solid var(--gold);
+/* Portraet-Reihe: fuenf Bilder nebeneinander, flach gehalten. Auf dem
+   Handy ein Streifen zum Wischen statt fuenf Bildschirmseiten. */
+.portraet-reihe {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--luft-2);
 }
-
-/* Form elements */
-.form-input {
+.portraet-kachel {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--papier-2);
+}
+.portraet-kachel img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1000ms var(--ease);
+}
+@media (hover: hover) {
+  .portraet-kachel:hover img { transform: scale(1.06); }
+}
+
+@media (max-width: 860px) {
+  .portraet-reihe {
+    display: flex;
+    gap: var(--luft-2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Der Streifen darf ueber die Bahn hinauslaufen, sonst sieht man
+       nicht, dass es weitergeht. */
+    margin-inline: calc(-1 * var(--rand));
+    padding-inline: var(--rand);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .portraet-reihe::-webkit-scrollbar { display: none; }
+  .portraet-reihe > * { flex: 0 0 46%; scroll-snap-align: start; }
+}
+
+/* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,
+   nicht als erste Zeile. So beginnt die Kachel mit dem Namen der
+   Leistung - dem einzigen, wonach jemand sucht. */
+.leistung { position: relative; overflow: hidden; display: grid; }
+/* Die Ziffer lief bei allen drei Kacheln hinter dem Titel durch,
+   gemessen 53 bis 64 px Ueberschneidung. Der Titel bekommt deshalb
+   rechts Platz, und die Ziffer rueckt etwas hoeher und wird kleiner -
+   sie soll ein Wasserzeichen sein, kein zweiter Text. */
+.leistung h3 { padding-right: 4.6rem; hyphens: manual; overflow-wrap: break-word; }
+/* "Hochzeitsfotografie" ist der laengste Titel und bricht dadurch auf
+   zwei Zeilen um. Das ist gewollt: lieber ein Umbruch als ein Wort,
+   das durch die Ziffer laeuft. */
+
+.leistung-ziffer {
+  position: absolute;
+  top: 0.1rem; right: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 3.4rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--linie);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transition: color 400ms var(--ease), transform 600ms var(--ease);
+}
+@media (hover: hover) {
+  .leistung:hover .leistung-ziffer {
+    color: rgba(104,120,80,0.22);
+    transform: translateY(-4px);
+  }
+}
+
+/* Unsere Arbeit: links der Gedanke, rechts ein Bild. Das Bild ist
+   etwas schmaler als der Text, damit die Leserichtung stimmt. */
+.arbeit-raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.arbeit-bild {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--papier-2);
+}
+.arbeit-bild-inner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 1100ms var(--ease);
+}
+@media (hover: hover) {
+  .arbeit-bild:hover .arbeit-bild-inner { transform: scale(1.05); }
+}
+@media (max-width: 860px) {
+  .arbeit-raster { grid-template-columns: 1fr; }
+  .arbeit-bild   { aspect-ratio: 3 / 4; }
+}
+
+/* ── Bewegung ────────────────────────────────────────────────────
+   Nevio am 21.09.2026: "packe ueberall coole und stylische Animationen
+   rein". Die Regel: nur dort, wo eine Bewegung etwas sagt. Ein Bild, das
+   beim Zeigen naeher kommt, sagt "hier kannst du hinschauen". Ein Knopf,
+   der den Pfeil vorschiebt, sagt "hier geht es weiter". Alles andere ist
+   Zappeln.
+
+   Alle Zeiten liegen zwischen 300 und 700 ms. Darunter wirkt es hektisch,
+   darueber wartet man.                                                 */
+
+/* Portraits kommen beim Zeigen leicht naeher. */
+.portraet-bild { transition: transform 900ms var(--ease); }
+@media (hover: hover) {
+  .portraet:hover .portraet-bild { transform: scale(1.04); }
+}
+
+/* Die Augenbraue zieht ihren Strich auf, wenn der Abschnitt erscheint.
+   Kleine Geste, aber sie markiert jeden Abschnittsanfang gleich. */
+.t-label::before {
+  animation: strich-auf 700ms var(--ease) both;
+}
+@keyframes strich-auf {
+  from { width: 0; opacity: 0; }
+  to   { width: 28px; opacity: 0.55; }
+}
+
+/* Kacheln heben sich beim Zeigen, Schatten statt nur Rahmenfarbe. */
+@media (hover: hover) {
+  .kachel-heb:hover {
+    box-shadow: 0 18px 40px -28px rgba(20,20,19,0.45);
+  }
+}
+
+/* Links in der Kopfzeile bekommen einen Strich, der von links aufzieht. */
+.nav-links a:not(.knopf) {
+  position: relative;
+}
+.nav-links a:not(.knopf)::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -5px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 320ms var(--ease);
+}
+@media (hover: hover) {
+  .nav-links a:not(.knopf):hover::after { transform: scaleX(1); }
+}
+
+/* Wer Bewegung reduziert hat, bekommt nichts davon. */
+@media (prefers-reduced-motion: reduce) {
+  .portraet-bild,
+  .nav-links a:not(.knopf)::after { transition: none !important; }
+  .t-label::before { animation: none !important; width: 28px; opacity: 0.55; }
+}
+
+/* ── Formular ────────────────────────────────────────────────────── */
+
+.feld {
+  width: 100%;
+  min-height: 48px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--bg3);
-  padding: 0.8rem 0;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  color: #1A1A1A;
-  outline: none;
+  border-bottom: 1px solid var(--linie);
+  padding: 0.75rem 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1rem;           /* 16 px: darunter zoomt iOS beim Antippen hinein */
+  font-weight: 400;
+  color: var(--tinte);
   border-radius: 0;
+  outline: none;
+  transition: border-color 220ms var(--ease);
+}
+.feld:focus { border-bottom-color: var(--gruen); }
+.feld::placeholder { color: var(--grau-3); }
+
+select.feld {
   -webkit-appearance: none;
-  transition: border-color 0.5s ease;
-}
-.form-input:focus {
-  border-bottom-color: var(--brown);
-}
-.form-input::placeholder {
-  color: rgba(94,81,72,0.55);
-}
-.form-select {
+  appearance: none;
   cursor: pointer;
-  color: rgba(94,81,72,0.55);
-}
-.form-select.filled {
-  color: #1A1A1A;
-}
-.form-textarea {
-  resize: none;
-  line-height: 1.9;
-  min-height: 80px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--grau-2) 50%),
+                    linear-gradient(135deg, var(--grau-2) 50%, transparent 50%);
+  background-position: calc(100% - 14px) center, calc(100% - 9px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
 }
 
-/* Mobile menu */
-#mob-menu {
-  display: none;
+textarea.feld {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
 }
-#mob-menu.open {
+
+.feld-label {
+  display: block;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  color: var(--tinte);
+  margin-bottom: var(--luft-1);
+}
+
+/* Meldung ohne Rot. Traegt ihre Bedeutung ueber Symbol, Fettung und
+   Kasten, nicht ueber Farbe. */
+.meldung {
   display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--papier-2);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+}
+.meldung p {
+  font-size: var(--schrift-fein);
+  font-weight: 500;
+  color: var(--tinte);
+  line-height: 1.6;
+}
+
+/* Zwei Spalten fuer die kurzen Felder, volle Breite fuer Textfelder,
+   Meldungen und den Absenden-Bereich. Halbiert die Hoehe des Formulars. */
+.formular-raster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--luft-3) var(--luft-3);
+  align-items: start;
+}
+.formular-raster > .ganze-zeile { grid-column: 1 / -1; }
+
+@media (max-width: 720px) {
+  .formular-raster { grid-template-columns: 1fr; }
+}
+
+.formular-felder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--luft-4);
+}
+
+/* ── Raster innerhalb der Abschnitte ─────────────────────────────── */
+
+.galerie-raster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--luft-1);
+}
+
+.filme-raster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--luft-4);
+}
+
+.zwei-spalten {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--luft-5);
+}
+
+.vertrauen-raster {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--luft-3);
+}
+@media (max-width: 960px) {
+  .vertrauen-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Trennt in der Kopfzeile das Menue vom Kontaktteil. Ohne ihn liest
+   sich die Telefonnummer wie ein weiterer Menuepunkt.                */
+.nav-trenner {
+  display: block;
+  width: 1px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.22;
+  flex-shrink: 0;
+}
+
+/* Drei Leistungen nebeneinander. Untereinander war der Abschnitt der
+   laengste der Seite. */
+/* Nevio: "das sieht ein bisschen unsymmetrisch aus". Stimmt, und zwar
+   messbar: weil "Hochzeits-fotografie" zweizeilig umbricht, sass in
+   dieser Kachel alles darunter 42 px tiefer, und die Trennlinien standen
+   auf drei verschiedenen Hoehen.
+
+   subgrid loest das: die Kacheln teilen sich die Zeilen des aeusseren
+   Rasters, also beginnen Titel, Untertitel, Text, Linie und Liste
+   ueberall auf derselben Hoehe. Weil zwischen Raster und Kachel noch
+   die Einblend-Huelle sitzt, muss die Kette ueber zwei Ebenen laufen. */
+.leistungs-raster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto auto auto auto 1fr;
+  gap: var(--luft-3);
+}
+
+.leistungs-raster > * {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+}
+
+.leistung {
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+/* Browser ohne subgrid bekommen wenigstens gleich hohe Titel. */
+@supports not (grid-template-rows: subgrid) {
+  .leistungs-raster > *, .leistung { display: block; grid-row: auto; }
+  .leistung h3 { min-height: 2.2em; }
+}
+
+.fragen-raster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--luft-2);
+  align-items: start;
+}
+
+.stimmen-raster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--luft-5);
+  align-items: stretch;
+}
+
+.fuss-raster {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--luft-5);
+}
+
+.fuss-leiste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--luft-2);
+  flex-wrap: wrap;
+}
+
+.anfrage-raster {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: var(--luft-6);
+  align-items: start;
+}
+.anfrage-links { position: sticky; top: 120px; }
+
+/* Ablauf: grosse Ziffer links, Text rechts */
+/* Fuenf Schritte in drei Spalten: die letzten beiden fallen in die
+   zweite Zeile und stehen dort bewusst breiter. Besser als fuenf
+   duenne Saeulen, in denen jedes Wort umbricht.                      */
+/* Fuenf Schritte, fuenf Spalten, darueber eine Linie, die sie
+   verbindet. Der Strich sitzt auf Hoehe der Ziffern und laeuft
+   durch - ein Ablauf ist eine Folge, keine Sammlung. */
+.schritt-raster {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: auto auto 1fr;
+  gap: var(--luft-4) var(--luft-3);
+  position: relative;
+  padding-top: var(--luft-3);
+}
+.schritt-raster::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--luft-3) + 0.9rem);
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--linie);
+}
+.schritt-raster > * {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  position: relative;
+}
+.schritt {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: var(--luft-2);
+  background: var(--papier);
+}
+.schritt h3 { align-self: start; }
+.schritt .t-fein { align-self: start; }
+
+@supports not (grid-template-rows: subgrid) {
+  .schritt-raster > *, .schritt { display: block; grid-row: auto; }
+  .schritt h3 { margin: var(--luft-2) 0 var(--luft-1); }
+}
+
+.schritt-ziffer {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--linie);
+  font-variant-numeric: tabular-nums;
+}
+.dunkel .schritt-ziffer { color: rgba(244,244,242,0.18); }
+
+.liste-haken {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--luft-2);
+}
+.liste-haken li {
+  display: flex;
+  gap: var(--luft-2);
+  align-items: flex-start;
+  font-size: var(--schrift-fein);
+  color: var(--grau-2);
+  line-height: 1.6;
+}
+.liste-haken svg { flex-shrink: 0; margin-top: 4px; }
+
+/* Bild wandert beim Zeigen leicht heran. Nur am Rechner. */
+@media (hover: hover) {
+  .filmkachel:hover .filmkachel-bild,
+  .galerie-kachel:hover .galerie-bild { transform: scale(1.03); }
+  .filmkachel:hover .filmkachel-knopf { background: rgba(104,120,80,0.85); }
+}
+
+/* ── Lenis (weiches Scrollen) ────────────────────────────────────── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Mobil ───────────────────────────────────────────────────────
+   Alle Umbrueche stehen hier und nicht in <style>-Bloecken in den
+   Komponenten. Dort schreibt React beim Server-Rendern ">" als
+   "&gt;", was in einem <style> nicht zurueckuebersetzt wird: die
+   Regel wird ungueltig und die Seite hydriert fehlerhaft.          */
+
+@media (max-width: 1024px) {
+  .nav-telefon { display: none !important; }
+  .nav-trenner { display: none !important; }
+}
+
+@media (max-width: 900px) {
+  .zwei-spalten     { grid-template-columns: 1fr; gap: var(--luft-4); }
+  .filme-raster     { grid-template-columns: 1fr; }
+  .vertrauen-raster { grid-template-columns: repeat(2, 1fr); }
+  .stimmen-raster   { grid-template-columns: 1fr; gap: var(--luft-5); }
+  .fuss-raster      { grid-template-columns: 1fr 1fr; }
+  .fuss-raster > *:first-child { grid-column: 1 / -1; }
+  .anfrage-raster   { grid-template-columns: 1fr; gap: var(--luft-5); }
+  .anfrage-links    { position: static; }
+}
+
+@media (max-width: 860px) {
+  .nav-links    { display: none !important; }
+  .nav-knopf    { display: none !important; }
+  .nav-schalter { display: block !important; }
+  /* Auf dem Handy traegt die Pille nur Marke und Schalter. Sie darf
+     dann nicht mehr eingerueckt sein als der Text darunter.          */
+  /* Auf dem Handy traegt die Pille nur Marke und Schalter, ohne Glas.
+     Dann muss auch der negative Aussenabstand weg, der auf dem Rechner
+     das Glas ueber die Bahn ziehen laesst - sonst steht die Marke bei
+     7 statt 24 px und der Schalter ragt aus dem Bild.                */
+  .nav-pille    { padding-left: 0 !important; padding-right: 0 !important;
+                  margin-inline: 0 !important;
+                  background: transparent !important; border-color: transparent !important;
+                  box-shadow: none !important; backdrop-filter: none !important;
+                  -webkit-backdrop-filter: none !important; }
+}
+
+@media (max-width: 760px) {
+  .galerie-raster  { grid-template-columns: repeat(2, 1fr); }
+  .paar            { grid-template-columns: 1fr; gap: var(--luft-4); }
+  .schritt-raster  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .schritt-raster::before { display: none; }
+  .leistungs-raster{ grid-template-columns: 1fr; }
+  .fragen-raster   { grid-template-columns: 1fr; }
+  .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
+  .schritt-ziffer  { font-size: 1.75rem; }
+}
+
+@media (max-width: 560px) {
+  .vertrauen-raster { grid-template-columns: 1fr; }
+  .schritt-raster   { grid-template-columns: 1fr; }
+  .fuss-raster      { grid-template-columns: 1fr; }
+  .fuss-leiste      { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .galerie-raster { grid-template-columns: 1fr; }
+}
+
+/* ── Bewegung nur, wenn erwuenscht ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

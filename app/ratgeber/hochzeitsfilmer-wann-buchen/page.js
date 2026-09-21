@@ -13,7 +13,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
-  dateModified: '2025-05-13',
+  dateModified: '2026-09-21',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/hochzeitsfilmer-wann-buchen' },
   image: 'https://amoriva-films.de/images/og-image.jpg',
 };

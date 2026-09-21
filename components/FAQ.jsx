@@ -3,9 +3,6 @@
 import { useState } from 'react';
 import FadeIn from './FadeIn';
 
-const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
-
 const fragen = [
   {
     frage: 'Was kostet ein Hochzeitsfilm bei euch?',
@@ -37,48 +34,72 @@ export default function FAQ() {
   const [offen, setOffen] = useState(null);
 
   return (
-    <section style={{ padding: '6rem 1.5rem', background: '#FAFAF8', borderTop: '0.5px solid #E8E2DC' }}>
-      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+    <section className="abschnitt hell-2">
+      <div className="bahn">
         <FadeIn>
-          <p style={{ textAlign: 'center', fontFamily: sans, fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8A7B6F', marginBottom: '1rem', fontWeight: 300 }}>
-            Häufige Fragen
-          </p>
-          <h2 style={{ textAlign: 'center', fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 300, color: '#3B2F2A', marginBottom: '3.5rem' }}>
-            Was ihr wissen wollt.
-          </h2>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
+              <h2 className="t-gross">
+                Was ihr <span className="kursiv">wissen wollt.</span>
+              </h2>
+            </div>
+          </div>
         </FadeIn>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {fragen.map((f, i) => (
-            <FadeIn key={i} delay={i * 0.05}>
-              <div style={{ borderBottom: '0.5px solid #E8E2DC' }}>
-                <button
-                  onClick={() => setOffen(offen === i ? null : i)}
-                  style={{
-                    width: '100%', display: 'flex', justifyContent: 'space-between',
-                    alignItems: 'center', padding: '1.5rem 0',
-                    background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem',
-                  }}
-                >
-                  <span style={{ fontFamily: sans, fontSize: '16px', fontWeight: 400, color: '#3B2F2A', lineHeight: 1.4 }}>
-                    {f.frage}
-                  </span>
-                  <span style={{
-                    fontSize: '20px', color: '#C4973A', flexShrink: 0,
-                    transition: 'transform 0.25s ease',
-                    transform: offen === i ? 'rotate(45deg)' : 'rotate(0deg)',
-                    display: 'inline-block', lineHeight: 1,
-                  }}>
-                    +
-                  </span>
-                </button>
-                {offen === i && (
-                  <p style={{ fontFamily: sans, fontSize: '15px', lineHeight: 1.8, color: '#6B5E57', paddingBottom: '1.5rem', margin: 0, fontWeight: 300 }}>
-                    {f.antwort}
-                  </p>
-                )}
-              </div>
-            </FadeIn>
-          ))}
+
+        {/* Die Fragen liefen als Linienliste ueber die halbe Seitenbreite.
+            Jetzt zwei Spalten aus Kacheln: kuerzere Wege fuers Auge und
+            der Abschnitt wird nur noch halb so hoch.                   */}
+        <div className="fragen-raster">
+          {fragen.map((f, i) => {
+            const auf = offen === i;
+            return (
+              <FadeIn key={i}>
+                <div className="kachel" style={{ paddingBlock: 'var(--luft-2)' }}>
+                  <h3>
+                    <button
+                      onClick={() => setOffen(auf ? null : i)}
+                      aria-expanded={auf}
+                      style={{
+                        width: '100%', display: 'flex', gap: 'var(--luft-3)',
+                        justifyContent: 'space-between', alignItems: 'center',
+                        paddingBlock: 'var(--luft-2)', background: 'none', border: 'none',
+                        cursor: 'pointer', textAlign: 'left',
+                        fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                        fontSize: 'var(--schrift-klein)', fontWeight: 500,
+                        color: 'var(--tinte)', lineHeight: 1.35,
+                      }}
+                    >
+                      {f.frage}
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          flexShrink: 0, width: '16px', height: '16px',
+                          position: 'relative',
+                          transform: auf ? 'rotate(45deg)' : 'rotate(0deg)',
+                          transition: 'transform 250ms var(--ease)',
+                        }}
+                      >
+                        <span style={{
+                          position: 'absolute', top: '50%', left: 0, right: 0,
+                          height: '1px', background: 'var(--grau-2)',
+                        }} />
+                        <span style={{
+                          position: 'absolute', left: '50%', top: 0, bottom: 0,
+                          width: '1px', background: 'var(--grau-2)',
+                        }} />
+                      </span>
+                    </button>
+                  </h3>
+                  {auf && (
+                    <p className="t-text t-grau" style={{ paddingBottom: 'var(--luft-2)' }}>
+                      {f.antwort}
+                    </p>
+                  )}
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

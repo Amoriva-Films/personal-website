@@ -13,11 +13,17 @@ module.exports = {
         'text-primary': '#1A1A1A',
         soft:   '#5E5148',
         brown:  '#3B2F2A',
-        gold:   '#B79B72',
+        gruen:   '#687850',
       },
+      /* Diese beiden standen bis 21.09.2026 als reine Namen da:
+         'Cormorant Garamond' ist gar nicht mehr geladen, und 'Inter'
+         trifft die von next/font erzeugte Familie NICHT - next/font
+         haengt einen Hash an den Namen. Beides waere still auf Georgia
+         und die Systemschrift zurueckgefallen. Jetzt zeigen sie auf
+         dieselben Variablen wie der Rest der Seite. */
       fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans:  ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-display)', 'Georgia', 'serif'],
+        sans:  ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display': 'clamp(56px, 7vw, 92px)',

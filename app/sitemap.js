@@ -9,8 +9,15 @@ const RATGEBER = [
   'same-day-edit-hochzeit',
 ];
 
+/* Stand der letzten inhaltlichen Aenderung. Bewusst ein fester Wert:
+   vorher stand hier new Date(), damit meldete die Seite Google jeden Tag
+   aufs Neue, jede Unterseite habe sich geaendert. Wer staendig "alles neu"
+   meldet, wird irgendwann nicht mehr geglaubt. Beim naechsten echten
+   Umbau hier das Datum nachziehen. */
+const STAND = '2026-09-21';
+
 export default function sitemap() {
-  const jetzt = new Date();
+  const jetzt = new Date(STAND);
   const eintrag = (pfad, prioritaet, takt = 'monthly') => ({
     url: pfad ? `${BASIS}/${pfad}` : BASIS,
     lastModified: jetzt,
@@ -20,9 +27,12 @@ export default function sitemap() {
 
   return [
     eintrag('', 1),
+    // Filme sind das Wichtigste, was die Seite zeigt - deshalb meldet
+    // sie sich erst bei Google an, wenn dort auch Filme liegen.
+    // eintrag('filme', 0.95),
     eintrag('angebote', 0.9),
     eintrag('leistungen', 0.8),
-    eintrag('referenzen', 0.8),
+    // eintrag('referenzen', 0.9),   // Galerie raus, Seite nicht mehr verlinkt
     eintrag('anfrage', 0.8, 'yearly'),
     eintrag('ratgeber', 0.7),
     ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),

@@ -5,28 +5,28 @@ export const metadata = {
   alternates: { canonical: 'https://amoriva-films.de/datenschutz' },
 };
 
-const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "'Inter', sans-serif";
+const serif = "var(--font-display), Georgia, serif";
+const sans  = "var(--font-inter), system-ui, sans-serif";
 
 const linkStyle = {
-  color: '#B79B72',
+  color: 'var(--grau-dunkel)',
   textDecoration: 'none',
 };
 
 function Divider() {
-  return <hr style={{ border: 'none', borderTop: '1px solid rgba(59,47,42,0.12)', margin: '2.8rem 0' }} />;
+  return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', marginBlock: 'var(--luft-5)' }} />;
 }
 
 function Section({ title, children }) {
   return (
-    <div style={{ marginBottom: '1.6rem' }}>
+    <div style={{ marginBottom: 'var(--luft-3)' }}>
       <h2 style={{
         fontFamily: serif,
         fontSize: '1.4rem',
         fontWeight: 300,
-        color: '#2A1F1B',
-        marginBottom: '0.9rem',
-        marginTop: '2.4rem',
+        color: 'var(--tinte)',
+        marginBottom: 'var(--luft-2)',
+        marginTop: 'var(--luft-4)',
       }}>
         {title}
       </h2>
@@ -34,11 +34,11 @@ function Section({ title, children }) {
         fontFamily: sans,
         fontSize: '0.88rem',
         lineHeight: 1.95,
-        color: '#5E5148',
+        color: 'var(--grau-2)',
         fontWeight: 300,
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.4rem',
+        gap: 'var(--luft-1)',
       }}>
         {children}
       </div>
@@ -49,51 +49,22 @@ function Section({ title, children }) {
 export default function Datenschutz() {
   return (
     <>
-      {/* Header */}
-      <div style={{
-        background: '#2A1F1B',
-        padding: '140px 8% 80px',
-        textAlign: 'center',
-      }}>
-        <p style={{
-          fontFamily: sans,
-          fontSize: '0.66rem',
-          fontWeight: 300,
-          letterSpacing: '0.30em',
-          textTransform: 'uppercase',
-          color: '#B79B72',
-          marginBottom: '1.6rem',
-        }}>
-          Rechtliches
-        </p>
-        <h1 style={{
-          fontFamily: serif,
-          fontSize: 'clamp(36px, 5vw, 68px)',
-          fontWeight: 300,
-          color: '#F6F1EB',
-          lineHeight: 1.05,
-          letterSpacing: '-0.02em',
-        }}>
-          Datenschutzerklärung
-        </h1>
-        <p style={{
-          fontFamily: serif,
-          fontStyle: 'italic',
-          fontSize: '1rem',
-          color: 'rgba(246,241,235,0.35)',
-          marginTop: '1rem',
-        }}>
-          Transparenz ist uns wichtig.
-        </p>
-      </div>
+      {/* Kopf */}
+      <section className="abschnitt-kopf dunkel">
+        <div className="bahn">
+          <p className="t-label ab-3">Rechtliches</p>
+          <h1 className="t-display" style={{ color: 'var(--auf-dunkel)' }}>
+            Datenschutzerklärung
+          </h1>
+          <p className="t-text" style={{ color: 'var(--grau-dunkel)', marginTop: 'var(--luft-3)' }}>
+            Transparenz ist uns wichtig.
+          </p>
+        </div>
+      </section>
 
-      {/* Content */}
-      <div style={{
-        maxWidth: '760px',
-        margin: '0 auto',
-        padding: '80px 8% 120px',
-        background: '#F6F1EB',
-      }}>
+      {/* Inhalt */}
+      <section className="abschnitt hell">
+        <div className="bahn lesebreite">
 
         <Section title="1. Verantwortlicher">
           <p>
@@ -231,21 +202,21 @@ export default function Datenschutz() {
 
         <Divider />
 
-        <div style={{ marginTop: '3rem' }}>
+        <div style={{ marginTop: 'var(--luft-5)' }}>
           <Link href="/" style={{
             fontFamily: sans,
             fontSize: '0.72rem',
             fontWeight: 300,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: '#B79B72',
+            color: 'var(--grau-dunkel)',
             textDecoration: 'none',
           }}>
             ← Zurück zur Startseite
           </Link>
+          </div>
         </div>
-
-      </div>
+      </section>
     </>
   );
 }

@@ -1,19 +1,24 @@
 import './globals.css';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Fraunces, Inter } from 'next/font/google';
 import Nav from '@/components/Nav';
 import StructuredData from '@/components/StructuredData';
 
-const cormorant = Cormorant_Garamond({
+/* Fraunces, dieselbe Schrift wie auf amoriva.app. Beide Marken sind
+   eine Familie, und eine Hochzeitsfirma erkennt man an der Schrift
+   frueher als am Logo. Variabel, deshalb reicht eine Angabe fuer den
+   ganzen Bereich von 400 bis 600. Kursiv brauchen wir fuer den Akzent
+   in den Ueberschriften. */
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  axes: ['SOFT', 'WONK', 'opsz'],
+  variable: '--font-display',
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['400', '500'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -58,11 +63,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="de" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="de" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
         <StructuredData />
       </head>
-      <body style={{ margin: 0, padding: 0, background: '#F6F1EB' }}>
+      <body style={{ margin: 0, padding: 0, background: '#FBFBFA' }}>
         <Nav />
         {children}
       </body>

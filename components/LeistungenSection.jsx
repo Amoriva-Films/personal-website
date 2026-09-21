@@ -1,19 +1,18 @@
 'use client';
 
+import Link from 'next/link';
 import FadeIn from './FadeIn';
 
-const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
-const brown = '#3B2F2A';
-const soft  = '#6B5E57';
+/* Keine Preise, keine Ab-Preise, keine Zahlen. Eine Zahl macht
+   vergleichbar und zieht die Anfragen an, die nur auf den Preis
+   schauen. Das Budgetfeld im Anfrageformular bleibt. */
 
 const services = [
   {
     nr: '01',
     title: 'Hochzeitsfilm',
     subtitle: 'Cinematische Videografie Niedersachsen',
-    description: 'Ein cinematic Hochzeitsfilm der sich anfühlt wie ein echtes Kinoerlebnis. Wir fangen die Atmosphäre, die Emotionen und die kleinen Momente ein die euren Tag besonders machen. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
+    description: 'Ein Film, der sich anfühlt wie Kino. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
     includes: [
       'Cinematischer Hauptfilm (3 bis 12 Minuten)',
       'Emotionaler Highlights-Clip (60 bis 90 Sekunden)',
@@ -24,9 +23,12 @@ const services = [
   },
   {
     nr: '02',
-    title: 'Hochzeitsfotografie',
+    /* Weiches Trennzeichen: unsichtbar, ausser die Zeile bricht.
+       Ein Wort ohne Trennstelle kann nicht umbrechen und lief deshalb
+       durch die Ziffer. */
+    title: 'Hochzeits\u00ADfotografie',
     subtitle: 'Fine Art Fotografie Niedersachsen',
-    description: 'Hochzeitsfotos die zeitlos sind. Wir arbeiten im Fine Art Stil und achten auf Licht, Tiefe und Authentizität. Keine gestellten Fotos. Nur echte Momente.',
+    description: 'Zeitlose Bilder im Fine-Art-Stil. Keine gestellten Fotos, nur echte Momente.',
     includes: [
       'Vollständige Fotobegleitung vom Getting Ready bis zum Tanz',
       'Bearbeitete Galeriefotos in hoher Auflösung',
@@ -38,7 +40,7 @@ const services = [
     nr: '03',
     title: 'Film und Foto',
     subtitle: 'Das komplette Hochzeitspaket',
-    description: 'Ihr bekommt beides aus einer Hand. Kein zweites Team, keine Koordination zwischen verschiedenen Anbietern. Wir kennen euren Tag und halten ihn vollständig fest. Film und Foto perfekt aufeinander abgestimmt.',
+    description: 'Beides aus einer Hand. Kein zweites Team, keine Koordination zwischen Anbietern.',
     includes: [
       'Alles aus Film und Fotografie-Paket',
       'Perfekte Abstimmung durch ein Team',
@@ -47,69 +49,65 @@ const services = [
   },
 ];
 
-function ServiceRow({ s }) {
-  return (
-    <FadeIn>
-      <div className="service-row" style={{
-        borderTop: '1px solid rgba(59,47,42,0.10)',
-        paddingTop: 'clamp(36px, 4.5vw, 60px)',
-        paddingBottom: 'clamp(36px, 4.5vw, 60px)',
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        gap: 'clamp(28px, 4vw, 80px)',
-      }}>
-        <div>
-          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: gold, fontWeight: 300, marginBottom: '1rem' }}>
-            {s.nr}
-          </p>
-          <h3 style={{ fontFamily: serif, fontSize: 'clamp(24px, 2.6vw, 38px)', fontWeight: 300, color: brown, lineHeight: 1.1, marginBottom: '0.5rem' }}>
-            {s.title}
-          </h3>
-          <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.20em', textTransform: 'uppercase', color: soft, fontWeight: 300, opacity: 0.65 }}>
-            {s.subtitle}
-          </p>
-        </div>
-        <div>
-          <p style={{ fontFamily: sans, fontSize: 'clamp(14px, 1.2vw, 16px)', fontWeight: 300, color: soft, lineHeight: 1.85, marginBottom: '2rem' }}>
-            {s.description}
-          </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
-            {s.includes.map((item, i) => (
-              <li key={i} style={{ fontFamily: sans, fontSize: '13px', fontWeight: 300, color: soft, display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                <span style={{ color: gold, flexShrink: 0, marginTop: '2px' }}>›</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </FadeIn>
-  );
-}
-
 export default function LeistungenSection() {
   return (
-    <section id="leistungen" style={{ background: '#F6F1EB' }}>
-      <div style={{ padding: 'clamp(64px, 7vw, 96px) 8% 0' }}>
+    <section id="leistungen" className="abschnitt hell-2">
+      <div className="bahn">
         <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '11px', fontWeight: 300, letterSpacing: '0.40em', textTransform: 'uppercase', color: gold, marginBottom: '1.4rem' }}>
-            Leistungen
-          </span>
-          <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 4vw, 58px)', fontWeight: 300, lineHeight: 1.05, color: brown, maxWidth: '680px' }}>
-            Was wir für euch <em style={{ fontStyle: 'italic' }}>tun können.</em>
-          </h2>
+          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+            <div>
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Leistungen</p>
+              <h2 className="t-gross">
+                Was wir für euch <span className="kursiv">tun können.</span>
+              </h2>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* Lagen als drei Kacheln untereinander, jede zweispaltig - der
+            Abschnitt kam damit auf 1,75 Bildschirme und war der laengste
+            der ganzen Seite. Jetzt nebeneinander: drei Leistungen sind
+            eine Auswahl, und eine Auswahl vergleicht man, statt sie zu
+            durchscrollen. */}
+        <div className="leistungs-raster">
+          {services.map((s, i) => (
+            <FadeIn key={s.nr} index={i}>
+              {/* Die Ziffer sitzt jetzt oben rechts und liegt hinter dem
+                  Titel statt ueber ihm. Dadurch beginnt jede Kachel mit
+                  dem, was zaehlt - dem Namen der Leistung. */}
+              <div className="kachel leistung" style={{ height: '100%' }}>
+                <span className="leistung-ziffer" aria-hidden="true">{s.nr}</span>
+                <h3 className="t-mittel" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
+                <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>{s.subtitle}</p>
+                <p className="t-fein t-grau" style={{ marginBottom: 'var(--luft-3)' }}>{s.description}</p>
+                <div style={{ borderTop: '1px solid var(--linie)', marginBottom: 'var(--luft-3)' }} />
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
+                  {s.includes.map((item, i) => (
+                    <li key={i} style={{
+                      display: 'flex', gap: 'var(--luft-1)', alignItems: 'flex-start',
+                      fontSize: '0.875rem', color: 'var(--grau-2)', lineHeight: 1.55,
+                    }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="var(--gruen)" strokeWidth="2" strokeLinecap="round"
+                           strokeLinejoin="round" aria-hidden="true"
+                           style={{ flexShrink: 0, marginTop: '4px' }}>
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <FadeIn>
+          <div style={{ paddingTop: 'var(--luft-4)', borderTop: '1px solid var(--linie)' }}>
+            <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>
+          </div>
         </FadeIn>
       </div>
-      <div style={{ padding: '0 8% clamp(48px, 6vw, 80px)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          {services.map((s) => <ServiceRow key={s.nr} s={s} />)}
-        </div>
-      </div>
-      <style>{`
-        @media (max-width: 760px) {
-          .service-row { grid-template-columns: 1fr !important; gap: 1.4rem !important; }
-        }
-      `}</style>
     </section>
   );
 }

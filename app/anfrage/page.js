@@ -1,44 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import SmoothScroll from '../../components/SmoothScroll';
-import WhatsApp from '../../components/WhatsApp';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import WhatsApp from '@/components/WhatsApp';
 
-const ease = [0.22, 1, 0.36, 1];
+export default function AnfragePage() {
+  const [gesendet, setGesendet] = useState(false);
+  const [laedt, setLaedt] = useState(false);
+  const [fehler, setFehler] = useState('');
 
-const selectStyle = {
-  width: '100%',
-  background: 'transparent',
-  border: 'none',
-  borderBottom: '1px solid #C8BDB5',
-  padding: '0.8rem 0',
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '1rem',
-  fontWeight: 300,
-  color: '#1A1A1A',
-  outline: 'none',
-  borderRadius: 0,
-  WebkitAppearance: 'none',
-  cursor: 'pointer',
-  transition: 'border-color 0.5s',
-};
-
-export default function InquirePage() {
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  async function handleSubmit(e) {
+  async function absenden(e) {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+    setLaedt(true);
+    setFehler('');
 
     const fd = new FormData(e.target);
-    const payload = {
+    const daten = {
       name: fd.get('name'),
       email: fd.get('email'),
       hochzeitsdatum: fd.get('Hochzeitsdatum'),
@@ -56,375 +35,164 @@ export default function InquirePage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(daten),
       });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok) {
-        setSent(true);
-      } else {
-        setError(data.error || 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut.');
-      }
+      const antwort = await res.json().catch(() => ({}));
+      if (res.ok) setGesendet(true);
+      else setFehler(antwort.error || 'Es ist ein Fehler aufgetreten. Bitte versucht es erneut.');
     } catch {
-      setError('Verbindungsfehler. Bitte prüft eure Internetverbindung oder schreibt uns direkt an booking@amoriva-films.de.');
+      setFehler('Verbindungsfehler. Bitte prüft eure Internetverbindung oder schreibt uns direkt an booking@amoriva-films.de.');
     }
-    setLoading(false);
+    setLaedt(false);
   }
 
-  const labelStyle = {
-    display: 'block',
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '0.78rem',
-    letterSpacing: '0.22em',
-    textTransform: 'uppercase',
-    color: '#3B2F2A',
-    fontWeight: 400,
-    marginBottom: '0.9rem',
-  };
-
-  const inputStyle = {
-    width: '100%',
-    background: 'transparent',
-    border: 'none',
-    borderBottom: '1px solid #C8BDB5',
-    padding: '0.8rem 0',
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
-    fontWeight: 300,
-    color: '#1A1A1A',
-    outline: 'none',
-    borderRadius: 0,
-    transition: 'border-color 0.5s',
-  };
-
   return (
-    <SmoothScroll>
+    <>
       <Nav />
 
-      <main
-        style={{
-          padding: 'clamp(120px, 16vw, 200px) 8% clamp(80px, 10vw, 140px)',
-          background: '#F6F1EB',
-          minHeight: '100vh',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1280px',
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: '42% 1fr',
-            gap: 'clamp(4rem, 8vw, 10rem)',
-            alignItems: 'start',
-          }}
-          className="inq-grid"
-        >
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease }}
-            style={{ position: 'sticky', top: '120px' }}
-            className="inq-left"
-          >
-            <span
-              style={{
-                display: 'block',
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.68rem',
-                fontWeight: 300,
-                letterSpacing: '0.32em',
-                textTransform: 'uppercase',
-                color: '#B79B72',
-                marginBottom: '1.6rem',
-              }}
-            >
-              Jetzt anfragen
-            </span>
-            <h1
-              style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: 'clamp(38px, 4.2vw, 62px)',
-                fontWeight: 300,
-                fontStyle: 'italic',
-                lineHeight: 1.08,
-                color: '#3B2F2A',
-                marginBottom: '2rem',
-                hyphens: 'none',
-                wordBreak: 'keep-all',
-              }}
-            >
-              Beginnt mit<br />
-              eurer Geschichte.
-            </h1>
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 'clamp(15px, 1.2vw, 17px)',
-                fontWeight: 300,
-                lineHeight: 1.88,
-                color: '#5E5148',
-                maxWidth: '360px',
-                marginBottom: '2.8rem',
-              }}
-            >
-              Jede Nachricht wird persönlich gelesen. Erzählt uns von eurer
-              Hochzeit, eurer Vision und davon, was euer Film und eure Bilder
-              später auslösen sollen.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <a
-                href="mailto:booking@amoriva-films.de"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.84rem',
-                  fontWeight: 300,
-                  color: '#5E5148',
-                  textDecoration: 'none',
-                  transition: 'color 0.3s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = '#3B2F2A'}
-                onMouseLeave={e => e.currentTarget.style.color = '#5E5148'}
-              >
-                booking@amoriva-films.de
-              </a>
-              <a
-                href="tel:015565559747"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.84rem',
-                  fontWeight: 300,
-                  color: '#5E5148',
-                  textDecoration: 'none',
-                  transition: 'color 0.3s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = '#3B2F2A'}
-                onMouseLeave={e => e.currentTarget.style.color = '#5E5148'}
-              >
-                01556 5559747
-              </a>
-            </div>
-          </motion.div>
+      <main className="hell" style={{ minHeight: '100vh' }}>
+        <section className="abschnitt-kopf">
+          <div className="bahn anfrage-raster">
 
-          {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1.1, ease }}
-          >
-            {sent ? (
-              <div style={{ paddingTop: '2rem' }}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
-                    fontSize: 'clamp(28px, 3vw, 42px)',
-                    fontWeight: 300,
-                    fontStyle: 'italic',
-                    color: '#3B2F2A',
-                    marginBottom: '1.2rem',
-                  }}
-                >
-                  Vielen Dank.
-                </p>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '1rem',
-                    fontWeight: 300,
-                    lineHeight: 1.85,
-                    color: '#5E5148',
-                  }}
-                >
-                  Eure Nachricht ist angekommen. Nevio meldet sich persönlich,
-                  spätestens am nächsten Tag.
-                </p>
+            {/* Links: worum es geht */}
+            <div className="anfrage-links">
+              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Jetzt anfragen</p>
+              <h1 className="t-display" style={{ marginBottom: 'var(--luft-3)' }}>
+                Beginnt mit eurer Geschichte.
+              </h1>
+              <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
+                Jede Nachricht wird persönlich gelesen. Antwort in der Regel
+                innerhalb von 24 Stunden.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
+                <a href="mailto:booking@amoriva-films.de" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
+                  booking@amoriva-films.de
+                </a>
+                <a href="tel:+4915565559747" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
+                  +49 155 6555 9747
+                </a>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate>
-                {/* Row 1 */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
-                  <div>
-                    <label htmlFor="feld-namen" style={labelStyle}>Eure Namen</label>
-                    <input
-                      id="feld-namen"
-                      type="text"
-                      name="name"
-                      placeholder="Lena & Thomas"
-                      required
-                      style={inputStyle}
-                      onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                      onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="feld-email" style={labelStyle}>E-Mail Adresse</label>
-                    <input
-                      id="feld-email"
-                      type="email"
-                      name="email"
-                      placeholder="eure@email.de"
-                      required
-                      style={inputStyle}
-                      onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                      onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                    />
-                  </div>
-                </div>
+            </div>
 
-                {/* Row 2 */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
-                  <div>
-                    <label htmlFor="feld-telefon" style={labelStyle}>Telefonnummer</label>
-                    <input
-                      id="feld-telefon"
-                      type="tel"
-                      name="Telefon"
-                      placeholder="+49 …"
-                      style={inputStyle}
-                      onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                      onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="feld-datum" style={labelStyle}>Hochzeitsdatum</label>
-                    <input
-                      id="feld-datum"
-                      type="date"
-                      name="Hochzeitsdatum"
-                      required
-                      style={inputStyle}
-                      onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                      onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                    />
-                  </div>
+            {/* Rechts: das Formular, ein Feld unter dem anderen */}
+            <div>
+              {gesendet ? (
+                <div>
+                  <h2 className="t-gross" style={{ marginBottom: 'var(--luft-2)' }}>Vielen Dank.</h2>
+                  <p className="t-text t-grau">
+                    Eure Nachricht ist angekommen. Nevio meldet sich persönlich,
+                    spätestens am nächsten Tag.
+                  </p>
                 </div>
-
-                {/* Row 3 */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', marginBottom: '2.8rem' }} className="form-row">
+              ) : (
+                /* Lag als eine Kolonne mit neun Feldern und 2,25 rem
+                   Abstand untereinander - das war die halbe Seitenlaenge.
+                   Jetzt zwei Spalten: kurze Felder teilen sich eine Zeile,
+                   die beiden Textfelder laufen ueber die volle Breite. */
+                <form onSubmit={absenden} noValidate className="formular-raster">
                   <div>
-                    <label htmlFor="feld-ort" style={labelStyle}>Wo findet die Hochzeit statt?</label>
-                    <input
-                      id="feld-ort"
-                      type="text"
-                      name="Location"
-                      placeholder="Hamburg, Toskana …"
-                      style={inputStyle}
-                      onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                      onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                    />
+                    <label className="feld-label" htmlFor="feld-namen">Eure Namen</label>
+                    <input className="feld" id="feld-namen" name="name" type="text"
+                           placeholder="Lena & Thomas" required autoComplete="name" />
                   </div>
+
                   <div>
-                    <label htmlFor="feld-gaeste" style={labelStyle}>Ungefähre Gästeanzahl</label>
-                    <select
-                      id="feld-gaeste"
-                      name="Gaeste"
-                      style={selectStyle}
-                      onChange={e => e.target.style.color = '#1A1A1A'}
-                    >
-                      <option value="" disabled defaultValue hidden></option>
+                    <label className="feld-label" htmlFor="feld-mail">E-Mail Adresse</label>
+                    <input className="feld" id="feld-mail" name="email" type="email"
+                           placeholder="eure@email.de" required autoComplete="email" />
+                  </div>
+
+                  <div>
+                    <label className="feld-label" htmlFor="feld-telefon">Telefonnummer</label>
+                    <input className="feld" id="feld-telefon" name="Telefon" type="tel"
+                           placeholder="+49 …" autoComplete="tel" />
+                  </div>
+
+                  <div>
+                    <label className="feld-label" htmlFor="feld-datum">Hochzeitsdatum</label>
+                    <input className="feld" id="feld-datum" name="Hochzeitsdatum" type="date" required />
+                  </div>
+
+                  <div>
+                    <label className="feld-label" htmlFor="feld-ort">Wo findet die Hochzeit statt?</label>
+                    <input className="feld" id="feld-ort" name="Location" type="text"
+                           placeholder="Hamburg, Toskana …" />
+                  </div>
+
+                  <div>
+                    <label className="feld-label" htmlFor="feld-gaeste">Ungefähre Gästeanzahl</label>
+                    <select className="feld" id="feld-gaeste" name="Gaeste" defaultValue="">
+                      <option value="" disabled>Bitte wählen</option>
                       <option>Unter 50 Gäste</option>
                       <option>50 bis 100 Gäste</option>
                       <option>100 bis 150 Gäste</option>
                       <option>Über 150 Gäste</option>
                     </select>
                   </div>
-                </div>
 
-                {/* Budget */}
-                <div style={{ marginBottom: '2.8rem' }}>
-                  <label htmlFor="feld-budget" style={labelStyle}>Euer Budgetrahmen</label>
-                  <select
-                      id="feld-budget"
-                    name="Budget"
-                    style={selectStyle}
-                    onChange={e => e.target.style.color = '#1A1A1A'}
-                  >
-                    <option value="" disabled defaultValue hidden></option>
-                    <option>2.000 bis 3.500 €</option>
-                    <option>3.500 bis 5.000 €</option>
-                    <option>5.000 bis 7.500 €</option>
-                    <option>Über 7.500 €</option>
-                  </select>
-                </div>
+                  <div>
+                    {/* Stand vorher als Preisspannen in Euro drin. Nevio am
+                        21.09.2026: keine Zahlen. Die Auswahl sagt jetzt
+                        dasselbe ueber die Haltung des Paares, ohne dass es
+                        eine Zahl zu lesen bekommt, an der es uns misst.
+                        Der Feldname "Budget" bleibt, daran haengen die
+                        Mail und der Eingang im Amoriva-Dashboard. */}
+                    <label className="feld-label" htmlFor="feld-budget">Wie steht ihr zum Budget?</label>
+                    <select className="feld" id="feld-budget" name="Budget" defaultValue="">
+                      <option value="" disabled>Bitte wählen</option>
+                      <option>Wir haben noch keine Vorstellung</option>
+                      <option>Wir haben einen festen Rahmen</option>
+                      <option>Wir sind flexibel, wenn es passt</option>
+                      <option>Qualität geht vor Preis</option>
+                    </select>
+                  </div>
 
-                {/* Vision */}
-                <div style={{ marginBottom: '2.8rem' }}>
-                  <label htmlFor="feld-vision" style={labelStyle}>Erzählt uns von eurer Vision</label>
-                  <textarea
-                      id="feld-vision"
-                    name="Vision"
-                    rows={4}
-                    placeholder="Wie stellt ihr euch euren Tag vor? Was soll festgehalten werden?"
-                    style={{ ...inputStyle, resize: 'none', lineHeight: '1.9', minHeight: '84px' }}
-                    onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                    onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                  />
-                </div>
+                  <div className="ganze-zeile">
+                    <label className="feld-label" htmlFor="feld-vision">Erzählt uns von eurer Vision</label>
+                    <textarea className="feld" id="feld-vision" name="Vision" rows={3}
+                              placeholder="Wie stellt ihr euch euren Tag vor? Was soll festgehalten werden?" />
+                  </div>
 
-                {/* Feeling */}
-                <div style={{ marginBottom: '3.5rem' }}>
-                  <label htmlFor="feld-wirkung" style={labelStyle}>Was soll euer Film später auslösen?</label>
-                  <textarea
-                      id="feld-wirkung"
-                    name="Gefuehl"
-                    rows={4}
-                    placeholder="Ein Gefühl, eine Stimmung, ein Bild. Beschreibt es so, wie es euch in den Sinn kommt."
-                    style={{ ...inputStyle, resize: 'none', lineHeight: '1.9', minHeight: '84px' }}
-                    onFocus={e => e.target.style.borderBottomColor = '#3B2F2A'}
-                    onBlur={e => e.target.style.borderBottomColor = '#C8BDB5'}
-                  />
-                </div>
+                  {fehler && (
+                    <div className="meldung ganze-zeile" role="alert">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                           stroke="var(--tinte)" strokeWidth="1.8" strokeLinecap="round"
+                           strokeLinejoin="round" aria-hidden="true"
+                           style={{ flexShrink: 0, marginTop: '1px' }}>
+                        <path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                      </svg>
+                      <p>{fehler}</p>
+                    </div>
+                  )}
 
-                {error && (
-                  <p style={{ color: '#c0392b', fontSize: '0.84rem', marginBottom: '1.5rem' }}>{error}</p>
-                )}
+                  <div className="ganze-zeile">
+                    <button type="submit" disabled={laedt} className="knopf knopf-voll"
+                            style={{ opacity: laedt ? 0.55 : 1 }}>
+                      {laedt ? 'Wird gesendet …' : 'Nachricht senden'}
+                    </button>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-outline"
-                  style={{ color: '#3B2F2A', borderColor: '#3B2F2A', opacity: loading ? 0.5 : 1 }}
-                >
-                  {loading ? 'Wird gesendet …' : 'Nachricht senden'}
-                </button>
-
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.7rem',
-                    color: '#5E5148',
-                    fontWeight: 300,
-                    marginTop: '2rem',
-                    lineHeight: 1.8,
-                  }}
-                >
-                  Ihr bekommt sofort eine kurze Eingangsbestätigung. Die
-                  richtige Antwort schreibt Nevio persönlich, in der Regel
-                  innerhalb von 24 Stunden.
-                </p>
-              </form>
-            )}
-          </motion.div>
-        </div>
+                    {/* Hier werden Name, E-Mail, Telefon, Datum, Ort und
+                        Budget erhoben. Der Hinweis gehoert an die Stelle,
+                        an der die Daten abgeschickt werden. */}
+                    <p className="t-fein" style={{ marginTop: 'var(--luft-3)', fontSize: '0.8125rem' }}>
+                      Ihr bekommt sofort eine Eingangsbestätigung, die richtige
+                      Antwort schreibt Nevio persönlich. Mit dem Absenden
+                      schickt ihr uns die angegebenen Daten, damit wir eure
+                      Anfrage beantworten können. Mehr dazu in unserer{' '}
+                      <Link href="/datenschutz" className="link-fein">Datenschutzerklärung</Link>.
+                    </p>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
       <WhatsApp />
-
-      <style>{`
-        @media (max-width: 900px) {
-          .inq-grid {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-          }
-          .inq-left {
-            position: static !important;
-            text-align: center;
-          }
-        }
-        @media (max-width: 600px) {
-          .form-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        }
-      `}</style>
-    </SmoothScroll>
+    </>
   );
 }

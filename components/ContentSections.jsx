@@ -1,92 +1,138 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import FadeIn from './FadeIn';
+// import Galerie from './Galerie';        // s. u., ausgehaengt
 import TrustBadges from './TrustBadges';
-
-const serif = "var(--font-cormorant), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
-const gold  = '#C4973A';
-const brown = '#3B2F2A';
-const soft  = '#6B5E57';
-const muted = '#8A7B6F';
+// import { Filmkachel, KeineFilme } from './Filmspieler';   // s. u., ausgehaengt
+// import { galerie } from '@/data/galerie';  // s. u., ausgehaengt
+// import { startseitenFilm } from '@/data/filme';           // s. u., ausgehaengt
 
 export default function ContentSections() {
   return (
     <>
-      {/* ── 1. Unsere Arbeit ─────────────────────────────────────────────── */}
-      <section style={{ padding: '7rem 1.5rem', background: '#FFFFFF' }}>
+      {/* ── Ein Film, direkt unter dem Hero ──────────────────────────
+          AUSGEHAENGT, bis es Filme zu zeigen gibt (Nevio, 20.09.2026).
+          Ein Abschnitt, der nur sagt "hier kommen bald Filme", kostet
+          Vertrauen statt es aufzubauen.
+
+          Wieder einhaengen: diesen Block entkommentieren, die Importe
+          fuer Filmkachel/KeineFilme/startseitenFilm oben wieder
+          aktivieren, den Link "Filme" in Nav.jsx und Footer.jsx wieder
+          eintragen, den Hero-Knopf auf /filme zurueckstellen und
+          'filme' wieder in app/sitemap.js aufnehmen. Die Filme selbst
+          kommen in data/filme.js, dort steht die Anleitung.
+
+      <section className="abschnitt dunkel">
+        <div className="bahn">
+          <FadeIn>
+            {startseitenFilm ? (
+              <>
+                <Filmkachel film={startseitenFilm} gross />
+                <div style={{ marginTop: 'var(--luft-4)', textAlign: 'center' }}>
+                  <Link href="/filme" className="knopf knopf-linie">Alle Filme ansehen</Link>
+                </div>
+              </>
+            ) : (
+              <KeineFilme knapp />
+            )}
+          </FadeIn>
+        </div>
+      </section>
+      */}
+
+      {/* ── Unsere Arbeit ───────────────────────────────────────────── */}
+      <section className="abschnitt hell">
         <FadeIn>
-          <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-            <p style={{ fontFamily: sans, fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: muted, marginBottom: '1.75rem', fontWeight: 300 }}>
-              Unsere Arbeit
-            </p>
-            <h2 style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 400, color: brown, lineHeight: 1.25, marginBottom: '2rem' }}>
-              Für einen Tag voller Gefühle,<br />den ihr niemals vergessen wollt.
-            </h2>
-            <div style={{ width: '2.5rem', height: '1px', background: gold, margin: '0 auto 2rem' }} />
-            <p style={{ fontFamily: sans, fontSize: '17px', lineHeight: 1.9, color: soft, marginBottom: '1.5rem', fontWeight: 300 }}>
-              Eure Hochzeit ist mehr als ein Ablauf. Sie ist ein Gefühl. Der Moment bevor ihr euch zum ersten Mal seht. Die Hände die sich halten. Die Stimmen eurer Liebsten. Das Licht, die Musik, die Aufregung und all die kleinen Augenblicke die viel zu schnell vorbeigehen.
-            </p>
-            <p style={{ fontFamily: sans, fontSize: '17px', lineHeight: 1.9, color: soft, marginBottom: '2.75rem', fontWeight: 300 }}>
-              Mit Fotos und Filmen halten wir genau diese Momente fest. Ehrlich, emotional und so dass ihr euch auch Jahre später noch mittendrin fühlt.
-            </p>
-            <Link href="/anfrage" style={{
-              display: 'inline-block', padding: '0.9rem 2.5rem',
-              background: 'transparent', border: '1px solid #3B2F2A',
-              color: '#3B2F2A', fontFamily: sans, fontSize: '12px',
-              letterSpacing: '0.18em', textTransform: 'uppercase', textDecoration: 'none',
-              fontWeight: 300, transition: 'background 0.25s ease, color 0.25s ease',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#3B2F2A'; e.currentTarget.style.color = '#FFFFFF'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#3B2F2A'; }}>
-              Anfrage stellen
-            </Link>
+          <div className="bahn">
+            {/* Ueberschrift und Text standen untereinander in einer Spalte,
+                rechts blieb die halbe Seite leer. Jetzt nebeneinander -
+                das Paar-Raster, das auf amoriva.app die Startseite traegt. */}
+            {/* Nevio am 21.09.2026 zu dieser Section: gefaellt ihm nicht.
+                Sie war reiner Text - eine Hochzeitsfirma, die ueber Bilder
+                spricht und keins zeigt. Jetzt ein Bild-Text-Paar: links
+                der Gedanke, rechts ein Beispiel. Das ist bewusst KEINE
+                Galerie (die ist raus), sondern ein einzelnes Bild als
+                Gestaltungselement.
+
+                Der lange zweite Absatz ist zusammengezogen. Er sagte
+                dasselbe zweimal. */}
+            <div className="arbeit-raster">
+              <div className="arbeit-text">
+                <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Arbeit</p>
+                <h2 className="t-gross" style={{ marginBottom: 'var(--luft-3)' }}>
+                  Für einen Tag voller Gefühle, den ihr <span className="kursiv">niemals vergesst.</span>
+                </h2>
+                <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-3)' }}>
+                  Der Moment bevor ihr euch zum ersten Mal seht. Die Hände die
+                  sich halten. Die Stimmen eurer Liebsten. Das Licht, die Musik
+                  und all die kleinen Augenblicke, die viel zu schnell
+                  vorbeigehen.
+                </p>
+                <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
+                  Genau die halten wir fest. Ehrlich, emotional und so, dass ihr
+                  euch auch Jahre später noch mittendrin fühlt.
+                </p>
+                <Link href="/anfrage" className="knopf knopf-linie">Anfrage stellen</Link>
+              </div>
+
+              <FadeIn richtung="rechts" delay={0.1}>
+                <div className="arbeit-bild">
+                  <Image
+                    src="/images/paare/paar-gehen.webp"
+                    alt="Ein Brautpaar geht Hand in Hand durch den Schlossgarten"
+                    width={1024}
+                    height={1536}
+                    sizes="(max-width: 900px) 100vw, 44vw"
+                    className="arbeit-bild-inner"
+            quality={90}
+                  />
+                </div>
+              </FadeIn>
+            </div>
+
+            <TrustBadges />
           </div>
         </FadeIn>
       </section>
 
-      {/* ── 2. TrustBadges ──────────────────────────────────────────────── */}
-      <TrustBadges />
+      {/* ── Bilder ───────────────────────────────────────────────────
+          AUSGEHAENGT auf Nevios Wunsch (21.09.2026): "Galerie rausnehmen
+          komplett". Die drei Bilder waren das Einzige, was die Seite an
+          eigener Arbeit gezeigt hat.
 
-      {/* ── 3. 3-Bilder-Grid ────────────────────────────────────────────── */}
-      <section style={{ padding: '0 1.5rem 5.5rem', background: '#FFFFFF' }}>
-        <div className="gallery-grid" style={{
-          maxWidth: '1000px', margin: '0 auto',
-          display: 'grid', gridTemplateColumns: '1fr 1fr',
-          gridTemplateRows: '320px 320px', gap: '10px',
-        }}>
-          <FadeIn style={{ gridRow: '1 / 3', overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
-            <div style={{ gridRow: '1 / 3', overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-33.webp" alt="Brautpaar Champagner Hochzeitsmoment Fine Art – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center 20%', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
-                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
+          Wieder einhaengen: diesen Block entkommentieren, die Importe fuer
+          Galerie und galerie oben wieder aktivieren, den Link "Galerie" in
+          Nav.jsx und Footer.jsx eintragen, den Hero-Knopf zurueckstellen
+          und 'referenzen' wieder in app/sitemap.js aufnehmen.
+
+      <section className="abschnitt dunkel">
+        <div className="bahn">
+          <FadeIn>
+            <div style={{
+              display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+              gap: 'var(--luft-3)', flexWrap: 'wrap', marginBottom: 'var(--luft-4)',
+            }}>
+              <div>
+                <p className="t-label" style={{ marginBottom: 'var(--luft-2)' }}>Galerie</p>
+                <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)' }}>
+                  Momente, die <span className="kursiv">bleiben.</span>
+                </h2>
+              </div>
+              <Link href="/referenzen" className="t-fein" style={{
+                color: 'var(--grau-dunkel)', textDecoration: 'none',
+                borderBottom: '1px solid rgba(244,244,242,0.25)', paddingBottom: '2px',
+              }}>
+                Zur Galerie
+              </Link>
             </div>
-          </FadeIn>
-          <FadeIn delay={0.1} style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
-            <div style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-101.webp" alt="Brautpaar emotionaler Hochzeitsfilm Niedersachsen – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
-                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.15} style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative' }}>
-            <div style={{ overflow: 'hidden', borderRadius: '4px', position: 'relative', height: '100%' }}>
-              <Image src="/images/Bild-67.webp" alt="Hochzeitsmoment cinematic Hannover Braunschweig – Amoriva Films" fill style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.8s ease' }} sizes="(max-width: 768px) 100vw, 50vw"
-                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
-            </div>
+            <Galerie bilder={galerie} grenze={3} />
           </FadeIn>
         </div>
       </section>
+      */}
 
-      <style>{`
-        @media (max-width: 768px) {
-          .gallery-grid { grid-template-columns: 1fr !important; grid-template-rows: 260px 200px 200px !important; }
-          .gallery-grid > *:first-child { grid-row: auto !important; }
-        }
-      `}</style>
     </>
   );
 }

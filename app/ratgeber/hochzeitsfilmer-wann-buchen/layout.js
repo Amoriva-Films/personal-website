@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Hochzeitsfilmer & Fotograf buchen: Wann ist der richtige Zeitpunkt? | Amoriva Films',
   description:
-    'Wann sollte man Hochzeitsfilmer und Hochzeitsfotograf buchen? Unsere Empfehlung: 12 bis 18 Monate vorher. Checkliste und Tipps für Paare in Wolfsburg, Braunschweig und Deutschland.',
+    'Wann Hochzeitsfilmer und Fotograf buchen? Unsere Empfehlung: 12 bis 18 Monate vorher. Mit Checkliste für Paare in Niedersachsen.',
   keywords: [
     'Hochzeitsfilmer buchen wann',
     'Hochzeitsfotograf buchen wann',
