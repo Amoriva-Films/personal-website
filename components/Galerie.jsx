@@ -122,6 +122,7 @@ export default function Galerie({ bilder, grenze }) {
               className="galerie-bild"
               sizes="(max-width: 480px) 100vw, (max-width: 760px) 50vw, 33vw"
               style={{ objectFit: 'cover', transition: 'transform 700ms var(--ease)' }}
+            quality={90}
             />
           </button>
         ))}

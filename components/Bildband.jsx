@@ -18,6 +18,7 @@ export default function Bildband() {
         height={683}
         sizes="100vw"
         className="bildband-bild"
+            quality={90}
       />
     </section>
   );

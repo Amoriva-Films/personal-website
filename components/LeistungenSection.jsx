@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import FadeIn from './FadeIn';
 
 /* Keine Preise, keine Ab-Preise, keine Zahlen. Eine Zahl macht
@@ -12,8 +11,6 @@ const services = [
   {
     nr: '01',
     title: 'Hochzeitsfilm',
-    bild: '/images/paare/paar-kuss.webp',
-    alt: 'Ein Brautpaar kuesst sich nach der Trauung',
     subtitle: 'Cinematische Videografie Niedersachsen',
     description: 'Ein Film, der sich anfühlt wie Kino. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
     includes: [
@@ -30,8 +27,6 @@ const services = [
        Ein Wort ohne Trennstelle kann nicht umbrechen und lief deshalb
        durch die Ziffer. */
     title: 'Hochzeits\u00ADfotografie',
-    bild: '/images/paare/braut.webp',
-    alt: 'Eine Braut im Kleid, kurz vor der Trauung',
     subtitle: 'Fine Art Fotografie Niedersachsen',
     description: 'Zeitlose Bilder im Fine-Art-Stil. Keine gestellten Fotos, nur echte Momente.',
     includes: [
@@ -44,8 +39,6 @@ const services = [
   {
     nr: '03',
     title: 'Film und Foto',
-    bild: '/images/paare/paar-tuer.webp',
-    alt: 'Ein Brautpaar im Tuerrahmen des Trausaals',
     subtitle: 'Das komplette Hochzeitspaket',
     description: 'Beides aus einer Hand. Kein zweites Team, keine Koordination zwischen Anbietern.',
     includes: [
@@ -83,13 +76,6 @@ export default function LeistungenSection() {
                   Titel statt ueber ihm. Dadurch beginnt jede Kachel mit
                   dem, was zaehlt - dem Namen der Leistung. */}
               <div className="kachel leistung" style={{ height: '100%' }}>
-                {/* Ein Bild je Leistung. Bewusst nur eins und im gleichen
-                    Zuschnitt - drei verschiedene Formate nebeneinander
-                    waeren wieder eine Galerie. */}
-                <div className="leistung-bild">
-                  <Image src={s.bild} alt={s.alt} width={1024} height={1536}
-                         sizes="(max-width: 900px) 100vw, 30vw" />
-                </div>
                 <span className="leistung-ziffer" aria-hidden="true">{s.nr}</span>
                 <h3 className="t-mittel" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
                 <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>{s.subtitle}</p>

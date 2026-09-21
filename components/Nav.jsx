@@ -112,6 +112,7 @@ export default function Nav() {
                 objectFit: 'contain', objectPosition: 'left center',
                 opacity: sichtbar ? 1 : 0, transition: 'opacity 400ms var(--ease)',
               }}
+            quality={90}
             />
           ))}
         </Link>

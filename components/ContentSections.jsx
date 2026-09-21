@@ -86,6 +86,7 @@ export default function ContentSections() {
                     height={1536}
                     sizes="(max-width: 900px) 100vw, 44vw"
                     className="arbeit-bild-inner"
+            quality={90}
                   />
                 </div>
               </FadeIn>

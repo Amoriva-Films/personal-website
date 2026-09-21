@@ -422,25 +422,45 @@ p, li { overflow-wrap: break-word; }
   .bildband { aspect-ratio: 4 / 3; }
 }
 
-/* Bild in der Leistungskachel. Alle drei im selben Zuschnitt, sonst
-   waere es wieder ein Bilderraster. */
-.leistung-bild {
-  position: relative;
-  width: calc(100% + 2 * clamp(1.5rem, 2.6vw, 2.25rem));
-  margin: calc(-1 * clamp(1.5rem, 2.6vw, 2.25rem)) 0 var(--luft-3)
-          calc(-1 * clamp(1.5rem, 2.6vw, 2.25rem));
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
+/* Portraet-Reihe: fuenf Bilder nebeneinander, flach gehalten. Auf dem
+   Handy ein Streifen zum Wischen statt fuenf Bildschirmseiten. */
+.portraet-reihe {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--luft-2);
 }
-.leistung-bild img {
+.portraet-kachel {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--papier-2);
+}
+.portraet-kachel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
-  transition: transform 900ms var(--ease);
+  transition: transform 1000ms var(--ease);
 }
 @media (hover: hover) {
-  .leistung:hover .leistung-bild img { transform: scale(1.05); }
+  .portraet-kachel:hover img { transform: scale(1.06); }
+}
+
+@media (max-width: 860px) {
+  .portraet-reihe {
+    display: flex;
+    gap: var(--luft-2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Der Streifen darf ueber die Bahn hinauslaufen, sonst sieht man
+       nicht, dass es weitergeht. */
+    margin-inline: calc(-1 * var(--rand));
+    padding-inline: var(--rand);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .portraet-reihe::-webkit-scrollbar { display: none; }
+  .portraet-reihe > * { flex: 0 0 46%; scroll-snap-align: start; }
 }
 
 /* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,

@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import ContentSections from '@/components/ContentSections';
 import Prozess from '@/components/Prozess';
 import Bildband from '@/components/Bildband';
+import Portraets from '@/components/Portraets';
 import LeistungenSection from '@/components/LeistungenSection';
 import Testimonials from '@/components/Testimonials';
 import BegrenztTermine from '@/components/BegrenztTermine';
@@ -24,6 +25,7 @@ export default function Home() {
       <Prozess />
       <Bildband />
       <LeistungenSection />
+      <Portraets />
       <Testimonials />
       <BegrenztTermine />
       <Founders />
