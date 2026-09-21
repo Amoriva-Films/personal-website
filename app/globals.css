@@ -46,12 +46,18 @@
   --luft-3: 24px;
   --luft-4: 40px;
   --luft-5: 64px;
-  --luft-6: 112px;   /* Abschnittsabstand, wie amoriva.app */
+  /* Abschnittsabstand. Stand auf 112 (der Wert von amoriva.app). Nevio
+     am 21.09.2026: zu viel. Gemessen waren es 1.792 px reines Polster auf
+     der Startseite, also zwei von zehn Bildschirmen nur Luft. Mit 80
+     bleibt die Gliederung deutlich, ohne dass man sich durchscrollt.
+     amoriva.app ist eine Software-Seite mit langen Erklaertexten, hier
+     stehen Bilder und kurze Bloecke - die brauchen weniger Anlauf. */
+  --luft-6: 80px;
   --luft-7: 144px;
 
   /* Abstand unter der fest stehenden Kopfzeile. Eigener Wert, weil er
      nicht Abschnittsabstand ist, sondern Platz fuer die Navigation. */
-  --kopf-luft: 144px;
+  --kopf-luft: 124px;
 
   /* ── Schrift ─────────────────────────────────────────────────────
      Drei Stufen fuer Ueberschriften, zwei fuer Text. Mehr nicht.
@@ -78,7 +84,7 @@
   --ease:   cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (min-width: 768px)  { :root { --rand: 40px; --kopf-luft: 184px; } }
+@media (min-width: 768px)  { :root { --rand: 40px; --kopf-luft: 150px; } }
 @media (min-width: 1280px) { :root { --rand: 60px; } }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -149,6 +155,12 @@ p, li { overflow-wrap: break-word; }
    Leerraum, dreieinhalb Bildschirme.                                */
 
 .abschnitt { padding-block: var(--luft-6); }
+
+/* Auf dem Handy ist jeder Abschnitt ohnehin eine eigene Bildschirmseite,
+   da traegt schon weniger Abstand die Trennung. */
+@media (max-width: 720px) {
+  .abschnitt { padding-block: var(--luft-5); }
+}
 
 /* Erster Abschnitt einer Unterseite: mehr Luft oben, weil die Kopfzeile
    fest ueber dem Inhalt steht. */
@@ -511,6 +523,15 @@ textarea.feld {
   flex-shrink: 0;
 }
 
+/* Drei Leistungen nebeneinander. Untereinander war der Abschnitt der
+   laengste der Seite. */
+.leistungs-raster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--luft-3);
+  align-items: stretch;
+}
+
 .fragen-raster {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -641,6 +662,7 @@ html.lenis, html.lenis body { height: auto; }
   .galerie-raster  { grid-template-columns: repeat(2, 1fr); }
   .paar            { grid-template-columns: 1fr; gap: var(--luft-4); }
   .schritt-raster  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .leistungs-raster{ grid-template-columns: 1fr; }
   .fragen-raster   { grid-template-columns: 1fr; }
   .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
   .schritt-ziffer  { font-size: 1.75rem; }

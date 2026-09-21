@@ -61,31 +61,26 @@ export default function LeistungenSection() {
           </div>
         </FadeIn>
 
-        {services.map((s) => (
-          <FadeIn key={s.nr}>
-            {/* Grosse ruhige Bloecke. Keine Karten mit Rahmen und Schatten,
-                getrennt wird durch eine Linie und durch Raum. */}
-            {/* Vorher getrennt durch eine Linie ueber die volle Breite.
-                Jetzt eine Kachel je Leistung, wie die Funktionsbloecke
-                auf amoriva.app: der Block wird zum Gegenstand, den man
-                anschauen kann, statt zu einem Absatz in einer Liste. */}
-            <div className="kachel zwei-spalten" style={{
-              marginBottom: 'var(--luft-3)',
-            }}>
-              <div>
+        {/* Lagen als drei Kacheln untereinander, jede zweispaltig - der
+            Abschnitt kam damit auf 1,75 Bildschirme und war der laengste
+            der ganzen Seite. Jetzt nebeneinander: drei Leistungen sind
+            eine Auswahl, und eine Auswahl vergleicht man, statt sie zu
+            durchscrollen. */}
+        <div className="leistungs-raster">
+          {services.map((s) => (
+            <FadeIn key={s.nr}>
+              <div className="kachel" style={{ height: '100%' }}>
                 <span className="schritt-ziffer" aria-hidden="true">{s.nr}</span>
-                <h3 className="t-klein" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
-                <p className="t-fein">{s.subtitle}</p>
-              </div>
-              <div>
-                <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>{s.description}</p>
+                <h3 className="t-klein" style={{ marginTop: 'var(--luft-2)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
+                <p className="t-fein" style={{ marginBottom: 'var(--luft-3)' }}>{s.subtitle}</p>
+                <p className="t-fein t-grau" style={{ marginBottom: 'var(--luft-3)' }}>{s.description}</p>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                   {s.includes.map((item, i) => (
                     <li key={i} style={{
                       display: 'flex', gap: 'var(--luft-1)', alignItems: 'flex-start',
-                      fontSize: 'var(--schrift-fein)', color: 'var(--grau-2)', lineHeight: 1.6,
+                      fontSize: '0.875rem', color: 'var(--grau-2)', lineHeight: 1.55,
                     }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                            stroke="var(--gruen)" strokeWidth="2" strokeLinecap="round"
                            strokeLinejoin="round" aria-hidden="true"
                            style={{ flexShrink: 0, marginTop: '4px' }}>
@@ -96,9 +91,9 @@ export default function LeistungenSection() {
                   ))}
                 </ul>
               </div>
-            </div>
-          </FadeIn>
-        ))}
+            </FadeIn>
+          ))}
+        </div>
 
         <FadeIn>
           <div style={{ paddingTop: 'var(--luft-4)', borderTop: '1px solid var(--linie)' }}>

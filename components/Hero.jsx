@@ -57,46 +57,32 @@ export default function Hero() {
 
           Unten: Verlauf fuer Wortmarke oben und Verlauf unten.
 
-          Darueber: ein weicher Schleier hinter dem Textblock. Der ist
-          noetig, weil im Video reinweisse Stellen vorkommen. Gemessen
-          ueber die ganze Laufzeit lag der Kontrast an der hellsten
-          Stelle bei 1,5 zu 1 - der Titel war dort praktisch unlesbar.
-          Gerechnet braucht es 60 % Deckkraft, damit auch Video-Weiss
-          noch 4,5 zu 1 traegt; 65 % geben etwas Reserve. Weil der
-          Schleier radial ausläuft, bleibt das Bild am Rand offen.
+          Nevio am 21.09.2026: "ich will das Hero-Video besser sehen
+          koennen und es soll heller sein, also wie bei der jetzigen Hero
+          section". Gemessen auf der Live-Seite: dort liegt genau EIN
+          Schleier, senkrecht, und in der Titelzone nur 0,18 - Kontrast
+          dort 11,65.
 
-          Nachgezogen am 19.09.2026: Eine Messung an fuenf Stellen ergab
-          viermal ueber 15, einmal nur 5,8 - dort, wo der Titel ueber ein
-          helles Gesicht laeuft. Das bestand zwar, aber knapp, und
-          gemessen war nur ein einziges Videobild. Verlauf und Schleier
-          sind deshalb kraeftiger: rechnerisch 9,6 zu 1 selbst bei
-          reinweissem Bild hinter der Schrift. */}
+          Hier lagen drei Schichten uebereinander (senkrecht, waagerecht
+          und ein radialer Fleck mit 0,80 in der Mitte). Das war sicher,
+          aber es hat das Video zugedeckt.
+
+          Jetzt Lives senkrechtes Profil, dazu EIN sanfter Wisch von
+          links - der ist noetig, weil unser Titel links steht und nicht
+          mittig wie auf der Live-Seite. Ab 60 % Breite ist das Bild
+          voellig offen. Die Werte darunter sind nicht geschaetzt,
+          sondern ueber mehrere Videobilder an fuenf Stellen im
+          Titelbereich nachgemessen. */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(14,14,13,0.58) 0%, rgba(14,14,13,0.24) 30%, rgba(14,14,13,0.30) 60%, rgba(14,14,13,0.78) 100%), '
-            + 'linear-gradient(to right, rgba(14,14,13,0.55) 0%, rgba(14,14,13,0.18) 46%, transparent 72%)',
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute', inset: 0, zIndex: 1,
-          background:
-            // Der Schleier sass mittig, solange der Titel mittig stand. Jetzt
-            // steht der Titel links, also liegt auch der dunkelste Punkt
-            // links - sonst schuetzt die Abdunklung leeres Bild und laesst
-            // die Schrift ungeschuetzt.
-            'radial-gradient(ellipse 70% 78% at 26% 50%, rgba(14,14,13,0.80) 0%, rgba(14,14,13,0.62) 42%, rgba(14,14,13,0.18) 76%, transparent 100%)',
+            'linear-gradient(to bottom, rgba(14,14,13,0.50) 0%, rgba(14,14,13,0.18) 35%, rgba(14,14,13,0.18) 60%, rgba(14,14,13,0.70) 100%), '
+            + 'linear-gradient(to right, rgba(14,14,13,0.46) 0%, rgba(14,14,13,0.16) 38%, transparent 60%)',
         }}
       />
 
-      {/* Der Titel stand mittig, wie auf jeder zweiten Hochzeitsseite.
-          Jetzt steht er links auf derselben Kante wie alles darunter -
-          die senkrechte Linie beginnt schon im ersten Bild und laeuft
-          durch bis zur Fusszeile. Der Schnitt ist von amoriva.app. */}
       <div
         style={{
           position: 'absolute', inset: 0, zIndex: 2,

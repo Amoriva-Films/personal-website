@@ -44,7 +44,10 @@ export default function Founders() {
                      schnitt den Kopf ab und zeigte Oberkoerper und Laptop.
                      Portraits gehoeren ins Hochformat, und der Ausschnitt
                      sitzt oben, wo das Gesicht ist. */
-                  aspectRatio: '4 / 5', overflow: 'hidden',
+                  /* War 4/5 und damit 785 px hoch je Bild - der Abschnitt
+                     kam auf 1,6 Bildschirme. Quadratisch zeigt dieselben
+                     Gesichter auf 628 px. */
+                  aspectRatio: '1 / 1', overflow: 'hidden',
                   marginBottom: 'var(--luft-3)', background: 'var(--papier)',
                 }}>
                   <Image
