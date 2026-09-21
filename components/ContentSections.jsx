@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import FadeIn from './FadeIn';
 // import Galerie from './Galerie';        // s. u., ausgehaengt
 import TrustBadges from './TrustBadges';
@@ -48,29 +49,48 @@ export default function ContentSections() {
             {/* Ueberschrift und Text standen untereinander in einer Spalte,
                 rechts blieb die halbe Seite leer. Jetzt nebeneinander -
                 das Paar-Raster, das auf amoriva.app die Startseite traegt. */}
-            <div className="paar">
-              <div>
+            {/* Nevio am 21.09.2026 zu dieser Section: gefaellt ihm nicht.
+                Sie war reiner Text - eine Hochzeitsfirma, die ueber Bilder
+                spricht und keins zeigt. Jetzt ein Bild-Text-Paar: links
+                der Gedanke, rechts ein Beispiel. Das ist bewusst KEINE
+                Galerie (die ist raus), sondern ein einzelnes Bild als
+                Gestaltungselement.
+
+                Der lange zweite Absatz ist zusammengezogen. Er sagte
+                dasselbe zweimal. */}
+            <div className="arbeit-raster">
+              <div className="arbeit-text">
                 <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Unsere Arbeit</p>
-                <h2 className="t-gross">
+                <h2 className="t-gross" style={{ marginBottom: 'var(--luft-3)' }}>
                   Für einen Tag voller Gefühle, den ihr <span className="kursiv">niemals vergesst.</span>
                 </h2>
-              </div>
-              <div>
                 <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-3)' }}>
-                  Eure Hochzeit ist mehr als ein Ablauf. Sie ist ein Gefühl. Der
-                  Moment bevor ihr euch zum ersten Mal seht. Die Hände die sich
-                  halten. Die Stimmen eurer Liebsten. Das Licht, die Musik, die
-                  Aufregung und all die kleinen Augenblicke die viel zu schnell
+                  Der Moment bevor ihr euch zum ersten Mal seht. Die Hände die
+                  sich halten. Die Stimmen eurer Liebsten. Das Licht, die Musik
+                  und all die kleinen Augenblicke, die viel zu schnell
                   vorbeigehen.
                 </p>
                 <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
-                  Mit Fotos und Filmen halten wir genau diese Momente fest.
-                  Ehrlich, emotional und so dass ihr euch auch Jahre später noch
-                  mittendrin fühlt.
+                  Genau die halten wir fest. Ehrlich, emotional und so, dass ihr
+                  euch auch Jahre später noch mittendrin fühlt.
                 </p>
                 <Link href="/anfrage" className="knopf knopf-linie">Anfrage stellen</Link>
               </div>
+
+              <FadeIn richtung="rechts" delay={0.1}>
+                <div className="arbeit-bild">
+                  <Image
+                    src="/images/Bild-33.webp"
+                    alt="Brautpaar am Hochzeitstag, aufgenommen von Amoriva Films"
+                    width={1920}
+                    height={2879}
+                    sizes="(max-width: 900px) 100vw, 44vw"
+                    className="arbeit-bild-inner"
+                  />
+                </div>
+              </FadeIn>
             </div>
+
             <TrustBadges />
           </div>
         </FadeIn>

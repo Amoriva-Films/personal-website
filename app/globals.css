@@ -398,6 +398,70 @@ p, li { overflow-wrap: break-word; }
   align-items: start;
 }
 
+/* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,
+   nicht als erste Zeile. So beginnt die Kachel mit dem Namen der
+   Leistung - dem einzigen, wonach jemand sucht. */
+.leistung { position: relative; overflow: hidden; }
+/* Die Ziffer lief bei allen drei Kacheln hinter dem Titel durch,
+   gemessen 53 bis 64 px Ueberschneidung. Der Titel bekommt deshalb
+   rechts Platz, und die Ziffer rueckt etwas hoeher und wird kleiner -
+   sie soll ein Wasserzeichen sein, kein zweiter Text. */
+.leistung h3 { padding-right: 4.6rem; hyphens: manual; overflow-wrap: break-word; }
+/* "Hochzeitsfotografie" ist der laengste Titel und bricht dadurch auf
+   zwei Zeilen um. Das ist gewollt: lieber ein Umbruch als ein Wort,
+   das durch die Ziffer laeuft. */
+
+.leistung-ziffer {
+  position: absolute;
+  top: 0.1rem; right: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 3.4rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--linie);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transition: color 400ms var(--ease), transform 600ms var(--ease);
+}
+@media (hover: hover) {
+  .leistung:hover .leistung-ziffer {
+    color: rgba(104,120,80,0.22);
+    transform: translateY(-4px);
+  }
+}
+
+/* Unsere Arbeit: links der Gedanke, rechts ein Bild. Das Bild ist
+   etwas schmaler als der Text, damit die Leserichtung stimmt. */
+.arbeit-raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.arbeit-bild {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--papier-2);
+}
+.arbeit-bild-inner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 1100ms var(--ease);
+}
+@media (hover: hover) {
+  .arbeit-bild:hover .arbeit-bild-inner { transform: scale(1.05); }
+}
+@media (max-width: 860px) {
+  .arbeit-raster { grid-template-columns: 1fr; }
+  .arbeit-bild   { aspect-ratio: 3 / 4; }
+}
+
 /* ── Bewegung ────────────────────────────────────────────────────
    Nevio am 21.09.2026: "packe ueberall coole und stylische Animationen
    rein". Die Regel: nur dort, wo eine Bewegung etwas sagt. Ein Bild, das

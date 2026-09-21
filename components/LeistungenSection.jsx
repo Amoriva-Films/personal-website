@@ -12,7 +12,7 @@ const services = [
     nr: '01',
     title: 'Hochzeitsfilm',
     subtitle: 'Cinematische Videografie Niedersachsen',
-    description: 'Ein cinematic Hochzeitsfilm der sich anfühlt wie ein echtes Kinoerlebnis. Wir fangen die Atmosphäre, die Emotionen und die kleinen Momente ein die euren Tag besonders machen. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
+    description: 'Ein Film, der sich anfühlt wie Kino. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
     includes: [
       'Cinematischer Hauptfilm (3 bis 12 Minuten)',
       'Emotionaler Highlights-Clip (60 bis 90 Sekunden)',
@@ -23,9 +23,12 @@ const services = [
   },
   {
     nr: '02',
-    title: 'Hochzeitsfotografie',
+    /* Weiches Trennzeichen: unsichtbar, ausser die Zeile bricht.
+       Ein Wort ohne Trennstelle kann nicht umbrechen und lief deshalb
+       durch die Ziffer. */
+    title: 'Hochzeits\u00ADfotografie',
     subtitle: 'Fine Art Fotografie Niedersachsen',
-    description: 'Hochzeitsfotos die zeitlos sind. Wir arbeiten im Fine Art Stil und achten auf Licht, Tiefe und Authentizität. Keine gestellten Fotos. Nur echte Momente.',
+    description: 'Zeitlose Bilder im Fine-Art-Stil. Keine gestellten Fotos, nur echte Momente.',
     includes: [
       'Vollständige Fotobegleitung vom Getting Ready bis zum Tanz',
       'Bearbeitete Galeriefotos in hoher Auflösung',
@@ -37,7 +40,7 @@ const services = [
     nr: '03',
     title: 'Film und Foto',
     subtitle: 'Das komplette Hochzeitspaket',
-    description: 'Ihr bekommt beides aus einer Hand. Kein zweites Team, keine Koordination zwischen verschiedenen Anbietern. Wir kennen euren Tag und halten ihn vollständig fest. Film und Foto perfekt aufeinander abgestimmt.',
+    description: 'Beides aus einer Hand. Kein zweites Team, keine Koordination zwischen Anbietern.',
     includes: [
       'Alles aus Film und Fotografie-Paket',
       'Perfekte Abstimmung durch ein Team',
@@ -69,11 +72,15 @@ export default function LeistungenSection() {
         <div className="leistungs-raster">
           {services.map((s, i) => (
             <FadeIn key={s.nr} index={i}>
-              <div className="kachel" style={{ height: '100%' }}>
-                <span className="schritt-ziffer" aria-hidden="true">{s.nr}</span>
-                <h3 className="t-klein" style={{ marginTop: 'var(--luft-2)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
-                <p className="t-fein" style={{ marginBottom: 'var(--luft-3)' }}>{s.subtitle}</p>
+              {/* Die Ziffer sitzt jetzt oben rechts und liegt hinter dem
+                  Titel statt ueber ihm. Dadurch beginnt jede Kachel mit
+                  dem, was zaehlt - dem Namen der Leistung. */}
+              <div className="kachel leistung" style={{ height: '100%' }}>
+                <span className="leistung-ziffer" aria-hidden="true">{s.nr}</span>
+                <h3 className="t-mittel" style={{ marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
+                <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>{s.subtitle}</p>
                 <p className="t-fein t-grau" style={{ marginBottom: 'var(--luft-3)' }}>{s.description}</p>
+                <div style={{ borderTop: '1px solid var(--linie)', marginBottom: 'var(--luft-3)' }} />
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                   {s.includes.map((item, i) => (
                     <li key={i} style={{
