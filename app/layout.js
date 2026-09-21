@@ -69,6 +69,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="de" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
+        {/* Das Hero-Video ist das Erste, was ein Besucher sieht, aber
+            Browser geben Video von sich aus eine niedrige Prioritaet:
+            gemessen startete die Anfrage erst nach 543 ms, hinter CSS,
+            Schriften und Javascript. Dieser Hinweis stellt sie nach
+            vorne, damit das Laden mit der Seite beginnt statt danach. */}
+        <link rel="preload" as="video" type="video/mp4" href="/videos/hero.mp4" />
         <StructuredData />
       </head>
       <body style={{ margin: 0, padding: 0, background: '#FBFBFA' }}>
