@@ -152,3 +152,128 @@ export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht }) 
     }),
   };
 }
+
+/* ------------------------------------------------------------------ *
+ * Waechter: Meldungen an Nevio, wenn etwas nicht funktioniert hat.
+ *
+ * Diese Mails sind bewusst im selben Gewand wie alle anderen. Eine
+ * Stoermeldung, die aussieht wie eine Systemmeldung, wird im Postfach
+ * uebersehen; eine, die aussieht wie die Anfrage selbst, nicht.
+ *
+ * Wichtigste Eigenschaft: die vollstaendige Anfrage steht drin. Wenn
+ * der Eintrag ins Dashboard bricht, ist diese Mail die einzige Stelle,
+ * an der die Anfrage noch existiert. Nevio kann direkt aus ihr heraus
+ * antworten, ohne irgendwo nachzusehen.
+ * ------------------------------------------------------------------ */
+
+/** Grauer Hinweiskasten. Bewusst ohne Rot: eine Farbe macht die Stoerung
+ *  nicht dringender, sie macht die Mail nur lauter. */
+function kasten(ueberschrift, zeilenText) {
+  return `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 30px;background:${F.creme};border-left:3px solid ${F.dunkel};">
+      <tr><td style="padding:20px 24px;">
+        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};margin-bottom:10px;">${esc(ueberschrift)}</div>
+        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};">${zeilenText}</div>
+      </td></tr>
+    </table>`;
+}
+
+/**
+ * Sofortmeldung: beim Absenden einer Anfrage ist mindestens ein Weg
+ * gebrochen. `wege` ist eine Liste aus { name, ok, grund }.
+ */
+export function mailAlarm({ wege, anfrage, verloren }) {
+  const { name, email, hochzeitsdatum, location, nachricht } = anfrage || {};
+  const kaputt = wege.filter((w) => !w.ok);
+
+  const liste = kaputt
+    .map((w) => `<div style="margin:0 0 8px;"><strong style="font-weight:600;">${esc(w.name)}</strong> &mdash; ${esc(w.grund || 'unbekannter Grund')}</div>`)
+    .join('');
+
+  const details = [
+    zeile('Paar', name),
+    zeile('E-Mail', email),
+    zeile('Datum', datumSchoen(hochzeitsdatum)),
+    zeile('Location', location),
+    zeile('Nachricht', nachricht, { mehrzeilig: true }),
+  ].join('');
+
+  const betreffAntwort = encodeURIComponent('Eure Hochzeit mit Amoriva Films');
+
+  /* Zwei sehr verschiedene Lagen, und der Unterschied muss im ersten
+     Satz stehen: entweder ist die Anfrage noch irgendwo gespeichert,
+     oder diese Mail ist das Einzige, was von ihr uebrig ist. */
+  const einstieg = verloren
+    ? absatz('diese Mail ist gerade die <strong style="font-weight:600;">einzige Kopie</strong> dieser Anfrage. Weder die normale Benachrichtigung noch der Eintrag im Dashboard hat funktioniert. Bitte antworte von Hand, am besten sofort.')
+    : absatz('eine Anfrage ist angekommen, aber nicht auf allen Wegen. Sie ist nicht verloren &mdash; unten steht sie vollstaendig. Ein Weg hat gehakt und sollte nachgesehen werden.');
+
+  const inhalt = `
+    ${absatz('Hallo Nevio,')}
+    ${einstieg}
+    ${kasten('Das hat nicht funktioniert', liste)}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 30px;background:${F.creme};">
+      <tr><td style="padding:10px 24px 12px;">
+        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};padding:8px 0 4px;">Die vollstaendige Anfrage</div>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${details}</table>
+      </td></tr>
+    </table>
+    ${email ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td style="background:${F.dunkel};">
+        <a href="mailto:${esc(email)}?subject=${betreffAntwort}" style="display:inline-block;padding:15px 30px;font-family:${sans};font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:${F.creme};text-decoration:none;">Von Hand antworten</a>
+      </td>
+    </tr></table>` : ''}
+    <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
+      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Automatische Meldung vom Waechter</div>
+      <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">amoriva-films.de</div>
+      <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
+    </div>`;
+
+  return {
+    subject: verloren
+      ? `Anfrage von ${name || 'unbekannt'} konnte nicht zugestellt werden`
+      : `Anfrage von ${name || 'unbekannt'} angekommen, ein Weg hat gehakt`,
+    html: rahmen({
+      titelZeile: 'Stoerung beim Anfrageformular',
+      preheader: verloren
+        ? 'Diese Mail ist die einzige Kopie der Anfrage. Bitte von Hand antworten.'
+        : 'Die Anfrage ist da, ein Weg hat gehakt.',
+      eyebrow: 'Stoerung',
+      titel: verloren ? 'Eine Anfrage<br>braucht dich sofort.' : 'Eine Anfrage kam<br>nur halb durch.',
+      inhalt,
+    }),
+  };
+}
+
+/**
+ * Taegliche Pruefung: nur gesendet, wenn etwas abweicht.
+ * `befunde` ist eine Liste aus { was, text }.
+ */
+export function mailWaechter({ befunde }) {
+  const liste = befunde
+    .map((b) => `<div style="margin:0 0 10px;"><strong style="font-weight:600;">${esc(b.was)}</strong><br><span style="color:${F.weich};">${esc(b.text)}</span></div>`)
+    .join('');
+
+  const inhalt = `
+    ${absatz('Hallo Nevio,')}
+    ${absatz('die taegliche Pruefung der Website hat etwas gefunden. Solange alles laeuft, kommt diese Mail nicht &mdash; wenn sie da ist, ist wirklich etwas.')}
+    ${kasten('Gefunden', liste)}
+    ${absatz(`<span style="font-size:13px;color:${F.gedaempft};">Geprueft am ${esc(new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' }))} Uhr.</span>`)}
+    <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
+      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Automatische Meldung vom Waechter</div>
+      <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">amoriva-films.de</div>
+      <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
+    </div>`;
+
+  return {
+    subject: befunde.length === 1
+      ? `Waechter: ${befunde[0].was}`
+      : `Waechter: ${befunde.length} Punkte zu pruefen`,
+    html: rahmen({
+      titelZeile: 'Taegliche Pruefung',
+      preheader: befunde.map((b) => b.was).join(' · '),
+      eyebrow: 'Taegliche Pruefung',
+      titel: 'Die Pruefung hat<br>etwas gefunden.',
+      inhalt,
+    }),
+  };
+}
