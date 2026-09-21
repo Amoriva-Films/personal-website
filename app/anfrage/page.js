@@ -131,13 +131,19 @@ export default function AnfragePage() {
                   </div>
 
                   <div>
-                    <label className="feld-label" htmlFor="feld-budget">Euer Budgetrahmen</label>
+                    {/* Stand vorher als Preisspannen in Euro drin. Nevio am
+                        21.09.2026: keine Zahlen. Die Auswahl sagt jetzt
+                        dasselbe ueber die Haltung des Paares, ohne dass es
+                        eine Zahl zu lesen bekommt, an der es uns misst.
+                        Der Feldname "Budget" bleibt, daran haengen die
+                        Mail und der Eingang im Amoriva-Dashboard. */}
+                    <label className="feld-label" htmlFor="feld-budget">Wie steht ihr zum Budget?</label>
                     <select className="feld" id="feld-budget" name="Budget" defaultValue="">
                       <option value="" disabled>Bitte wählen</option>
-                      <option>2.000 bis 3.500 €</option>
-                      <option>3.500 bis 5.000 €</option>
-                      <option>5.000 bis 7.500 €</option>
-                      <option>Über 7.500 €</option>
+                      <option>Wir haben noch keine Vorstellung</option>
+                      <option>Wir haben einen festen Rahmen</option>
+                      <option>Wir sind flexibel, wenn es passt</option>
+                      <option>Qualität geht vor Preis</option>
                     </select>
                   </div>
 
