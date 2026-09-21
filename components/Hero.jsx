@@ -2,9 +2,33 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import Link from 'next/link';
 
 const ease = [0.22, 1, 0.36, 1];
+
+/* Nevio am 21.09.2026: "mach die Hero section genau so, will die so
+   behalten, dass man das ganze Video auf dem Vollbild sieht."
+
+   Das ist die Fassung von der Live-Seite, 1:1 uebernommen: volle
+   Bildschirmhoehe, zentrierter Markenname, EIN senkrechter Schleier,
+   der in der Mitte nur 0,18 traegt. Drei Dinge sind bewusst anders:
+
+   1. var(--font-display) statt var(--font-cormorant). Die Schrift heisst
+      jetzt Fraunces.
+   2. var(--font-inter) statt 'Inter', sans-serif. next/font erzeugt einen
+      eigenen Familiennamen; 'Inter' trifft ihn NICHT und faellt still auf
+      die Systemschrift zurueck. Auf Nevios Rechner faellt das nicht auf,
+      weil Inter dort installiert ist - bei Besuchern schon. Genau dieser
+      Fehler steckte hier schon einmal an 27 Stellen.
+   3. Ein weicher Schatten hinter den Buchstaben. Gemessen ueber sechs
+      Videostellen an je drei Punkten: mit dem Schleier allein faellt der
+      Titel bei Sekunde 7,5 auf 2,07 zu 1 - dort laeuft er ueber ein
+      helles Brautkleid. Das gilt fuer die Live-Seite genauso. Der
+      Schatten liegt nur hinter der Schrift, ist auf dunklen Bildern
+      unsichtbar und laesst das Video vollstaendig frei. Genau das war
+      Nevios Wunsch: das ganze Video sehen.
+   4. 100svh statt 100vh. Auf dem Handy rechnet vh mit eingeklappter
+      Adressleiste, dadurch ragt der Hero unten aus dem Bild. svh ist die
+      Hoehe, die wirklich sichtbar ist.                                   */
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -12,24 +36,23 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // muted muss zusaetzlich am Element gesetzt werden, sonst verweigern
-    // manche Browser das automatische Abspielen.
     v.muted = true;
+    v.style.opacity = '0';
+    v.style.transition = 'opacity 0.6s ease';
+    const show = () => { v.style.opacity = '1'; };
+    v.addEventListener('canplay', show, { once: true });
     v.play().catch(() => {});
+    return () => v.removeEventListener('canplay', show);
   }, []);
 
-  /* data-dunkler-kopf ist die Markierung fuer die Kopfzeile: nur ueber
-     DIESEM Abschnitt darf sie sich hell faerben. Ohne die Markierung stand
-     helle Schrift auf hellem Grund - auf fuenf von sechs Unterseiten, mit
-     1,06 zu 1, also praktisch unsichtbar. */
   return (
     <section
       data-dunkler-kopf=""
       style={{
         position: 'relative',
         width: '100%',
-        height: '82svh',
-        minHeight: '560px',
+        height: '100svh',
+        minHeight: '600px',
         overflow: 'hidden',
         background: 'var(--leinwand)',
       }}
@@ -42,131 +65,127 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster="/images/hero-poster.jpg"
-          aria-hidden="true"
           style={{
-            width: '100%', height: '100%',
-            objectFit: 'cover', objectPosition: 'center center',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            display: 'block',
           }}
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* Zwei Schichten Abdunklung.
-
-          Unten: Verlauf fuer Wortmarke oben und Verlauf unten.
-
-          Nevio am 21.09.2026: "ich will das Hero-Video besser sehen
-          koennen und es soll heller sein, also wie bei der jetzigen Hero
-          section". Gemessen auf der Live-Seite: dort liegt genau EIN
-          Schleier, senkrecht, und in der Titelzone nur 0,18 - Kontrast
-          dort 11,65.
-
-          Hier lagen drei Schichten uebereinander (senkrecht, waagerecht
-          und ein radialer Fleck mit 0,80 in der Mitte). Das war sicher,
-          aber es hat das Video zugedeckt.
-
-          Jetzt Lives senkrechtes Profil, dazu EIN sanfter Wisch von
-          links - der ist noetig, weil unser Titel links steht und nicht
-          mittig wie auf der Live-Seite. Ab 60 % Breite ist das Bild
-          voellig offen. Die Werte darunter sind nicht geschaetzt,
-          sondern ueber mehrere Videobilder an fuenf Stellen im
-          Titelbereich nachgemessen. */}
+      {/* Ein Schleier, dunkel oben und unten, offen in der Mitte. In der
+          Titelzone liegt er bei 0,18 - dort sieht man das Video. */}
       <div
         aria-hidden="true"
         style={{
-          position: 'absolute', inset: 0, zIndex: 1,
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(14,14,13,0.50) 0%, rgba(14,14,13,0.18) 35%, rgba(14,14,13,0.18) 60%, rgba(14,14,13,0.70) 100%), '
-            + 'linear-gradient(to right, rgba(14,14,13,0.46) 0%, rgba(14,14,13,0.16) 38%, transparent 60%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0.70) 100%)',
         }}
       />
-
-      <div
-        style={{
-          position: 'absolute', inset: 0, zIndex: 2,
-          display: 'flex', alignItems: 'center',
-        }}
-      >
-        <div className="bahn" style={{ width: '100%' }}>
-          {/* Breite in Pixeln, nicht in ch: ch rechnet auf der Schriftgroesse
-              DIESES Kastens (17 px), nicht auf der der Ueberschrift. Mit
-              15ch stand hier ein Wort pro Zeile.                        */}
-          <div style={{ maxWidth: 'min(640px, 58%)' }}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.05, duration: 0.8, ease }}
-              className="t-label"
-              style={{ color: 'rgba(244,244,242,0.62)', marginBottom: 'var(--luft-3)' }}
-            >
-              Hochzeitsfilm &amp; Fotografie
-            </motion.p>
-
-            {/* Der Name steht oben links als Wortmarke. Hier steht deshalb das,
-                was ein Paar bekommt, nicht noch einmal der Name. */}
-            <motion.h1
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease }}
-              className="t-display"
-              style={{ color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)' }}
-            >
-              Euer Tag, wie er sich <span className="kursiv">angefühlt hat.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.12, duration: 0.9, ease }}
-              style={{
-                fontSize: 'var(--schrift-text)',
-                lineHeight: 1.6,
-                color: 'rgba(244,244,242,0.82)',
-                maxWidth: '42ch',
-                marginBottom: 'var(--luft-4)',
-              }}
-            >
-              Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
-            </motion.p>
-
-            {/* Ein gefuellter Weg und ein leiser daneben, wie auf
-                amoriva.app. Zwei Knoepfe, aber nur einer faellt auf. */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.24, duration: 0.9, ease }}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--luft-2)' }}
-            >
-              <Link href="/anfrage" className="knopf knopf-voll">
-                Termin anfragen
-              </Link>
-              {/* Zeigte auf die Galerie. Die ist raus, also fuehrt der
-                  zweite Weg jetzt zu den Leistungen - dem einzigen Ort,
-                  an dem noch etwas zu sehen ist. */}
-              <Link href="/leistungen" className="knopf knopf-linie"
-                    style={{ color: 'var(--auf-dunkel)', borderColor: 'rgba(244,244,242,0.35)' }}>
-                Leistungen ansehen
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.9, duration: 0.8, ease }}
-        aria-hidden="true"
+        transition={{ delay: 0.3, duration: 1.8, ease }}
         style={{
-          position: 'absolute', bottom: '2rem', left: '50%',
-          transform: 'translateX(-50%)', zIndex: 3,
-          width: '1px', height: '48px',
-          background: 'linear-gradient(to bottom, rgba(244,244,242,0.45), transparent)',
+          position: 'absolute',
+          inset: 0,
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          padding: '0 8%',
+        }}
+      >
+        <span
+          style={{
+            display: 'block',
+            fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            fontSize: '11px',
+            letterSpacing: '0.44em',
+            textTransform: 'uppercase',
+            color: 'rgba(244,244,242,0.75)',
+            fontWeight: 400,
+            marginBottom: '2.2rem',
+            textShadow: '0 1px 18px rgba(0,0,0,0.60), 0 1px 3px rgba(0,0,0,0.45)',
+          }}
+        >
+          Hochzeitsfilm &amp; Hochzeitsfotografie
+        </span>
+
+        <h1
+          style={{
+            fontFamily: 'var(--font-display), Georgia, serif',
+            fontSize: 'clamp(38px, 6.5vw, 92px)',
+            lineHeight: 0.9,
+            letterSpacing: '0.03em',
+            fontWeight: 400,
+            color: 'var(--auf-dunkel)',
+            textTransform: 'uppercase',
+            marginBottom: '2.2rem',
+            textShadow: '0 2px 28px rgba(0,0,0,0.60), 0 1px 4px rgba(0,0,0,0.45)',
+          }}
+        >
+          Amoriva Films
+        </h1>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-display), Georgia, serif',
+            fontSize: 'clamp(17px, 1.8vw, 26px)',
+            fontWeight: 400,
+            fontStyle: 'italic',
+            color: 'rgba(244,244,242,0.82)',
+            letterSpacing: '0.02em',
+            maxWidth: '620px',
+            textShadow: '0 1px 18px rgba(0,0,0,0.60), 0 1px 3px rgba(0,0,0,0.45)',
+          }}
+        >
+          Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
+        </p>
+      </motion.div>
+
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 1.2, ease }}
+        style={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
           pointerEvents: 'none',
         }}
-      />
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            fontSize: '9px',
+            letterSpacing: '0.40em',
+            textTransform: 'uppercase',
+            color: 'rgba(244,244,242,0.55)',
+            fontWeight: 400,
+          }}
+        >
+          Scroll
+        </span>
+        <div style={{ width: '1px', height: '56px', background: 'rgba(244,244,242,0.38)' }} />
+      </motion.div>
     </section>
   );
 }
