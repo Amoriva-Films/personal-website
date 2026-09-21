@@ -189,11 +189,7 @@ export default function Nav() {
           gap: 'var(--luft-3)', padding: '0 var(--rand)',
         }}>
           {LINKS.map(({ label, href }) => (
-            <Link key={label} href={href} onClick={() => setOffen(false)} style={{
-              fontFamily: 'var(--font-display), Georgia, serif',
-              fontSize: '2.5rem', fontWeight: 300, lineHeight: 1.1,
-              color: 'var(--tinte)', textDecoration: 'none',
-            }}>
+            <Link key={label} href={href} onClick={() => setOffen(false)} className="menue-link">
               {label}
             </Link>
           ))}

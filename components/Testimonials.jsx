@@ -45,11 +45,10 @@ export default function Testimonials() {
                   auch wenn die Zitate verschieden lang sind.          */}
               <figure className="kachel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <blockquote style={{ flex: 1, marginBottom: 'var(--luft-4)' }}>
-                  <p style={{
-                    fontFamily: 'var(--font-display), Georgia, serif',
-                    fontSize: '1.5rem', fontWeight: 300, fontStyle: 'italic',
-                    lineHeight: 1.45, color: 'var(--tinte)',
-                  }}>
+                  {/* Groesse als Klasse statt fest hier: ein fester Wert
+                      im Element laesst sich auf dem Handy nicht mehr
+                      verkleinern. Siehe .stimme-zitat in globals.css. */}
+                  <p className="stimme-zitat">
                     {t.quote}
                   </p>
                 </blockquote>

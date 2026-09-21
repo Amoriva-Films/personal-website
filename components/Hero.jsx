@@ -30,8 +30,12 @@ const ease = [0.22, 1, 0.36, 1];
       Adressleiste, dadurch ragt der Hero unten aus dem Bild. svh ist die
       Hoehe, die wirklich sichtbar ist.                                   */
 
+/* Wie lange die Ueberblendung am Schleifenpunkt dauert, in Sekunden. */
+const UEBERBLENDUNG = 1.1;
+
 export default function Hero() {
   const videoRef = useRef(null);
+  const zweitRef = useRef(null);
 
   /* Nevio am 21.09.2026: "Das video soll direkt losgehen und nicht
      5 sekunden spaeter."
@@ -69,6 +73,71 @@ export default function Hero() {
     return () => document.removeEventListener('visibilitychange', beiSichtbar);
   }, []);
 
+  /* Nevio am 21.09.2026: "Das video soll durchlaufen und direkt wieder
+     neu anlaufen, also ohne Pause sich wiederholen."
+
+     Mit dem blossen loop-Attribut lief es technisch schon ohne Pause.
+     Was man sah, war etwas anderes: das LETZTE Bild des Videos ist eine
+     helle Szene am Tisch (gemessene Helligkeit 131), das erste eine
+     dunkle Tanzflaeche (39). Am Schleifenpunkt schlug das Bild also
+     hart von hell auf dunkel um - und ein harter Schnitt sieht aus wie
+     ein Stopp, auch wenn kein einziges Bild fehlt.
+
+     Deshalb liegen hier ZWEI Videoebenen uebereinander, beide mit
+     derselben Datei. Geht die vordere auf ihr Ende zu, startet die
+     hintere bei null und wird eingeblendet, waehrend die vordere
+     ausgeblendet wird. Danach tauschen sie die Rollen. Das Ergebnis
+     ist eine weiche Blende statt eines Schnitts - dieselbe Blende, die
+     in einem Hochzeitsfilm auch zwischen zwei Szenen steht.
+
+     Es kostet keinen zweiten Download: beide Ebenen zeigen dieselbe
+     Adresse, der Browser nimmt sie aus dem Zwischenspeicher.         */
+  useEffect(() => {
+    const a = videoRef.current;
+    const b = zweitRef.current;
+    if (!a || !b) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let vorne = a, hinten = b;
+    let blendet = false;
+    let bild = 0;
+
+    const ebene = (v, wert) => { v.style.opacity = String(wert); };
+
+    const schritt = () => {
+      bild = requestAnimationFrame(schritt);
+      const d = vorne.duration;
+      if (!d || isNaN(d)) return;
+      const rest = d - vorne.currentTime;
+
+      if (!blendet && rest <= UEBERBLENDUNG) {
+        blendet = true;
+        hinten.currentTime = 0;
+        const p = hinten.play();
+        if (p) p.catch(() => {});
+      }
+
+      if (blendet) {
+        // 0 am Beginn der Blende, 1 am Ende.
+        const t = Math.min(1, Math.max(0, (UEBERBLENDUNG - rest) / UEBERBLENDUNG));
+        ebene(hinten, t);
+        ebene(vorne, 1 - t);
+
+        if (rest <= 0.03) {
+          // Rollen tauschen. Die alte vordere Ebene haelt an und
+          // wartet unsichtbar auf ihren naechsten Einsatz.
+          vorne.pause();
+          ebene(hinten, 1);
+          ebene(vorne, 0);
+          const merk = vorne; vorne = hinten; hinten = merk;
+          blendet = false;
+        }
+      }
+    };
+    bild = requestAnimationFrame(schritt);
+    return () => cancelAnimationFrame(bild);
+  }, []);
+
   return (
     <section
       data-dunkler-kopf=""
@@ -82,11 +151,12 @@ export default function Hero() {
       }}
     >
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        {/* Kein loop-Attribut mehr: das Wiederholen macht die
+            Ueberblendung oben, sonst kaeme der harte Schnitt zurueck. */}
         <video
           ref={videoRef}
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
           /* Standbild, bis das Video laeuft. Ohne das sieht man beim
@@ -107,6 +177,31 @@ export default function Hero() {
             objectFit: 'cover',
             objectPosition: 'center center',
             display: 'block',
+          }}
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Die zweite Ebene. Liegt unsichtbar darunter und uebernimmt
+            am Schleifenpunkt. Kein autoPlay: sie wird gestartet, wenn
+            sie gebraucht wird. Fuer Vorlesesoftware unsichtbar, sie
+            zeigt ja dasselbe Bild.                                   */}
+        <video
+          ref={zweitRef}
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            display: 'block',
+            opacity: 0,
           }}
         >
           <source src="/videos/hero.mp4" type="video/mp4" />

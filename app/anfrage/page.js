@@ -10,6 +10,16 @@ export default function AnfragePage() {
   const [gesendet, setGesendet] = useState(false);
   const [laedt, setLaedt] = useState(false);
   const [fehler, setFehler] = useState('');
+  /* Welche Pflichtfelder fehlen, als { feldname: Hinweistext }.
+     Nevio am 21.09.2026: "wenn etwas fehlt dann soll er rot
+     aufleuchten, was noch fehlt." */
+  const [fehlende, setFehlende] = useState({});
+
+  const feldKlasse  = (k) => 'feld' + (fehlende[k] ? ' feld-fehler' : '');
+  const labelKlasse = (k) => 'feld-label' + (fehlende[k] ? ' feld-label-fehler' : '');
+  const Hinweis = ({ k }) => (fehlende[k]
+    ? <span className="feld-hinweis" id={`hinweis-${k}`}>{fehlende[k]}</span>
+    : null);
 
   async function absenden(e) {
     e.preventDefault();
@@ -31,6 +41,44 @@ export default function AnfragePage() {
       ].join('\n'),
     };
 
+    /* Erst pruefen, dann senden. Vorher ging jede unvollstaendige
+       Anfrage an den Server und kam als allgemeiner Fehlersatz zurueck -
+       man las "es fehlt etwas", aber nicht WAS. Das Formular traegt
+       noValidate, die Pruefung des Browsers ist also aus; sie muss hier
+       stehen. Der Server prueft weiterhin selbst, das hier ersetzt ihn
+       nicht, es kommt ihm nur zuvor.                                  */
+    const mangel = {};
+    if (!String(daten.name || '').trim()) {
+      mangel.name = 'Bitte sagt uns, wie ihr heißt.';
+    }
+    const mail = String(daten.email || '').trim();
+    if (!mail) {
+      mangel.email = 'Ohne E-Mail-Adresse können wir euch nicht antworten.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
+      mangel.email = 'Diese E-Mail-Adresse sieht nicht richtig aus.';
+    }
+    if (!String(daten.hochzeitsdatum || '').trim()) {
+      mangel.hochzeitsdatum = 'Bitte euer Hochzeitsdatum angeben.';
+    }
+
+    if (Object.keys(mangel).length > 0) {
+      setFehlende(mangel);
+      setFehler(Object.keys(mangel).length === 1
+        ? 'Ein Feld fehlt noch. Es ist unten rot markiert.'
+        : `${Object.keys(mangel).length} Felder fehlen noch. Sie sind unten rot markiert.`);
+      setLaedt(false);
+      // Zum ersten fehlenden Feld springen und hineinsetzen: bei einem
+      // langen Formular sieht man sonst gar nicht, dass unten etwas rot ist.
+      const erstes = { name: 'feld-namen', email: 'feld-mail', hochzeitsdatum: 'feld-datum' }[Object.keys(mangel)[0]];
+      const el = document.getElementById(erstes);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.focus({ preventScroll: true });
+      }
+      return;
+    }
+    setFehlende({});
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -38,7 +86,13 @@ export default function AnfragePage() {
         body: JSON.stringify(daten),
       });
       const antwort = await res.json().catch(() => ({}));
-      if (res.ok) setGesendet(true);
+      if (res.ok) {
+        setGesendet(true);
+        /* Auf dem Handy steht der Knopf weit unten. Ohne das Hochrollen
+           taeuscht die Bestaetigung: das Formular ist weg, aber man
+           sieht nur Leerraum und weiss nicht, ob es geklappt hat. */
+        requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
       else setFehler(antwort.error || 'Es ist ein Fehler aufgetreten. Bitte versucht es erneut.');
     } catch {
       setFehler('Verbindungsfehler. Bitte prüft eure Internetverbindung oder schreibt uns direkt an booking@amoriva-films.de.');
@@ -77,11 +131,30 @@ export default function AnfragePage() {
             {/* Rechts: das Formular, ein Feld unter dem anderen */}
             <div>
               {gesendet ? (
+                /* Nevio am 21.09.2026: "Es soll auch eine Benachrichtigung
+                   kommen, wenn die die Anfrage absenden."
+
+                   Vorher stand hier nur Text. Der las sich wie ein
+                   weiterer Abschnitt der Seite, nicht wie eine Antwort
+                   auf das, was man gerade getan hat. Jetzt ein Kasten
+                   in Markengruen mit Haken, den role="status" auch
+                   Vorlesesoftware ansagt.                            */
                 <div>
+                  <div className="meldung meldung-erfolg" role="status" style={{ marginBottom: 'var(--luft-4)' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="var(--gruen)" strokeWidth="2" strokeLinecap="round"
+                         strokeLinejoin="round" aria-hidden="true"
+                         style={{ flexShrink: 0, marginTop: '1px' }}>
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <p>Eure Anfrage ist angekommen.</p>
+                  </div>
+
                   <h2 className="t-gross" style={{ marginBottom: 'var(--luft-2)' }}>Vielen Dank.</h2>
                   <p className="t-text t-grau">
-                    Eure Nachricht ist angekommen. Nevio meldet sich persönlich,
-                    spätestens am nächsten Tag.
+                    Ihr bekommt gleich eine Eingangsbestätigung per E-Mail.
+                    Nevio meldet sich persönlich, in der Regel innerhalb von
+                    24 Stunden.
                   </p>
                 </div>
               ) : (
@@ -91,15 +164,21 @@ export default function AnfragePage() {
                    die beiden Textfelder laufen ueber die volle Breite. */
                 <form onSubmit={absenden} noValidate className="formular-raster">
                   <div>
-                    <label className="feld-label" htmlFor="feld-namen">Eure Namen</label>
-                    <input className="feld" id="feld-namen" name="name" type="text"
-                           placeholder="Lena & Thomas" required autoComplete="name" />
+                    <label className={labelKlasse('name')} htmlFor="feld-namen">Eure Namen</label>
+                    <input className={feldKlasse('name')} id="feld-namen" name="name" type="text"
+                           placeholder="Lena & Thomas" required autoComplete="name"
+                           aria-invalid={Boolean(fehlende.name)}
+                           aria-describedby={fehlende.name ? 'hinweis-name' : undefined} />
+                    <Hinweis k="name" />
                   </div>
 
                   <div>
-                    <label className="feld-label" htmlFor="feld-mail">E-Mail Adresse</label>
-                    <input className="feld" id="feld-mail" name="email" type="email"
-                           placeholder="eure@email.de" required autoComplete="email" />
+                    <label className={labelKlasse('email')} htmlFor="feld-mail">E-Mail Adresse</label>
+                    <input className={feldKlasse('email')} id="feld-mail" name="email" type="email"
+                           placeholder="eure@email.de" required autoComplete="email"
+                           aria-invalid={Boolean(fehlende.email)}
+                           aria-describedby={fehlende.email ? 'hinweis-email' : undefined} />
+                    <Hinweis k="email" />
                   </div>
 
                   <div>
@@ -109,8 +188,11 @@ export default function AnfragePage() {
                   </div>
 
                   <div>
-                    <label className="feld-label" htmlFor="feld-datum">Hochzeitsdatum</label>
-                    <input className="feld" id="feld-datum" name="Hochzeitsdatum" type="date" required />
+                    <label className={labelKlasse('hochzeitsdatum')} htmlFor="feld-datum">Hochzeitsdatum</label>
+                    <input className={feldKlasse('hochzeitsdatum')} id="feld-datum" name="Hochzeitsdatum" type="date" required
+                           aria-invalid={Boolean(fehlende.hochzeitsdatum)}
+                           aria-describedby={fehlende.hochzeitsdatum ? 'hinweis-hochzeitsdatum' : undefined} />
+                    <Hinweis k="hochzeitsdatum" />
                   </div>
 
                   <div>
@@ -154,9 +236,9 @@ export default function AnfragePage() {
                   </div>
 
                   {fehler && (
-                    <div className="meldung ganze-zeile" role="alert">
+                    <div className="meldung meldung-fehler ganze-zeile" role="alert">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                           stroke="var(--tinte)" strokeWidth="1.8" strokeLinecap="round"
+                           stroke="var(--warnung)" strokeWidth="1.8" strokeLinecap="round"
                            strokeLinejoin="round" aria-hidden="true"
                            style={{ flexShrink: 0, marginTop: '1px' }}>
                         <path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z" />

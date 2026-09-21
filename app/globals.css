@@ -446,10 +446,34 @@ p, li { overflow-wrap: break-word; }
 
 /* Portraet-Reihe: fuenf Bilder nebeneinander, flach gehalten. Auf dem
    Handy ein Streifen zum Wischen statt fuenf Bildschirmseiten. */
+/* Laufband statt starrer Reihe (Nevio, 21.09.2026). Es laeuft auf
+   jeder Breite, nicht nur auf dem Handy.
+
+   KEIN scroll-snap: Snap zerrt den Streifen nach jedem Stueck auf die
+   naechste Kachel und macht aus dem gleichmaessigen Lauf ein Rucken.
+   Snap ist richtig fuer eine Galerie, die man durchblaettert, falsch
+   fuer ein Band, das von selbst zieht.
+
+   Das Scrollen selbst uebernimmt der Browser, Javascript schiebt nur
+   die Position weiter. Deshalb ist Wischen hier echtes Wischen, mit
+   Schwung und Auslauf - genau das war die Vorgabe.                  */
 .portraet-reihe {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
   gap: var(--luft-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Ueber die volle Breite, nicht in der Bahn: ein Laufband, das an
+     der Textkante aufhoert, sieht aus wie ein Fehler. */
+  padding-inline: var(--rand);
+  cursor: grab;
+}
+.portraet-reihe::-webkit-scrollbar { display: none; }
+.portraet-reihe > * { flex: 0 0 240px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portraet-reihe { cursor: auto; }
 }
 .portraet-kachel {
   position: relative;
@@ -469,20 +493,90 @@ p, li { overflow-wrap: break-word; }
 }
 
 @media (max-width: 860px) {
-  .portraet-reihe {
-    display: flex;
-    gap: var(--luft-2);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    /* Der Streifen darf ueber die Bahn hinauslaufen, sonst sieht man
-       nicht, dass es weitergeht. */
-    margin-inline: calc(-1 * var(--rand));
-    padding-inline: var(--rand);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .portraet-reihe::-webkit-scrollbar { display: none; }
-  .portraet-reihe > * { flex: 0 0 46%; scroll-snap-align: start; }
+  /* Auf dem Handy schmalere Kacheln, damit immer angeschnitten zu
+     sehen ist, dass es weitergeht. */
+  .portraet-reihe > * { flex: 0 0 46%; }
+}
+
+/* ── Nevio-Runde vom 21.09.2026 ───────────────────────────────── */
+
+/* Fehlerfarbe fuers Formular (Nevio, 21.09.2026: "wenn etwas fehlt
+   dann soll er rot aufleuchten, was noch fehlt").
+
+   Bewusst ein gedaempftes Ziegelrot und kein Signalrot. Nevios Regel
+   fuer die Marke zieht die Grenze an der Saettigung, nicht an der
+   Farbe - ein satter Warnton wuerde die ganze ruhige Seite kippen.
+   Auf dem hellen Grund kommt dieser Ton auf 6,4 zu 1 und ist damit
+   auch fuer schwache Augen klar als Fehler zu erkennen. */
+:root {
+  --warnung:      #A33B28;
+  --warnung-leis: rgba(163, 59, 40, 0.06);
+}
+
+/* Ein fehlendes Feld leuchtet auf: kraeftigere Linie in der Warnfarbe,
+   dazu ein Hauch Flaeche. Die Beschriftung faerbt sich mit, damit auch
+   erkennbar ist WELCHES Feld gemeint ist, wenn mehrere fehlen. */
+.feld-fehler,
+.feld-fehler:focus {
+  border-bottom-color: var(--warnung);
+  border-bottom-width: 2px;
+  background: var(--warnung-leis);
+}
+.feld-label-fehler { color: var(--warnung); }
+.feld-hinweis {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--warnung);
+}
+.meldung-fehler {
+  background: var(--warnung-leis);
+  border-color: var(--warnung);
+}
+.meldung-fehler p { color: var(--warnung); }
+
+/* Die Erfolgsmeldung nach dem Absenden - in Markengruen, nicht in
+   Warnfarbe. */
+.meldung-erfolg {
+  background: rgba(104, 120, 80, 0.07);
+  border-color: var(--gruen);
+}
+.meldung-erfolg p { color: var(--gruen); }
+
+
+/* Die Rezensionen waren auf dem Handy zu gross (Nevio). 24 px kursiv
+   ueber die schmale Breite ergaben lange, duenne Textsaeulen. */
+.stimme-zitat {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--tinte);
+}
+
+/* Das Menue auf dem Handy: drei Woerter fuellten fast den halben
+   Bildschirm (Screenshot Nevio). Gross darf es bleiben, aber nicht so
+   gross, dass Menue und Knopf nicht mehr zusammen ins Bild passen. */
+.menue-link {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--tinte);
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .stimme-zitat { font-size: 1.1875rem; line-height: 1.5; }
+  .menue-link   { font-size: 1.875rem; }
+
+  /* Die Schritte im Ablauf gingen auf dem Handy ineinander ueber -
+     man sah nicht, wo einer aufhoert und der naechste anfaengt
+     (Screenshot Nevio). Eine feine Linie trennt sie jetzt. Nicht vor
+     dem ersten: dort steht schon die Ueberschrift darueber. */
+  .schritt-raster > * + * { border-top: 1px solid var(--linie); padding-top: var(--luft-4); }
 }
 
 /* Leistungskachel: die Ziffer liegt als heller Schatten oben rechts,
