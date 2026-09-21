@@ -451,6 +451,20 @@ textarea.feld {
   line-height: 1.6;
 }
 
+/* Zwei Spalten fuer die kurzen Felder, volle Breite fuer Textfelder,
+   Meldungen und den Absenden-Bereich. Halbiert die Hoehe des Formulars. */
+.formular-raster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--luft-3) var(--luft-3);
+  align-items: start;
+}
+.formular-raster > .ganze-zeile { grid-column: 1 / -1; }
+
+@media (max-width: 720px) {
+  .formular-raster { grid-template-columns: 1fr; }
+}
+
 .formular-felder {
   display: flex;
   flex-direction: column;

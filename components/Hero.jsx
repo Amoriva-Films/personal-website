@@ -18,8 +18,13 @@ export default function Hero() {
     v.play().catch(() => {});
   }, []);
 
+  /* data-dunkler-kopf ist die Markierung fuer die Kopfzeile: nur ueber
+     DIESEM Abschnitt darf sie sich hell faerben. Ohne die Markierung stand
+     helle Schrift auf hellem Grund - auf fuenf von sechs Unterseiten, mit
+     1,06 zu 1, also praktisch unsichtbar. */
   return (
     <section
+      data-dunkler-kopf=""
       style={{
         position: 'relative',
         width: '100%',
@@ -151,9 +156,12 @@ export default function Hero() {
               <Link href="/anfrage" className="knopf knopf-voll">
                 Termin anfragen
               </Link>
-              <Link href="/referenzen" className="knopf knopf-linie"
+              {/* Zeigte auf die Galerie. Die ist raus, also fuehrt der
+                  zweite Weg jetzt zu den Leistungen - dem einzigen Ort,
+                  an dem noch etwas zu sehen ist. */}
+              <Link href="/leistungen" className="knopf knopf-linie"
                     style={{ color: 'var(--auf-dunkel)', borderColor: 'rgba(244,244,242,0.35)' }}>
-                Bilder ansehen
+                Leistungen ansehen
               </Link>
             </motion.div>
           </div>

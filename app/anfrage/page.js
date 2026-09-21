@@ -61,9 +61,8 @@ export default function AnfragePage() {
                 Beginnt mit eurer Geschichte.
               </h1>
               <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
-                Jede Nachricht wird persönlich gelesen. Erzählt uns von eurer
-                Hochzeit, eurer Vision und davon, was euer Film und eure Bilder
-                später auslösen sollen.
+                Jede Nachricht wird persönlich gelesen. Antwort in der Regel
+                innerhalb von 24 Stunden.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
                 <a href="mailto:booking@amoriva-films.de" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
@@ -86,9 +85,11 @@ export default function AnfragePage() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={absenden} noValidate style={{
-                  display: 'flex', flexDirection: 'column', gap: '2.25rem',
-                }}>
+                /* Lag als eine Kolonne mit neun Feldern und 2,25 rem
+                   Abstand untereinander - das war die halbe Seitenlaenge.
+                   Jetzt zwei Spalten: kurze Felder teilen sich eine Zeile,
+                   die beiden Textfelder laufen ueber die volle Breite. */
+                <form onSubmit={absenden} noValidate className="formular-raster">
                   <div>
                     <label className="feld-label" htmlFor="feld-namen">Eure Namen</label>
                     <input className="feld" id="feld-namen" name="name" type="text"
@@ -140,20 +141,14 @@ export default function AnfragePage() {
                     </select>
                   </div>
 
-                  <div>
+                  <div className="ganze-zeile">
                     <label className="feld-label" htmlFor="feld-vision">Erzählt uns von eurer Vision</label>
-                    <textarea className="feld" id="feld-vision" name="Vision" rows={4}
+                    <textarea className="feld" id="feld-vision" name="Vision" rows={3}
                               placeholder="Wie stellt ihr euch euren Tag vor? Was soll festgehalten werden?" />
                   </div>
 
-                  <div>
-                    <label className="feld-label" htmlFor="feld-wirkung">Was soll euer Film später auslösen?</label>
-                    <textarea className="feld" id="feld-wirkung" name="Gefuehl" rows={4}
-                              placeholder="Ein Gefühl, eine Stimmung, ein Bild. Beschreibt es so, wie es euch in den Sinn kommt." />
-                  </div>
-
                   {fehler && (
-                    <div className="meldung" role="alert">
+                    <div className="meldung ganze-zeile" role="alert">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                            stroke="var(--tinte)" strokeWidth="1.8" strokeLinecap="round"
                            strokeLinejoin="round" aria-hidden="true"
@@ -166,7 +161,7 @@ export default function AnfragePage() {
                     </div>
                   )}
 
-                  <div>
+                  <div className="ganze-zeile">
                     <button type="submit" disabled={laedt} className="knopf knopf-voll"
                             style={{ opacity: laedt ? 0.55 : 1 }}>
                       {laedt ? 'Wird gesendet …' : 'Nachricht senden'}
@@ -176,16 +171,11 @@ export default function AnfragePage() {
                         Budget erhoben. Der Hinweis gehoert an die Stelle,
                         an der die Daten abgeschickt werden. */}
                     <p className="t-fein" style={{ marginTop: 'var(--luft-3)', fontSize: '0.8125rem' }}>
-                      Mit dem Absenden schickt ihr uns die angegebenen Daten,
-                      damit wir eure Anfrage beantworten können. Mehr dazu in
-                      unserer{' '}
+                      Ihr bekommt sofort eine Eingangsbestätigung, die richtige
+                      Antwort schreibt Nevio persönlich. Mit dem Absenden
+                      schickt ihr uns die angegebenen Daten, damit wir eure
+                      Anfrage beantworten können. Mehr dazu in unserer{' '}
                       <Link href="/datenschutz" className="link-fein">Datenschutzerklärung</Link>.
-                    </p>
-
-                    <p className="t-fein" style={{ marginTop: 'var(--luft-2)', fontSize: '0.8125rem' }}>
-                      Ihr bekommt sofort eine kurze Eingangsbestätigung. Die
-                      richtige Antwort schreibt Nevio persönlich, in der Regel
-                      innerhalb von 24 Stunden.
                     </p>
                   </div>
                 </form>

@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 // Filme stehen an erster Stelle. Wer einen Hochzeitsfilmer sucht,
 // will Filme sehen, nicht Leistungen lesen.
 const LINKS = [
   // { label: 'Filme', href: '/filme' },   // wieder rein, sobald es Filme gibt
-  { label: 'Galerie',    href: '/referenzen'      },
+  // { label: 'Galerie', href: '/referenzen' },   // raus auf Nevios Wunsch 21.09.2026
   { label: 'Leistungen', href: '/#leistungen'  },
   { label: 'Über uns',   href: '/#founders'    },
   { label: 'Anfrage',    href: '/anfrage'      },
@@ -24,12 +25,23 @@ export default function Nav() {
   const [gescrollt, setGescrollt] = useState(false);
   const [offen, setOffen] = useState(false);
 
+  const pfad = usePathname();
+  const [ueberDunkel, setUeberDunkel] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setGescrollt(window.scrollY > 80);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  /* Nur wo ein Abschnitt sich als dunkler Kopf meldet (das Hero-Video auf
+     der Startseite), darf die Leiste helle Schrift tragen. Vorher galt das
+     ueberall: auf den Unterseiten stand helle Schrift auf hellem Grund,
+     gemessen 1,06 zu 1 - praktisch unsichtbar.                          */
+  useEffect(() => {
+    setUeberDunkel(Boolean(document.querySelector('[data-dunkler-kopf]')));
+  }, [pfad]);
 
   useEffect(() => {
     if (!offen) return;
@@ -44,7 +56,7 @@ export default function Nav() {
   }, [offen]);
 
   // Helle Wortmarke nur, solange sie ueber dem dunklen Video steht.
-  const aufDunkel = !offen && !gescrollt;
+  const aufDunkel = ueberDunkel && !offen && !gescrollt;
   const textFarbe = aufDunkel ? 'rgba(244,244,242,0.9)' : 'var(--tinte)';
 
   return (

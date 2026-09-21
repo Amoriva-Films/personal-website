@@ -25,10 +25,6 @@ export default function Prozess() {
                 Von der ersten Nachricht bis zu <span className="kursiv">eurem Film.</span>
               </h2>
             </div>
-            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
-              Kein Verkaufsgespräch, keine Vertragsfalle, keine Technikvorträge.
-              Fünf Schritte, die ihr von Anfang an überblickt.
-            </p>
           </div>
         </FadeIn>
 

@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import FadeIn from './FadeIn';
-import Galerie from './Galerie';
+// import Galerie from './Galerie';        // s. u., ausgehaengt
 import TrustBadges from './TrustBadges';
 // import { Filmkachel, KeineFilme } from './Filmspieler';   // s. u., ausgehaengt
-import { galerie } from '@/data/galerie';
+// import { galerie } from '@/data/galerie';  // s. u., ausgehaengt
 // import { startseitenFilm } from '@/data/filme';           // s. u., ausgehaengt
 
 export default function ContentSections() {
@@ -76,7 +76,16 @@ export default function ContentSections() {
         </FadeIn>
       </section>
 
-      {/* ── Bilder ──────────────────────────────────────────────────── */}
+      {/* ── Bilder ───────────────────────────────────────────────────
+          AUSGEHAENGT auf Nevios Wunsch (21.09.2026): "Galerie rausnehmen
+          komplett". Die drei Bilder waren das Einzige, was die Seite an
+          eigener Arbeit gezeigt hat.
+
+          Wieder einhaengen: diesen Block entkommentieren, die Importe fuer
+          Galerie und galerie oben wieder aktivieren, den Link "Galerie" in
+          Nav.jsx und Footer.jsx eintragen, den Hero-Knopf zurueckstellen
+          und 'referenzen' wieder in app/sitemap.js aufnehmen.
+
       <section className="abschnitt dunkel">
         <div className="bahn">
           <FadeIn>
@@ -101,6 +110,8 @@ export default function ContentSections() {
           </FadeIn>
         </div>
       </section>
+      */}
+
     </>
   );
 }

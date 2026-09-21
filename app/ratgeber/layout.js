@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Ratgeber | Hochzeitsfilm & Fotografie',
   description:
-    'Ratgeber für Hochzeitsfilme & Hochzeitsfotografie: Kosten, Buchungszeitpunkte, Same Day Edit, cinematic Stil und alles was Paare wissen müssen. Von Amoriva Films, Wolfsburg.',
+    'Ratgeber für Hochzeitsfilme: Kosten, wann buchen, Same Day Edit und cinematic Stil. Alles, was Paare vor der Buchung wissen sollten.',
   alternates: {
     canonical: 'https://amoriva-films.de/ratgeber',
   },

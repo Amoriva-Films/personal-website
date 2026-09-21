@@ -92,7 +92,7 @@ export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${details}</table>
       </td></tr>
     </table>` : ''}
-    ${absatz(`Wenn ihr mögt, schaut in der Zwischenzeit bei unseren <a href="https://amoriva-films.de/referenzen" style="color:${F.gruen};text-decoration:underline;text-underline-offset:3px;">Filmen</a> vorbei. So bekommt ihr ein Gefühl dafür, wie euer Tag aussehen könnte.`)}
+    ${absatz(`Wenn ihr mögt, schaut in der Zwischenzeit bei unseren <a href="https://amoriva-films.de/leistungen" style="color:${F.gruen};text-decoration:underline;text-underline-offset:3px;">Leistungen</a> vorbei. So bekommt ihr ein Gefühl dafür, wie wir arbeiten.`)}
     <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
       <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Bis ganz bald</div>
       <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">Nevio und Danilo</div>

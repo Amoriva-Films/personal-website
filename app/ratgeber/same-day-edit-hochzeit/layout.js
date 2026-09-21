@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Same Day Edit: Hochzeitsfilm noch am selben Abend | Amoriva Films',
   description:
-    'Same Day Edit Hochzeit: Was ist das, wie funktioniert es und für wen lohnt es sich? Euer Highlight Film fertig zur Abendveranstaltung, erklärt von Amoriva Films Wolfsburg.',
+    'Same Day Edit: euer Highlight-Film noch am Hochzeitsabend fertig. Wie es abläuft und für wen es sich lohnt.',
   keywords: [
     'Same Day Edit Hochzeit',
     'Same Day Edit was ist das',

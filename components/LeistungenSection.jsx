@@ -58,10 +58,6 @@ export default function LeistungenSection() {
                 Was wir für euch <span className="kursiv">tun können.</span>
               </h2>
             </div>
-            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
-              Drei Wege, einer davon passt zu euch. Was ihr am Ende bekommt,
-              steht bei jedem dabei, Punkt für Punkt.
-            </p>
           </div>
         </FadeIn>
 
@@ -78,7 +74,7 @@ export default function LeistungenSection() {
             }}>
               <div>
                 <span className="schritt-ziffer" aria-hidden="true">{s.nr}</span>
-                <h3 className="t-mittel" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
+                <h3 className="t-klein" style={{ marginTop: 'var(--luft-3)', marginBottom: 'var(--luft-1)' }}>{s.title}</h3>
                 <p className="t-fein">{s.subtitle}</p>
               </div>
               <div>
@@ -106,11 +102,6 @@ export default function LeistungenSection() {
 
         <FadeIn>
           <div style={{ paddingTop: 'var(--luft-4)', borderTop: '1px solid var(--linie)' }}>
-            <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
-              Jede Hochzeit ist anders. Was zu eurem Tag passt, besprechen wir
-              in einem kurzen Gespräch und ihr bekommt ein Angebot, das wirklich
-              zu euch passt.
-            </p>
             <Link href="/anfrage" className="knopf knopf-voll">Anfrage stellen</Link>
           </div>
         </FadeIn>

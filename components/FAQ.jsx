@@ -44,10 +44,6 @@ export default function FAQ() {
                 Was ihr <span className="kursiv">wissen wollt.</span>
               </h2>
             </div>
-            <p className="t-text t-grau" style={{ paddingTop: '0.4rem' }}>
-              Steht eure Frage nicht dabei, schreibt uns einfach. Wir antworten
-              innerhalb von 24 Stunden, auch per WhatsApp.
-            </p>
           </div>
         </FadeIn>
 

@@ -1,11 +1,11 @@
 export const metadata = {
-  title: 'Was kostet ein Hochzeitsfilm? Preise & Pakete 2025 | Amoriva Films',
+  title: 'Was kostet ein Hochzeitsfilm? Preise und Pakete | Amoriva Films',
   description:
-    'Hochzeitsfilm Kosten 2025: Welche Faktoren den Preis beeinflussen, was ein gutes Paket enthalten sollte und was ihr für einen cinematic Hochzeitsfilm in Deutschland realistisch einplanen solltet.',
+    'Was einen Hochzeitsfilm teurer oder günstiger macht, was in ein gutes Paket gehört und woran ihr Qualität erkennt.',
   keywords: [
     'Hochzeitsfilm Kosten',
     'Hochzeitsfilm Preise',
-    'Hochzeitsfilm Preise 2025',
+    'Hochzeitsfilm Preise',
     'was kostet ein Hochzeitsfilm',
     'Hochzeitsfilm buchen Kosten',
     'Hochzeitsfilmer Preise Deutschland',

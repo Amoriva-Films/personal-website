@@ -29,13 +29,11 @@ export default function Testimonials() {
         {/* Stand nur eine Augenbraue ohne Ueberschrift - der Abschnitt
             begann damit im Nichts. Jetzt derselbe Paar-Kopf wie ueberall. */}
         <FadeIn>
-          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
-            <div>
-              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Das sagen unsere Paare</p>
-              <h2 className="t-gross">
-                Was danach <span className="kursiv">übrig bleibt.</span>
-              </h2>
-            </div>
+          <div style={{ marginBottom: 'var(--luft-5)' }}>
+            <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Das sagen unsere Paare</p>
+            <h2 className="t-gross">
+              Was danach <span className="kursiv">übrig bleibt.</span>
+            </h2>
           </div>
         </FadeIn>
 

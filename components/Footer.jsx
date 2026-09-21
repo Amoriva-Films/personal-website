@@ -8,7 +8,7 @@ const LOGO_BREITE = Math.round(LOGO_HOEHE * 1116 / 427);
 
 const wege = [
   // { label: 'Filme', href: '/filme' },   // wieder rein, sobald es Filme gibt
-  { label: 'Galerie',    href: '/referenzen'     },
+  // { label: 'Galerie', href: '/referenzen' },   // raus auf Nevios Wunsch 21.09.2026
   { label: 'Leistungen', href: '/#leistungen' },
   { label: 'Über uns',   href: '/#founders'   },
   { label: 'Anfrage',    href: '/anfrage'     },

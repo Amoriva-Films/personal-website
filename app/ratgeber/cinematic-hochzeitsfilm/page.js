@@ -13,7 +13,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
-  dateModified: '2025-05-13',
+  dateModified: '2026-09-21',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/cinematic-hochzeitsfilm' },
   image: 'https://amoriva-films.de/images/og-image.jpg',
 };
@@ -90,7 +90,7 @@ export default function Page() {
         Wir drehen jeden Hochzeitsfilm mit einem cinematischen Blick, vom ersten Moment des Tages bis zum letzten Tanz. Was uns antreibt: Wir wollen, dass ihr in fünf Jahren denselben Film anschaut und dieselben Gefühle habt wie am Hochzeitstag selbst.
       </p>
       <p>
-        Schaut euch unsere <Link href="/referenzen">Referenzen</Link> an oder <Link href="/anfrage">stellt direkt eine Anfrage</Link>, wir sind gespannt von euch zu hören.
+        Schaut euch unsere <Link href="/leistungen">Leistungen</Link> an oder <Link href="/anfrage">stellt direkt eine Anfrage</Link>, wir sind gespannt von euch zu hören.
       </p>
     </ArticleLayout>
   );

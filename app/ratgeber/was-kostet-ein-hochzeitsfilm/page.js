@@ -4,8 +4,8 @@ import Link from 'next/link';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Was kostet ein Hochzeitsfilm? Preise & Pakete 2025',
-  description: 'Hochzeitsfilm Kosten 2025: Faktoren, Preisrahmen und was in einem guten Paket enthalten sein sollte.',
+  headline: 'Was kostet ein Hochzeitsfilm? Preise und Pakete',
+  description: 'Hochzeitsfilm Kosten: Faktoren, Preisrahmen und was in einem guten Paket enthalten sein sollte.',
   author: { '@type': 'Organization', name: 'Amoriva Films', url: 'https://amoriva-films.de' },
   publisher: {
     '@type': 'Organization',
@@ -13,7 +13,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
-  dateModified: '2025-05-13',
+  dateModified: '2026-09-21',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/was-kostet-ein-hochzeitsfilm' },
   image: 'https://amoriva-films.de/images/og-image.jpg',
 };
@@ -31,7 +31,7 @@ const breadcrumb = {
 export default function Page() {
   return (
     <ArticleLayout
-      title="Was kostet ein Hochzeitsfilm? Preise & Pakete 2025"
+      title="Was kostet ein Hochzeitsfilm? Preise und Pakete"
       category="Kosten & Pakete"
       date="Mai 2025"
       readTime="5 Min."
@@ -44,7 +44,7 @@ export default function Page() {
       </p>
 
       <div className="highlight-box">
-        Kurze Antwort: Ein professioneller Hochzeitsfilm kostet im Jahr 2025 typischerweise zwischen <strong>1.200 € und 3.500 €</strong>, je nach Umfang und Qualitätsniveau.
+        Kurze Antwort: Ein professioneller Hochzeitsfilm kostet typischerweise zwischen <strong>1.200 € und 3.500 €</strong>, je nach Umfang und Qualitätsniveau.
       </div>
 
       <h2>Warum ein Hochzeitsfilm eine lohnende Investition ist</h2>
@@ -68,7 +68,7 @@ export default function Page() {
         <li><strong>Zusatzleistungen:</strong> Separater Trailer, Rohschnitt-Material oder besondere Formate.</li>
       </ul>
 
-      <h2>Hochzeitsfilm Preise 2025: Was ist realistisch?</h2>
+      <h2>Hochzeitsfilm Preise: Was ist realistisch?</h2>
 
       <h3>Einsteiger (unter 1.200 €)</h3>
       <p>

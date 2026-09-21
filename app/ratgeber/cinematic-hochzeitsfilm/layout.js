@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Was ist ein cinematic Hochzeitsfilm? | Amoriva Films Wolfsburg',
   description:
-    'Cinematic Hochzeitsfilm erklärt: Was bedeutet cinematic, der Unterschied zu documentary Hochzeitsfilmen, wie ein filmischer Hochzeitsfilm entsteht und warum er emotionaler berührt.',
+    'Was cinematic beim Hochzeitsfilm wirklich heißt, worin der Unterschied zum documentary Stil liegt und warum er stärker berührt.',
   keywords: [
     'cinematic Hochzeitsfilm',
     'filmischer Hochzeitsfilm',
