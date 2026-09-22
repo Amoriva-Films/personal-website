@@ -153,7 +153,7 @@ export default function Datenschutz() {
 
         <Section title="8. Cookies">
           <p>
-            Diese Website verwendet keine Tracking-Cookies. Es werden ausschließlich technisch notwendige Cookies eingesetzt, die für den Betrieb der Website erforderlich sind. Du kannst Cookies in deinem Browser jederzeit deaktivieren.
+            Diese Website setzt <strong>gar keine Cookies</strong> &mdash; weder zur Analyse noch für Werbung, und auch keine technisch notwendigen. Ebenso wird nichts im Speicher deines Browsers abgelegt. Es sind keine Zähldienste, keine Werbenetzwerke und keine Schaltflächen sozialer Netzwerke eingebunden. Die Schriften liegen auf unserem eigenen Server, es wird also auch dafür keine Verbindung zu Dritten aufgebaut. Deshalb gibt es auf dieser Seite auch kein Zustimmungsfenster: Es gibt nichts, dem du zustimmen müsstest.
           </p>
         </Section>
 
