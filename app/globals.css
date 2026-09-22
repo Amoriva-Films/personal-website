@@ -534,13 +534,18 @@ p, li { overflow-wrap: break-word; }
 /* Ein fehlendes Feld leuchtet auf: kraeftigere Linie in der Warnfarbe,
    dazu ein Hauch Flaeche. Die Beschriftung faerbt sich mit, damit auch
    erkennbar ist WELCHES Feld gemeint ist, wenn mehrere fehlen. */
-.feld-fehler,
-.feld-fehler:focus {
+/* Zwei Klassen statt einer, mit Absicht: die Grundregel .feld steht
+   weiter unten in dieser Datei. Bei gleicher Gewichtung gewinnt die
+   spaetere - die graue Linie hat die rote ueberschrieben, die Felder
+   waren als fehlend markiert, sahen aber unveraendert aus. Mit
+   .feld.feld-fehler ist die Reihenfolge egal. */
+.feld.feld-fehler,
+.feld.feld-fehler:focus {
   border-bottom-color: var(--warnung);
   border-bottom-width: 2px;
   background: var(--warnung-leis);
 }
-.feld-label-fehler { color: var(--warnung); }
+.feld-label.feld-label-fehler { color: var(--warnung); }
 .feld-hinweis {
   display: block;
   margin-top: 0.4rem;
