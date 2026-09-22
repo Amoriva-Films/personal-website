@@ -72,7 +72,7 @@ export default function Testimonials() {
                     }}>
                       {t.namen}
                     </span>
-                    <span style={{ display: 'block', fontSize: '0.8125rem', color: 'var(--grau-3)' }}>
+                    <span style={{ display: 'block', fontSize: '0.8125rem', color: 'var(--grau-2)' }}>
                       {t.datum}
                     </span>
                   </span>
