@@ -3,6 +3,19 @@
 // Cormorant (Fallback Georgia) für Überschriften, Inter (Fallback Helvetica) für Text.
 // Aufbau mit Tabellen und Inline-Styles, damit auch Outlook und Gmail sauber rendern.
 
+/* Kurzfassung fuer Betreffzeilen.
+
+   Eine Betreffzeile darf nach RFC 5322 nicht beliebig lang sein; Resend
+   lehnt zu lange ab. Gemessen am 22.09.2026: ein Name mit 3000 Zeichen
+   ergab einen Betreff mit 3017 Zeichen, die Benachrichtigung an Nevio
+   wurde abgelehnt - und weil die Stoermeldung denselben Namen in ihren
+   Betreff schreibt, scheiterte auch sie. Die Anfrage waere still
+   verschwunden, obwohl der Waechter genau das verhindern soll. */
+export function kurz(v, max = 70) {
+  const t = String(v ?? '').replace(/\s+/g, ' ').trim();
+  return t.length > max ? t.slice(0, max - 1) + '\u2026' : t;
+}
+
 export function esc(v) {
   return String(v ?? '')
     .replace(/&/g, '&amp;')
@@ -142,7 +155,7 @@ export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht }) 
       <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
     </div>`;
   return {
-    subject: `Neue Anfrage von ${name}`,
+    subject: `Neue Anfrage von ${kurz(name) || 'unbekannt'}`,
     html: rahmen({
       titelZeile: `Neue Anfrage von ${name}`,
       preheader: `${name}${location ? ', ' + location : ''}${hochzeitsdatum ? ', ' + datumSchoen(hochzeitsdatum) : ''}`,
@@ -230,8 +243,8 @@ export function mailAlarm({ wege, anfrage, verloren }) {
 
   return {
     subject: verloren
-      ? `Anfrage von ${name || 'unbekannt'} konnte nicht zugestellt werden`
-      : `Anfrage von ${name || 'unbekannt'} angekommen, ein Weg hat gehakt`,
+      ? `Anfrage von ${kurz(name) || 'unbekannt'} konnte nicht zugestellt werden`
+      : `Anfrage von ${kurz(name) || 'unbekannt'} angekommen, ein Weg hat gehakt`,
     html: rahmen({
       titelZeile: 'Stoerung beim Anfrageformular',
       preheader: verloren

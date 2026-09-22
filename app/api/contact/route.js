@@ -141,7 +141,19 @@ async function alarmAnNevio({ wege, anfrage, verloren }) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, hochzeitsdatum, location, nachricht } = body;
+
+    /* Eingaben begrenzen, bevor irgendetwas damit passiert.
+       Ohne Grenze landet ein 3000 Zeichen langer Name in der
+       Betreffzeile, Resend lehnt die Mail ab - und die Stoermeldung
+       gleich mit, weil sie denselben Namen traegt. Gemessen am
+       22.09.2026. Die Grenzen sind grosszuegig: kein echtes Paar
+       schreibt einen Namen mit mehr als 120 Zeichen. */
+    const kappen = (v, max) => String(v ?? '').slice(0, max);
+    const name           = kappen(body.name, 120);
+    const email          = kappen(body.email, 200);
+    const hochzeitsdatum = kappen(body.hochzeitsdatum, 40);
+    const location       = kappen(body.location, 200);
+    const nachricht      = kappen(body.nachricht, 5000);
 
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unbekannt';
     if (zuVieleAnfragen(ip)) {
