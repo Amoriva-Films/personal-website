@@ -25,9 +25,9 @@ const bilder = [
   { src: '/images/Bild-5.webp',              b: 2000, h: 3000, alt: 'Save-the-Date-Karten und die Ringschatulle auf hellem Stoff' },
   { src: '/images/paare/paar-kuss.webp',     b: 1600, h: 2400, alt: 'Ein Brautpaar küsst sich nach der Trauung, Schwarzweiß' },
   { src: '/images/Bild-33.webp',             b: 2000, h: 3000, alt: 'Brautpaar mit Champagner zwischen brennenden Kerzen' },
-  { src: '/images/paare/kronleuchter.webp',  b: 1600, h: 2400, alt: 'Kronleuchter über dem Festsaal' },
+  { src: '/images/paare/kronleuchter-v2.webp',  b: 1600, h: 2400, alt: 'Kronleuchter über dem Festsaal' },
   { src: '/images/paare/haende.webp',        b: 1600, h: 2400, alt: 'Die Hände des Brautpaars, ineinander gelegt' },
-  { src: '/images/paare/paar-wand.webp',     b: 1600, h: 2400, alt: 'Das Brautpaar vor einer hellen Wand, ruhiger Moment' },
+  { src: '/images/paare/paar-wand-v2.webp',     b: 1600, h: 2400, alt: 'Das Brautpaar vor einer hellen Wand, ruhiger Moment' },
 ];
 
 export default function Portraets() {
