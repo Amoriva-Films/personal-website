@@ -458,23 +458,38 @@ p, li { overflow-wrap: break-word; }
    die Position weiter. Deshalb ist Wischen hier echtes Wischen, mit
    Schwung und Auslauf - genau das war die Vorgabe.                  */
 .portraet-reihe {
-  display: flex;
-  gap: var(--luft-2);
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Ueber die volle Breite, nicht in der Bahn: ein Laufband, das an
-     der Textkante aufhoert, sieht aus wie ein Fehler. */
-  padding-inline: var(--rand);
-  cursor: grab;
 }
 .portraet-reihe::-webkit-scrollbar { display: none; }
-.portraet-reihe > * { flex: 0 0 240px; }
 
-@media (prefers-reduced-motion: reduce) {
-  .portraet-reihe { cursor: auto; }
+/* Die Spur, die laeuft. Zwei Durchgaenge derselben Bilder; von -50% auf 0
+   wandern heisst: die Bilder ziehen von links nach rechts. Nach einem
+   Durchlauf sieht es aus wie am Anfang, der Sprung ist unsichtbar. */
+.portraet-lauf {
+  display: flex;
+  gap: var(--luft-2);
+  width: max-content;
+  padding-inline: var(--rand);
+  animation: portraet-laufband 60s linear infinite;
 }
+@keyframes portraet-laufband {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+/* Anhalten, solange jemand mit der Maus darauf steht - sonst kann man
+   sich kein Bild in Ruhe ansehen. */
+@media (hover: hover) {
+  .portraet-reihe:hover .portraet-lauf { animation-play-state: paused; }
+}
+/* Wer weniger Bewegung eingestellt hat, bekommt einen stehenden Streifen. */
+@media (prefers-reduced-motion: reduce) {
+  .portraet-lauf { animation: none; }
+}
+.portraet-lauf > * { flex: 0 0 240px; }
+
 .portraet-kachel {
   position: relative;
   aspect-ratio: 3 / 4;
@@ -495,7 +510,7 @@ p, li { overflow-wrap: break-word; }
 @media (max-width: 860px) {
   /* Auf dem Handy schmalere Kacheln, damit immer angeschnitten zu
      sehen ist, dass es weitergeht. */
-  .portraet-reihe > * { flex: 0 0 46%; }
+  .portraet-lauf > * { flex: 0 0 46%; }
 }
 
 /* ── Nevio-Runde vom 21.09.2026 ───────────────────────────────── */
