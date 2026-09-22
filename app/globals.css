@@ -475,15 +475,18 @@ p, li { overflow-wrap: break-word; }
   padding-inline: var(--rand);
   animation: portraet-laufband 60s linear infinite;
 }
+/* Richtung: die Spur wandert nach links, dadurch kommen neue Bilder von
+   rechts herein und ziehen nach links aus dem Bild. Vorher lief es
+   andersherum, das war Nevio falsch. */
 @keyframes portraet-laufband {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
-/* Anhalten, solange jemand mit der Maus darauf steht - sonst kann man
-   sich kein Bild in Ruhe ansehen. */
-@media (hover: hover) {
-  .portraet-reihe:hover .portraet-lauf { animation-play-state: paused; }
-}
+/* KEIN Anhalten beim Daraufzeigen.
+   Vorher stand hier ein Pausieren bei :hover. Wer mit der Maus ueber dem
+   Streifen steht und scrollt, hat damit die Animation angehalten - genau
+   das ist Nevio aufgefallen ("wenn ich scrolle, hoert das auf"). Ein
+   Laufband, das beim Scrollen stehenbleibt, wirkt kaputt. */
 /* Wer weniger Bewegung eingestellt hat, bekommt einen stehenden Streifen. */
 @media (prefers-reduced-motion: reduce) {
   .portraet-lauf { animation: none; }

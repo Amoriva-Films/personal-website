@@ -31,7 +31,7 @@ const bilder = [
 ];
 
 export default function Portraets() {
-  const lauf = [...bilder, ...bilder];
+  const lauf = [...bilder, ...bilder, ...bilder, ...bilder];
 
   return (
     <section className="abschnitt hell">
