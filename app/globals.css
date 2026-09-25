@@ -595,7 +595,7 @@ p, li { overflow-wrap: break-word; }
 .stimme-zitat {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;   /* Bodoni Moda beginnt bei 400, 300 klemmte still */
   font-style: italic;
   line-height: 1.45;
   color: var(--tinte);
@@ -607,7 +607,7 @@ p, li { overflow-wrap: break-word; }
 .menue-link {
   font-family: var(--font-display), Georgia, serif;
   font-size: 2.5rem;
-  font-weight: 300;
+  font-weight: 400;   /* Bodoni Moda beginnt bei 400, 300 klemmte still */
   line-height: 1.1;
   color: var(--tinte);
   text-decoration: none;
@@ -643,9 +643,14 @@ p, li { overflow-wrap: break-word; }
   font-family: var(--font-display), Georgia, serif;
   font-size: 3.4rem;
   font-weight: 400;
+  /* Dieselbe Falle wie bei .schritt-ziffer, nur eine Stufe milder: die
+     Ziffer hier ist als Wasserzeichen gemeint und soll leise bleiben.
+     Deshalb nicht --grau-3, sondern ein Wert dazwischen, dazu opsz 11
+     gegen die duennen Haarstriche der Bodoni.                        */
+  font-variation-settings: 'opsz' 11;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--linie);
+  color: #C9C9C4;
   font-variant-numeric: tabular-nums;
   pointer-events: none;
   transition: color 400ms var(--ease), transform 600ms var(--ease);
@@ -974,17 +979,31 @@ textarea.feld {
   .schritt h3 { margin: var(--luft-2) 0 var(--luft-1); }
 }
 
+/* Die Ziffern standen in --linie. Gemessen auf dem Grund der Kacheln:
+   1,16 zu 1. Mit der Fraunces las man davon noch einen Schatten, weil
+   ihre Stamme dick sind. Die Bodoni hat Haarstriche - bei 1,16 zu 1
+   verschwinden die vollstaendig (Screenshot Nevio 25.09.2026).
+
+   Drei Stellschrauben zusammen, nicht nur die Farbe:
+   - --grau-3 statt --linie: 2,52 zu 1. Bewusst noch leise, die Ziffer
+     soll ein Wegweiser bleiben und kein zweiter Text werden.
+   - opsz 11 fest statt automatisch. Die Bodoni duennt ihre Haarstriche
+     aus, je groesser die optische Groesse gewaehlt wird - genau falsch
+     herum fuer eine kleine, helle Ziffer. 11 ist der Lesetext-Schnitt
+     mit den kraeftigsten Strichen.
+   - Gewicht 500 und etwas groesser, damit die Striche Flaeche haben. */
 .schritt-ziffer {
   display: block;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 400;
+  font-size: 2rem;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 11;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--linie);
+  color: var(--grau-3);
   font-variant-numeric: tabular-nums;
 }
-.dunkel .schritt-ziffer { color: rgba(244,244,242,0.18); }
+.dunkel .schritt-ziffer { color: rgba(244,244,242,0.42); }
 
 .liste-haken {
   list-style: none;
