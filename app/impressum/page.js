@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 const serif = "var(--font-display), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
+const sans  = "var(--font-text), system-ui, sans-serif";
 
 export default function Impressum() {
   return (
@@ -131,7 +131,7 @@ function Section({ title, children }) {
         {title}
       </h2>
       <div style={{
-        fontFamily: "var(--font-inter), system-ui, sans-serif",
+        fontFamily: "var(--font-text), system-ui, sans-serif",
         fontSize: '0.88rem',
         lineHeight: 1.95,
         color: 'var(--grau-2)',

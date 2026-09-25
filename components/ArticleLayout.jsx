@@ -7,7 +7,7 @@ import SmoothScroll from './SmoothScroll';
 import FadeIn from './FadeIn';
 
 const serif = "var(--font-display), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
+const sans  = "var(--font-text), system-ui, sans-serif";
 const brown = 'var(--tinte)';
 const gruen  = 'var(--gruen)';
 const soft  = 'var(--grau-2)';
@@ -123,7 +123,7 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           line-height: 1.15;
         }
         .article-body h3 {
-          font-family: var(--font-inter), system-ui, sans-serif;
+          font-family: var(--font-text), system-ui, sans-serif;
           font-size: clamp(13px, 1vw, 15px);
           font-weight: 400;
           text-transform: uppercase;

@@ -7,7 +7,7 @@ import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-display), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
+const sans  = "var(--font-text), system-ui, sans-serif";
 const brown = 'var(--tinte)';
 const gruen  = 'var(--gruen)';
 const soft  = 'var(--grau-2)';

@@ -65,7 +65,7 @@ export default function FAQ() {
                         justifyContent: 'space-between', alignItems: 'center',
                         paddingBlock: 'var(--luft-2)', background: 'none', border: 'none',
                         cursor: 'pointer', textAlign: 'left',
-                        fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                        fontFamily: 'var(--font-text), system-ui, sans-serif',
                         fontSize: 'var(--schrift-klein)', fontWeight: 500,
                         color: 'var(--tinte)', lineHeight: 1.35,
                       }}

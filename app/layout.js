@@ -1,25 +1,31 @@
 import './globals.css';
-import { Fraunces, Inter } from 'next/font/google';
+import { Bodoni_Moda, Jost } from 'next/font/google';
 import Nav from '@/components/Nav';
 import StructuredData from '@/components/StructuredData';
 
-/* Fraunces, dieselbe Schrift wie auf amoriva.app. Beide Marken sind
-   eine Familie, und eine Hochzeitsfirma erkennt man an der Schrift
-   frueher als am Logo. Variabel, deshalb reicht eine Angabe fuer den
-   ganzen Bereich von 400 bis 600. Kursiv brauchen wir fuer den Akzent
-   in den Ueberschriften. */
-const fraunces = Fraunces({
+/* Bodoni Moda fuer die Ueberschriften. Giambattista Bodoni hat sie
+   ab 1790 in Parma geschnitten - es gibt keine italienischere Schrift,
+   und sie liegt frei bei Google Fonts, wir hosten sie also selbst wie
+   vorher die Fraunces. Variabel ueber die optische Groesse: dieselbe
+   Datei traegt die grosse Zeile im Hero und die kleine Ueberschrift
+   im Ratgeber, ohne dass die Haarstriche kippen. Kursiv brauchen wir
+   fuer den hervorgehobenen Halbsatz in den Ueberschriften.           */
+const bodoni = Bodoni_Moda({
   subsets: ['latin'],
   style: ['normal', 'italic'],
-  axes: ['SOFT', 'WONK', 'opsz'],
+  axes: ['opsz'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const inter = Inter({
+/* Jost fuer alles, was gelesen wird. Der freie Nachbau der Futura -
+   Bodoni ueber einer geometrischen Grotesk ist seit Jahrzehnten der
+   Satz der italienischen Modepresse. Variabel, deshalb reicht eine
+   Angabe fuer den ganzen Gewichtsbereich.                            */
+const jost = Jost({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-inter',
+  style: ['normal', 'italic'],
+  variable: '--font-text',
   display: 'swap',
 });
 
@@ -67,7 +73,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="de" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="de" className={`${bodoni.variable} ${jost.variable}`}>
       <head>
         {/* Das Hero-Video ist das Erste, was ein Besucher sieht, aber
             Browser geben Video von sich aus eine niedrige Prioritaet:

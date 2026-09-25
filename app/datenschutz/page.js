@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 const serif = "var(--font-display), Georgia, serif";
-const sans  = "var(--font-inter), system-ui, sans-serif";
+const sans  = "var(--font-text), system-ui, sans-serif";
 
 const linkStyle = {
   color: 'var(--grau-dunkel)',

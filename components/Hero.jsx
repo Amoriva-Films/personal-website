@@ -13,8 +13,8 @@ const ease = [0.22, 1, 0.36, 1];
    der in der Mitte nur 0,18 traegt. Drei Dinge sind bewusst anders:
 
    1. var(--font-display) statt var(--font-cormorant). Die Schrift heisst
-      jetzt Fraunces.
-   2. var(--font-inter) statt 'Inter', sans-serif. next/font erzeugt einen
+      jetzt Bodoni Moda.
+   2. var(--font-text) statt 'Inter', sans-serif. next/font erzeugt einen
       eigenen Familiennamen; 'Inter' trifft ihn NICHT und faellt still auf
       die Systemschrift zurueck. Auf Nevios Rechner faellt das nicht auf,
       weil Inter dort installiert ist - bei Besuchern schon. Genau dieser
@@ -240,7 +240,7 @@ export default function Hero() {
         <span
           style={{
             display: 'block',
-            fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            fontFamily: 'var(--font-text), system-ui, sans-serif',
             fontSize: '11px',
             letterSpacing: '0.44em',
             textTransform: 'uppercase',
@@ -257,8 +257,10 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
             fontSize: 'clamp(38px, 6.5vw, 92px)',
-            lineHeight: 0.9,
-            letterSpacing: '0.03em',
+            lineHeight: 0.92,
+            /* Bodoni-Versalien stehen enger beieinander als die der
+               Fraunces. Etwas mehr Luft, sonst klebt AMORIVA FILMS. */
+            letterSpacing: '0.055em',
             fontWeight: 400,
             color: 'var(--auf-dunkel)',
             textTransform: 'uppercase',
@@ -271,13 +273,22 @@ export default function Hero() {
 
         <p
           style={{
-            fontFamily: 'var(--font-display), Georgia, serif',
-            fontSize: 'clamp(17px, 1.8vw, 26px)',
+            /* Stand vorher: Fraunces kursiv. Ueber einem laufenden Video
+               liest sich eine Kursive wie eine Bildunterschrift zum
+               Bild. Das hier ist aber keine Bildunterschrift, sondern
+               die Absenderangabe. Deshalb gerade, in der Jost, und
+               weiter gesperrt, damit sie trotzdem Haltung hat.       */
+            fontFamily: 'var(--font-text), system-ui, sans-serif',
+            fontSize: 'clamp(16px, 1.6vw, 22px)',
             fontWeight: 400,
-            fontStyle: 'italic',
-            color: 'rgba(244,244,242,0.82)',
-            letterSpacing: '0.02em',
-            maxWidth: '620px',
+            fontStyle: 'normal',
+            color: 'rgba(244,244,242,0.86)',
+            letterSpacing: '0.035em',
+            /* Die Jost laeuft breiter als die Fraunces vorher. Bei 620 px
+               rutschte das letzte Wort allein in die zweite Zeile.
+               Mehr Breite plus balance haelt die Zeilen gleich lang.  */
+            maxWidth: '760px',
+            textWrap: 'balance',
             textShadow: '0 1px 18px rgba(0,0,0,0.60), 0 1px 3px rgba(0,0,0,0.45)',
           }}
         >
@@ -305,7 +316,7 @@ export default function Hero() {
       >
         <span
           style={{
-            fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            fontFamily: 'var(--font-text), system-ui, sans-serif',
             fontSize: '9px',
             letterSpacing: '0.40em',
             textTransform: 'uppercase',

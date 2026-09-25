@@ -32,9 +32,9 @@ const F = {
    Schriften nach. Hier MUESSEN echte Namen stehen, und die Kette muss
    mit etwas enden, das jedes Geraet hat. Georgia ist auf Windows, macOS
    und Android vorhanden - die Mail sieht damit ueberall gleich aus,
-   auch wenn sie nicht nach Fraunces aussieht. */
+   auch wenn sie nicht nach Bodoni aussieht. */
 const serif = "Georgia, 'Times New Roman', serif";
-const sans = "Inter, Helvetica, Arial, sans-serif";
+const sans = "Jost, Futura, Helvetica, Arial, sans-serif";
 
 const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 /** "2027-09-11" wird zu "11. September 2027", alles andere bleibt wie eingegeben. */
