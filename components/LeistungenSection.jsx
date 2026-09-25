@@ -12,10 +12,10 @@ const services = [
   {
     nr: '01',
     title: 'Hochzeitsfilm',
-    subtitle: 'Cinematische Videografie Niedersachsen',
+    subtitle: 'Cinégraphie aus Niedersachsen',
     description: 'Ein Film, der sich anfühlt wie Kino. Für Paare in Wolfsburg, Braunschweig, Hannover und ganz Deutschland.',
     includes: [
-      'Cinematischer Hauptfilm (3 bis 12 Minuten)',
+      'Hauptfilm in Cinégraphie (3 bis 12 Minuten)',
       'Emotionaler Highlights-Clip (60 bis 90 Sekunden)',
       'Vollständige Begleitung vom Morgen bis zum Abend',
       'Private Online-Galerie',

@@ -6,14 +6,14 @@ import WhatsApp from '@/components/WhatsApp';
 const services = [
   {
     nr: '01',
-    title: 'Cinematic Hochzeitsfilm',
+    title: 'Hochzeitsfilm in Cinégraphie',
     subtitle: 'Hochzeitsvideografie',
     keywords: 'International',
     description:
       'Wir halten euren Tag so fest, wie er sich angefühlt hat. Ruhige Momente, kleine Details und die Augenblicke dazwischen werden zu einem Film, der zeitlos wirkt und eure Geschichte authentisch erzählt.',
     includes: [
       'Vollständige Filmbegleitung (Vorbereitung bis Tanz)',
-      'Cinematischer Hauptfilm (3 bis 12 Min.)',
+      'Hauptfilm in Cinégraphie (3 bis 12 Min.)',
       'Highlight Trailer (1 Min.)',
       'Professionelle Farbkorrektur und Tonbearbeitung',
       'Private Online-Galerie zum Download',
@@ -95,7 +95,7 @@ export default function LeistungenPage() {
             </h1>
             <p className="t-text t-grau">
               Hochzeitsfilm und Fotografie, wo immer ihr heiratet.
-              International, zeitlos, cinematisch.
+              International, zeitlos, in Cinégraphie.
             </p>
           </div>
         </section>

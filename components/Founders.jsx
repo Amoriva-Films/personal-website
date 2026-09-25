@@ -33,7 +33,7 @@ const leute = [
   },
   {
     name: 'Danilo Buonafede',
-    rolle: 'Co Founder · Cinematography & Bildgestaltung',
+    rolle: 'Co Founder · Cinégraphie & Bildgestaltung',
     bio: 'Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen.',
     bild: '/images/danilo.webp',
     hoehe: '101.9%', oben: '-9.5%', links: '4.4%', grund: 'rgb(246,246,246)',
@@ -60,6 +60,11 @@ export default function Founders() {
                     im Hochformat, also gut ein Drittel kleiner. */}
                 <div className="portraet" style={{
                   position: 'relative', width: '100%', maxWidth: 360,
+                  /* Nevio am 25.09.2026: die Bilder sollen mittig ueber dem
+                     Text stehen. Das Bild ist hoechstens 360 px breit, die
+                     Textspalte darunter deutlich breiter - links buendig
+                     sass es dadurch sichtbar aus der Mitte. */
+                  marginInline: 'auto',
                   aspectRatio: '4 / 5', overflow: 'hidden',
                   marginBottom: 'var(--luft-3)',
                   background: p.grund, borderRadius: 'var(--radius)',

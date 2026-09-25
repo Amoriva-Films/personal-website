@@ -17,10 +17,10 @@ const leistungen = [
   {
     nummer: '01',
     name: 'Hochzeitsfilm',
-    subline: 'Cinematische Videografie',
+    subline: 'Cinégraphie',
     beschreibung: 'Ein cinematic Hochzeitsfilm der sich anfühlt wie ein echtes Kinoerlebnis. Wir erzählen eure Geschichte so wie sie wirklich war.',
     enthalten: [
-      'Cinematischer Hauptfilm (3 bis 12 Minuten)',
+      'Hauptfilm in Cinégraphie (3 bis 12 Minuten)',
       'Emotionaler Highlights-Clip (60 bis 90 Sekunden)',
       'Vollständige Begleitung vom Morgen bis zum Abend',
       'Private Online-Galerie',

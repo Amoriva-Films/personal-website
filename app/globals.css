@@ -279,14 +279,12 @@ p, li { overflow-wrap: break-word; }
 /* Der kurze Strich vor der Augenbraue. Er setzt den Abschnitt an, ohne
    eine Ueberschrift mehr zu sein, und wiederholt sich auf jeder Seite
    an derselben Stelle - daran haengt sich das Auge beim Scrollen auf. */
-.t-label::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.55;
-  flex-shrink: 0;
-}
+/* Nevio am 25.09.2026: "Bindestriche bitte ueberall weg, es soll nicht
+   nach KI aussehen."
+
+   Hier sass der kurze Strich vor jeder Augenbraue. Im Fliesstext steht
+   nirgends ein Gedankenstrich - nachgemessen an der Live-Seite, null
+   Treffer. Was man sah, waren diese Deko-Linien. Sie sind raus. */
 .dunkel .t-label { color: var(--grau-dunkel); }
 
 .t-grau { color: var(--grau-2); }
@@ -699,15 +697,7 @@ p, li { overflow-wrap: break-word; }
   .portraet:hover .portraet-bild { transform: scale(1.04); }
 }
 
-/* Die Augenbraue zieht ihren Strich auf, wenn der Abschnitt erscheint.
-   Kleine Geste, aber sie markiert jeden Abschnittsanfang gleich. */
-.t-label::before {
-  animation: strich-auf 700ms var(--ease) both;
-}
-@keyframes strich-auf {
-  from { width: 0; opacity: 0; }
-  to   { width: 28px; opacity: 0.55; }
-}
+/* Die Aufzieh-Bewegung des Strichs entfaellt mit dem Strich selbst. */
 
 /* Kacheln heben sich beim Zeigen, Schatten statt nur Rahmenfarbe. */
 @media (hover: hover) {
@@ -738,7 +728,7 @@ p, li { overflow-wrap: break-word; }
 @media (prefers-reduced-motion: reduce) {
   .portraet-bild,
   .nav-links a:not(.knopf)::after { transition: none !important; }
-  .t-label::before { animation: none !important; width: 28px; opacity: 0.55; }
+  
 }
 
 /* ── Formular ────────────────────────────────────────────────────── */
@@ -953,14 +943,9 @@ textarea.feld {
   position: relative;
   padding-top: var(--luft-3);
 }
-.schritt-raster::before {
-  content: '';
-  position: absolute;
-  top: calc(var(--luft-3) + 0.9rem);
-  left: 0; right: 0;
-  height: 1px;
-  background: var(--linie);
-}
+/* Die durchlaufende Linie auf Hoehe der Ziffern ist raus (Nevio,
+   25.09.2026). Sie erschien links neben 02, 03, 04 und 05 wie ein
+   Bindestrich. */
 .schritt-raster > * {
   display: grid;
   grid-row: span 3;
