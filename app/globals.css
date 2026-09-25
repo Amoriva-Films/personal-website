@@ -1051,7 +1051,6 @@ html.lenis, html.lenis body { height: auto; }
   .galerie-raster  { grid-template-columns: repeat(2, 1fr); }
   .paar            { grid-template-columns: 1fr; gap: var(--luft-4); }
   .schritt-raster  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .schritt-raster::before { display: none; }
   .leistungs-raster{ grid-template-columns: 1fr; }
   .fragen-raster   { grid-template-columns: 1fr; }
   .schritt         { grid-template-columns: 3rem 1fr; gap: var(--luft-3); }
