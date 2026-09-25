@@ -62,7 +62,7 @@ export default function Page() {
       <ul>
         <li><strong>Drehtag & Stunden:</strong> Wie lange wird gefilmt? Von der Vorbereitung bis zur Party oder nur Trauung bis Dinner?</li>
         <li><strong>Anzahl der Kameramänner:</strong> Ein Kameramann filmt anders als zwei. Mit zwei Kameras werden gleichzeitige Momente eingefangen, zum Beispiel die Reaktionen der Gäste beim Einzug.</li>
-        <li><strong>Schnitt & Nachbearbeitung:</strong> Ein cinematic Film braucht 30 bis 80 Stunden Schnittprozess: Farbkorrektur, Sounddesign und Musik Licensing.</li>
+        <li><strong>Schnitt & Nachbearbeitung:</strong> Ein Film in Cinégraphie braucht 30 bis 80 Stunden Schnittprozess: Farbkorrektur, Sounddesign und Musik Licensing.</li>
         <li><strong>Kameraausrüstung:</strong> Vollformat-Kameras, Gimbal, Slider. Professionelles Equipment kostet und macht den visuellen Unterschied.</li>
         <li><strong>Länge des Hauptfilms:</strong> 6 Minuten oder 20 Minuten sind zwei komplett unterschiedliche Schnittaufwände.</li>
         <li><strong>Zusatzleistungen:</strong> Separater Trailer, Rohschnitt-Material oder besondere Formate.</li>
@@ -82,13 +82,13 @@ export default function Page() {
 
       <h3>Premium</h3>
       <p>
-        Ganz oben wird mit zwei Kameras gearbeitet, mit cinematischem Ansatz, ausgeprägtem Stilgefühl und oft mit nur wenigen Hochzeiten im Jahr. Die Ergebnisse sind filmreif, das ist auch der Anspruch. Hier arbeiten wir.
+        Ganz oben wird mit zwei Kameras gearbeitet, in Cinégraphie, mit ausgeprägtem Stilgefühl und oft mit nur wenigen Hochzeiten im Jahr. Die Ergebnisse sind filmreif, das ist auch der Anspruch. Hier arbeiten wir.
       </p>
 
       <h2>Was sollte in einem guten Paket enthalten sein?</h2>
       <ul>
         <li>Vollständige Filmbegleitung (Vorbereitung bis mindestens Abendessen)</li>
-        <li>Cinematic Hauptfilm (mindestens 5 bis 8 Minuten)</li>
+        <li>Hauptfilm in Cinégraphie (mindestens 5 bis 8 Minuten)</li>
         <li>Highlight Trailer (1 bis 2 Minuten)</li>
         <li>Professionelle Farbkorrektur und Audiobearbeitung</li>
         <li>Lizenzierte Musik (kein Copyright Problem)</li>

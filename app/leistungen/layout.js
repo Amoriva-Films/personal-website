@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'Leistungen: Hochzeitsfilm & Fotografie',
   description:
-    'Cinematic Hochzeitsfilm & Hochzeitsfotografie international. Amoriva Films begleitet euch weltweit. Alle Pakete & Leistungen im Überblick.',
+    'Hochzeitsfilm in Cinégraphie & Hochzeitsfotografie international. Amoriva Films begleitet euch weltweit. Alle Pakete & Leistungen im Überblick.',
   keywords: [
     'Hochzeitsfilm Wolfsburg',
     'Hochzeitsfotografie Wolfsburg',

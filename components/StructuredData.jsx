@@ -22,7 +22,7 @@ export default function StructuredData() {
         name: 'Amoriva Films',
         alternateName: 'Amoriva Films Hochzeitsfilm',
         description:
-          'Cinematic Hochzeitsfilm und Hochzeitsfotografie aus Niedersachsen. Wolfsburg, Braunschweig, Hannover und deutschlandweit.',
+          'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie aus Niedersachsen. Wolfsburg, Braunschweig, Hannover und deutschlandweit.',
         url: 'https://amoriva-films.de',
         telephone: '+4915565559747',
         email: 'booking@amoriva-films.de',
@@ -50,14 +50,14 @@ export default function StructuredData() {
           '@type': 'OfferCatalog',
           name: 'Leistungen',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfilm', description: 'Cinematischer Hauptfilm und Highlights-Clip, Begleitung vom Morgen bis zum Abend.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfilm', description: 'Hauptfilm in Cinégraphie und Highlights-Clip, Begleitung vom Morgen bis zum Abend.' } },
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfotografie', description: 'Fine-Art-Fotografie vom Getting Ready bis zum Tanz, private Online-Galerie.' } },
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Film und Foto', description: 'Film und Fotografie aus einer Hand, ein Team, eine Bildsprache.' } },
           ],
         },
         founder: [
           { '@type': 'Person', name: 'Nevio Mastrogiorgio', jobTitle: 'Founder, Beratung und kreative Leitung' },
-          { '@type': 'Person', name: 'Danilo Buonafede', jobTitle: 'Co Founder, Cinematography und Bildgestaltung' },
+          { '@type': 'Person', name: 'Danilo Buonafede', jobTitle: 'Co Founder, Cinégraphie und Bildgestaltung' },
         ],
         knowsLanguage: ['de', 'en'],
         /* Die Adresse hier stand als "amoriva.films" mit Punkt drin -
