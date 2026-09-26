@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
+import Wortmarke from './Wortmarke';
 
 // Filme stehen an erster Stelle. Wer einen Hochzeitsfilmer sucht,
 // will Filme sehen, nicht Leistungen lesen.
@@ -16,10 +16,9 @@ const LINKS = [
 ];
 
 const TELEFON = '+49 155 6555 9747';
-// Seitenverhaeltnis der Wortmarke ist 1116:427. Die Hoehe bestimmt den
-// Auftritt, die Breite folgt daraus, sonst wird die Marke verzerrt.
+// Die Wortmarke ist jetzt gesetzter Text, kein Bild mehr. Sie richtet
+// sich allein nach dieser Hoehe aus, die Breite ergibt der Satz.
 const LOGO_HOEHE = 34;
-const LOGO_BREITE = Math.round(LOGO_HOEHE * 1116 / 427);
 
 export default function Nav() {
   const [gescrollt, setGescrollt] = useState(false);
@@ -92,29 +91,9 @@ export default function Nav() {
           transition: 'background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease), padding 400ms var(--ease)',
         }}>
         <Link href="/" aria-label="Amoriva Films, zur Startseite" style={{
-          position: 'relative', display: 'block', flexShrink: 0,
-          width: LOGO_BREITE, height: LOGO_HOEHE,
+          display: 'block', flexShrink: 0, textDecoration: 'none',
         }}>
-          {[
-            { datei: '/brand/wortmarke-hell.png',  sichtbar: aufDunkel },
-            { datei: '/brand/wortmarke-gruen.png', sichtbar: !aufDunkel },
-          ].map(({ datei, sichtbar }) => (
-            <Image
-              key={datei}
-              src={datei}
-              alt=""
-              width={LOGO_BREITE}
-              height={LOGO_HOEHE}
-              priority
-              sizes={`${LOGO_BREITE}px`}
-              style={{
-                position: 'absolute', inset: 0, width: '100%', height: '100%',
-                objectFit: 'contain', objectPosition: 'left center',
-                opacity: sichtbar ? 1 : 0, transition: 'opacity 400ms var(--ease)',
-              }}
-            quality={85}
-            />
-          ))}
+          <Wortmarke hoehe={LOGO_HOEHE} farbe={aufDunkel ? 'var(--auf-dunkel)' : 'var(--gruen)'} />
         </Link>
 
         <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1.25rem, 2.2vw, 2.25rem)' }}>

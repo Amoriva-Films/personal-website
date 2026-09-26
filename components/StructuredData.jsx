@@ -28,10 +28,10 @@ export default function StructuredData() {
         email: 'booking@amoriva-films.de',
         address: ADRESSE,
         geo: { '@type': 'GeoCoordinates', latitude: 52.4083, longitude: 10.9333 },
-        image: 'https://amoriva-films.de/brand/wortmarke-gruen.png',
+        image: 'https://amoriva-films.de/brand/wortmarke-gruen-v2.png',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://amoriva-films.de/brand/wortmarke-gruen.png',
+          url: 'https://amoriva-films.de/brand/wortmarke-gruen-v2.png',
         },
         /* Umkreis statt blosser Ortsliste: sagt Google, wie weit wir
            fahren, statt nur welche Staedte wir aufzaehlen. */

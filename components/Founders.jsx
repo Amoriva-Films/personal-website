@@ -66,7 +66,12 @@ const leute = [
     rolle: 'Co Founder · Cinégraphie & Bildgestaltung',
     bio: 'Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen.',
     bild: '/images/danilo-v3.webp',
-    hoehe: '101.9%', oben: '-9.5%', links: '4.4%', grund: 'rgb(249,249,251)',
+    /* Nevio am 26.09.2026: Danilo mittiger setzen. Nachgemessen im
+       Rahmen von 360x450: sein Schwerpunkt sass bei 196 statt bei 180,
+       und das Bild hing 42 px zu hoch - unten blieb ein leerer Streifen,
+       oben war sein Kopf angeschnitten. Jetzt waagerecht und senkrecht
+       mittig. */
+    hoehe: '101.9%', oben: '-1%', links: '0%', grund: 'rgb(249,249,251)',
   },
 ];
 

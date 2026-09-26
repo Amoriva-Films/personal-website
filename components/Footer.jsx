@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import Wortmarke from './Wortmarke';
 
 const LOGO_HOEHE = 40;
-const LOGO_BREITE = Math.round(LOGO_HOEHE * 1116 / 427);
 
 const wege = [
   // { label: 'Filme', href: '/filme' },   // wieder rein, sobald es Filme gibt
@@ -33,15 +32,9 @@ export default function Footer() {
         <div className="bahn fuss-raster">
           {/* Marke und Kontakt */}
           <div>
-            <Image
-              src="/brand/wortmarke-hell.png"
-              alt="Amoriva Films"
-              width={LOGO_BREITE}
-              height={LOGO_HOEHE}
-              sizes={`${LOGO_BREITE}px`}
-              style={{ objectFit: 'contain', marginBottom: 'var(--luft-3)' }}
-            quality={85}
-            />
+            <div style={{ marginBottom: 'var(--luft-3)' }}>
+              <Wortmarke hoehe={LOGO_HOEHE} farbe="var(--auf-dunkel)" />
+            </div>
             <p style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)', lineHeight: 1.7 }}>
               Hochzeitsfilm und Fotografie<br />
               Wolfsburg, Niedersachsen
