@@ -14,7 +14,7 @@ import FadeIn from './FadeIn';
    nachmessen, ohne die Seite ansehen zu muessen.
 
    Wie die Endlosschleife entsteht: die Liste steht mehrfach
-   hintereinander, und die Spur wandert von 0 auf -50%. Nach einem
+   hintereinander, und die Spur wandert von -50% auf 0. Nach einem
    Durchlauf sieht das Bild exakt so aus wie am Anfang, der Sprung ist
    deshalb unsichtbar. Damit das aufgeht, muss die halbe Spur GENAU der
    halben Kachelzahl entsprechen - deshalb traegt jede Kachel ihren

@@ -528,20 +528,24 @@ p, li { overflow-wrap: break-word; }
      vorher 30 px/s - das galt fuer eine kuerzere Spur.) */
   animation: portraet-laufband 190s linear infinite;
 }
-/* RICHTUNG. Diese Stelle wurde mehrfach hin und her gedreht, deshalb
-   steht sie hier als das, was man SIEHT, und nicht als Himmelsrichtung:
+/* RICHTUNG, festgelegt von Nevio am 26.09.2026:
 
-     Neue Bilder kommen RECHTS ins Bild und wandern nach LINKS hinaus.
+     Die Bilder wandern nach RECHTS.
+     Neue Bilder kommen also LINKS ins Bild und ziehen nach rechts hinaus.
 
-   Nevio hat am 26.09.2026 beide Varianten live gesehen. Die andere
-   (Bilder kommen links herein und ziehen nach rechts) hat er verworfen:
-   "laeuft durchgehend ist aber immernoch falschrum".
+   Sein Wortlaut: "Es soll in die andere Seite gehen nach RECHTS".
 
-   Technisch: die Spur wandert von 0 auf -50%. Sie schiebt sich also nach
-   links, und dadurch ruecken die Bilder nach links durchs Fenster. */
+   Technisch: die Spur startet um eine halbe Laenge nach links versetzt
+   und wandert auf 0 zu. Sie schiebt sich nach rechts, und die Bilder
+   mit ihr.
+
+   Bitte nicht wieder drehen. Die Stelle ging an einem Tag dreimal hin
+   und her, weil "von links nach rechts" zwei Lesarten hat: die Bewegung
+   der Bilder oder die Seite, von der sie hereinkommen. Massgeblich ist
+   die Bewegung: nach rechts. */
 @keyframes portraet-laufband {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 /* KEIN Anhalten beim Daraufzeigen.
    Vorher stand hier ein Pausieren bei :hover. Wer mit der Maus ueber dem
