@@ -32,7 +32,12 @@ export default function sitemap() {
     // eintrag('filme', 0.95),
     eintrag('angebote', 0.9),
     eintrag('leistungen', 0.8),
-    // eintrag('referenzen', 0.9),   // Galerie raus, Seite nicht mehr verlinkt
+    /* Referenzen war auskommentiert mit der Begruendung "Seite nicht
+       mehr verlinkt". Das stimmt seit laengerem nicht: die Startseite
+       verlinkt sie unter "Zur Galerie", und dort liegen 55 Bilder.
+       Google kannte damit ausgerechnet die Seite nicht, die unsere
+       Arbeit zeigt - nach der Startseite die wichtigste. */
+    eintrag('referenzen', 0.9),
     eintrag('anfrage', 0.8, 'yearly'),
     eintrag('ratgeber', 0.7),
     ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),

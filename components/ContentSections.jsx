@@ -117,9 +117,10 @@ export default function ContentSections() {
                   Momente, die <span className="kursiv">bleiben.</span>
                 </h2>
               </div>
-              <Link href="/referenzen" className="t-fein" style={{
-                color: 'var(--grau-dunkel)', textDecoration: 'none',
-                borderBottom: '1px solid rgba(244,244,242,0.25)', paddingBottom: '2px',
+              {/* Baute wieder .link-fein von Hand nach und fiel dadurch
+                  nicht unter die Tippflaechen-Regel. */}
+              <Link href="/referenzen" className="t-fein link-fein" style={{
+                color: 'var(--grau-dunkel)',
               }}>
                 Zur Galerie
               </Link>
