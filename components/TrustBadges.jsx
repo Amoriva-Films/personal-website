@@ -17,7 +17,10 @@ const punkte = [
   },
   {
     icon: <><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></>,
-    label: 'International tätig', sub: 'Deutschland, Österreich, Schweiz und Europa',
+    /* Die Unterzeile las sich wie eine Liste von Orten, an denen wir
+       schon waren. Bisher war das nur Deutschland. Jetzt sagt sie, wohin
+       wir reisen - das stimmt und bleibt genauso international. */
+    label: 'International buchbar', sub: 'Wir reisen dorthin, wo eure Hochzeit ist',
   },
 ];
 

@@ -472,21 +472,52 @@ p, li { overflow-wrap: break-word; }
    Das Scrollen selbst uebernimmt der Browser, Javascript schiebt nur
    die Position weiter. Deshalb ist Wischen hier echtes Wischen, mit
    Schwung und Auslauf - genau das war die Vorgabe.                  */
+/* Nevio am 26.09.2026: "es hoert wieder irgendwann auf, es soll NIEMALS
+   aufhoeren ... auch wenn ich scrolle".
+
+   Ursache war overflow-x: auto an dieser Stelle. Die Reihe war damit
+   waagerecht scrollbar (gemessen: Inhalt 7272 px in einem 1900 px
+   breiten Kasten). Eine leicht schraege Geste auf dem Trackpad schiebt
+   den Streifen zur Seite - und weil die Animation nur zwischen -50% und
+   0 laeuft, landet man in einem Bereich, in dem die Bilder zu Ende sind:
+   links drei Kacheln, rechts nichts. Von allein kommt er da nie wieder
+   raus, es sieht aus als waere das Band stehengeblieben.
+
+   Ein Laufband ist keine Galerie. Es wird nicht von Hand geschoben,
+   also darf es auch nicht scrollbar sein. */
 .portraet-reihe {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  /* clip statt hidden: hidden erzeugt weiterhin einen Scroll-Bereich,
+     er laesst sich nur nicht mehr mit dem Finger schieben - per
+     scrollLeft aber sehr wohl, und der Browser selbst tut das auch,
+     etwa wenn der Tastaturfokus in ein Bild ausserhalb des Ausschnitts
+     wandert. Nachgemessen: mit hidden liess sich die Reihe auf 1500
+     setzen und blieb dort stehen. clip erzeugt gar keinen Scroll-
+     Bereich, damit ist die Stelle wirklich dicht.
+
+     hidden bleibt als Rueckfall fuer aeltere Browser davor stehen. */
+  overflow: hidden;
+  overflow: clip;
 }
-.portraet-reihe::-webkit-scrollbar { display: none; }
 
 /* Die Spur, die laeuft. Die Bilder liegen mehrfach hintereinander; nach
    einem Durchlauf sieht es aus wie am Anfang, der Sprung ist unsichtbar. */
 .portraet-lauf {
   display: flex;
-  gap: var(--luft-2);
   width: max-content;
-  padding-inline: var(--rand);
+  /* KEIN gap und KEIN padding-inline mehr, und das ist wichtig:
+
+     Der Sprung am Rundenende funktioniert nur, wenn die halbe Spur
+     genau zwei Bilderdurchgaengen entspricht. Mit padding-inline: 60px
+     auf beiden Seiten war die halbe Spur 3636 px, zwei Durchgaenge aber
+     3584 px - gemessen 52 px daneben. Bei jeder Runde sprang das Band
+     also um 52 px. Auch gap allein reicht nicht: zwischen 28 Kacheln
+     liegen nur 27 Luecken, die letzte fehlt und verschiebt die Rechnung
+     noch einmal.
+
+     Jetzt traegt jede Kachel ihren Abstand selbst als rechten
+     Aussenabstand. Damit belegt jede Kachel exakt dieselbe Breite, die
+     Spur ist ein glattes Vielfaches davon, und die halbe Spur trifft
+     punktgenau auf denselben Bildinhalt. */
   /* Tempo: 60s ergaben gemessen 96 px pro Sekunde - eine Kachel war in
      2,5 Sekunden durchs Bild. Das ist ein Boersenticker, kein Band aus
      Hochzeitsbildern. Es soll im Augenwinkel leben, nicht ziehen.
@@ -522,7 +553,7 @@ p, li { overflow-wrap: break-word; }
 @media (prefers-reduced-motion: reduce) {
   .portraet-lauf { animation: none; }
 }
-.portraet-lauf > * { flex: 0 0 240px; }
+.portraet-lauf > * { flex: 0 0 240px; margin-right: var(--luft-2); }
 
 .portraet-kachel {
   position: relative;
@@ -543,8 +574,14 @@ p, li { overflow-wrap: break-word; }
 
 @media (max-width: 860px) {
   /* Auf dem Handy schmalere Kacheln, damit immer angeschnitten zu
-     sehen ist, dass es weitergeht. */
-  .portraet-lauf > * { flex: 0 0 46%; }
+     sehen ist, dass es weitergeht.
+
+     46vw statt 46%: die Spur hat width: max-content, ein Prozentwert
+     rechnet also gegen eine Breite, die erst aus den Kacheln entsteht -
+     ein Zirkelschluss. Gemessen kam dabei eine Kachelbreite von 3642 px
+     heraus statt der gemeinten 173, und die Spur war 153612 px lang.
+     vw bezieht sich auf das Fenster und ist damit eindeutig. */
+  .portraet-lauf > * { flex: 0 0 46vw; margin-right: var(--luft-2); }
   /* Schmalere Kacheln heissen kuerzere Spur. Bei gleicher Dauer liefe
      das Band auf dem Handy nur halb so schnell und wirkte zaeh. */
   .portraet-lauf { animation-duration: 110s; }

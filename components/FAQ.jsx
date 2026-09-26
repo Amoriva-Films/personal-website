@@ -18,7 +18,13 @@ const fragen = [
   },
   {
     frage: 'Seid ihr nur in Wolfsburg tätig?',
-    antwort: 'Nein, wir sind international unterwegs. Wolfsburg ist unser Zuhause, aber wir waren schon in Deutschland, Österreich, der Schweiz und südeuropäischen Ländern. Wo eure Hochzeit ist, schauen wir uns gemeinsam an. Anreisekosten sprechen wir offen im Vorfeld ab.',
+    /* Hier stand vorher "wir waren schon in Deutschland, Österreich, der
+       Schweiz und südeuropäischen Ländern". Das war eine Behauptung über
+       die Vergangenheit, und sie stimmte nicht: gefilmt wurde bisher nur
+       in Deutschland (Nevio, 26.09.2026). Die Aussage bleibt trotzdem
+       international - aber als das, was sie wirklich ist: wir reisen
+       dorthin, wo die Hochzeit ist. Das ist wahr und sagt dasselbe. */
+    antwort: 'Nein, wir filmen international. Wolfsburg ist unser Zuhause und bisher waren wir in ganz Deutschland unterwegs. Für eure Hochzeit reisen wir genauso nach Österreich, in die Schweiz oder nach Südeuropa. Wo es hingeht, schauen wir uns gemeinsam an, und die Anreise sprechen wir vorher offen ab.',
   },
   {
     frage: 'Wie viele Hochzeiten begleitet ihr pro Jahr?',
