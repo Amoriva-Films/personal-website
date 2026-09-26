@@ -1,7 +1,8 @@
 export const metadata = {
-  title: 'Same Day Edit: Hochzeitsfilm noch am selben Abend | Amoriva Films',
+  /* War 65 Zeichen. */
+  title: 'Same Day Edit beim Hochzeitsfilm | Amoriva Films',
   description:
-    'Same Day Edit: euer Highlight-Film noch am Hochzeitsabend fertig. Wie es abläuft und für wen es sich lohnt.',
+    'Same Day Edit: euer Highlight-Film läuft noch am Hochzeitsabend vor den Gästen. Wie der Tag dafür abläuft, was wir dafür brauchen und für wen sich das lohnt.',
   keywords: [
     'Same Day Edit Hochzeit',
     'Same Day Edit was ist das',

@@ -34,12 +34,16 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
         <div className="bahn lesebreite">
           <FadeIn>
             {/* Breadcrumb */}
-            <nav style={{ marginBottom: 'var(--luft-4)', display: 'flex', gap: 'var(--luft-1)', alignItems: 'center' }}>
-              <Link href="/" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Startseite</Link>
-              <span style={{ color: gruen, fontSize: '0.6rem' }}>›</span>
-              <Link href="/ratgeber" style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Ratgeber</Link>
-              <span style={{ color: gruen, fontSize: '0.6rem' }}>›</span>
-              <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: soft, fontWeight: 300, opacity: 0.6 }}>{category}</span>
+            {/* Die Brotkrumen standen auf 0,6rem, also 9,6 px - kleiner
+                als alles andere auf der Seite und auf dem Handy nur 16 px
+                hoch zum Antippen. Jetzt 0,72rem und ueber .brotkrumen in
+                der Tippflaechen-Regel. */}
+            <nav className="brotkrumen" style={{ marginBottom: 'var(--luft-4)', display: 'flex', gap: 'var(--luft-1)', alignItems: 'center', flexWrap: 'wrap' }}>
+              <Link href="/" style={{ fontFamily: sans, fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Startseite</Link>
+              <span aria-hidden="true" style={{ color: gruen, fontSize: '0.72rem' }}>›</span>
+              <Link href="/ratgeber" style={{ fontFamily: sans, fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, textDecoration: 'none' }}>Ratgeber</Link>
+              <span aria-hidden="true" style={{ color: gruen, fontSize: '0.72rem' }}>›</span>
+              <span style={{ fontFamily: sans, fontSize: '0.72rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: soft, fontWeight: 300, opacity: 0.6 }}>{category}</span>
             </nav>
 
             <span style={{ display: 'block', fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, fontWeight: 300, marginBottom: 'var(--luft-2)' }}>
@@ -74,7 +78,11 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
       {/* ── CTA ──────────────────────────────────────────── */}
       <section className="abschnitt hell-2">
         <FadeIn>
-          <p style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.26em', textTransform: 'uppercase', color: gruen, marginBottom: 'var(--luft-2)' }}>Amoriva Films · Wolfsburg</p>
+          {/* War 0,62rem in Markengruen: gemessen 9,9 px bei 4,27 zu 1,
+              also zu klein UND unter der Schwelle von 4,5. Jetzt dieselben
+              Werte wie .t-label auf dem Rest der Seite - 11 px in --grau-2,
+              gemessen 4,95 zu 1. */}
+          <p style={{ fontFamily: sans, fontSize: '0.6875rem', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: soft, marginBottom: 'var(--luft-2)' }}>Amoriva Films · Wolfsburg</p>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(26px,3vw,44px)', fontWeight: 300, color: brown, marginBottom: 'var(--luft-2)' }}>
             Euer Hochzeitsfilm wartet auf euch.
           </h2>

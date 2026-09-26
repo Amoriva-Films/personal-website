@@ -1,7 +1,8 @@
 export const metadata = {
-  title: 'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt | Amoriva Films',
+  /* War 68 Zeichen, der Markenname fiel hinten raus. */
+  title: 'Was kostet ein Hochzeitsfilm? | Amoriva Films',
   description:
-    'Was einen Hochzeitsfilm teurer oder günstiger macht, was in ein gutes Paket gehört und woran ihr Qualität erkennt.',
+    'Was einen Hochzeitsfilm teurer oder günstiger macht, was in ein gutes Paket gehört, woran ihr Qualität erkennt und womit ihr in Niedersachsen rechnen solltet.',
   keywords: [
     'Hochzeitsfilm Kosten',
     'Hochzeitsfilm Preise',

@@ -1116,7 +1116,12 @@ html.lenis, html.lenis body { height: auto; }
      schlecht, empfohlen sind 44 px. Ausgerechnet Mailadresse und
      Telefonnummer sind der zweite Weg zu einer Anfrage, wenn jemand das
      Formular nicht ausfuellen will. */
-  .fuss-raster a, .fuss-leiste a, .link-fein {
+  /* Die Wortmarke war die letzte Tippflaeche unter 44 px (gemessen 35).
+     Sie bekommt die Luft oben und unten, der negative Aussenabstand
+     nimmt sie optisch wieder zurueck - die Navigationsleiste waechst
+     dadurch nicht. */
+  .marken-link { padding-block: 0.4rem; margin-block: -0.4rem; }
+  .fuss-raster a, .fuss-leiste a, .link-fein, .brotkrumen a {
     display: inline-block;
     padding-block: 0.8rem;
     margin-block: -0.5rem;

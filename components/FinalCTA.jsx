@@ -33,10 +33,14 @@ export default function FinalCTA() {
             display: 'flex', gap: 'var(--luft-4)', justifyContent: 'flex-start',
             flexWrap: 'wrap', marginTop: 'var(--luft-4)',
           }}>
-            <a href="mailto:booking@amoriva-films.de" style={{
+            {/* Vorher bauten diese beiden Links .link-fein von Hand nach:
+                gleiche Farbe, gleiche Linie, aber ohne die Klasse. Dadurch
+                fielen sie nicht unter die Tippflaechen-Regel und waren auf
+                dem Handy nur 29 px hoch statt der empfohlenen 44. Genau
+                diese zwei sind der zweite Weg zu einer Anfrage, wenn jemand
+                das Formular nicht ausfuellen will. */}
+            <a href="mailto:booking@amoriva-films.de" className="link-fein" style={{
               fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)',
-              textDecoration: 'none',
-              borderBottom: '1px solid rgba(244,244,242,0.25)', paddingBottom: '2px',
             }}>
               booking@amoriva-films.de
             </a>
@@ -44,11 +48,8 @@ export default function FinalCTA() {
               href="https://wa.me/4915565559747?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eure%20Arbeit."
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)',
-                textDecoration: 'none',
-                borderBottom: '1px solid rgba(244,244,242,0.25)', paddingBottom: '2px',
-              }}
+              className="link-fein"
+              style={{ fontSize: 'var(--schrift-fein)', color: 'var(--grau-dunkel)' }}
             >
               WhatsApp schreiben
             </a>

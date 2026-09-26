@@ -1,5 +1,6 @@
 export const metadata = {
-  title: 'Hochzeitsfilmer & Fotograf buchen: Wann ist der richtige Zeitpunkt? | Amoriva Films',
+  /* War 83 Zeichen, also gut ein Drittel zu lang. */
+  title: 'Wann Hochzeitsfilmer buchen? | Amoriva Films',
   description:
     'Wann Hochzeitsfilmer und Fotograf buchen? Unsere Empfehlung: 12 bis 18 Monate vorher. Mit Checkliste für Paare in Niedersachsen.',
   keywords: [

@@ -60,13 +60,17 @@ export default function Nav() {
 
   return (
     <>
-      <nav
+      {/* <header> statt nur <nav>: Vorlesesoftware und Suchmaschinen
+          erkennen daran den Seitenkopf. Vorher gab es auf der ganzen
+          Seite kein einziges header-Element. */}
+      <header
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
           paddingBlock: gescrollt ? '0.75rem' : '1.25rem',
           transition: 'padding 400ms var(--ease)',
         }}
       >
+      <nav aria-label="Hauptnavigation">
         {/* Die Navigation liegt als Pille auf der Seite statt als Balken
             quer darueber. Ueber dem Video bleibt sie durchsichtig, sobald
             man scrollt legt sie sich als milchiges Glas darunter - so
@@ -90,7 +94,7 @@ export default function Nav() {
           boxShadow: gescrollt ? '0 8px 30px rgba(20,20,19,0.07)' : 'none',
           transition: 'background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease), padding 400ms var(--ease)',
         }}>
-        <Link href="/" aria-label="Amoriva Films, zur Startseite" style={{
+        <Link href="/" aria-label="Amoriva Films, zur Startseite" className="marken-link" style={{
           display: 'block', flexShrink: 0, textDecoration: 'none',
         }}>
           <Wortmarke hoehe={LOGO_HOEHE} farbe={aufDunkel ? 'var(--auf-dunkel)' : 'var(--gruen)'} />
@@ -158,6 +162,7 @@ export default function Nav() {
         </div>
         </div>
       </nav>
+      </header>
 
       {offen && (
         <div style={{
