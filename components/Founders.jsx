@@ -36,7 +36,22 @@ import FadeIn from './FadeIn';
    Hintergrundflaeche betroffen - eine Lichtkante im Gesicht oder das
    Silber des Laptops haengen nicht am Rand und blieben unberuehrt.
    Nachgemessen: beide Bilder an allen sechs Randpunkten identisch,
-   Spanne 0 Stufen. Die Originale liegen in .bilder-original/. */
+   Spanne 0 Stufen.
+
+   Zweite Runde, 26.09.2026: Danilo hatte rechts von sich zusaetzlich
+   einen weichen Schlagschatten aus der Ausleuchtung. Der ist jetzt
+   auch weg (danilo-v3). Der Trenner dafuer ist die Buntheit, nicht die
+   Helligkeit: Haut ist farbig (gemessen 79 im Mittel), Studiogrund und
+   Schatten sind neutral (unter 8). Dazu eine Kantenpruefung, damit der
+   Flutvorgang an der Silhouette stoppt statt durch sie hindurchzulaufen.
+
+   Ein erster Versuch ueber die Helligkeit hat beide Gesichter
+   ausgebrannt - Stirn und Nase sind heller als jede brauchbare
+   Schwelle. Deshalb entscheidet hier die Farbe.
+
+   Nevios Bild bleibt absichtlich unangetastet: sein Grund war schon
+   flach, und derselbe Vorgang frisst die Silberflaeche des Laptops weg.
+   Die Originale liegen in .bilder-original/. */
 
 const leute = [
   {
@@ -50,7 +65,7 @@ const leute = [
     name: 'Danilo Buonafede',
     rolle: 'Co Founder · Cinégraphie & Bildgestaltung',
     bio: 'Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen.',
-    bild: '/images/danilo-v2.webp',
+    bild: '/images/danilo-v3.webp',
     hoehe: '101.9%', oben: '-9.5%', links: '4.4%', grund: 'rgb(249,249,251)',
   },
 ];
