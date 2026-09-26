@@ -34,8 +34,23 @@ const nextConfig = {
            bei jedem Besuch neu geladen. Diese Dateien aendern sich nie,
            ohne dass sich ihr Name aendert - ein Jahr Cache ist richtig.
            Fuer wiederkehrende Besucher spart das die komplette Last. */
-        source: '/:datei*.(jpg|jpeg|png|webp|avif|mp4|ico|svg)',
+        source: '/:datei*.(jpg|jpeg|png|webp|avif|mp4|svg)',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        /* Das Favicon war hier mit drin und gehoert nicht dazu. Alle
+           anderen Bilder bekommen bei einer Aenderung einen neuen Namen
+           oder von Next einen Hash angehaengt - /favicon.ico nicht, die
+           Adresse steht fest. Ein Jahr immutable heisst dann: wer die
+           Seite schon einmal besucht hat, sieht das alte Icon noch
+           monatelang, egal was wir ausliefern. Aufgefallen beim Wechsel
+           auf das Bodoni-A am 26.09.2026.
+
+           Einen Tag Cache mit Rueckfrage danach: schnell genug, damit
+           es nicht bei jedem Aufruf neu geladen wird, und aktuell genug,
+           dass eine Aenderung wirklich ankommt. */
+        source: '/:datei*.ico',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, must-revalidate' }],
       },
     ];
   },
