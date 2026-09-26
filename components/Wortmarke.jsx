@@ -30,7 +30,21 @@ export default function Wortmarke({ hoehe = 34, farbe = 'currentColor' }) {
         gap: hoehe * 0.09,
         color: farbe,
         fontFamily: 'var(--font-display), Georgia, serif',
-        fontWeight: 400,
+        /* Nevio am 26.09.2026: "mach es ein bisschen dicker, man kann es
+           schlecht lesen". Zwei Ursachen, beide nachgemessen:
+
+           1. Gewicht 400 plus automatische optische Groesse. Die Bodoni
+              duennt ihre Haarstriche aus, je groesser die optische
+              Groesse gewaehlt wird - und automatisch waehlt der Browser
+              danach. Bei 18 px Versalien bleibt vom Querstrich des A
+              fast nichts uebrig. Jetzt Gewicht 600 und opsz fest auf 11,
+              das ist der Lesetext-Schnitt mit den kraeftigsten Strichen.
+           2. FILMS stand auf 82 Prozent Deckung. Gemessen auf dem hellen
+              Papier: 3,02 zu 1 bei 6,8 px. Die Deckung ist raus, damit
+              liegen beide Zeilen bei 4,62 zu 1. Der Groessenunterschied
+              trennt die Zeilen ohnehin deutlich genug. */
+        fontWeight: 600,
+        fontVariationSettings: "'opsz' 11",
         lineHeight: 1,
         /* Versalien, wie im Musterblatt gezeigt. Der weite Abstand
            zwischen den Buchstaben ist das eigentliche Erkennungszeichen
@@ -50,10 +64,9 @@ export default function Wortmarke({ hoehe = 34, farbe = 'currentColor' }) {
         Amoriva
       </span>
       <span style={{
-        fontSize: hoehe * 0.2,
+        fontSize: hoehe * 0.23,
         letterSpacing: `${SPERRE_KLEIN}em`,
         textIndent: `${SPERRE_KLEIN}em`,
-        opacity: 0.82,
       }}>
         Films
       </span>

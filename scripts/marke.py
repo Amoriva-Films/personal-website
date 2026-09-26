@@ -26,8 +26,12 @@ def wortmarke(hoehe, farbe, rand=0.12):
     """Zweizeilig: AMORIVA gross, FILMS klein und weit gesperrt darunter."""
     UEB = 4          # Ueberabtastung, danach verkleinern
     H = hoehe * UEB
-    gross  = schrift(int(H * 0.42), 400, 36)
-    klein  = schrift(int(H * 0.155), 400, 11)
+    # Gewicht 600 und kleine optische Groesse, genau wie der gesetzte
+    # Text auf der Seite. Die Bodoni duennt ihre Haarstriche aus, je
+    # groesser die optische Groesse gewaehlt wird - bei 400/36 war die
+    # Marke kaum zu lesen (Nevio, 26.09.2026).
+    gross  = schrift(int(H * 0.42), 600, 11)
+    klein  = schrift(int(H * 0.177), 600, 11)
     sp_g   = H * 0.42 * 0.16
     sp_k   = H * 0.155 * 0.46
 
