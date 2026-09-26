@@ -32,13 +32,28 @@ export default function AnfragePage() {
       email: fd.get('email'),
       hochzeitsdatum: fd.get('Hochzeitsdatum'),
       location: fd.get('Location'),
+      /* Telefon, Gaeste und Budget gehen ab jetzt EINZELN mit. Vorher
+         wurden sie in nachricht hineingestopft - in der Meldung an uns
+         standen sie dadurch als Fliesstext im selben Kasten wie die
+         eigentliche Nachricht, statt als eigene Zeilen. Genau das hat
+         die Mail unbrauchbar gemacht (Nevio, 26.09.2026).
+
+         "Gefuehl" ist raus: das Feld gibt es im Formular gar nicht mehr,
+         es stand trotzdem in JEDER Anfrage als "keine Angabe". */
+      telefon: fd.get('Telefon') || '',
+      gaeste: fd.get('Gaeste') || '',
+      budget: fd.get('Budget') || '',
+      /* nachricht bleibt der gewohnte Block. Das Amoriva-Dashboard liest
+         dieses eine Feld; wuerde hier nur noch die Vision stehen, fehlten
+         dort Telefon, Gaeste und Budget. Die Mail an uns benutzt statt
+         dessen die Einzelfelder oben. */
       nachricht: [
         `Telefon: ${fd.get('Telefon') || 'keine Angabe'}`,
         `Gästeanzahl: ${fd.get('Gaeste') || 'keine Angabe'}`,
         `Budget: ${fd.get('Budget') || 'keine Angabe'}`,
         `\nVision:\n${fd.get('Vision') || 'keine Angabe'}`,
-        `\nGefühl:\n${fd.get('Gefuehl') || 'keine Angabe'}`,
       ].join('\n'),
+      vision: fd.get('Vision') || '',
     };
 
     /* Erst pruefen, dann senden. Vorher ging jede unvollstaendige

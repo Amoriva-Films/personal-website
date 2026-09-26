@@ -166,7 +166,14 @@ export async function POST(request) {
       return Response.json({ error: 'Bitte eine gültige E-Mail-Adresse eingeben.' }, { status: 400 });
     }
 
-    const anfrage = { name, email, hochzeitsdatum, location, nachricht };
+    /* Die Einzelfelder reisen mit, damit die Meldung an uns sie als
+       eigene Zeilen zeigen kann statt als Textklumpen. nachricht bleibt
+       unveraendert, daran haengt das Dashboard. */
+    const telefon = kappen(body.telefon, 60).trim();
+    const gaeste  = kappen(body.gaeste, 60).trim();
+    const budget  = kappen(body.budget, 80).trim();
+    const vision  = kappen(body.vision, 5000).trim();
+    const anfrage = { name, email, hochzeitsdatum, location, nachricht, telefon, gaeste, budget, vision };
     const schluessel = Boolean(process.env.RESEND_API_KEY);
     if (!schluessel) console.error('RESEND_API_KEY ist nicht gesetzt.');
 

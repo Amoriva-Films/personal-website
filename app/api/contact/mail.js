@@ -145,67 +145,74 @@ export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
   };
 }
 
-/** Benachrichtigung an uns. Gleiches Layout wie die Mail an das Paar, nur mit anderen Daten. */
-export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht }) {
-  const paar = esc(String(name || '').trim());
-  const details = [zeile('Paar', name), zeile('E-Mail', email), zeile('Datum', datumSchoen(hochzeitsdatum)), zeile('Location', location), zeile('Nachricht', nachricht, { mehrzeilig: true })].join('');
+/** Benachrichtigung an uns.
+
+    Nevio am 26.09.2026 zur alten Fassung: "echt arsch". Zu Recht. Sie war
+    wie ein Kundenbrief gebaut, ist aber ein Arbeitszettel:
+
+    - Eine 32px-Serifenueberschrift "Eine neue Anfrage ist angekommen."
+      ueber zwei Zeilen fuellte den halben ersten Bildschirm, ohne eine
+      einzige Information zu tragen.
+    - Darunter drei Absaetze Hoeflichkeit ("Hallo Nevio", "hier ist alles
+      auf einen Blick", "jetzt bist du dran") - alles Dinge, die Nevio
+      weiss.
+    - Telefon, Gaestezahl und Budget standen als Fliesstext IM Kasten der
+      Nachricht, nicht als eigene Zeilen. Wer zurueckrufen wollte, musste
+      den Text durchlesen.
+    - Am Ende ein Unterschriftsblock mit "amoriva-films.de" in 26px
+      kursiver Serife. Fuer eine interne Mail sinnlos.
+
+    Jetzt steht oben, was zaehlt: der Name des Paares ist die Ueberschrift,
+    Datum und Ort die Zeile darunter. Dann die Fakten als Tabelle, dann die
+    Nachricht, dann der Antwortknopf. Kein Gruss, keine Unterschrift.
+
+    Der Betreff traegt jetzt auch das Datum, damit man die Anfrage schon in
+    der Liste des Postfachs einordnen kann. */
+export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht, telefon, gaeste, budget, vision }) {
+  const paar = esc(String(name || '').trim()) || 'Unbekannt';
+  const datum = datumSchoen(hochzeitsdatum);
+  const kopfzeile = [datum, location ? esc(location) : ''].filter(Boolean).join(' &middot; ');
+
+  /* vision ist der Text, den das Paar wirklich geschrieben hat. Aeltere
+     Anfragen kennen das Feld nicht - dann faellt die Vorlage auf den
+     gewohnten Block zurueck, damit nichts verloren geht. */
+  const text = (vision && vision.trim()) ? vision : nachricht;
+
+  const fakten = [
+    zeile('E-Mail', email),
+    zeile('Telefon', telefon),
+    zeile('Gäste', gaeste),
+    zeile('Budget', budget),
+  ].join('');
+
   const betreffAntwort = encodeURIComponent('Eure Hochzeit mit Amoriva Films');
   const inhalt = `
-    ${absatz('Hallo Nevio,')}
-    ${absatz(`${paar} haben euch gerade über die Website geschrieben. Hier ist alles auf einen Blick.`)}
-    ${absatz('Die Eingangsbestätigung an das Paar ist schon raus. Jetzt bist du dran, in der Regel innerhalb von 24 Stunden.')}
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 30px;background:${F.creme};">
-      <tr><td style="padding:10px 24px 12px;">
-        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};padding:8px 0 4px;">Das hat das Paar geschickt</div>
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${details}</table>
+    ${kopfzeile ? `<div style="font-family:${sans};font-size:15px;color:${F.weich};margin:-14px 0 24px;">${kopfzeile}</div>` : ''}
+    ${fakten ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;">${fakten}</table>` : ''}
+    ${text ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 26px;background:${F.creme};">
+      <tr><td style="padding:16px 20px;">
+        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gruen};margin-bottom:8px;">Nachricht</div>
+        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};white-space:pre-wrap;">${esc(text)}</div>
       </td></tr>
-    </table>
+    </table>` : ''}
     <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
       <td style="background:${F.dunkel};">
-        <a href="mailto:${esc(email)}?subject=${betreffAntwort}" style="display:inline-block;padding:15px 30px;font-family:${sans};font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:${F.creme};text-decoration:none;">Jetzt antworten</a>
+        <a href="mailto:${esc(email)}?subject=${betreffAntwort}" style="display:inline-block;padding:15px 30px;font-family:${sans};font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:${F.creme};text-decoration:none;">Antworten</a>
       </td>
     </tr></table>
-    ${absatz(`<span style="font-size:13px;color:${F.gedaempft};">Oder einfach auf diese Mail antworten, die Antwort geht direkt an das Paar.</span>`).replace('margin:0 0 18px', 'margin:18px 0 0')}
-    <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
-      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Automatisch weitergeleitet vom Kontaktformular</div>
-      <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">amoriva-films.de</div>
-      <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
-    </div>`;
+    <div style="margin:16px 0 0;font-family:${sans};font-size:13px;line-height:1.6;color:${F.gedaempft};">Oder einfach auf diese Mail antworten, die Antwort geht direkt an das Paar.</div>`;
   return {
-    subject: `Neue Anfrage von ${kurz(name) || 'unbekannt'}`,
+    subject: `Neue Anfrage: ${kurz(name) || 'unbekannt'}${datum ? ' \u00b7 ' + datum : ''}`,
     html: rahmen({
       titelZeile: `Neue Anfrage von ${name}`,
       preheader: `${name}${location ? ', ' + location : ''}${hochzeitsdatum ? ', ' + datumSchoen(hochzeitsdatum) : ''}`,
       eyebrow: 'Neue Anfrage',
-      titel: 'Eine neue Anfrage ist<br>angekommen.',
+      titel: paar,
       inhalt,
     }),
   };
-}
-
-/* ------------------------------------------------------------------ *
- * Waechter: Meldungen an Nevio, wenn etwas nicht funktioniert hat.
- *
- * Diese Mails sind bewusst im selben Gewand wie alle anderen. Eine
- * Stoermeldung, die aussieht wie eine Systemmeldung, wird im Postfach
- * uebersehen; eine, die aussieht wie die Anfrage selbst, nicht.
- *
- * Wichtigste Eigenschaft: die vollstaendige Anfrage steht drin. Wenn
- * der Eintrag ins Dashboard bricht, ist diese Mail die einzige Stelle,
- * an der die Anfrage noch existiert. Nevio kann direkt aus ihr heraus
- * antworten, ohne irgendwo nachzusehen.
- * ------------------------------------------------------------------ */
-
-/** Grauer Hinweiskasten. Bewusst ohne Rot: eine Farbe macht die Stoerung
- *  nicht dringender, sie macht die Mail nur lauter. */
-function kasten(ueberschrift, zeilenText) {
-  return `
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 30px;background:${F.creme};border-left:3px solid ${F.dunkel};">
-      <tr><td style="padding:20px 24px;">
-        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};margin-bottom:10px;">${esc(ueberschrift)}</div>
-        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};">${zeilenText}</div>
-      </td></tr>
-    </table>`;
 }
 
 /**
