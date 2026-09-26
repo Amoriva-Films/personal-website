@@ -63,9 +63,12 @@ export default function AnfragePage() {
 
     if (Object.keys(mangel).length > 0) {
       setFehlende(mangel);
+      /* Vorher stand hier "unten rot markiert". Das stimmte nicht: die
+         Meldung erscheint beim Absendeknopf, die Felder stehen darueber.
+         Wer nach unten sucht, findet nichts. */
       setFehler(Object.keys(mangel).length === 1
-        ? 'Ein Feld fehlt noch. Es ist unten rot markiert.'
-        : `${Object.keys(mangel).length} Felder fehlen noch. Sie sind unten rot markiert.`);
+        ? 'Ein Feld fehlt noch. Wir haben es rot markiert und springen hin.'
+        : `${Object.keys(mangel).length} Felder fehlen noch. Sie sind rot markiert, wir springen zum ersten.`);
       setLaedt(false);
       // Zum ersten fehlenden Feld springen und hineinsetzen: bei einem
       // langen Formular sieht man sonst gar nicht, dass unten etwas rot ist.

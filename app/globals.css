@@ -632,10 +632,21 @@ p, li { overflow-wrap: break-word; }
    gemessen 53 bis 64 px Ueberschneidung. Der Titel bekommt deshalb
    rechts Platz, und die Ziffer rueckt etwas hoeher und wird kleiner -
    sie soll ein Wasserzeichen sein, kein zweiter Text. */
-.leistung h3 { padding-right: 4.6rem; hyphens: manual; overflow-wrap: break-word; }
-/* "Hochzeitsfotografie" ist der laengste Titel und bricht dadurch auf
-   zwei Zeilen um. Das ist gewollt: lieber ein Umbruch als ein Wort,
-   das durch die Ziffer laeuft. */
+/* "Hochzeitsfotografie" ist der laengste Titel und bricht auf zwei
+   Zeilen um. Das ist gewollt - aber es muss AM WEICHEN TRENNSTRICH
+   brechen, den der Titel im Text mitbringt.
+
+   Vorher stand hier zusaetzlich overflow-wrap: break-word, und der
+   Platz rechts war 4,6rem. Gemessen am 26.09.2026 brach der Titel
+   dadurch als "Hochzeitsf" / "otografie" um - mitten im Wort und ohne
+   Trennstrich. Fuer ein Brautpaar sieht das aus wie ein Tippfehler.
+   Ursache: bei 4,6rem passte nicht einmal "Hochzeits-" in die Zeile,
+   also sprang break-word ein und trennte irgendwo.
+
+   Jetzt 3rem Platz - genug fuer "Hochzeits-" - und kein break-word
+   mehr. Die Ziffer daneben ist seit der Schriftumstellung ohnehin nur
+   noch ein helles Wasserzeichen, sie braucht weniger Abstand. */
+.leistung h3 { padding-right: 3rem; hyphens: manual; }
 
 .leistung-ziffer {
   position: absolute;
@@ -1099,7 +1110,13 @@ html.lenis, html.lenis body { height: auto; }
    optisch wieder zurueck, damit die Fusszeile nicht auseinanderfaellt.
    Nur auf Geraeten mit grobem Zeiger: mit der Maus stoert es nur. */
 @media (pointer: coarse) {
-  .fuss-raster a, .fuss-leiste a {
+  /* .link-fein kam dazu. Gemessen auf der Anfrageseite bei 375 px waren
+     die Mailadresse und die Telefonnummer dort nur 29 px hoch und der
+     Link zur Datenschutzerklaerung 22 px - mit dem Daumen trifft man das
+     schlecht, empfohlen sind 44 px. Ausgerechnet Mailadresse und
+     Telefonnummer sind der zweite Weg zu einer Anfrage, wenn jemand das
+     Formular nicht ausfuellen will. */
+  .fuss-raster a, .fuss-leiste a, .link-fein {
     display: inline-block;
     padding-block: 0.8rem;
     margin-block: -0.5rem;
