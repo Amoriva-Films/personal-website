@@ -8,11 +8,6 @@ export const metadata = {
 const serif = "var(--font-display), Georgia, serif";
 const sans  = "var(--font-text), system-ui, sans-serif";
 
-const linkStyle = {
-  color: 'var(--grau-dunkel)',
-  textDecoration: 'none',
-};
-
 function Divider() {
   return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', marginBlock: 'var(--luft-5)' }} />;
 }
@@ -71,7 +66,7 @@ export default function Datenschutz() {
             Amoriva Films<br />
             Inhaber: Nevio Mastrogiorgio<br />
             Grafhorster Str. 16b, 38458 Velpke<br />
-            E-Mail: <a href="mailto:booking@amoriva-films.de" style={linkStyle}>booking@amoriva-films.de</a>
+            E-Mail: <a href="mailto:booking@amoriva-films.de" className="rechts-link">booking@amoriva-films.de</a>
           </p>
         </Section>
 
@@ -94,7 +89,7 @@ export default function Datenschutz() {
         <Section title="3. Hosting">
           <p>
             Diese Website wird über <strong>Vercel Inc.</strong> gehostet (440 N Barranca Ave #4133, Covina, CA 91723, USA). Beim Besuch der Website werden personenbezogene Daten auf den Servern von Vercel verarbeitet. Weitere Informationen findest du in der{' '}
-            <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener" style={linkStyle}>
+            <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener" className="rechts-link">
               Datenschutzerklärung von Vercel
             </a>.
           </p>
@@ -108,7 +103,7 @@ export default function Datenschutz() {
           </p>
           <p>
             Für den Versand dieser E-Mails nutzen wir den Dienst <strong>Resend</strong> (Resend Inc., 2261 Market Street, San Francisco, CA 94114, USA), der seinerseits Amazon SES in der EU-Region Irland für die Zustellung einsetzt. Dabei werden deine E-Mail-Adresse, der Inhalt deiner Anfrage sowie technische Zustellinformationen verarbeitet. Weitere Informationen findest du in der{' '}
-            <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener" style={linkStyle}>Datenschutzerklärung von Resend</a>.
+            <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener" className="rechts-link">Datenschutzerklärung von Resend</a>.
           </p>
           <p>
             Direkt nach dem Absenden schicken wir dir automatisch eine kurze Eingangsbestätigung an die von dir angegebene E-Mail-Adresse. Sie bestätigt nur, dass deine Anfrage angekommen ist. Die persönliche Antwort schreiben wir dir danach selbst.
@@ -126,7 +121,7 @@ export default function Datenschutz() {
           </p>
           <p>
             Gespeichert werden dieselben Angaben wie oben (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (EU-Region Irland) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
-            <a href="https://amoriva.app/datenschutz" target="_blank" rel="noopener" style={linkStyle}>Datenschutzerklärung von Amoriva</a>.
+            <a href="https://amoriva.app/datenschutz" target="_blank" rel="noopener" className="rechts-link">Datenschutzerklärung von Amoriva</a>.
           </p>
         </Section>
 
@@ -135,7 +130,7 @@ export default function Datenschutz() {
         <Section title="6. Kommunikation über WhatsApp">
           <p>
             Du kannst uns alternativ über WhatsApp kontaktieren. Dabei wird deine Telefonnummer verarbeitet. WhatsApp ist ein Dienst der Meta Platforms Ireland Ltd. Die Nutzung erfolgt freiwillig und auf eigene Verantwortung. Weitere Informationen findest du in der{' '}
-            <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener" style={linkStyle}>
+            <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener" className="rechts-link">
               Datenschutzerklärung von WhatsApp
             </a>.
           </p>
@@ -171,7 +166,7 @@ export default function Datenschutz() {
           </ul>
           <p>
             Zur Ausübung deiner Rechte wende dich an:{' '}
-            <a href="mailto:booking@amoriva-films.de" style={linkStyle}>booking@amoriva-films.de</a>
+            <a href="mailto:booking@amoriva-films.de" className="rechts-link">booking@amoriva-films.de</a>
           </p>
           <p>Du hast außerdem das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren.</p>
         </Section>
@@ -209,8 +204,11 @@ export default function Datenschutz() {
             fontWeight: 300,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: 'var(--grau-dunkel)',
+            /* War ebenfalls --grau-dunkel auf hellem Grund. */
+            color: 'var(--grau-2)',
             textDecoration: 'none',
+            borderBottom: '1px solid var(--linie)',
+            paddingBottom: '3px',
           }}>
             ← Zurück zur Startseite
           </Link>

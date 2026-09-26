@@ -37,9 +37,9 @@ export default function Impressum() {
         <Divider />
 
         <Section title="Kontakt">
-          <p>Telefon: <a href="tel:015565559747" style={linkStyle}>0155 65559747</a></p>
-          <p>E-Mail: <a href="mailto:booking@amoriva-films.de" style={linkStyle}>booking@amoriva-films.de</a></p>
-          <p>Website: <a href="https://amoriva-films.de" style={linkStyle}>https://amoriva-films.de</a></p>
+          <p>Telefon: <a href="tel:015565559747" className="rechts-link">0155 65559747</a></p>
+          <p>E-Mail: <a href="mailto:booking@amoriva-films.de" className="rechts-link">booking@amoriva-films.de</a></p>
+          <p>Website: <a href="https://amoriva-films.de" className="rechts-link">https://amoriva-films.de</a></p>
         </Section>
 
         <Divider />
@@ -60,7 +60,7 @@ export default function Impressum() {
         <Section title="EU-Streitschlichtung">
           <p>
             Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{' '}
-            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" style={linkStyle}>
+            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" className="rechts-link">
               https://ec.europa.eu/consumers/odr/
             </a>
           </p>
@@ -96,8 +96,11 @@ export default function Impressum() {
             fontWeight: 300,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: 'var(--grau-dunkel)',
+            /* War ebenfalls --grau-dunkel auf hellem Grund. */
+            color: 'var(--grau-2)',
             textDecoration: 'none',
+            borderBottom: '1px solid var(--linie)',
+            paddingBottom: '3px',
           }}>
             ← Zurück zur Startseite
           </Link>
@@ -107,11 +110,6 @@ export default function Impressum() {
     </>
   );
 }
-
-const linkStyle = {
-  color: 'var(--grau-dunkel)',
-  textDecoration: 'none',
-};
 
 function Divider() {
   return <hr style={{ border: 'none', borderTop: '1px solid var(--linie)', marginBlock: 'var(--luft-5)' }} />;

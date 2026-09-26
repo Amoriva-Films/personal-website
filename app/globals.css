@@ -1109,6 +1109,24 @@ html.lenis, html.lenis body { height: auto; }
    Aussenabstand nimmt den groessten Teil des neuen Innenabstands
    optisch wieder zurueck, damit die Fusszeile nicht auseinanderfaellt.
    Nur auf Geraeten mit grobem Zeiger: mit der Maus stoert es nur. */
+/* Links auf Impressum und Datenschutz. Sie standen in --grau-dunkel -
+   das ist laut eigenem Kommentar die Farbe "Grau auf dunkel" und war
+   hier auf hellem Grund im Einsatz. Gemessen 2,31 zu 1 bei 14 px.
+   Dazu kam textDecoration: none: die Links waren weder lesbar noch als
+   Links erkennbar. Ausgerechnet auf den beiden Seiten, die rechtlich
+   vorgeschrieben sind und auf denen Telefonnummer und Mailadresse
+   stehen. Jetzt --tinte mit Unterstrich, gemessen 15,3 zu 1. */
+.rechts-link {
+  color: var(--tinte);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--grau-3);
+  transition: text-decoration-color 220ms var(--ease);
+  overflow-wrap: anywhere;
+}
+.rechts-link:hover { text-decoration-color: currentColor; }
+
 @media (pointer: coarse) {
   /* .link-fein kam dazu. Gemessen auf der Anfrageseite bei 375 px waren
      die Mailadresse und die Telefonnummer dort nur 29 px hoch und der
@@ -1121,6 +1139,7 @@ html.lenis, html.lenis body { height: auto; }
      nimmt sie optisch wieder zurueck - die Navigationsleiste waechst
      dadurch nicht. */
   .marken-link { padding-block: 0.4rem; margin-block: -0.4rem; }
+  .rechts-link { padding-block: 0.7rem; margin-block: -0.5rem; display: inline-block; }
   .fuss-raster a, .fuss-leiste a, .link-fein, .brotkrumen a {
     display: inline-block;
     padding-block: 0.8rem;
