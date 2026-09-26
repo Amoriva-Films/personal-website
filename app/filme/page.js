@@ -10,6 +10,22 @@ export const metadata = {
   description:
     'Ausgewählte Hochzeitsfilme von Amoriva Films. Hochzeitsfilme in Cinégraphie aus Wolfsburg, Braunschweig, Hannover und international.',
   alternates: { canonical: 'https://amoriva-films.de/filme' },
+  /* Aus dem Index genommen am 26.09.2026, solange hier keine Filme
+     liegen. Die Seite sagt derzeit "Die Filme kommen in Kuerze" - das
+     unter der Ueberschrift "Hochzeitsfilme aus Niedersachsen" im
+     Suchergebnis zu haben schadet mehr, als es nutzt: wer danach sucht,
+     landet auf einer leeren Seite und ist weg.
+
+     follow bleibt an, die Links von dort duerfen verfolgt werden.
+
+     WIEDER EINSCHALTEN, sobald Filme drin sind: diesen robots-Block
+     loeschen UND in app/sitemap.js die Zeile eintrag('filme', 0.95)
+     entkommentieren. Beides gehoert zusammen. */
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: { index: false, follow: true },
+  },
 };
 
 export default function FilmePage() {
