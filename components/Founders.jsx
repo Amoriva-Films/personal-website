@@ -71,7 +71,17 @@ const leute = [
        und das Bild hing 42 px zu hoch - unten blieb ein leerer Streifen,
        oben war sein Kopf angeschnitten. Jetzt waagerecht und senkrecht
        mittig. */
-    hoehe: '101.9%', oben: '-1%', links: '0%', grund: 'rgb(249,249,251)',
+    /* Korrektur 26.09.2026, zweiter Anlauf. Mein Zentrieren davor war
+       falsch: es hat Danilo nach unten geschoben, dadurch sass sein
+       Kopf 50 px tiefer als Nevios und er wirkte kleiner und weiter
+       weg. Das richtige Mass ist nicht die Bildmitte, sondern die
+       Stirnlinie - Portraits nebeneinander liest man ueber die Koepfe.
+       Gemessen ueber die Hautflaeche, weil Haare und Kragen jede
+       andere Messung verfaelschen: die Wangenbreite ist bei beiden
+       fast gleich (68,4 zu 66,5 px), die Koepfe sind also gleich gross.
+       Nur die Hoehe stimmte nicht. Jetzt liegen beide Stirnkanten bei
+       42 px im Rahmen. */
+    hoehe: '99.1%', oben: '-11.8%', links: '3.55%', grund: 'rgb(249,249,251)',
   },
 ];
 
