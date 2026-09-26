@@ -20,23 +20,38 @@ import FadeIn from './FadeIn';
    Rahmenhoehe fuellt. Danilos Bild wird dafuer 10 % groesser gezeigt.
 
    Weil die Bilder schmaler sind als der Rahmen, bleibt links und rechts
-   ein Rest. Der traegt den gemessenen Studiohintergrund des jeweiligen
-   Bildes, dadurch sieht man die Naht nicht. */
+   ein Rest. Der traegt den Studiohintergrund, dadurch sieht man die
+   Naht nicht.
+
+   Nevio am 26.09.2026: "der hintergrund von danilo und mir ist
+   unterschiedlich". Stimmte, und zwar aus zwei Gruenden. Gemessen:
+   Nevios Hintergrund lag flach bei rgb(248,248,250) mit leichtem Blau,
+   Danilos bei rgb(246,246,246) neutral - und er lief nach unten auf
+   rgb(229,229,229) aus. Diese Verlaufskante stiess im Rahmen auf eine
+   flache Fuellfarbe, dadurch stand um sein Bild ein sichtbarer Kasten.
+
+   Behoben in den Bilddateien selbst, nicht per CSS: der Studiogrund
+   beider Fotos ist auf genau rgb(249,249,251) eingeebnet. Die Maske
+   dafuer wurde vom Bildrand her geflutet, also ist nur zusammenhaengende
+   Hintergrundflaeche betroffen - eine Lichtkante im Gesicht oder das
+   Silber des Laptops haengen nicht am Rand und blieben unberuehrt.
+   Nachgemessen: beide Bilder an allen sechs Randpunkten identisch,
+   Spanne 0 Stufen. Die Originale liegen in .bilder-original/. */
 
 const leute = [
   {
     name: 'Nevio Mastrogiorgio',
     rolle: 'Founder · Beratung & kreative Leitung',
     bio: 'Nevio begleitet euch vom ersten Gespräch bis weit über den Hochzeitstag hinaus. Mit seiner ruhigen und klaren Art sorgt er dafür, dass ihr euch verstanden, sicher und vollkommen aufgehoben fühlt.',
-    bild: '/images/nevio.webp',
+    bild: '/images/nevio-v2.webp',
     hoehe: '92.7%', oben: '-0.3%', links: '5.5%', grund: 'rgb(249,249,251)',
   },
   {
     name: 'Danilo Buonafede',
     rolle: 'Co Founder · Cinégraphie & Bildgestaltung',
     bio: 'Danilo ist der Blick hinter der Kamera. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen die Momente, die euren Film später lebendig machen.',
-    bild: '/images/danilo.webp',
-    hoehe: '101.9%', oben: '-9.5%', links: '4.4%', grund: 'rgb(246,246,246)',
+    bild: '/images/danilo-v2.webp',
+    hoehe: '101.9%', oben: '-9.5%', links: '4.4%', grund: 'rgb(249,249,251)',
   },
 ];
 
