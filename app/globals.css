@@ -480,9 +480,8 @@ p, li { overflow-wrap: break-word; }
 }
 .portraet-reihe::-webkit-scrollbar { display: none; }
 
-/* Die Spur, die laeuft. Zwei Durchgaenge derselben Bilder; von -50% auf 0
-   wandern heisst: die Bilder ziehen von links nach rechts. Nach einem
-   Durchlauf sieht es aus wie am Anfang, der Sprung ist unsichtbar. */
+/* Die Spur, die laeuft. Die Bilder liegen mehrfach hintereinander; nach
+   einem Durchlauf sieht es aus wie am Anfang, der Sprung ist unsichtbar. */
 .portraet-lauf {
   display: flex;
   gap: var(--luft-2);
@@ -490,16 +489,29 @@ p, li { overflow-wrap: break-word; }
   padding-inline: var(--rand);
   /* Tempo: 60s ergaben gemessen 96 px pro Sekunde - eine Kachel war in
      2,5 Sekunden durchs Bild. Das ist ein Boersenticker, kein Band aus
-     Hochzeitsbildern. 190s ergeben 30 px/s, eine Kachel braucht knapp
-     8 Sekunden. Es soll im Augenwinkel leben, nicht ziehen. */
+     Hochzeitsbildern. Es soll im Augenwinkel leben, nicht ziehen.
+
+     Bei 190s nachgemessen am 26.09.2026 bei 1440 px Fensterbreite:
+     Spur 7272 px, halbe Laenge 3636 px, macht 19 px/s. Eine 240er
+     Kachel braucht damit knapp 13 Sekunden. (Im Kommentar standen
+     vorher 30 px/s - das galt fuer eine kuerzere Spur.) */
   animation: portraet-laufband 190s linear infinite;
 }
-/* Richtung: die Spur wandert nach links, dadurch kommen neue Bilder von
-   rechts herein und ziehen nach links aus dem Bild. Vorher lief es
-   andersherum, das war Nevio falsch. */
+/* Richtung, Nevio am 26.09.2026: von LINKS nach RECHTS.
+
+   Die Spur startet um eine halbe Laenge nach links verschoben und
+   wandert auf 0 zu. Damit kommen neue Bilder links herein und ziehen
+   nach rechts aus dem Bild - das Gegenteil von vorher.
+
+   Hier standen frueher zwei Kommentare, die sich widersprachen: der
+   eine beschrieb schon links nach rechts, die Keyframes machten das
+   Gegenteil. Deshalb steht es jetzt nur noch an dieser einen Stelle.
+
+   Alles andere bleibt: 190s Dauer, kein Anhalten beim Daraufzeigen,
+   stehender Streifen bei "weniger Bewegung". */
 @keyframes portraet-laufband {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 /* KEIN Anhalten beim Daraufzeigen.
    Vorher stand hier ein Pausieren bei :hover. Wer mit der Maus ueber dem
