@@ -93,28 +93,45 @@ function rahmen({ titelZeile, preheader, eyebrow, titel, inhalt }) {
 
 const absatz = (t) => `<p style="margin:0 0 18px;font-family:${sans};font-size:15.5px;line-height:1.75;color:${F.text};">${t}</p>`;
 
-/** Eingangsbestätigung an das Paar. Kündigt die persönliche Antwort an, ersetzt sie nicht. */
+/** Eingangsbestätigung an das Paar.
+
+    Nevio am 26.09.2026: "viel zu unübersichtlich, kann gefühlt 3000 mal
+    nach unten scrollen". Stimmte. Drei Dinge haben die Mail aufgeblasen:
+
+    1. Die komplette Nachricht des Paares wurde zurückgespiegelt. Die
+       haben sie gerade selbst getippt - wer viel schreibt, bekommt eine
+       endlose Bestätigung zurück. Raus. Geblieben ist eine einzige Zeile
+       mit Datum und Ort: das ist die Angabe, bei der ein Tippfehler
+       wirklich weh tut, und sie kostet eine Zeile statt zwanzig.
+    2. Vier Absätze sagten dreimal dasselbe ("wir schauen sie uns an",
+       "Nevio meldet sich", "antwortet auf diese Mail"). Jetzt zwei.
+    3. Ein eigener Absatz warb für die Leistungsseite. Der ist eine
+       kurze Zeile geworden.
+
+    Eine Eingangsbestätigung hat genau einen Job: sagen, dass es
+    angekommen ist und wann jemand antwortet. Alles andere kann warten,
+    bis Nevio persönlich schreibt. */
 export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
   // Anrede: bei Paaren ("Laura und Tim", "Laura & Tim") der ganze Name, sonst nur der Vorname.
   const roh = String(name || '').trim();
   const vorname = esc(/\s(und|&|\+)\s|,/i.test(roh) ? roh : (roh.split(/\s+/)[0] || roh));
-  const details = [zeile('Datum', datumSchoen(hochzeitsdatum)), zeile('Location', location), zeile('Nachricht', nachricht, { mehrzeilig: true })].join('');
+
+  // Eine Zeile statt einer Tabelle. Beides kann fehlen, dann faellt sie weg.
+  const eckdaten = [datumSchoen(hochzeitsdatum), location ? esc(location) : ''].filter(Boolean).join(' &middot; ');
+
   const inhalt = `
     ${absatz(`Hallo ${vorname},`)}
-    ${absatz('schön, dass ihr euch bei uns gemeldet habt. Eure Anfrage ist gerade reingekommen und wir schauen sie uns in Ruhe an.')}
-    ${absatz('Nevio meldet sich persönlich bei euch, in der Regel innerhalb von 24 Stunden. Wenn euch bis dahin noch etwas einfällt, antwortet einfach auf diese Mail.')}
-    ${details ? `
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 30px;background:${F.creme};">
-      <tr><td style="padding:10px 24px 12px;">
-        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};padding:8px 0 4px;">Das habt ihr uns geschickt</div>
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${details}</table>
+    ${absatz('schön, dass ihr euch gemeldet habt. Nevio meldet sich persönlich bei euch, in der Regel innerhalb von 24 Stunden. Wenn euch bis dahin noch etwas einfällt, antwortet einfach auf diese Mail.')}
+    ${eckdaten ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;">
+      <tr><td style="padding:12px 18px;background:${F.creme};font-family:${sans};font-size:14px;line-height:1.6;color:${F.text};">
+        <span style="font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:${F.gruen};">Eure Angaben</span><br>${eckdaten}
       </td></tr>
     </table>` : ''}
-    ${absatz(`Wenn ihr mögt, schaut in der Zwischenzeit bei unseren <a href="https://amoriva-films.de/leistungen" style="color:${F.gruen};text-decoration:underline;text-underline-offset:3px;">Leistungen</a> vorbei. So bekommt ihr ein Gefühl dafür, wie wir arbeiten.`)}
-    <div style="margin-top:34px;padding-top:26px;border-top:1px solid ${F.linie};">
-      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:6px;">Bis ganz bald</div>
-      <div style="font-family:${serif};font-size:26px;font-style:italic;color:${F.dunkel};line-height:1.2;">Nevio und Danilo</div>
-      <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
+    ${absatz(`So arbeiten wir: <a href="https://amoriva-films.de/leistungen" style="color:${F.gruen};text-decoration:underline;text-underline-offset:3px;">unsere Leistungen</a>`)}
+    <div style="margin-top:26px;padding-top:22px;border-top:1px solid ${F.linie};">
+      <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:4px;">Bis ganz bald</div>
+      <div style="font-family:${serif};font-size:22px;font-style:italic;color:${F.dunkel};line-height:1.2;">Nevio und Danilo</div>
     </div>`;
   return {
     subject: 'Eure Anfrage ist angekommen',
@@ -122,7 +139,7 @@ export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
       titelZeile: 'Eure Anfrage ist angekommen',
       preheader: 'Nevio meldet sich persönlich, in der Regel innerhalb von 24 Stunden.',
       eyebrow: 'Eingangsbestätigung',
-      titel: 'Eure Anfrage ist<br>angekommen.',
+      titel: 'Eure Anfrage ist angekommen.',
       inhalt,
     }),
   };
