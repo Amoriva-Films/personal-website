@@ -1140,6 +1140,7 @@ html.lenis, html.lenis body { height: auto; }
      dadurch nicht. */
   .marken-link { padding-block: 0.4rem; margin-block: -0.4rem; }
   .rechts-link { padding-block: 0.7rem; margin-block: -0.5rem; display: inline-block; }
+  .zurueck-link { padding-block: 0.8rem; margin-block: -0.6rem; display: inline-block; }
   .fuss-raster a, .fuss-leiste a, .link-fein, .brotkrumen a {
     display: inline-block;
     padding-block: 0.8rem;

@@ -90,7 +90,7 @@ export default function Impressum() {
         <Divider />
 
         <div style={{ marginTop: 'var(--luft-5)' }}>
-          <Link href="/" style={{
+          <Link href="/" className="zurueck-link" style={{
             fontFamily: sans,
             fontSize: '0.72rem',
             fontWeight: 300,
