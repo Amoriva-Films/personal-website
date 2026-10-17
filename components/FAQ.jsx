@@ -18,12 +18,6 @@ const fragen = [
   },
   {
     frage: 'Seid ihr nur in Wolfsburg tätig?',
-    /* Hier stand vorher "wir waren schon in Deutschland, Österreich, der
-       Schweiz und südeuropäischen Ländern". Das war eine Behauptung über
-       die Vergangenheit, und sie stimmte nicht: gefilmt wurde bisher nur
-       in Deutschland (Nevio, 26.09.2026). Die Aussage bleibt trotzdem
-       international - aber als das, was sie wirklich ist: wir reisen
-       dorthin, wo die Hochzeit ist. Das ist wahr und sagt dasselbe. */
     antwort: 'Nein, wir filmen international. Wolfsburg ist unser Zuhause und bisher waren wir in ganz Deutschland unterwegs. Für eure Hochzeit reisen wir genauso nach Österreich, in die Schweiz oder nach Südeuropa. Wo es hingeht, schauen wir uns gemeinsam an, und die Anreise sprechen wir vorher offen ab.',
   },
   {
@@ -40,74 +34,91 @@ export default function FAQ() {
   const [offen, setOffen] = useState(null);
 
   return (
-    <section className="abschnitt hell-2">
+    <section className="abschnitt dunkel faq-dunkel">
       <div className="bahn">
         <FadeIn>
-          <div className="paar" style={{ marginBottom: 'var(--luft-4)' }}>
-            <div>
-              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
-              <h2 className="t-gross">
-                Was ihr <span className="kursiv">wissen wollt.</span>
-              </h2>
-            </div>
+          <div style={{ textAlign: 'center', marginBottom: 'var(--luft-4)' }}>
+            <p className="t-label" style={{ justifyContent: 'center', marginBottom: 'var(--luft-2)' }}>Häufige Fragen</p>
+            <h2 className="t-gross" style={{ color: 'var(--auf-dunkel)' }}>
+              Was ihr <span className="kursiv">wissen wollt.</span>
+            </h2>
           </div>
         </FadeIn>
 
-        {/* Die Fragen liefen als Linienliste ueber die halbe Seitenbreite.
-            Jetzt zwei Spalten aus Kacheln: kuerzere Wege fuers Auge und
-            der Abschnitt wird nur noch halb so hoch.                   */}
-        <div className="fragen-raster">
+        <div className="faq-liste">
           {fragen.map((f, i) => {
             const auf = offen === i;
             return (
-              <FadeIn key={i}>
-                <div className="kachel" style={{ paddingBlock: 'var(--luft-2)' }}>
-                  <h3>
+              <FadeIn key={i} index={i}>
+                <div className={`faq-zeile${auf ? ' faq-zeile--auf' : ''}`}>
+                  <h3 style={{ margin: 0 }}>
                     <button
+                      className="faq-frage"
                       onClick={() => setOffen(auf ? null : i)}
                       aria-expanded={auf}
-                      style={{
-                        width: '100%', display: 'flex', gap: 'var(--luft-3)',
-                        justifyContent: 'space-between', alignItems: 'center',
-                        paddingBlock: 'var(--luft-2)', background: 'none', border: 'none',
-                        cursor: 'pointer', textAlign: 'left',
-                        fontFamily: 'var(--font-text), system-ui, sans-serif',
-                        fontSize: 'var(--schrift-klein)', fontWeight: 500,
-                        color: 'var(--tinte)', lineHeight: 1.35,
-                      }}
                     >
-                      {f.frage}
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          flexShrink: 0, width: '16px', height: '16px',
-                          position: 'relative',
-                          transform: auf ? 'rotate(45deg)' : 'rotate(0deg)',
-                          transition: 'transform 250ms var(--ease)',
-                        }}
-                      >
-                        <span style={{
-                          position: 'absolute', top: '50%', left: 0, right: 0,
-                          height: '1px', background: 'var(--grau-2)',
-                        }} />
-                        <span style={{
-                          position: 'absolute', left: '50%', top: 0, bottom: 0,
-                          width: '1px', background: 'var(--grau-2)',
-                        }} />
-                      </span>
+                      <span className="faq-frage-text">{f.frage}</span>
+                      <span className={`faq-plus${auf ? ' faq-plus--auf' : ''}`} aria-hidden="true" />
                     </button>
                   </h3>
-                  {auf && (
-                    <p className="t-text t-grau" style={{ paddingBottom: 'var(--luft-2)' }}>
-                      {f.antwort}
-                    </p>
-                  )}
+                  <div className="faq-antwort" data-auf={auf ? '1' : '0'}>
+                    <div className="faq-antwort-inner">
+                      <p>{f.antwort}</p>
+                    </div>
+                  </div>
                 </div>
               </FadeIn>
             );
           })}
         </div>
       </div>
+
+      <style>{`
+        .faq-dunkel { position: relative; overflow: hidden; }
+        /* Weicher Sage-Schein oben links, wie der Akzent in der Vorlage, nur in Markenfarbe. */
+        .faq-dunkel::before {
+          content: ''; position: absolute; top: -12%; left: -6%;
+          width: 360px; height: 360px; z-index: 0; pointer-events: none;
+          background: radial-gradient(circle at center, rgba(110,125,84,0.22), rgba(110,125,84,0) 68%);
+          filter: blur(6px);
+        }
+        .faq-liste { position: relative; z-index: 1; max-width: 760px; margin-inline: auto; }
+        .faq-zeile { border-top: 1px solid rgba(244,244,242,0.12); }
+        .faq-zeile:last-child { border-bottom: 1px solid rgba(244,244,242,0.12); }
+        .faq-frage {
+          width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center;
+          gap: var(--luft-3); padding-block: 0.95rem;
+          background: none; border: none; cursor: pointer;
+          font-family: var(--font-text), system-ui, sans-serif;
+          font-size: 1.0625rem; font-weight: 500; line-height: 1.3;
+          color: var(--auf-dunkel);
+          transition: color 200ms var(--ease);
+        }
+        .faq-frage-text { text-align: center; }
+        @media (hover: hover) { .faq-frage:hover .faq-frage-text { color: var(--gruen-hell); } }
+        /* Plus-Zeichen aus zwei Strichen, dreht beim Oeffnen zum x. */
+        .faq-plus { position: relative; width: 15px; height: 15px; flex-shrink: 0; transition: transform 300ms var(--ease); }
+        .faq-plus::before, .faq-plus::after {
+          content: ''; position: absolute; background: var(--gruen-hell); border-radius: 1px;
+        }
+        .faq-plus::before { top: 50%; left: 0; right: 0; height: 1.5px; transform: translateY(-50%); }
+        .faq-plus::after  { left: 50%; top: 0; bottom: 0; width: 1.5px; transform: translateX(-50%); transition: opacity 250ms var(--ease); }
+        .faq-plus--auf { transform: rotate(90deg); }
+        .faq-plus--auf::after { opacity: 0; }
+        /* Antwort faehrt weich auf (grid-rows-Trick, keine feste Hoehe noetig). */
+        .faq-antwort { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 360ms var(--ease); }
+        .faq-antwort[data-auf='1'] { grid-template-rows: 1fr; }
+        .faq-antwort-inner { overflow: hidden; }
+        .faq-antwort-inner p {
+          font-family: var(--font-text), system-ui, sans-serif;
+          font-size: 0.9375rem; line-height: 1.6; color: var(--grau-dunkel);
+          max-width: 60ch; margin-inline: auto; text-align: center;
+          padding: 0 0 1.1rem;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .faq-antwort, .faq-plus { transition: none; }
+        }
+      `}</style>
     </section>
   );
 }
