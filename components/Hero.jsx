@@ -54,11 +54,12 @@ export default function Hero() {
 
   // Das Schrumpfen ist bei 70 % durch, danach haelt die Karte kurz, bevor
   // sie wegscrollt. Transform-Werte (scale/radius) laufen auf der GPU.
-  const skala    = useTransform(scrollYProgress, [0, 0.7], [1, 0.82]);
-  const radius   = useTransform(scrollYProgress, [0, 0.7], [0, 26]);
-  // Titel und Scroll-Hinweis gehen frueher weg, damit sie beim Schrumpfen
-  // nicht ueber den Kartenrand hinausragen.
-  const textAuf  = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
+  // Nevio will es deutlich kleiner (Vorbild giomediamarketing.de): die Karte
+  // faellt auf 58 %, der Markenzug bleibt dabei sichtbar (skaliert mit).
+  const skala    = useTransform(scrollYProgress, [0, 0.7], [1, 0.58]);
+  const radius   = useTransform(scrollYProgress, [0, 0.7], [0, 22]);
+  // Nur der Scroll-Hinweis blendet beim Scrollen weg - der Titel bleibt.
+  const hinweisAuf = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   /* Wer "Bewegung reduzieren" gesetzt hat, bekommt den Effekt nicht:
      dann ist der Hero ein ganz normales Vollbild ohne Schrumpfen. Die
@@ -289,7 +290,8 @@ export default function Hero() {
           position: 'absolute',
           inset: 0,
           zIndex: 2,
-          opacity: reduziert ? 1 : textAuf,
+          /* Der Markenzug bleibt die ganze Zeit sichtbar und skaliert mit der
+             Karte - er verschwindet nicht mehr beim Scrollen. */
         }}
       >
       <motion.div
@@ -379,7 +381,7 @@ export default function Hero() {
           transform: 'translateX(-50%)',
           zIndex: 3,
           pointerEvents: 'none',
-          opacity: reduziert ? 1 : textAuf,
+          opacity: reduziert ? 1 : hinweisAuf,
         }}
       >
       <motion.div
