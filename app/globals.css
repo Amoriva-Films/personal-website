@@ -646,7 +646,7 @@ p, li { overflow-wrap: break-word; }
    ueber die schmale Breite ergaben lange, duenne Textsaeulen. */
 .stimme-zitat {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400;   /* Bodoni Moda beginnt bei 400, 300 klemmte still */
   font-style: italic;
   line-height: 1.45;
@@ -736,6 +736,8 @@ p, li { overflow-wrap: break-word; }
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
+  max-height: 440px;
+  margin-inline: auto;
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--papier-2);

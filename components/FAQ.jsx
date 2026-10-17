@@ -43,7 +43,7 @@ export default function FAQ() {
     <section className="abschnitt hell-2">
       <div className="bahn">
         <FadeIn>
-          <div className="paar" style={{ marginBottom: 'var(--luft-5)' }}>
+          <div className="paar" style={{ marginBottom: 'var(--luft-4)' }}>
             <div>
               <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Häufige Fragen</p>
               <h2 className="t-gross">

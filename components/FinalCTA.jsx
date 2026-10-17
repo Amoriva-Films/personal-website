@@ -14,8 +14,8 @@ export default function FinalCTA() {
               Wenn jede Ueberschrift gross ist, ist keine gross.        */}
           <h2 style={{
             fontFamily: 'var(--font-display), Georgia, serif',
-            fontSize: 'var(--schrift-riesig)', fontWeight: 400,
-            lineHeight: 0.98, letterSpacing: 'var(--laufweite-eng)',
+            fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)', fontWeight: 400,
+            lineHeight: 1.02, letterSpacing: 'var(--laufweite-eng)',
             color: 'var(--auf-dunkel)', marginBottom: 'var(--luft-3)',
             textWrap: 'balance',
           }}>

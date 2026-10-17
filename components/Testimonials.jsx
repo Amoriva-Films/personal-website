@@ -29,7 +29,7 @@ export default function Testimonials() {
         {/* Stand nur eine Augenbraue ohne Ueberschrift - der Abschnitt
             begann damit im Nichts. Jetzt derselbe Paar-Kopf wie ueberall. */}
         <FadeIn>
-          <div style={{ marginBottom: 'var(--luft-5)' }}>
+          <div style={{ marginBottom: 'var(--luft-4)' }}>
             <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Das sagen unsere Paare</p>
             <h2 className="t-gross">
               Was danach <span className="kursiv">übrig bleibt.</span>

@@ -91,54 +91,108 @@ export default function Founders() {
       <div className="bahn">
         <FadeIn>
           <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Wer wir sind</p>
-          <h2 className="t-gross" style={{ maxWidth: '20ch', marginBottom: 'var(--luft-5)' }}>
+          <h2 className="t-gross" style={{ maxWidth: '20ch', marginBottom: 'var(--luft-4)' }}>
             Zwei Blicke. Eine <span className="kursiv">gemeinsame Haltung.</span>
           </h2>
         </FadeIn>
 
-        <div className="zwei-spalten">
-          {leute.map((p) => (
-            <FadeIn key={p.name}>
-              <div>
-                {/* Nevio: "macht unsere Bilder kleiner". Der Rahmen war
-                    quadratisch und 628 px breit. Jetzt hoechstens 360 px
-                    im Hochformat, also gut ein Drittel kleiner. */}
-                <div className="portraet" style={{
-                  position: 'relative', width: '100%', maxWidth: 360,
-                  /* Nevio am 25.09.2026: die Bilder sollen mittig ueber dem
-                     Text stehen. Das Bild ist hoechstens 360 px breit, die
-                     Textspalte darunter deutlich breiter - links buendig
-                     sass es dadurch sichtbar aus der Mitte. */
-                  marginInline: 'auto',
-                  aspectRatio: '4 / 5', overflow: 'hidden',
-                  marginBottom: 'var(--luft-3)',
-                  background: p.grund, borderRadius: 'var(--radius)',
-                }}>
+        {/* Zwei Portraets, die sich wie ein Stapel ueberlappen. Beim Hover
+            kommt das jeweilige nach vorne (z-index + Hebung) und gibt den
+            Text frei. Auf Touch stehen beide offen. Die Bild-Zuschnitte
+            (hoehe/oben/links je Person) bleiben wie gemessen. */}
+        <FadeIn>
+          <div className="founder-stapel">
+            {leute.map((p, i) => (
+              <article key={p.name} className={`founder-karte${i === 1 ? ' founder-karte--b' : ''}`}>
+                <div className="founder-bild" style={{ background: p.grund }}>
                   <Image
                     src={p.bild}
                     alt={p.name}
                     width={1086}
                     height={1448}
-                    sizes="360px"
+                    sizes="400px"
                     className="portraet-bild"
-                    style={{
-                      position: 'absolute',
-                      height: p.hoehe, width: 'auto',
-                      top: p.oben, left: p.links,
-                    }}
-            quality={85}
+                    quality={85}
+                    style={{ position: 'absolute', height: p.hoehe, width: 'auto', top: p.oben, left: p.links }}
                   />
+                  <div className="founder-overlay">
+                    <p className="founder-rolle">{p.rolle}</p>
+                    <h3 className="founder-name">{p.name}</h3>
+                    <p className="founder-bio">{p.bio}</p>
+                  </div>
                 </div>
-                <p className="t-label" style={{ marginBottom: 'var(--luft-1)' }}>{p.rolle}</p>
-                {/* War t-gross (bis 56 px). Ein Name ist keine
-                    Abschnitts-Ueberschrift. */}
-                <h3 className="t-mittel" style={{ marginBottom: 'var(--luft-2)' }}>{p.name}</h3>
-                <p className="t-text t-grau">{p.bio}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        </FadeIn>
       </div>
+
+      <style>{`
+        .founder-stapel {
+          position: relative;
+          display: flex; justify-content: center; align-items: flex-start;
+          padding-top: var(--luft-2);
+        }
+        .founder-karte {
+          position: relative;
+          width: min(44%, 400px);
+          border-radius: var(--radius);
+          overflow: hidden;
+          box-shadow: 0 10px 30px -22px rgba(20,20,19,0.35);
+          transition: transform 420ms var(--ease), box-shadow 420ms var(--ease);
+          z-index: 2;
+        }
+        .founder-karte--b { margin-left: -9%; z-index: 1; }
+        @media (hover: hover) {
+          .founder-karte:hover {
+            z-index: 5;
+            transform: translateY(-10px) scale(1.035);
+            box-shadow: 0 34px 64px -30px rgba(20,20,19,0.5);
+          }
+        }
+        .founder-bild {
+          position: relative;
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          border-radius: var(--radius);
+        }
+        .founder-overlay {
+          position: absolute; inset-inline: 0; bottom: 0;
+          padding: var(--luft-3);
+          background: linear-gradient(to top, rgba(20,20,19,0.82) 0%, rgba(20,20,19,0.45) 45%, rgba(20,20,19,0) 100%);
+          color: #f4f4f2;
+        }
+        .founder-rolle {
+          font-family: var(--font-text), system-ui, sans-serif;
+          font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase;
+          color: rgba(244,244,242,0.72); margin-bottom: 0.3rem;
+        }
+        .founder-name {
+          font-family: var(--font-display), Georgia, serif;
+          font-size: clamp(1.25rem, 2vw, 1.625rem); font-weight: 400; line-height: 1.1;
+          color: #fff;
+        }
+        .founder-bio {
+          font-family: var(--font-text), system-ui, sans-serif;
+          font-size: 0.8125rem; line-height: 1.55; color: rgba(244,244,242,0.88);
+          max-height: 0; opacity: 0; overflow: hidden; margin-top: 0;
+          transition: max-height 480ms var(--ease), opacity 320ms var(--ease), margin-top 320ms var(--ease);
+        }
+        @media (hover: hover) {
+          .founder-karte:hover .founder-bio { max-height: 12rem; opacity: 1; margin-top: 0.55rem; }
+        }
+        @media (hover: none) {
+          .founder-bio { max-height: 12rem; opacity: 1; margin-top: 0.55rem; }
+        }
+        @media (max-width: 760px) {
+          .founder-stapel { flex-direction: column; align-items: center; }
+          .founder-karte { width: min(92%, 360px); }
+          .founder-karte--b { margin-left: 0; margin-top: var(--luft-3); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .founder-karte, .founder-bio { transition: none; }
+        }
+      `}</style>
     </section>
   );
 }

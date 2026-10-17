@@ -144,8 +144,9 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100svh',
-        minHeight: '600px',
+        height: '74svh',
+        minHeight: '440px',
+        maxHeight: '760px',
         overflow: 'hidden',
         background: 'var(--leinwand)',
       }}
@@ -246,7 +247,7 @@ export default function Hero() {
             textTransform: 'uppercase',
             color: 'rgba(244,244,242,0.75)',
             fontWeight: 400,
-            marginBottom: '2.2rem',
+            marginBottom: '1.4rem',
             textShadow: '0 1px 18px rgba(0,0,0,0.60), 0 1px 3px rgba(0,0,0,0.45)',
           }}
         >
@@ -256,15 +257,15 @@ export default function Hero() {
         <h1
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
-            fontSize: 'clamp(38px, 6.5vw, 92px)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(30px, 4.8vw, 64px)',
+            lineHeight: 0.94,
             /* Bodoni-Versalien stehen enger beieinander als die der
                Fraunces. Etwas mehr Luft, sonst klebt AMORIVA FILMS. */
             letterSpacing: '0.055em',
             fontWeight: 400,
             color: 'var(--auf-dunkel)',
             textTransform: 'uppercase',
-            marginBottom: '2.2rem',
+            marginBottom: '1.4rem',
             textShadow: '0 2px 28px rgba(0,0,0,0.60), 0 1px 4px rgba(0,0,0,0.45)',
           }}
         >
