@@ -28,11 +28,15 @@ import FadeIn from './FadeIn';
 
 const bilder = [
   { src: '/images/Bild-76.webp',             b: 2000, h: 3000, alt: 'Braut unter einem Perlenschleier, Porträt' },
+  { src: '/images/hochzeit-1.jpg',           b: 1333, h: 2000, alt: 'Brautpaar Stirn an Stirn unter dem Schleier' },
   { src: '/images/Bild-5.webp',              b: 2000, h: 3000, alt: 'Save-the-Date-Karten und die Ringschatulle auf hellem Stoff' },
   { src: '/images/paare/paar-kuss.webp',     b: 1600, h: 2400, alt: 'Ein Brautpaar küsst sich nach der Trauung, Schwarzweiß' },
+  { src: '/images/hochzeit-3.jpg',           b: 1333, h: 2000, alt: 'Brautpaar unter dem Schleier, Schwarzweiß' },
   { src: '/images/Bild-33.webp',             b: 2000, h: 3000, alt: 'Brautpaar mit Champagner zwischen brennenden Kerzen' },
+  { src: '/images/hochzeit-2.jpg',           b: 1333, h: 2000, alt: 'Braut mit Brautstrauß' },
   { src: '/images/paare/kronleuchter-v2.webp',  b: 1600, h: 2400, alt: 'Kronleuchter über dem Festsaal' },
   { src: '/images/paare/haende.webp',        b: 1600, h: 2400, alt: 'Die Hände des Brautpaars, ineinander gelegt' },
+  { src: '/images/hochzeit-4.jpg',           b: 1333, h: 2000, alt: 'Brautpaar im Garten, Ganzkörperaufnahme' },
   { src: '/images/paare/paar-wand-v2.webp',     b: 1600, h: 2400, alt: 'Das Brautpaar vor einer hellen Wand, ruhiger Moment' },
 ];
 
