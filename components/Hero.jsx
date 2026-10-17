@@ -256,8 +256,8 @@ export default function Hero() {
         <h1
           style={{
             fontFamily: 'var(--font-display), Georgia, serif',
-            fontSize: 'clamp(38px, 6.5vw, 92px)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(30px, 4.6vw, 62px)',
+            lineHeight: 0.96,
             /* Bodoni-Versalien stehen enger beieinander als die der
                Fraunces. Etwas mehr Luft, sonst klebt AMORIVA FILMS. */
             letterSpacing: '0.055em',
@@ -278,12 +278,12 @@ export default function Hero() {
                Bild. Das hier ist aber keine Bildunterschrift, sondern
                die Absenderangabe. Deshalb gerade, in der Jost, und
                weiter gesperrt, damit sie trotzdem Haltung hat.       */
-            fontFamily: 'var(--font-text), system-ui, sans-serif',
-            fontSize: 'clamp(16px, 1.6vw, 22px)',
+            fontFamily: 'var(--font-display), Georgia, serif',
+            fontSize: 'clamp(15px, 1.5vw, 21px)',
             fontWeight: 400,
-            fontStyle: 'normal',
-            color: 'rgba(244,244,242,0.86)',
-            letterSpacing: '0.035em',
+            fontStyle: 'italic',
+            color: 'rgba(244,244,242,0.9)',
+            letterSpacing: '0.01em',
             /* Die Jost laeuft breiter als die Fraunces vorher. Bei 620 px
                rutschte das letzte Wort allein in die zweite Zeile.
                Mehr Breite plus balance haelt die Zeilen gleich lang.  */
