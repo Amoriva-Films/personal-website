@@ -45,19 +45,19 @@
   --luft-2: 16px;
   --luft-3: 24px;
   --luft-4: 40px;
-  --luft-5: 64px;
+  --luft-5: 48px;
   /* Abschnittsabstand. Stand auf 112 (der Wert von amoriva.app). Nevio
      am 21.09.2026: zu viel. Gemessen waren es 1.792 px reines Polster auf
      der Startseite, also zwei von zehn Bildschirmen nur Luft. Mit 80
      bleibt die Gliederung deutlich, ohne dass man sich durchscrollt.
      amoriva.app ist eine Software-Seite mit langen Erklaertexten, hier
      stehen Bilder und kurze Bloecke - die brauchen weniger Anlauf. */
-  --luft-6: 80px;
-  --luft-7: 144px;
+  --luft-6: 56px;
+  --luft-7: 96px;
 
   /* Abstand unter der fest stehenden Kopfzeile. Eigener Wert, weil er
      nicht Abschnittsabstand ist, sondern Platz fuer die Navigation. */
-  --kopf-luft: 124px;
+  --kopf-luft: 92px;
 
   /* ── Schrift ─────────────────────────────────────────────────────
      Drei Stufen fuer Ueberschriften, zwei fuer Text. Mehr nicht.
@@ -79,10 +79,10 @@
      Untergrenze fuer schmale Bildschirme. Der letzte Wert, den grosse
      Bildschirme erreichen, ist unveraendert - der Desktop sieht
      rechnerisch exakt aus wie vorher, nachgemessen bei 1440 px.       */
-  --schrift-display: clamp(2.125rem, 5vw, 4.25rem);  /* 34 –  68 px */
-  --schrift-riesig:  clamp(2.5rem, 8vw, 6.5rem);     /* 40 – 104 px, Schlusszeile */
-  --schrift-gross:   clamp(1.875rem, 4.2vw, 3.5rem); /* 30 –  56 px */
-  --schrift-mittel:  clamp(1.5rem, 2.8vw, 2.375rem); /* 24 –  38 px */
+  --schrift-display: clamp(1.875rem, 3.8vw, 3.25rem); /* 30 –  52 px, kompakter */
+  --schrift-riesig:  clamp(2.125rem, 5.5vw, 4rem);    /* 34 –  64 px, Schlusszeile */
+  --schrift-gross:   clamp(1.625rem, 3.2vw, 2.625rem);/* 26 –  42 px */
+  --schrift-mittel:  clamp(1.375rem, 2.1vw, 1.75rem); /* 22 –  28 px */
   /* Jost hat eine kleinere x-Hoehe als die Inter davor: bei gleicher
      Pixelzahl liest sie sich kleiner. Alle drei Lesegroessen gehen
      deshalb einen Schritt hoch, damit der Text genauso gross wirkt
@@ -101,7 +101,7 @@
   --ease:   cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (min-width: 768px)  { :root { --rand: 40px; --kopf-luft: 150px; } }
+@media (min-width: 768px)  { :root { --rand: 40px; --kopf-luft: 112px; } }
 @media (min-width: 1280px) { :root { --rand: 60px; } }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -393,7 +393,7 @@ p, li { overflow-wrap: break-word; }
   background: var(--papier);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
-  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  padding: clamp(1.25rem, 2vw, 1.75rem);
   transition: border-color 300ms var(--ease), transform 300ms var(--ease);
 }
 
@@ -702,9 +702,9 @@ p, li { overflow-wrap: break-word; }
 
 .leistung-ziffer {
   position: absolute;
-  top: 0.1rem; right: 1rem;
+  top: 1.1rem; right: 1.25rem;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 3.4rem;
+  font-size: 2.5rem;
   font-weight: 400;
   /* Dieselbe Falle wie bei .schritt-ziffer, nur eine Stufe milder: die
      Ziffer hier ist als Wasserzeichen gemeint und soll leise bleiben.
@@ -721,7 +721,6 @@ p, li { overflow-wrap: break-word; }
 @media (hover: hover) {
   .leistung:hover .leistung-ziffer {
     color: rgba(104,120,80,0.22);
-    transform: translateY(-4px);
   }
 }
 
