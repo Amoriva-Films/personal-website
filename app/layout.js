@@ -16,6 +16,11 @@ const bodoni = Bodoni_Moda({
   axes: ['opsz'],
   variable: '--font-display',
   display: 'swap',
+  /* next/font kennt fuer Bodoni Moda keine Fallback-Metriken und wirft
+     sonst "Failed to find font override values" (vom Dev-Server als Error
+     gezaehlt). Ohne die automatische Ersatz-Skalierung laedt die Schrift
+     normal per display:swap - nur die Meldung ist weg. */
+  adjustFontFallback: false,
 });
 
 /* Jost fuer alles, was gelesen wird. Der freie Nachbau der Futura -
