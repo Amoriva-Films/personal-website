@@ -56,7 +56,7 @@ export default function Prozess() {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .prozess-raster-wrap { position: relative; }
         .prozess-linie {
           position: absolute; top: 2px; left: 0; right: 0; height: 2px; z-index: 0;
@@ -73,7 +73,7 @@ export default function Prozess() {
           .prozess-linie { transform: none !important; }
           .prozess-band .schritt { transition: none; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }

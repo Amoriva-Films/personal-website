@@ -73,7 +73,7 @@ export default function FAQ() {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .faq-dunkel { position: relative; overflow: hidden; }
         /* Weicher Sage-Schein oben links, wie der Akzent in der Vorlage, nur in Markenfarbe. */
         .faq-dunkel::before {
@@ -118,7 +118,7 @@ export default function FAQ() {
         @media (prefers-reduced-motion: reduce) {
           .faq-antwort, .faq-plus { transition: none; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }

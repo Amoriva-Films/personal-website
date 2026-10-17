@@ -41,7 +41,7 @@ export default function BegrenztTermine() {
         </div>
       </FadeIn>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .verf-band { position: relative; overflow: hidden; }
         .verf-ghost {
           position: absolute; right: -0.5rem; bottom: -3rem; z-index: 0;
@@ -92,7 +92,7 @@ export default function BegrenztTermine() {
         @media (prefers-reduced-motion: reduce) {
           .verf-ghost, .verf-dot { animation: none; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }

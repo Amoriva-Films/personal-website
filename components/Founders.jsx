@@ -127,7 +127,7 @@ export default function Founders() {
         </FadeIn>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .founder-stapel {
           position: relative;
           display: flex; justify-content: center; align-items: flex-start;
@@ -192,7 +192,7 @@ export default function Founders() {
         @media (prefers-reduced-motion: reduce) {
           .founder-karte, .founder-bio { transition: none; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }
