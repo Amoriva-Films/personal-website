@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -36,6 +36,41 @@ const UEBERBLENDUNG = 1.1;
 export default function Hero() {
   const videoRef = useRef(null);
   const zweitRef = useRef(null);
+  const huelleRef = useRef(null);
+
+  /* Scroll-Effekt: Beim Runterscrollen schrumpft das Video aus dem
+     Vollbild zu einer gerundeten Karte und zieht dann nach oben weg -
+     wie bei giomediamarketing.de. Umgesetzt mit einer klebenden Ebene
+     (position: sticky): die aeussere Huelle ist hoeher als der Schirm,
+     die innere Buehne bleibt waehrenddessen stehen und wird kleiner.
+
+     offset ['start start', 'end start']: fortschritt 0, wenn die Huelle
+     oben am Schirm anliegt; 1, wenn ihr unteres Ende oben ankommt. Dazwischen
+     ist die Buehne angeheftet und der Fortschritt laeuft von 0 auf 1.      */
+  const { scrollYProgress } = useScroll({
+    target: huelleRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Das Schrumpfen ist bei 70 % durch, danach haelt die Karte kurz, bevor
+  // sie wegscrollt. Transform-Werte (scale/radius) laufen auf der GPU.
+  const skala    = useTransform(scrollYProgress, [0, 0.7], [1, 0.82]);
+  const radius   = useTransform(scrollYProgress, [0, 0.7], [0, 26]);
+  // Titel und Scroll-Hinweis gehen frueher weg, damit sie beim Schrumpfen
+  // nicht ueber den Kartenrand hinausragen.
+  const textAuf  = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
+
+  /* Wer "Bewegung reduzieren" gesetzt hat, bekommt den Effekt nicht:
+     dann ist der Hero ein ganz normales Vollbild ohne Schrumpfen. Die
+     Hooks laufen trotzdem (Regeln der Hooks), nur ihre Werte greifen nicht. */
+  const [reduziert, setReduziert] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const an = () => setReduziert(mq.matches);
+    an();
+    mq.addEventListener('change', an);
+    return () => mq.removeEventListener('change', an);
+  }, []);
 
   /* Nevio am 21.09.2026: "Das video soll direkt losgehen und nicht
      5 sekunden spaeter."
@@ -140,16 +175,44 @@ export default function Hero() {
 
   return (
     <section
+      ref={huelleRef}
       data-dunkler-kopf=""
       style={{
         position: 'relative',
         width: '100%',
-        height: '100svh',
-        minHeight: '600px',
-        overflow: 'hidden',
-        background: 'var(--leinwand)',
+        /* Hoeher als der Schirm: diese Zusatzhoehe ist der Scrollweg, auf
+           dem die Buehne angeheftet bleibt und schrumpft. Bei reduzierter
+           Bewegung genau ein Schirm, also kein Effekt. */
+        height: reduziert ? '100svh' : '200vh',
+        /* Heller Seitengrund: schrumpft das Video, erscheint ringsum das
+           Papierweiss der Seite, nicht die dunkle Leinwand. */
+        background: 'var(--papier)',
       }}
     >
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '100svh',
+          minHeight: '600px',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+      <motion.div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden',
+          background: 'var(--leinwand)',
+          scale: reduziert ? 1 : skala,
+          borderRadius: reduziert ? 0 : radius,
+          willChange: 'transform',
+        }}
+      >
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         {/* Kein loop-Attribut mehr: das Wiederholen macht die
             Ueberblendung oben, sonst kaeme der harte Schnitt zurueck. */}
@@ -222,13 +285,20 @@ export default function Hero() {
       />
 
       <motion.div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 2,
+          opacity: reduziert ? 1 : textAuf,
+        }}
+      >
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 1.8, ease }}
         style={{
           position: 'absolute',
           inset: 0,
-          zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -295,23 +365,32 @@ export default function Hero() {
           Mit Sitz in Niedersachsen, für Hochzeiten auf der ganzen Welt.
         </p>
       </motion.div>
+      </motion.div>
 
+      {/* Aeussere Ebene traegt das scrollgesteuerte Ausblenden, die innere
+          die einmalige Einblendung beim Laden - getrennt, damit sich die
+          beiden Opacity-Werte nicht gegenseitig ueberschreiben. */}
       <motion.div
         aria-hidden="true"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 1.2, ease }}
         style={{
           position: 'absolute',
           bottom: '40px',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 3,
+          pointerEvents: 'none',
+          opacity: reduziert ? 1 : textAuf,
+        }}
+      >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 1.2, ease }}
+        style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '10px',
-          pointerEvents: 'none',
         }}
       >
         <span
@@ -328,6 +407,10 @@ export default function Hero() {
         </span>
         <div style={{ width: '1px', height: '56px', background: 'rgba(244,244,242,0.38)' }} />
       </motion.div>
+      </motion.div>
+
+      </motion.div>
+      </div>
     </section>
   );
 }
