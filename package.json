@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "bilder": "node scripts/bilder-pruefen.mjs",
-    "prebuild": "node scripts/bilder-pruefen.mjs"
+    "prebuild": "node scripts/bilder-pruefen.mjs && node scripts/mails-pruefen.mjs"
   },
   "dependencies": {
     "next": "^14.2.3",

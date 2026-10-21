@@ -93,6 +93,32 @@ function rahmen({ titelZeile, preheader, eyebrow, titel, inhalt }) {
 
 const absatz = (t) => `<p style="margin:0 0 18px;font-family:${sans};font-size:15.5px;line-height:1.75;color:${F.text};">${t}</p>`;
 
+/* Textfassung jeder Mail, Nevio am 21.10.2026 mit Bildschirmfoto:
+   "Verbessere bitte das Design".
+
+   Die Mails hatten bisher NUR eine HTML-Fassung. Ueberall, wo nicht das
+   HTML gezeigt wird, sondern ein Textauszug, sah das kaputt aus: der
+   Hinweis im Amoriva-Postfach ("booking@amoriva-films.de hat dir
+   geschrieben"), die Vorschauzeile im Postfach, Uhren und Mail-
+   Programme ohne HTML. Dort stand dann "PROBE" in Grossbuchstaben (das
+   Etikett ueber der Ueberschrift), Telefon, Gaeste und Budget in EINER
+   Zeile, und hinter "Antworten" der rohe Link
+   probe@beispiel.de?subject=Eure%20Hochzeit...
+
+   Das Amoriva-Postfach nimmt den Textteil, wenn es einen gibt, und
+   zeigt davon die ersten 400 Zeichen (lib/postfach/eingangVerarbeiten.ts
+   im App-Repo). Deshalb steht in jeder Textfassung das Wichtigste
+   ganz oben. */
+const textZeile = (label, wert) => {
+  const w = String(wert ?? '').trim();
+  return w ? `${label}: ${w}` : '';
+};
+const textBlock = (...teile) => teile
+  .map((t) => (Array.isArray(t) ? t.filter(Boolean).join('\n') : t))
+  .filter((t) => String(t || '').trim())
+  .join('\n\n');
+const FUSS_TEXT = 'Amoriva Films · Wolfsburg, Niedersachsen\nbooking@amoriva-films.de · amoriva-films.de';
+
 /** Eingangsbestätigung an das Paar.
 
     Nevio am 26.09.2026: "viel zu unübersichtlich, kann gefühlt 3000 mal
@@ -133,8 +159,21 @@ export function mailAnPaar({ name, hochzeitsdatum, location, nachricht }) {
       <div style="font-family:${sans};font-size:14px;color:${F.weich};margin-bottom:4px;">Bis ganz bald</div>
       <div style="font-family:${serif};font-size:22px;font-style:italic;color:${F.dunkel};line-height:1.2;">Nevio und Danilo</div>
     </div>`;
+  const roherName = String(name || '').trim();
+  const anrede = /\s(und|&|\+)\s|,/i.test(roherName) ? roherName : (roherName.split(/\s+/)[0] || roherName);
+  const text = textBlock(
+    `Hallo ${anrede || 'ihr zwei'},`,
+    'schön, dass ihr euch gemeldet habt. Nevio meldet sich persönlich bei euch, in der Regel innerhalb von 24 Stunden. Wenn euch bis dahin noch etwas einfällt, antwortet einfach auf diese Mail.',
+    [datumSchoen(hochzeitsdatum), String(location || '').trim()].filter(Boolean).length
+      ? `Eure Angaben: ${[datumSchoen(hochzeitsdatum), String(location || '').trim()].filter(Boolean).join(' · ')}`
+      : '',
+    'So arbeiten wir: https://amoriva-films.de/leistungen',
+    'Bis ganz bald\nNevio und Danilo',
+    FUSS_TEXT,
+  );
   return {
     subject: 'Eure Anfrage ist angekommen',
+    text,
     html: rahmen({
       titelZeile: 'Eure Anfrage ist angekommen',
       preheader: 'Nevio meldet sich persönlich, in der Regel innerhalb von 24 Stunden.',
@@ -194,7 +233,7 @@ export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht, te
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 26px;background:${F.creme};">
       <tr><td style="padding:16px 20px;">
         <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gruen};margin-bottom:8px;">Nachricht</div>
-        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};white-space:pre-wrap;">${esc(text)}</div>
+        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};">${esc(text).replace(/\n/g, '<br>')}</div>
       </td></tr>
     </table>` : ''}
     <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
@@ -203,8 +242,25 @@ export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht, te
       </td>
     </tr></table>
     <div style="margin:16px 0 0;font-family:${sans};font-size:13px;line-height:1.6;color:${F.gedaempft};">Oder einfach auf diese Mail antworten, die Antwort geht direkt an das Paar.</div>`;
+  // Reihenfolge wie im HTML: wer, wann, wo, dann die Kontaktwege.
+  // Alles, was Nevio zum Zurueckrufen braucht, steht in den ersten
+  // 400 Zeichen, die das Amoriva-Postfach im Hinweis zeigt.
+  const klartext = textBlock(
+    `Neue Anfrage: ${String(name || '').trim() || 'Unbekannt'}`,
+    [
+      textZeile('Datum', datum),
+      textZeile('Ort', location),
+      textZeile('Telefon', telefon),
+      textZeile('E-Mail', email),
+      textZeile('Gäste', gaeste),
+      textZeile('Budget', budget),
+    ],
+    text ? `Nachricht:\n${String(text).trim()}` : '',
+    'Antworten: einfach auf diese Mail antworten, die Antwort geht direkt an das Paar.',
+  );
   return {
     subject: `Neue Anfrage: ${kurz(name) || 'unbekannt'}${datum ? ' \u00b7 ' + datum : ''}`,
+    text: klartext,
     html: rahmen({
       titelZeile: `Neue Anfrage von ${name}`,
       preheader: `${name}${location ? ', ' + location : ''}${hochzeitsdatum ? ', ' + datumSchoen(hochzeitsdatum) : ''}`,
@@ -214,6 +270,25 @@ export function mailAnUns({ name, email, hochzeitsdatum, location, nachricht, te
     }),
   };
 }
+
+/** Grauer Hinweiskasten. Bewusst ohne Rot: eine Farbe macht die Stoerung
+ *  nicht dringender, sie macht die Mail nur lauter. */
+function kasten(ueberschrift, zeilenText) {
+  return `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 30px;background:${F.creme};border-left:3px solid ${F.dunkel};">
+      <tr><td style="padding:20px 24px;">
+        <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:${F.gedaempft};margin-bottom:10px;">${esc(ueberschrift)}</div>
+        <div style="font-family:${sans};font-size:15px;line-height:1.7;color:${F.text};">${zeilenText}</div>
+      </td></tr>
+    </table>`;
+}
+
+/* Am 26.09.2026 beim Umbau von mailAnUns versehentlich mit geloescht.
+   mailAlarm und mailWaechter benutzen kasten() aber weiter. Dadurch
+   stuerzten Sofortmeldung und Waechter-Mail bis 21.10.2026 mit
+   "ReferenceError: kasten is not defined" ab, bevor sie rausgingen.
+   Seitdem prueft scripts/mails-pruefen.mjs vor jedem Bau, dass jede
+   Vorlage mit Beispieldaten durchlaeuft. */
 
 /**
  * Sofortmeldung: beim Absenden einer Anfrage ist mindestens ein Weg
@@ -265,7 +340,21 @@ export function mailAlarm({ wege, anfrage, verloren }) {
       <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
     </div>`;
 
+  const text = textBlock(
+    verloren
+      ? 'ACHTUNG: Diese Mail ist die einzige Kopie dieser Anfrage. Bitte von Hand antworten, am besten sofort.'
+      : 'Eine Anfrage ist angekommen, aber nicht auf allen Wegen. Sie ist nicht verloren, unten steht sie vollständig.',
+    [
+      textZeile('Paar', name),
+      textZeile('E-Mail', email),
+      textZeile('Datum', datumSchoen(hochzeitsdatum)),
+      textZeile('Ort', location),
+    ],
+    nachricht ? `Nachricht:\n${String(nachricht).trim()}` : '',
+    `Nicht funktioniert:\n${kaputt.map((w) => `- ${w.name}: ${w.grund || 'unbekannter Grund'}`).join('\n')}`,
+  );
   return {
+    text,
     subject: verloren
       ? `Anfrage von ${kurz(name) || 'unbekannt'} konnte nicht zugestellt werden`
       : `Anfrage von ${kurz(name) || 'unbekannt'} angekommen, ein Weg hat gehakt`,
@@ -301,7 +390,13 @@ export function mailWaechter({ befunde }) {
       <div style="font-family:${sans};font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:${F.gruen};margin-top:8px;">Amoriva Films</div>
     </div>`;
 
+  const text = textBlock(
+    'Die tägliche Prüfung der Website hat etwas gefunden.',
+    befunde.map((b) => `- ${b.was}: ${b.text}`).join('\n'),
+    `Geprüft am ${new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })} Uhr.`,
+  );
   return {
+    text,
     subject: befunde.length === 1
       ? `Waechter: ${befunde[0].was}`
       : `Waechter: ${befunde.length} Punkte zu pruefen`,
