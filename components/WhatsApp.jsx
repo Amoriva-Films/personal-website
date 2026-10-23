@@ -13,11 +13,14 @@ export default function WhatsApp() {
         // Markengruen statt WhatsApp-Gruen. Das gesaettigte Signalgruen
         // war auf jedem Bildschirm das Lauteste und gehoert einer
         // fremden Marke.
+        /* Vintage-Redesign: dunkler Oliv-Kreis mit feiner Creme-Linie,
+           wie ein kleines Siegel, statt hellem Gruen mit weichem Schatten. */
         position: 'fixed', bottom: '1.5rem', right: '1.5rem', zIndex: 90,
         width: '52px', height: '52px', borderRadius: '50%',
-        background: 'var(--gruen)', color: '#FFFFFF',
+        background: 'var(--oliv-tief)', color: 'var(--blatt)',
+        border: '1px solid color-mix(in srgb, var(--blatt) 45%, transparent)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 6px 24px rgba(14,14,13,0.22)',
+        boxShadow: '0 0 0 3px var(--oliv-tief)',
         transition: 'transform 220ms var(--ease)',
       }}
       onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; }}

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
 
@@ -84,7 +83,6 @@ export default function LeistungenPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
-      <Nav />
 
       <main className="hell" style={{ minHeight: '100vh' }}>
         <section className="abschnitt-kopf">

@@ -1,9 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import SmoothScroll from '../../components/SmoothScroll';
 import FadeIn from '../../components/FadeIn';
 
 const serif = "var(--font-display), Georgia, serif";
@@ -45,8 +43,7 @@ const articles = [
 
 export default function RatgeberPage() {
   return (
-    <SmoothScroll>
-      <Nav />
+    <>
 
       {/* Hero */}
       <section className="abschnitt-kopf hell">
@@ -100,6 +97,6 @@ export default function RatgeberPage() {
           .article-row { grid-template-columns: 1fr !important; gap: 0.8rem !important; }
         }
       ` }} />
-    </SmoothScroll>
+    </>
   );
 }

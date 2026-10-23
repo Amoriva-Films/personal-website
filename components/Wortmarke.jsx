@@ -19,7 +19,8 @@
 const SPERRE_GROSS = 0.16;
 const SPERRE_KLEIN = 0.46;
 
-export default function Wortmarke({ hoehe = 34, farbe = 'currentColor' }) {
+// nurName: nur AMORIVA ohne FILMS (Danilo 20.10.2026 fuers Intro).
+export default function Wortmarke({ hoehe = 34, farbe = 'currentColor', nurName = false }) {
   return (
     <span
       aria-hidden="true"
@@ -63,13 +64,15 @@ export default function Wortmarke({ hoehe = 34, farbe = 'currentColor' }) {
       }}>
         Amoriva
       </span>
-      <span style={{
-        fontSize: hoehe * 0.23,
-        letterSpacing: `${SPERRE_KLEIN}em`,
-        textIndent: `${SPERRE_KLEIN}em`,
-      }}>
-        Films
-      </span>
+      {!nurName && (
+        <span style={{
+          fontSize: hoehe * 0.23,
+          letterSpacing: `${SPERRE_KLEIN}em`,
+          textIndent: `${SPERRE_KLEIN}em`,
+        }}>
+          Films
+        </span>
+      )}
     </span>
   );
 }

@@ -1,0 +1,317 @@
+/* ════════════════════════════════════════════════════════════════════
+   Vintage-Redesign, Oktober 2026.
+   Alle Werte stammen aus STYLE.md (Quellen dort). Im Code nur diese
+   Tokens verwenden, keine losen Farben oder Groessen.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Farben, gemessen aus den Referenzen im Figma-Board */
+  --blatt:        #EDE9E0;
+  --blatt-hell:   #F0ECE3;
+  --pergament:    #D3C4A7;
+  --tusche:       #141517;
+  --oliv-tief:    #413C29;
+  --oliv:         #48442B;
+  --oliv-mitte:   #5C5744;
+  --siegel:       #62603A;
+  --siegel-tief:  #4D4A2D;
+  --akzent:       #687850;
+
+  /* Vintage Gruen-Beige (Danilo 22.10.2026: "das Gruene passt nicht in
+     den Vintage-Look, ich will so beige und so gruen, aber vintage").
+     Gemessen aus seinen sechs Referenzen im Board: Sand aus "Wedding
+     Sessions", helles Creme aus "Darcy McQueeny", Khaki und das dunkle
+     Oliv-Braun aus "Tilly Roberts", Salbei-Creme aus "Dolcezza".
+     --nacht heisst weiter so, ist jetzt aber das dunkle Oliv-Braun. */
+  --sand:         #E3DACA;
+  --sand-hell:    #EEE9DE;
+  --khaki:        #BCAE8C;
+  --tinte:        #2E2B22;
+  --oliv-braun:   #6B6247;
+  --salbei-hell:  #DAD6BE;
+  --nacht:        #3D3727;
+  --nacht-hell:   #4A4433;
+  --nacht-tief:   #26231B;
+
+  /* Schriftgroessen */
+  --v-display: clamp(44px, 7vw, 104px);
+  --v-titel:   clamp(34px, 4.2vw, 62px);
+  --v-h2:      clamp(24px, 2.5vw, 38px);
+  --v-h3:      26px;
+  --v-text:    17px;
+  --v-klein:   15px;
+  --v-label:   11.5px;
+
+  --v-ease: cubic-bezier(.22, 1, .36, 1);
+
+  /* Abschnittsabstand und Seitenbreite */
+  --v-luft: clamp(64px, 7vw, 104px);
+  --v-spalte: 1320px;
+
+  --v-textur-papier: url("/textures/papier-rau.webp");
+
+  /* Der Briefbogen aus dem Intro (Figma-KI, 20.10.2026) */
+  --v-brief: url("/images/brief/papier-quer.webp");
+  --v-siegel: url("/images/brief/siegel.webp");
+
+
+  /* Echtes Baumwollpapier (Figma-KI) fuer helle Abschnitte */
+  --v-papier: url("/images/brief/papier-glatt.webp");
+  /* Runde 9: feinere Koernung wie im Papier-Riss ("so viel feiner, so
+     moechte ich das vom Hintergrund"). Nahtlose Kachel, Figma-KI. */
+  --v-papier-fein: url("/images/brief/papier-fein.webp");
+
+  /* Vergoldeter Bilderrahmen und ovaler Perlenrahmen (Figma-KI, 20.10.2026,
+     Vorbild Lunerre und Crown Perfumery im Board) */
+  --v-rahmen-gold: url("/images/brief/rahmen-gold.webp");
+  --v-rahmen-oval: url("/images/brief/rahmen-oval.webp");
+
+  /* Hoehe der Kopfzeile */
+  --v-kopf: 76px;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  :root { --v-brief: url("/images/brief/papier-hoch.webp"); }
+}
+
+/* Kein blinkender Textcursor in normalem Text (Board: "Leertasten-Ding") */
+body { caret-color: transparent; }
+input, textarea, select, [contenteditable] { caret-color: auto; }
+
+/* Nichts markieren und keine Bilder ziehen (Danilo 22.10.2026: "ich will
+   keine Sachen markieren koennen"). Formularfelder bleiben bedienbar. */
+html { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+img, video, svg { -webkit-user-drag: none; user-drag: none; }
+input, textarea, select, [contenteditable] { -webkit-user-select: text; user-select: text; }
+::selection { background: transparent; }
+input::selection, textarea::selection { background: color-mix(in srgb, var(--khaki) 55%, transparent); }
+
+/* ── Grundbausteine ──────────────────────────────────────────────── */
+
+.v-bahn { max-width: var(--v-spalte); margin-inline: auto; padding-inline: var(--rand); }
+@media (min-width: 960px) { .v-bahn { padding-inline: 60px; } }
+
+.v-abschnitt { position: relative; padding-block: var(--v-luft); }
+
+/* Flaechen. Jede setzt dieselben Ton-Variablen, die Komponenten nutzen
+   nur diese und passen dadurch auf jeden Grund:
+   --ton (Schrift), --ton-akzent (Schreibschrift, Ziffern), --ton-grund.
+   Hell: Sand und Creme (mit feinem Papier). Dunkel: Oliv-Braun (Tilly),
+   ein warmes Schwarz fuer den Fuss. */
+.v-nacht, .v-oliv, .v-schwarz {
+  --ton: var(--sand-hell); --ton-akzent: var(--khaki);
+  color: var(--ton); background: var(--ton-grund);
+}
+/* Oliv-Braun mit Vintage-Oberflaeche (Danilo 22.10.2026: "das Braune ist
+   valid, aber da fehlt der Vintage-Stil"): altes Papier wie ein Buchdeckel
+   (Figma-KI, nahtlose Kachel). Die Kachel liefert nur die Helligkeit
+   (luminosity), der Farbton bleibt exakt --nacht. Dazu dunklere Raender
+   wie bei altem Samt. */
+.v-nacht {
+  --ton-grund: var(--nacht);
+  background:
+    radial-gradient(ellipse 120% 95% at 50% 45%, transparent 55%, rgba(24, 20, 12, .42) 100%),
+    url("/images/vintage/braun-alt.webp") 0 0 / 1024px repeat,
+    var(--nacht);
+  background-blend-mode: normal, luminosity, normal;
+}
+.v-oliv    { --ton-grund: var(--nacht); }
+.v-schwarz { --ton-grund: var(--nacht-tief); }
+.v-papier, .v-sand {
+  --ton: var(--tinte); --ton-akzent: var(--oliv-braun);
+  color: var(--ton);
+}
+/* Helle Flaechen sind durchsichtig: darunter liegen das Papier (html) und
+   in zwei Zonen das Gemaelde (.tag-zone). Sand ist eine leichte Toenung darueber. */
+.v-papier { --ton-grund: var(--sand-hell); background: transparent; }
+.v-sand   { --ton-grund: var(--sand); background: rgba(190, 170, 135, .23); }
+
+/* Tuschezeichnungen (Figma-KI, Strich als Maske): Farbe ueber "color",
+   so passt dieselbe Zeichnung auf Hell und Dunkel. */
+.v-zeichnung {
+  display: block; pointer-events: none; background: currentColor;
+  -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat;
+}
+
+/* Versal-Label: das kleine Ordnungselement ueber Headlines */
+.v-label {
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-size: var(--v-label);
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Titel: duenne Antiqua-Versalien, ein Wort in Schreibschrift (em).
+   Vorbild: "Meet the Founders", "A Better Story", "About Runaway Vows". */
+.v-titel {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  font-size: var(--v-h2);
+  line-height: 1.12;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  margin: 0;
+}
+.v-titel em, .v-schrift {
+  font-family: var(--font-schrift), cursive;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.v-titel em { font-size: 1.32em; line-height: .7; padding-inline: .06em; }
+
+/* Kleine Schreibschrift-Zeile ueber einem Titel */
+.v-zeile {
+  font-family: var(--font-schrift), cursive;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1;
+  margin: 0 0 14px;
+}
+
+.v-text {
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-size: var(--v-text);
+  line-height: 1.75;
+  margin: 0;
+}
+.v-text { color: color-mix(in srgb, var(--ton, currentColor) 78%, transparent); }
+.v-zeile { color: var(--ton-akzent, currentColor); }
+
+/* Knopf als gedruckte Plakette (Danilo 22.10.2026: "nicht aesthetisch,
+   nicht unser Stil"). Vorbild: die runden Plaketten der Dolcezza-Referenz
+   und die Jahres-Plaketten bei der Verfuegbarkeit. Runde Form mit innerer
+   zweiter Linie, Antiqua-Versalien statt Grotesk, links und rechts je ein
+   kleiner Punkt wie ein Ornament im Buchdruck. Alles in currentColor,
+   dadurch passt er auf Hell und Dunkel. Hover fuellt ihn (nur
+   background-color, damit die Punkte bleiben). */
+.v-knopf {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-display), Georgia, serif; font-weight: 600;
+  font-size: 13.5px; letter-spacing: .22em; text-transform: uppercase; line-height: 1;
+  padding: 15px 48px 14px; min-height: 48px; color: inherit; text-decoration: none; white-space: nowrap;
+  border: 1px solid color-mix(in srgb, currentColor 75%, transparent); border-radius: 999px;
+  background-color: transparent;
+  background-image:
+    radial-gradient(circle at 24px 50%, currentColor 1.7px, transparent 2.3px),
+    radial-gradient(circle at calc(100% - 24px) 50%, currentColor 1.7px, transparent 2.3px);
+  cursor: pointer;
+  transition: background-color 400ms var(--v-ease), color 400ms var(--v-ease), letter-spacing 500ms var(--v-ease);
+}
+.v-knopf::after { content: ''; position: absolute; inset: 3px; border: 1px solid currentColor; border-radius: 999px; opacity: .3; pointer-events: none; }
+@media (hover: hover) {
+  .v-knopf:hover { background-color: var(--ton); color: var(--ton-grund); letter-spacing: .26em; }
+}
+.v-knopf:focus-visible, .v-link:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+/* Feiner Link mit Linie, die sich beim Darueberfahren schliesst */
+.v-link {
+  color: inherit; text-decoration: none; position: relative; padding-bottom: 3px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  opacity: .85; transition: opacity 250ms var(--v-ease);
+}
+@media (hover: hover) { .v-link:hover { opacity: 1; } }
+
+/* Goldrahmen um Bilder (Danilo, Runde 5: "ich will einen richtig
+   aesthetischen Rahmen"). Echtes Foto eines vergoldeten Rahmens, als
+   Neun-Teile-Bild: Ecken mit Ornament bleiben, die Leisten dehnen sich
+   auf jedes Seitenverhaeltnis. Masse im Bild (970 x 1222): Leiste 64 px,
+   Ornament bis 160 px. --r ist die Breite eines Eckstuecks auf dem Schirm;
+   die Leiste schliesst damit genau an der Bildkante ab. */
+.v-rahmen { position: relative; --r: clamp(30px, 3.2vw, 50px); }
+.v-rahmen::after {
+  content: ''; position: absolute; z-index: 2; pointer-events: none;
+  inset: calc(var(--r) * -.39);
+  border: var(--r) solid transparent;
+  border-image: var(--v-rahmen-gold) 160 stretch;
+  filter: saturate(.82) brightness(.94) drop-shadow(0 12px 18px rgba(0, 0, 0, .42));
+}
+.v-rahmen-bild { position: relative; overflow: hidden; background: var(--nacht-hell); }
+/* Das Bild sitzt etwas tiefer als die Leiste */
+.v-rahmen-bild::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 22px rgba(0, 0, 0, .5); }
+.v-rahmen-bild img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Papierflaeche: raues Papier */
+.v-blatt {
+  background-color: var(--blatt);
+  background-image: var(--v-textur-papier);
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* Gerissene Papierkante oben an einem Papier-Abschnitt (GUESS-Referenz).
+   Danilo, Runde 5: den Riss "weiter unten testen", unter "Unsere Arbeit". */
+.v-riss { position: absolute; left: 0; right: 0; top: 0; height: clamp(90px, 12vw, 170px); transform: translateY(-58%); z-index: 2; pointer-events: none;
+  background: url("/images/brief/riss.webp") center top / 100% 100% no-repeat;
+  filter: drop-shadow(0 -4px 6px rgba(0, 0, 0, .35));
+  /* Der Papierkoerper des Risses blendet unterhalb der Kante in das Papier
+     des Abschnitts aus, sonst zeichnet sich ein heller Streifen ab. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 80%);
+          mask-image: linear-gradient(to bottom, #000 60%, transparent 80%); }
+
+/* ── Intro ─────────────────────────────────────────────────────────
+   Kommt bei jedem Laden der Startseite (Danilo 19.10.2026), aber nicht
+   beim Zurueckklicken innerhalb der Seite (das regelt Intro.jsx). */
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}
+
+/* Notausgang: scheitert das Javascript, gibt die Seite sich nach elf
+   Sekunden trotzdem frei, statt hinter dem Papier zu bleiben (das Intro
+   selbst dauert mit Laden hoechstens rund acht Sekunden). */
+.intro { animation: intro-notaus 0s linear 11s forwards; }
+@keyframes intro-notaus {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* ── Grund der ganzen Seite ──────────────────────────────────────── */
+html { background: var(--sand-hell) var(--v-papier-fein) 0 0 / 768px repeat; }
+body { background: transparent !important; }
+
+/* Gemaelde "Ein Hochzeitstag" (public/images/vintage/tag.webp, Figma-KI)
+   nur in zwei Zonen der Startseite (app/page.js). Die Ebene liegt mit
+   z-index -1 im Wurzel-Stapel: ueber dem Papier (html), unter den
+   durchsichtigen Abschnitten, multipliziert ins Papier wie ein verblasster
+   Druck. Weiche Kanten per Maske, kein harter Schnitt zum Nachbarn. */
+.tag-zone { position: relative; }
+.tag-zone::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("/images/vintage/tag.webp"); background-repeat: no-repeat;
+  background-size: max(100%, 1100px) auto;
+  mix-blend-mode: multiply; opacity: .24;
+}
+/* Oben die Wolken mit Tauben, nach unten in den Morgendunst */
+/* Der Hero zeigt den Anfang des Bildes auf seiner klebenden Buehne (Hero.jsx).
+   Hier beginnt es eine Buehnenhoehe tiefer: am Ende des Heros zeigt die
+   Buehne Bildzeile 0 bis 100vh, die Zone direkt darunter Zeile 100vh. Der
+   Uebergang nahtlos. */
+.tag-zone--morgen::before {
+  background-position: center max(100svh, 600px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent);
+          mask-image: linear-gradient(to bottom, #000 84%, transparent);
+}
+/* Die Wiese mit dem Paar */
+.tag-zone--wiese::before {
+  background-position: center 70%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+
+/* Klebende Abschnitte (Prozess, Leitsatz): Struktur und Raender an die
+   stehende Buehne, nicht an die hohe Section. Sonst laeuft das Papier
+   beim Scrollen unter dem stehenden Inhalt weiter (Danilo 22.10.2026:
+   "dann scrolle ich auch im Hintergrund, das ist verwirrend"). */
+.prozess.v-nacht { background: var(--ton-grund); }
+.prozess .prozess-buehne {
+  background:
+    radial-gradient(ellipse 115% 95% at 50% 50%, transparent 52%, rgba(24, 20, 12, .45) 100%),
+    url("/images/vintage/braun-alt.webp") 0 0 / 1024px repeat,
+    var(--nacht);
+  background-blend-mode: normal, luminosity, normal;
+}
+

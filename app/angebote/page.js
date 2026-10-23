@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
 
@@ -69,7 +68,6 @@ const schritte = [
 export default function AngebotePage() {
   return (
     <>
-      <Nav />
 
       <main className="hell" style={{ minHeight: '100vh' }}>
         <section className="abschnitt-kopf">

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
 import { Filmkachel, KeineFilme } from '@/components/Filmspieler';
@@ -31,7 +30,6 @@ export const metadata = {
 export default function FilmePage() {
   return (
     <>
-      <Nav />
 
       <main className="dunkel" style={{ minHeight: '100vh' }}>
         <section className="abschnitt-kopf">

@@ -1,37 +1,49 @@
-import Hero from '@/components/Hero';
-import ContentSections from '@/components/ContentSections';
-import Prozess from '@/components/Prozess';
-import Bildband from '@/components/Bildband';
-import Portraets from '@/components/Portraets';
-import LeistungenSection from '@/components/LeistungenSection';
-import Testimonials from '@/components/Testimonials';
-import BegrenztTermine from '@/components/BegrenztTermine';
-import Founders from '@/components/Founders';
-import FAQ from '@/components/FAQ';
-import FinalCTA from '@/components/FinalCTA';
-import Footer from '@/components/Footer';
+import Hero from '@/components/vintage/Hero';
+import Arbeit from '@/components/vintage/Arbeit';
+import Leitsatz from '@/components/vintage/Leitsatz';
+import Momente from '@/components/vintage/Momente';
+import Leistungen from '@/components/vintage/Leistungen';
+import Prozess from '@/components/vintage/Prozess';
+import Stimmen from '@/components/vintage/Stimmen';
+import Termine from '@/components/vintage/Termine';
+import Gruender from '@/components/vintage/Gruender';
+import Brief from '@/components/vintage/Brief';
+import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 
-/* Reihenfolge nach dem Wechsel hell/dunkel:
-   Hero dunkel, Film dunkel, Arbeit hell, Vertrauen hell, Bilder dunkel,
-   Ablauf hell-2, Leistungen hell, Stimmen hell, Termine hell,
-   Ueber uns hell-2, Fragen hell, Abschluss dunkel, Fuss dunkel. */
+/* Startseite im Vintage-Redesign (Danilo 20.10.2026: "bau die ganze
+   Seite"). Die Reihenfolge erzaehlt: wer wir sind (Hero), worum es geht
+   (Unsere Arbeit), Beweis (Momente), was ihr bekommt (Leistungen), wie es
+   ablaeuft (Waehlscheibe), was Paare sagen (Stimmen), wann (Termine), mit
+   wem (Gruender), jetzt anfragen (Brief).
+   22.10.2026: neue Farbwelt Gruen-Beige nach Danilos sechs Referenzen,
+   dazu der grosse Leitsatz in Versalien nach "Unsere Arbeit".
+   Erzaehlbogen (Danilo): erst das Problem der Paare (Arbeit), dann die
+   Zuspitzung (Leitsatz), Belege und Angebot in der Mitte, die Loesung mit
+   Team und Anfrage ganz unten (Gruender, Brief). */
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <ContentSections />
-      <Prozess />
-      <Bildband />
-      <LeistungenSection />
-      <Portraets />
-      <Testimonials />
-      <BegrenztTermine />
-      <Founders />
-      <FAQ />
-      <FinalCTA />
-      <Footer />
+      <main>
+        {/* Gemaelde nur in zwei Zonen (Danilo 22.10.2026): Morgenwolken hinter
+            Hero und "Kennt ihr das?", die Wiese mit dem Paar hinter den Stimmen */}
+        <div className="tag-zone tag-zone--morgen">
+          <Hero />
+          <Arbeit />
+        </div>
+        <Leitsatz />
+        <Momente />
+        <Leistungen />
+        <Prozess />
+        <div className="tag-zone tag-zone--wiese">
+          <Stimmen />
+          <Termine />
+        </div>
+        <Gruender />
+        <Brief />
+      </main>
+      <Fuss />
       <WhatsApp />
     </>
   );

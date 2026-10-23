@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import WhatsApp from '@/components/WhatsApp';
 import Galerie from '@/components/Galerie';
@@ -14,7 +13,6 @@ import { galerie } from '@/data/galerie';
 export default function ReferenzenPage() {
   return (
     <>
-      <Nav />
 
       <main className="dunkel" style={{ minHeight: '100vh' }}>
         <section className="abschnitt-kopf">

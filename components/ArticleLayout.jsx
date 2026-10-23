@@ -1,9 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Nav from './Nav';
 import Footer from './Footer';
-import SmoothScroll from './SmoothScroll';
 import FadeIn from './FadeIn';
 
 const serif = "var(--font-display), Georgia, serif";
@@ -23,11 +21,10 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
   const others = related_articles.filter(a => a.href !== currentHref).slice(0, 3);
 
   return (
-    <SmoothScroll>
+    <>
       {jsonLd    && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       {breadcrumb && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />}
 
-      <Nav />
 
       {/* ── Article Header ───────────────────────────────── */}
       <header className="abschnitt-kopf hell" style={{ paddingBottom: 0 }}>
@@ -157,6 +154,6 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
           .related-grid { grid-template-columns: 1fr !important; }
         }
       ` }} />
-    </SmoothScroll>
+    </>
   );
 }

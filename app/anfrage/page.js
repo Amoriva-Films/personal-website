@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
+import Fuss from '@/components/vintage/Fuss';
+import SeitenKopf from '@/components/vintage/SeitenKopf';
 import WhatsApp from '@/components/WhatsApp';
+import { seiteAnfrage } from '@/content/texte';
 
 export default function AnfragePage() {
   const [gesendet, setGesendet] = useState(false);
@@ -120,27 +121,28 @@ export default function AnfragePage() {
 
   return (
     <>
-      <Nav />
 
-      <main className="hell" style={{ minHeight: '100vh' }}>
-        <section className="abschnitt-kopf">
-          <div className="bahn anfrage-raster">
+      {/* Vintage-Redesign 20.10.2026: oben ein Bild-Kopf wie in der
+          Kontakt-Referenz im Board ("Contact us, oben Hero"), darunter das
+          Formular auf Creme mit Linienfeldern wie das RSVP-Formular dort.
+          Die Logik oben (Pruefung, Versand, Felder) ist unveraendert. */}
+      <main className="anfrage-v">
+        <SeitenKopf label={seiteAnfrage.label} titel={seiteAnfrage.titel} bild={seiteAnfrage.bild} />
+        <section className="v-abschnitt v-nacht">
+          <span className="v-riss" aria-hidden="true" />
+          <div className="v-bahn anfrage-raster">
 
             {/* Links: worum es geht */}
             <div className="anfrage-links">
-              <p className="t-label" style={{ marginBottom: 'var(--luft-3)' }}>Jetzt anfragen</p>
-              <h1 className="t-display" style={{ marginBottom: 'var(--luft-3)' }}>
-                Beginnt mit eurer Geschichte.
-              </h1>
-              <p className="t-text t-grau" style={{ marginBottom: 'var(--luft-4)' }}>
+              <p className="v-text" style={{ marginBottom: 28 }}>
                 Jede Nachricht wird persönlich gelesen. Antwort in der Regel
                 innerhalb von 24 Stunden.
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--luft-1)' }}>
-                <a href="mailto:booking@amoriva-films.de" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
+                <a href="mailto:booking@amoriva-films.de" className="v-link">
                   booking@amoriva-films.de
                 </a>
-                <a href="tel:+4915565559747" className="t-fein link-fein" style={{ alignSelf: 'flex-start' }}>
+                <a href="tel:+4915565559747" className="v-link">
                   +49 155 6555 9747
                 </a>
               </div>
@@ -268,7 +270,7 @@ export default function AnfragePage() {
                   )}
 
                   <div className="ganze-zeile">
-                    <button type="submit" disabled={laedt} className="knopf knopf-voll"
+                    <button type="submit" disabled={laedt} className="v-knopf"
                             style={{ opacity: laedt ? 0.55 : 1 }}>
                       {laedt ? 'Wird gesendet …' : 'Nachricht senden'}
                     </button>
@@ -291,8 +293,38 @@ export default function AnfragePage() {
         </section>
       </main>
 
-      <Footer />
+      <Fuss />
       <WhatsApp />
+
+      {/* Formular im Vintage-Look: Linienfelder, Versal-Beschriftung */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .anfrage-v .anfrage-raster { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(40px, 7vw, 120px); align-items: start; }
+        .anfrage-v .formular-raster { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; }
+        .anfrage-v .ganze-zeile { grid-column: 1 / -1; }
+        .anfrage-v .feld-label {
+          display: block; margin-bottom: 6px; font-family: var(--font-text), system-ui, sans-serif;
+          font-size: 11.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--ton-akzent);
+        }
+        .anfrage-v .feld {
+          width: 100%; padding: 12px 0; background: transparent; border: none; border-radius: 0;
+          border-bottom: 1px solid color-mix(in srgb, var(--ton) 25%, transparent);
+          font-family: var(--font-text), system-ui, sans-serif; font-size: 16px; color: var(--ton);
+          transition: border-color 300ms var(--v-ease);
+        }
+        .anfrage-v .feld:focus { outline: none; border-bottom-color: var(--ton); }
+        .anfrage-v .feld:focus-visible { box-shadow: 0 1px 0 0 var(--ton); }
+        .anfrage-v textarea.feld { resize: vertical; min-height: 110px; }
+        .anfrage-v .feld-fehler { border-bottom-color: var(--warnung); }
+        .anfrage-v .feld-label-fehler { color: var(--warnung); }
+        .anfrage-v .feld-hinweis { display: block; margin-top: 6px; font-size: 13px; color: var(--warnung); }
+        .anfrage-v .meldung { display: flex; gap: 12px; padding: 16px 18px; border: 1px solid color-mix(in srgb, var(--ton) 18%, transparent); font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; }
+        .anfrage-v .meldung p { margin: 0; }
+        .anfrage-v .t-gross { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: var(--v-h2); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 16px; }
+        .anfrage-v .t-text, .anfrage-v .t-fein { font-family: var(--font-text), system-ui, sans-serif; color: color-mix(in srgb, var(--ton) 75%, transparent); line-height: 1.7; }
+        .anfrage-v .link-fein { color: inherit; }
+        @media (max-width: 900px) { .anfrage-v .anfrage-raster { grid-template-columns: 1fr; } }
+        @media (max-width: 560px) { .anfrage-v .formular-raster { grid-template-columns: 1fr; } }
+      ` }} />
     </>
   );
 }

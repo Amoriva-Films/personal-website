@@ -14,7 +14,7 @@ const RATGEBER = [
    aufs Neue, jede Unterseite habe sich geaendert. Wer staendig "alles neu"
    meldet, wird irgendwann nicht mehr geglaubt. Beim naechsten echten
    Umbau hier das Datum nachziehen. */
-const STAND = '2026-09-21';
+const STAND = '2026-10-20';
 
 export default function sitemap() {
   const jetzt = new Date(STAND);
@@ -34,6 +34,10 @@ export default function sitemap() {
     eintrag('leistungen', 0.8),
     // eintrag('referenzen', 0.9),   // Galerie raus, Seite nicht mehr verlinkt
     eintrag('anfrage', 0.8, 'yearly'),
+    // Vintage-Redesign 20.10.2026: Unterseiten statt Onepager
+    eintrag('ueber-uns', 0.8),
+    eintrag('vision', 0.6),
+    eintrag('fragen', 0.7),
     eintrag('ratgeber', 0.7),
     ...RATGEBER.map((a) => eintrag(`ratgeber/${a}`, 0.6)),
     eintrag('impressum', 0.2, 'yearly'),
