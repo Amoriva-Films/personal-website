@@ -82,7 +82,7 @@ function Plakat({ person }) {
       initial={{ opacity: 0, y: 30 }} animate={sichtbar ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease }}
     >
       <p className="plakat-name" aria-hidden="true">
-        {typeof person.plakat === 'string' ? person.name.split(' ').map((w) => <span key={w}>{w}</span>) : person.name}
+        {person.name.split(' ').map((w, i) => <span key={w} className={typeof person.plakat === 'string' ? undefined : 'plakat-wort'}>{w}{i === 0 && typeof person.plakat !== 'string' ? ' ' : ''}</span>)}
       </p>
       <div className="plakat-unten">
         <div className="plakat-foto">
@@ -206,15 +206,18 @@ export default function Gruender({ ausfuehrlich = false }) {
         .gruender-plakat--rechts .plakat-name span { display: block; }
         .gruender-plakat--rechts .plakat-foto { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
         .gruender-plakat--rechts .plakat-text { grid-column: 1; grid-row: 2; margin-top: 0; padding-top: 22px; padding-bottom: 8px; }
+        /* Handy (Nevio 28.10.2026: Fotos fehlten, bei Kati war alles verschoben).
+           Alle drei gleich: Name gross und blass oben, die Person steht davor und
+           verdeckt den unteren Teil des Namens, darunter der Text ueber die volle
+           Breite. Alle Gitter-Positionen vom Desktop zuruecksetzen. */
         @media (max-width: 760px) {
-          .gruender-plakat--rechts { display: block; }
-          .gruender-plakat--rechts .plakat-unten { display: grid; }
-          .gruender-plakat--rechts .plakat-name { text-align: center; margin-right: 0; }
-          .plakat-name { white-space: normal; transform: none; }
-          .gruender-plakat--unten { display: block; }
-          .gruender-plakat--unten .plakat-unten { display: grid; }
-          .plakat-unten { grid-template-columns: 1fr; margin-top: 0; }
-          .plakat-foto { max-width: 260px; margin-inline: auto; }
+          .gruender-plakat, .gruender-plakat--unten, .gruender-plakat--rechts { --nf: clamp(30px, 9.6vw, 60px); display: block; padding-top: 0; }
+          .gruender-plakat .plakat-unten { display: block; margin-top: 0; }
+          .gruender-plakat .plakat-name { grid-column: auto; grid-row: auto; margin: 0; justify-self: auto; text-align: center; white-space: normal; transform: none; line-height: .86; }
+          .gruender-plakat .plakat-name span { display: block; }
+          .gruender-plakat .plakat-foto { position: relative; z-index: 1; width: 68%; max-width: 280px; margin: calc(var(--nf) * -.95) auto 0; }
+          .gruender-plakat .plakat-text { grid-column: auto; grid-row: auto; margin-top: 18px; padding-top: 0; }
+          .gruender-plakat .plakat-text p { text-align: left; hyphens: manual; -webkit-hyphens: manual; }
         }
 
 

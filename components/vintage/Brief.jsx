@@ -200,7 +200,15 @@ export default function Brief() {
           .brief-text, .brief-wege { display: none; }
           .brief-zeile { font-size: 8cqw; }
           .brief-titel { font-size: 6.6cqw; margin: 0; }
-          .brief-handy { display: block; padding-bottom: 88px; }
+          /* Handy (Nevio 28.10.2026): zwischen Gemaelde und Text war eine harte
+             Kante. Das Gemaelde laeuft unten weich ins Papier der Seite aus, der
+             Text darunter liegt auf demselben Papier (ohne Sand-Toenung). */
+          .brief.v-nacht, .brief-buehne { background: none; }
+          .brief-buehne { isolation: isolate; }
+          .brief-buehne::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+            background: url("/images/vintage/landschaft-gemalt.webp") center / cover no-repeat;
+            -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); }
+          .brief-handy { display: block; padding-bottom: 88px; background: none; }
           .brief-handy-innen { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
           .brief-handy .brief-links { font-size: 14px; gap: 22px; }
         }

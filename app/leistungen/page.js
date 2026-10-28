@@ -139,7 +139,7 @@ export default function Leistungen() {
       <WhatsApp />
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .leist { padding-bottom: clamp(80px, 9vw, 130px); }
+        .leist { padding-bottom: clamp(80px, 9vw, 130px); overflow-x: clip; }
         .leist-kopf { max-width: 860px; margin-inline: auto; padding: calc(var(--v-kopf) + clamp(56px, 8vw, 110px)) var(--rand) 0; text-align: center; }
         .leist-label { margin: 0 0 18px; color: color-mix(in srgb, var(--ton) 75%, transparent); }
         .leist-h1 { font-size: var(--v-titel); text-wrap: balance; }

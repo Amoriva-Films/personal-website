@@ -172,13 +172,24 @@ export default function Prozess() {
         .prozess-punkte button:focus-visible { outline: 1px solid var(--oliv-braun); outline-offset: 2px; }
 
         /* Handy: Scheibe unten, darueber die Karte */
+        /* Handy (Nevio 28.10.2026: oben abgeschnitten): Karte und Scheibe passten
+           nicht zusammen in den Bildschirm, die Buehne schnitt oben ab. Jetzt
+           startet alles unter der Kopfleiste, Karte kompakter, Scheibe kleiner. */
         @media (max-width: 860px) {
-          .prozess-raster { grid-template-columns: 1fr; gap: 24px; }
-          .prozess-scheibe { width: min(64vw, 32svh); order: 2; }
-          .prozess-text { order: 1; }
-          .prozess-text .v-titel { font-size: clamp(22px, 6vw, 28px); }
-          .prozess-schrittfeld { min-height: 230px; }
+          .prozess-buehne { align-items: flex-start; padding-top: calc(var(--v-kopf) + 14px); min-height: 0; }
+          .prozess-raster { grid-template-columns: 1fr; gap: 14px; }
+          .prozess-scheibe { width: min(46vw, 24svh); order: 2; }
+          .prozess-text { order: 1; --rand: 26px; padding: 0 4px; rotate: 0deg; }
+          .prozess-text .v-zeile { margin-bottom: 2px; }
+          .prozess-text .v-titel { font-size: clamp(20px, 5.4vw, 25px); }
+          .prozess-schrittfeld { min-height: 0; height: 232px; margin-top: 12px; padding-top: 12px; }
+          .prozess-gross { font-size: 40px; }
+          .prozess-titel { margin: 4px 0 6px; font-size: 19px; }
+          .prozess-beschreibung { font-size: 14.5px; line-height: 1.5; margin-bottom: 10px; }
+          .prozess-punkte { gap: 6px; margin-top: 10px; padding-top: 10px; }
+          .prozess-punkte button { min-width: 40px; min-height: 40px; font-size: 15px; }
         }
+        @media (max-width: 860px) and (max-height: 700px) { .prozess-scheibe { display: none; } }
         @media (prefers-reduced-motion: reduce) { .prozess-punkte button { transition: none; } }
       ` }} />
     </section>
