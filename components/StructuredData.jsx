@@ -22,7 +22,7 @@ export default function StructuredData() {
         name: 'Amoriva Films',
         alternateName: 'Amoriva Films Hochzeitsfilm',
         description:
-          'Hochzeitsfotograf und Videograf aus Wolfsburg: Fine-Art-Hochzeitsfotografie und Hochzeitsfilm in Cinégraphie aus einem Team, für Wolfsburg, Braunschweig, Hannover und ganz Europa.',
+          'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie aus Wolfsburg, für Braunschweig, Hannover, ganz Niedersachsen und Europa.',
         url: 'https://amoriva-films.de',
         telephone: '+4915565559747',
         email: 'booking@amoriva-films.de',
@@ -50,7 +50,7 @@ export default function StructuredData() {
           // Europaweit buchbar (Nevio 28.10.2026)
           { '@type': 'Continent', name: 'Europa' },
         ],
-        serviceType: ['Hochzeitsfotograf', 'Hochzeitsfotografie', 'Hochzeitsfilm', 'Videografie'],
+        serviceType: ['Hochzeitsfilm', 'Videografie', 'Hochzeitsfotografie'],
         /* Startpreise wie auf /leistungen (28.10.2026). Highlight-Clip raus,
            der steht nicht mehr im Angebot der Fragen-Seite. */
         hasOfferCatalog: {
