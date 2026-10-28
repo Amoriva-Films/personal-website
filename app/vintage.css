@@ -323,3 +323,9 @@ body { background: transparent !important; }
   background-blend-mode: normal, luminosity, normal;
 }
 
+
+/* iPhone: das grosse Play-Symbol ueber stummen Hintergrundvideos ausblenden
+   (Nevio 28.10.2026). Das Video startet dann bei der ersten Beruehrung
+   von selbst (Hero.jsx), bis dahin steht das Standbild. */
+video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+video::-webkit-media-controls { display: none !important; }

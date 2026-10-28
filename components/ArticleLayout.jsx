@@ -86,10 +86,19 @@ export default function ArticleLayout({ title, category, date, readTime, jsonLd,
         }
         .artikel-blatt > :first-child { margin-top: 0; }
         .artikel-blatt p { margin: 0 0 1.2em; }
-        .artikel-blatt h2 { margin: 2.2em 0 .6em; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.2; color: var(--tinte); }
+        /* Zwischenbalken vor jedem Abschnitt (Nevio 28.10.2026): feine Linie mit
+           kleinem Ornament in der Mitte, wie im Buchdruck */
+        .artikel-blatt h2 { position: relative; margin: 2.4em 0 .6em; padding-top: 1.5em; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.2; color: var(--tinte); }
+        .artikel-blatt h2::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+          background: linear-gradient(to right, transparent, color-mix(in srgb, var(--tinte) 28%, transparent) 18%, color-mix(in srgb, var(--tinte) 28%, transparent) 82%, transparent); }
+        .artikel-blatt h2::after { content: '\\2726'; position: absolute; top: 0; left: 50%; transform: translate(-50%, -52%); padding: 0 12px;
+          font-size: 12px; line-height: 1; color: var(--oliv-braun); background: var(--blatt-hell) var(--v-papier-fein) 0 0 / 768px repeat; }
         .artikel-blatt h3 { margin: 1.8em 0 .5em; font-family: var(--font-text), system-ui, sans-serif; font-weight: 500; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--oliv-braun); }
-        .artikel-blatt ul, .artikel-blatt ol { margin: 0 0 1.2em; padding-left: 1.2em; display: flex; flex-direction: column; gap: .4em; }
-        .artikel-blatt li::marker { color: var(--oliv-braun); }
+        /* Listen buendig mit dem Text (Nevio 28.10.2026: am Handy wirkten sie
+           eingerueckt ohne sichtbare Punkte), davor eine kleine Raute */
+        .artikel-blatt ul, .artikel-blatt ol { margin: 0 0 1.2em; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .5em; }
+        .artikel-blatt li { position: relative; padding-left: 20px; }
+        .artikel-blatt li::before { content: ''; position: absolute; left: 1px; top: .66em; width: 6px; height: 6px; border: 1px solid var(--oliv-braun); transform: rotate(45deg); }
         .artikel-blatt strong { font-weight: 500; color: var(--tinte); }
         .artikel-blatt a { color: var(--tinte); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--tinte) 35%, transparent); text-underline-offset: 3px; }
         @media (hover: hover) { .artikel-blatt a:hover { text-decoration-color: var(--tinte); } }

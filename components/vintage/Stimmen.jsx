@@ -35,7 +35,8 @@ export default function Stimmen() {
       <style dangerouslySetInnerHTML={{ __html: `
         .stimmen { position: relative; overflow: clip; padding-block: clamp(56px, 6vw, 88px) clamp(40px, 4vw, 56px); }
         .stimmen-falter { position: absolute; right: 6%; top: 10%; width: clamp(70px, 7vw, 110px); aspect-ratio: 1; color: var(--ton-akzent); opacity: .55; transform: rotate(10deg); }
-        .stimmen-zeile { text-align: center; color: var(--ton-akzent); margin-bottom: clamp(20px, 2.4vw, 32px); }
+        /* Groesser und heller (Nevio 28.10.2026: war kaum zu sehen) */
+        .stimmen-zeile { text-align: center; color: var(--ton); font-size: clamp(40px, 4.6vw, 66px); line-height: 1.1; margin-bottom: clamp(28px, 3vw, 44px); }
         .stimmen-reihe { list-style: none; margin: 0 auto; padding: 0; max-width: 1180px; display: grid; grid-template-columns: repeat(3, 1fr); }
         .stimmen-reihe li { padding: 0 clamp(18px, 2.4vw, 36px); border-left: 1px solid color-mix(in srgb, var(--ton) 13%, transparent); }
         .stimmen-reihe li:first-child { border-left: none; }

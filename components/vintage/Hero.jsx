@@ -71,7 +71,20 @@ export default function Hero() {
     starten();
     const sichtbar = () => { if (document.visibilityState === 'visible' && v.paused) starten(); };
     document.addEventListener('visibilitychange', sichtbar);
-    return () => document.removeEventListener('visibilitychange', sichtbar);
+    // iPhone im Stromsparmodus blockiert Autoplay (Nevio 28.10.2026: man musste
+    // Play druecken). Dann startet das Video bei der ersten Beruehrung oder
+    // beim ersten Scrollen von selbst.
+    const beiGeste = () => { if (v.paused) starten(); };
+    const geste = { passive: true };
+    window.addEventListener('touchstart', beiGeste, geste);
+    window.addEventListener('scroll', beiGeste, geste);
+    window.addEventListener('pointerdown', beiGeste, geste);
+    return () => {
+      document.removeEventListener('visibilitychange', sichtbar);
+      window.removeEventListener('touchstart', beiGeste, geste);
+      window.removeEventListener('scroll', beiGeste, geste);
+      window.removeEventListener('pointerdown', beiGeste, geste);
+    };
   }, []);
 
   // Weiche Ueberblendung am Schleifenpunkt mit zwei Ebenen derselben Datei.
