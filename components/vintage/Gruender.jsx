@@ -216,6 +216,8 @@ export default function Gruender({ ausfuehrlich = false }) {
           .gruender-plakat .plakat-name { grid-column: auto; grid-row: auto; margin: 0; justify-self: auto; text-align: center; white-space: normal; transform: none; line-height: .86; }
           .gruender-plakat .plakat-name span { display: block; }
           .gruender-plakat .plakat-foto { position: relative; z-index: 1; width: 68%; max-width: 280px; margin: calc(var(--nf) * -.95) auto 0; }
+          /* Nevio: sein Kopf sitzt im Foto ganz oben und stiess an den Namen, etwas tiefer */
+          .gruender-plakat--unten .plakat-foto { margin-top: calc(var(--nf) * -.4); }
           .gruender-plakat .plakat-text { grid-column: auto; grid-row: auto; margin-top: 18px; padding-top: 0; }
           .gruender-plakat .plakat-text p { text-align: left; hyphens: manual; -webkit-hyphens: manual; }
         }
