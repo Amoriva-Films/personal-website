@@ -50,7 +50,7 @@ export default function StructuredData() {
           // Europaweit buchbar (Nevio 28.10.2026)
           { '@type': 'Continent', name: 'Europa' },
         ],
-        serviceType: ['Hochzeitsfilm', 'Videografie', 'Hochzeitsfotografie'],
+        serviceType: ['Hochzeitsfilm', 'Hochzeitsfotografie', 'Hochzeitsfotograf', 'Videografie'],
         /* Startpreise wie auf /leistungen (28.10.2026). Highlight-Clip raus,
            der steht nicht mehr im Angebot der Fragen-Seite. */
         hasOfferCatalog: {

@@ -54,10 +54,11 @@ export const metadata = {
      einen richtigen Namen und die Markenfarbe in der Browserleiste. */
   manifest: '/manifest.json',
   title: {
-    default: 'Hochzeitsfilm & Fotografie Niedersachsen | Amoriva Films',
+    // Film und Fotografie gleich stark (Nevio 28.10.2026)
+    default: 'Hochzeitsfilm & Hochzeitsfotografie Wolfsburg | Amoriva',
     template: '%s | Amoriva Films',
   },
-  description: 'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie in Niedersachsen. Wolfsburg, Braunschweig, Hannover. Persönlich, ehrlich, zeitlos. Jetzt anfragen.',
+  description: 'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie aus Wolfsburg, beides aus einem Team. Für Braunschweig, Hannover und ganz Niedersachsen. Jetzt anfragen.',
   keywords: [
     'Hochzeitsfilm Niedersachsen','Hochzeitsfilm Wolfsburg','Hochzeitsfilm Braunschweig',
     'Hochzeitsfilm Hannover','Hochzeitsvideo Niedersachsen','Hochzeitsfilmer Wolfsburg',
@@ -72,7 +73,7 @@ export const metadata = {
     locale: 'de_DE',
     url: 'https://amoriva-films.de',
     siteName: 'Amoriva Films',
-    title: 'Amoriva Films – Hochzeitsfilm und Fotografie Niedersachsen',
+    title: 'Hochzeitsfilm & Hochzeitsfotografie Wolfsburg | Amoriva',
     description: 'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie. Persönlich, ehrlich, zeitlos. Für Paare die mehr wollen als schöne Bilder.',
     images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Amoriva Films – Hochzeitsfilm Niedersachsen' }],
   },

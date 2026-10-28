@@ -91,14 +91,6 @@ const nextConfig = {
         destination: '/ratgeber',
         permanent: true,
       },
-      {
-        // Die Seite war am 28.10.2026 kurz online und ist bei Google schon
-        // angemeldet. Vorerst nur Hochzeitsfilm, deshalb Umleitung auf Leistungen.
-        // Vorlage liegt in der Git-Historie (Commit e3bc1b4 und b83bfb2).
-        source: '/hochzeitsfotograf-wolfsburg',
-        destination: '/leistungen',
-        permanent: false,
-      },
     ];
   },
 };
