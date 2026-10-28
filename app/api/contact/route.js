@@ -138,9 +138,51 @@ async function alarmAnNevio({ wege, anfrage, verloren }) {
   return false;
 }
 
+/* Formularfelder aus einem Absenden OHNE Javascript in dieselbe Form
+   bringen, die das Script schickt. Feldnamen wie im Formular. */
+function ausFormular(fd) {
+  const f = (k) => String(fd.get(k) ?? '').trim();
+  return {
+    name: f('name'),
+    email: f('email'),
+    hochzeitsdatum: f('Hochzeitsdatum'),
+    location: f('Location'),
+    telefon: f('Telefon'),
+    gaeste: f('Gaeste'),
+    budget: f('Budget'),
+    vision: f('Vision'),
+    nachricht: [
+      `Telefon: ${f('Telefon') || 'keine Angabe'}`,
+      `Gästeanzahl: ${f('Gaeste') || 'keine Angabe'}`,
+      `Budget: ${f('Budget') || 'keine Angabe'}`,
+      `\nVision:\n${f('Vision') || 'keine Angabe'}`,
+    ].join('\n'),
+  };
+}
+
 export async function POST(request) {
+  /* Absenden ohne Javascript, gefunden am 21.10.2026.
+
+     Tippt jemand auf "Nachricht senden", bevor das Script der Seite
+     geladen ist - auf dem Handy mit schlechtem Netz ganz normal - schickt
+     der Browser das Formular selbst ab. Vorher hatte es weder method noch
+     action, also ging es als GET an die Seite zurueck:
+       - die Anfrage kam nie an, die Seite lud nur neu
+       - Name, Mail und Datum standen in der Adresszeile und damit im
+         Browserverlauf und in den Server-Logs
+
+     Jetzt geht das Formular per POST hierher. Kommt es nicht als JSON,
+     ist es so ein Absenden ohne Script: dieselbe Pruefung, derselbe
+     Versand, und am Ende eine Weiterleitung auf eine Adresse OHNE Daten,
+     die nur den Ausgang sagt. */
+  const ohneScript = !(request.headers.get('content-type') || '').includes('application/json');
+  const zustand = { 200: 'gesendet', 400: 'unvollstaendig', 429: 'zuviel' };
+  const antwort = (json, status = 200) => ohneScript
+    ? Response.redirect(new URL(`/anfrage?status=${zustand[status] || 'fehler'}`, request.url), 303)
+    : Response.json(json, { status });
+
   try {
-    const body = await request.json();
+    const body = ohneScript ? ausFormular(await request.formData()) : await request.json();
 
     /* Eingaben begrenzen, bevor irgendetwas damit passiert.
        Ohne Grenze landet ein 3000 Zeichen langer Name in der
@@ -157,13 +199,13 @@ export async function POST(request) {
 
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unbekannt';
     if (zuVieleAnfragen(ip)) {
-      return Response.json({ error: 'Zu viele Anfragen in kurzer Zeit. Bitte versucht es gleich noch einmal oder schreibt uns direkt an booking@amoriva-films.de.' }, { status: 429 });
+      return antwort({ error: 'Zu viele Anfragen in kurzer Zeit. Bitte versucht es gleich noch einmal oder schreibt uns direkt an booking@amoriva-films.de.' }, 429);
     }
 
-    if (!name) return Response.json({ error: 'Bitte gebt euren Namen an.' }, { status: 400 });
-    if (!email) return Response.json({ error: 'Bitte gebt eure E-Mail-Adresse an.' }, { status: 400 });
+    if (!name) return antwort({ error: 'Bitte gebt euren Namen an.' }, 400);
+    if (!email) return antwort({ error: 'Bitte gebt eure E-Mail-Adresse an.' }, 400);
     if (!email.includes('@') || !email.includes('.')) {
-      return Response.json({ error: 'Bitte eine gültige E-Mail-Adresse eingeben.' }, { status: 400 });
+      return antwort({ error: 'Bitte eine gültige E-Mail-Adresse eingeben.' }, 400);
     }
 
     /* Die Einzelfelder reisen mit, damit die Meldung an uns sie als
@@ -222,12 +264,12 @@ export async function POST(request) {
     }
 
     if (!angekommen) {
-      return Response.json({ error: 'Eure Anfrage konnte gerade nicht übermittelt werden. Bitte schreibt uns direkt an booking@amoriva-films.de oder ruft an: 0155 6555 9747.' }, { status: 500 });
+      return antwort({ error: 'Eure Anfrage konnte gerade nicht übermittelt werden. Bitte schreibt uns direkt an booking@amoriva-films.de oder ruft an: 0155 6555 9747.' }, 500);
     }
 
-    return Response.json({ ok: true });
+    return antwort({ ok: true });
   } catch (e) {
     console.error('Contact error:', e);
-    return Response.json({ error: 'Verbindungsfehler. Bitte prüft eure Internetverbindung oder schreibt uns direkt an booking@amoriva-films.de.' }, { status: 500 });
+    return antwort({ error: 'Verbindungsfehler. Bitte prüft eure Internetverbindung oder schreibt uns direkt an booking@amoriva-films.de.' }, 500);
   }
 }

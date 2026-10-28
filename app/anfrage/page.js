@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Fuss from '@/components/vintage/Fuss';
 import SeitenKopf from '@/components/vintage/SeitenKopf';
@@ -15,6 +15,27 @@ export default function AnfragePage() {
      Nevio am 21.09.2026: "wenn etwas fehlt dann soll er rot
      aufleuchten, was noch fehlt." */
   const [fehlende, setFehlende] = useState({});
+
+  /* Heutiges Datum als JJJJ-MM-TT in Ortszeit, fuer das min am Datumsfeld.
+     Erst im Browser gesetzt: die Seite wird beim Bauen vorgerendert, ein
+     dort berechnetes Datum waere das Baudatum und laege nach ein paar
+     Tagen selbst in der Vergangenheit. */
+  const [heute, setHeute] = useState('');
+  useEffect(() => { setHeute(heuteText()); }, []);
+
+  /* Rueckkehr nach einem Absenden ohne Script. Der Server leitet auf
+     /anfrage?status=... um, ohne eine einzige Angabe in der Adresse.
+     Danach den Zusatz aus der Adresszeile nehmen, damit ein Neuladen
+     nicht wieder "gesendet" zeigt. */
+  useEffect(() => {
+    const st = new URLSearchParams(window.location.search).get('status');
+    if (!st) return;
+    if (st === 'gesendet') setGesendet(true);
+    else if (st === 'unvollstaendig') setFehler('Da hat noch etwas gefehlt. Bitte füllt Namen, E-Mail und Hochzeitsdatum aus und schickt es noch einmal.');
+    else if (st === 'zuviel') setFehler('Zu viele Anfragen in kurzer Zeit. Bitte versucht es gleich noch einmal oder schreibt uns direkt an booking@amoriva-films.de.');
+    else setFehler('Eure Anfrage ist gerade nicht angekommen. Bitte schreibt uns direkt an booking@amoriva-films.de oder ruft an: 0155 6555 9747.');
+    window.history.replaceState(null, '', window.location.pathname);
+  }, []);
 
   const feldKlasse  = (k) => 'feld' + (fehlende[k] ? ' feld-fehler' : '');
   const labelKlasse = (k) => 'feld-label' + (fehlende[k] ? ' feld-label-fehler' : '');
@@ -73,8 +94,15 @@ export default function AnfragePage() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
       mangel.email = 'Diese E-Mail-Adresse sieht nicht richtig aus.';
     }
-    if (!String(daten.hochzeitsdatum || '').trim()) {
+    const datum = String(daten.hochzeitsdatum || '').trim();
+    if (!datum) {
       mangel.hochzeitsdatum = 'Bitte euer Hochzeitsdatum angeben.';
+    } else if (datum < heuteText()) {
+      /* Nachgemessen am 21.10.2026: ein Datum in der Vergangenheit ging
+         ohne Widerspruch durch. Im Datumswaehler verrutscht man schnell
+         um ein Jahr, dann kommt die Anfrage mit einem falschen Termin an.
+         Der Text-Vergleich reicht, beide Seiten sind JJJJ-MM-TT. */
+      mangel.hochzeitsdatum = 'Dieses Datum liegt in der Vergangenheit. Schaut bitte noch einmal aufs Jahr.';
     }
 
     if (Object.keys(mangel).length > 0) {
@@ -83,8 +111,11 @@ export default function AnfragePage() {
          Meldung erscheint beim Absendeknopf, die Felder stehen darueber.
          Wer nach unten sucht, findet nichts. */
       setFehler(Object.keys(mangel).length === 1
-        ? 'Ein Feld fehlt noch. Wir haben es rot markiert und springen hin.'
-        : `${Object.keys(mangel).length} Felder fehlen noch. Sie sind rot markiert, wir springen zum ersten.`);
+        /* "fehlt noch" stimmte nicht immer: bei einer falsch getippten
+           Mailadresse fehlt nichts, sie ist nur falsch. "noch nicht
+           richtig ausgefuellt" passt auf beides. */
+        ? 'Ein Feld ist noch nicht richtig ausgefüllt. Wir haben es rot markiert und springen hin.'
+        : `${Object.keys(mangel).length} Felder sind noch nicht richtig ausgefüllt. Sie sind rot markiert, wir springen zum ersten.`);
       setLaedt(false);
       // Zum ersten fehlenden Feld springen und hineinsetzen: bei einem
       // langen Formular sieht man sonst gar nicht, dass unten etwas rot ist.
@@ -182,7 +213,12 @@ export default function AnfragePage() {
                    Abstand untereinander - das war die halbe Seitenlaenge.
                    Jetzt zwei Spalten: kurze Felder teilen sich eine Zeile,
                    die beiden Textfelder laufen ueber die volle Breite. */
-                <form onSubmit={absenden} noValidate className="formular-raster">
+                <form onSubmit={absenden} noValidate className="formular-raster" method="post" action="/api/contact">
+                  {/* method und action fuer den Fall, dass das Script noch
+                      nicht geladen ist. Ohne die beiden ging das Formular
+                      als GET an die Seite zurueck: Anfrage verloren, Daten
+                      in der Adresszeile. Mit Script faengt absenden() es
+                      ab wie bisher. */}
                   <div>
                     <label className={labelKlasse('name')} htmlFor="feld-namen">Eure Namen</label>
                     <input className={feldKlasse('name')} id="feld-namen" name="name" type="text"
@@ -210,6 +246,7 @@ export default function AnfragePage() {
                   <div>
                     <label className={labelKlasse('hochzeitsdatum')} htmlFor="feld-datum">Hochzeitsdatum</label>
                     <input className={feldKlasse('hochzeitsdatum')} id="feld-datum" name="Hochzeitsdatum" type="date" required
+                           min={heute || undefined}
                            aria-invalid={Boolean(fehlende.hochzeitsdatum)}
                            aria-describedby={fehlende.hochzeitsdatum ? 'hinweis-hochzeitsdatum' : undefined} />
                     <Hinweis k="hochzeitsdatum" />
@@ -327,4 +364,12 @@ export default function AnfragePage() {
       ` }} />
     </>
   );
+}
+
+/* Heute als JJJJ-MM-TT in Ortszeit. toISOString waere UTC und laege
+   zwischen Mitternacht und zwei Uhr einen Tag zurueck. */
+function heuteText() {
+  const d = new Date();
+  const zwei = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${zwei(d.getMonth() + 1)}-${zwei(d.getDate())}`;
 }
