@@ -24,6 +24,8 @@ export const metadata = {
 };
 
 const ZIFFER = ['I', 'II', 'III', 'IV'];
+// Blasse Fotos in den Bildern des Filmstreifens, keins davon steht weiter oben
+const FILM = ['/images/hochzeit-1.jpg', '/images/braut-schleier-garten.jpg', '/images/schleier-klavier.jpg', '/images/champagner.jpg', '/images/paare/haende.webp', '/images/braut-drehen.jpg'];
 const ohneStern = (t) => t.replace(/\*/g, '');
 
 const ld = [
@@ -98,14 +100,29 @@ export default function FotografWolfsburg() {
           {s.stil.map((t) => <p key={t.slice(0, 20)} className="v-text">{t}</p>)}
         </section>
 
+        {/* Paketinhalt als Negativstreifen (Nevio 28.10.2026: die Papierkarte war
+            zu langweilig). Jeder Punkt ist ein Bild auf dem Film, mit Bildnummer
+            und Randbeschriftung wie auf einem alten Kleinbildfilm. Nur CSS, am
+            Handy steht der Streifen senkrecht und ruhig. */}
         <section className="v-bahn fw-paket">
-          <div className="fw-blatt">
-            <h2 className="fw-blatt-titel">{ohneStern(s.inhaltTitel)}</h2>
-            <ul className="fw-inhalt">{s.inhalt.map((p) => <li key={p}>{p}</li>)}</ul>
-            <p className="fw-blatt-fuss">
-              Alle Preise und Pakete findet ihr auf der Seite <Link href="/leistungen#preise">Leistungen und Preise</Link>.
-            </p>
+          <p className="v-zeile">Euer Paket</p>
+          <Titel text={s.inhaltTitel} className="v-titel fw-zwischen" />
+          <div className="fw-film">
+            <p className="fw-film-rand fw-film-rand--oben" aria-hidden="true"><span>AMORIVA 400</span><span>WOLFSBURG</span><span>AMORIVA 400</span></p>
+            <ol className="fw-film-bilder">
+              {s.inhalt.map((p, i) => (
+                <li key={p} className="fw-film-bild">
+                  <Image src={FILM[i]} alt="" fill sizes="(max-width: 640px) 90vw, 200px" quality={60} className="fw-film-foto" />
+                  <span className="fw-film-nr" aria-hidden="true">{i + 1}<small>A</small></span>
+                  <span className="fw-film-text">{p}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="fw-film-rand fw-film-rand--unten" aria-hidden="true"><span>▸ 1</span><span>▸ 2</span><span>▸ 3</span><span>▸ 4</span><span>▸ 5</span><span>▸ 6</span></p>
           </div>
+          <p className="fw-film-fuss">
+            Ganzer Tag ab 850 €, Standesamt ab 250 €. Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>.
+          </p>
         </section>
 
         <section className="v-bahn fw-orte">
@@ -176,18 +193,52 @@ export default function FotografWolfsburg() {
         .fw-stil .v-text + .v-text { margin-top: 16px; }
         .fw-zwischen { margin-bottom: clamp(26px, 3vw, 40px); }
 
-        .fw-blatt { max-width: 720px; margin-inline: auto; padding: clamp(30px, 4.5vw, 60px) clamp(24px, 5vw, 64px); color: var(--tinte);
-          background: var(--blatt-hell) var(--v-papier-fein) 0 0 / 768px repeat;
-          box-shadow: 0 30px 60px -24px rgba(10, 8, 4, .6), 0 2px 6px rgba(10, 8, 4, .25);
-          outline: 1px solid color-mix(in srgb, var(--pergament) 70%, transparent); outline-offset: -14px; }
-        .fw-blatt-titel { margin: 0 0 20px; text-align: center; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.2vw, 30px); text-transform: uppercase; letter-spacing: .05em; }
-        .fw-inhalt { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;
-          font-family: var(--font-text), system-ui, sans-serif; font-size: 15.5px; line-height: 1.55; color: color-mix(in srgb, var(--tinte) 88%, transparent); }
-        .fw-inhalt li { position: relative; padding-left: 22px; }
-        .fw-inhalt li::before { content: ''; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border: 1px solid var(--oliv-braun); transform: rotate(45deg); }
-        .fw-blatt-fuss { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--tinte) 14%, transparent);
-          font-family: var(--font-maschine), ui-monospace, monospace; font-size: 12.5px; line-height: 1.6; color: color-mix(in srgb, var(--tinte) 72%, transparent); }
-        .fw-blatt-fuss a { color: var(--tinte); text-underline-offset: 3px; }
+        .fw-paket { text-align: center; }
+        /* Negativstreifen: dunkler Film, oben und unten Perforation, dazwischen
+           die Bilder. Leicht schraeg, wie hingelegt. */
+        .fw-film {
+          --loch: 14px; position: relative; max-width: 1180px; margin: 0 auto; padding: calc(var(--loch) * 2.4) 0;
+          background: linear-gradient(to bottom, #15110b, #221c12 50%, #15110b);
+          box-shadow: 0 30px 50px -24px rgba(0, 0, 0, .75);
+          rotate: -1.2deg;
+        }
+        .fw-film::before, .fw-film::after { content: ''; position: absolute; left: 0; right: 0; height: var(--loch); pointer-events: none;
+          background: radial-gradient(closest-side, var(--nacht) 0 60%, transparent 68%) 6px 0 / 26px 100% repeat-x; }
+        .fw-film::before { top: 8px; } .fw-film::after { bottom: 8px; }
+        .fw-film-rand { position: absolute; left: 0; right: 0; margin: 0; display: flex; justify-content: space-around; pointer-events: none;
+          font-family: var(--font-maschine), ui-monospace, monospace; font-size: 10px; letter-spacing: .3em; color: #d9a44a; opacity: .75; }
+        .fw-film-rand--oben { top: calc(var(--loch) + 12px); }
+        .fw-film-rand--unten { bottom: calc(var(--loch) + 12px); }
+        .fw-film-bilder { list-style: none; margin: 0; padding: 22px 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; counter-reset: bild; }
+        .fw-film-bild { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; aspect-ratio: 3 / 3.4; padding: 14px 14px 16px; text-align: left;
+          background: radial-gradient(120% 90% at 30% 20%, rgba(255, 236, 200, .1), transparent 60%), #2a2318;
+          outline: 1px solid rgba(231, 220, 196, .18); outline-offset: -1px; border-radius: 3px;
+          transition: transform 500ms var(--v-ease), background-color 500ms var(--v-ease); }
+        @media (hover: hover) { .fw-film-bild:hover { transform: translateY(-6px); background-color: #342b1d; } }
+        .fw-film-bild { overflow: hidden; isolation: isolate; }
+        .fw-film-foto { z-index: -1; object-fit: cover; opacity: .34; filter: sepia(.55) saturate(.7) contrast(1.05); transition: opacity 600ms var(--v-ease), transform 1200ms var(--v-ease); }
+        .fw-film-bild::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to top, rgba(18, 14, 8, .92) 18%, rgba(18, 14, 8, .25) 70%, rgba(18, 14, 8, .1)); }
+        @media (hover: hover) { .fw-film-bild:hover .fw-film-foto { opacity: .6; transform: scale(1.06); } }
+        .fw-film-nr { font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500; font-size: 34px; line-height: 1; color: #d9a44a; }
+        .fw-film-nr small { margin-left: 3px; font-size: .45em; font-style: normal; letter-spacing: .1em; }
+        .fw-film-text { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.25; color: #f1e8d6; }
+        .fw-film-fuss { max-width: 620px; margin: clamp(28px, 3vw, 40px) auto 0; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
+
+        /* Tablet: zwei Reihen zu drei Bildern */
+        @media (max-width: 1080px) { .fw-film-bilder { grid-template-columns: repeat(3, 1fr); } .fw-film-bild { aspect-ratio: auto; min-height: 150px; } }
+        /* Handy: ruhig und schlicht. Streifen gerade, Bilder als Zeilen
+           (Nummer links, Text rechts), Perforation bleibt oben und unten */
+        @media (max-width: 640px) {
+          .fw-film { rotate: 0deg; --loch: 11px; }
+          .fw-film-rand { font-size: 9px; letter-spacing: .22em; }
+          .fw-film-rand--unten { display: none; }
+          .fw-film-bilder { grid-template-columns: 1fr; gap: 8px; padding: 18px 12px 10px; }
+          .fw-film-bild { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; min-height: 0; padding: 12px 14px; }
+          .fw-film-nr { flex: 0 0 44px; font-size: 26px; }
+          .fw-film-text { font-size: 16px; }
+          .fw-film-foto { opacity: .26; }
+          .fw-film-bild::after { background: linear-gradient(to right, rgba(18, 14, 8, .9) 30%, rgba(18, 14, 8, .45)); }
+        }
 
         .fw-orte { text-align: center; }
         .fw-orte-text { max-width: 640px; margin: 0 auto; }
