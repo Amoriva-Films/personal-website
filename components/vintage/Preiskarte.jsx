@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { seiteLeistungen as s } from '@/content/texte';
 
 /* Preiskarte auf /leistungen (Nevio 28.10.2026: "schoener, in unserem Stil,
@@ -23,7 +23,18 @@ const ease = [0.22, 1, 0.36, 1];
 export default function Preiskarte() {
   const buehne = useRef(null);
   const karte = useRef(null);
-  const reduziert = useReducedMotion();
+  const ohneBewegung = useReducedMotion();
+  // Handy (Nevio 28.10.2026: "wackelt und haengt"): kein Aufrichten, kein
+  // Neigen, die Karte steht still da, nur die Zeilen blenden ein
+  const [handy, setHandy] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 760px)');
+    const an = () => setHandy(mq.matches);
+    an();
+    mq.addEventListener('change', an);
+    return () => mq.removeEventListener('change', an);
+  }, []);
+  const reduziert = ohneBewegung || handy;
   const sichtbar = useInView(karte, { once: true, margin: '0px 0px -18% 0px' });
   const an = reduziert || sichtbar;
 
@@ -152,11 +163,28 @@ export default function Preiskarte() {
           background: url("/images/brief/siegel.webp") center / contain no-repeat; filter: drop-shadow(0 8px 10px rgba(8, 6, 3, .45)); }
 
         @media (max-width: 560px) {
-          .pk-oben-zeile { flex-wrap: wrap; row-gap: 2px; }
-          .pk-punkte { display: none; }
-          .pk-name { flex-basis: 100%; }
-          .pk-fuss { padding-right: 0; padding-bottom: 70px; }
+          /* Handy: kompakt, damit die ganze Karte auf einen Blick zu sehen ist.
+             Ohne Unterzeilen, Name und Preis in einer Zeile, ohne Schatten-Filter
+             (der machte das Scrollen ruckelig) */
+          .pk-buehne { padding-bottom: 34px; }
           .pk-hinten { display: none; }
+          .pk-karte { --r: 22px; padding: 2px 4px 10px; filter: none; box-shadow: 0 18px 30px -16px rgba(8, 6, 3, .6); will-change: auto; }
+          .pk-glanz { display: none; }
+          .pk-kopf { margin-bottom: 14px; }
+          .pk-oben { font-size: 10px; }
+          .pk-titel { font-size: 42px; }
+          .pk-saison { font-size: 11px; }
+          .pk-zier { margin-top: 10px; }
+          .pk-liste { gap: 12px; }
+          .pk-oben-zeile { gap: 8px; }
+          .pk-name { font-size: 16px; }
+          .pk-punkte { min-width: 12px; }
+          .pk-preis { font-size: 18px; }
+          .pk-text { display: none; }
+          .pk-fuss { margin-top: 16px; padding-top: 12px; padding-right: 74px; }
+          .pk-hinweis { font-size: 10.5px; line-height: 1.5; }
+          .pk-gruss { font-size: 22px; margin-top: 6px; }
+          .pk-siegel { width: 66px; right: 2px; bottom: 6px; }
         }
       ` }} />
     </div>

@@ -176,9 +176,11 @@ export default function Prozess() {
            nicht zusammen in den Bildschirm, die Buehne schnitt oben ab. Jetzt
            startet alles unter der Kopfleiste, Karte kompakter, Scheibe kleiner. */
         @media (max-width: 860px) {
-          .prozess-buehne { align-items: flex-start; padding-top: calc(var(--v-kopf) + 14px); min-height: 0; }
+          .prozess-buehne { align-items: center; padding-top: var(--v-kopf); min-height: 0; }
           .prozess-raster { grid-template-columns: 1fr; gap: 14px; }
-          .prozess-scheibe { width: min(46vw, 24svh); order: 2; }
+          /* Waehlscheibe am Handy ganz raus (Nevio 28.10.2026: buggt), die Nummern
+             01 bis 05 auf der Karte reichen */
+          .prozess-scheibe { display: none; }
           .prozess-text { order: 1; --rand: 26px; padding: 0 4px; rotate: 0deg; }
           .prozess-text .v-zeile { margin-bottom: 2px; }
           .prozess-text .v-titel { font-size: clamp(20px, 5.4vw, 25px); }
@@ -189,7 +191,6 @@ export default function Prozess() {
           .prozess-punkte { gap: 6px; margin-top: 10px; padding-top: 10px; }
           .prozess-punkte button { min-width: 40px; min-height: 40px; font-size: 15px; }
         }
-        @media (max-width: 860px) and (max-height: 700px) { .prozess-scheibe { display: none; } }
         @media (prefers-reduced-motion: reduce) { .prozess-punkte button { transition: none; } }
       ` }} />
     </section>
