@@ -157,8 +157,12 @@ export default function Hero() {
               animate={bereit ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
               transition={{ duration: 1.4, ease, delay: 0.15 }}
             >
-              <p className="v-label hero-label">{hero.label}</p>
-              <h1 className="hero-titel">{hero.titel}</h1>
+              {/* Eine H1 mit Ort und Leistung (SEO, Nevio 28.10.2026), sichtbar wie vorher:
+                  kleine Zeile oben, darunter gross der Name */}
+              <h1 className="hero-h1">
+                <span className="v-label hero-label">{hero.label}</span>
+                <span className="hero-titel">{hero.titel}</span>
+              </h1>
               <span className="hero-trenner" aria-hidden="true" />
               <p className="hero-unterzeile">{hero.unterzeile}</p>
             </motion.div>
@@ -218,6 +222,8 @@ export default function Hero() {
           display: flex; flex-direction: column; align-items: center; justify-content: center;
           text-align: center; padding: 0 10%; color: var(--blatt);
         }
+        .hero-h1 { margin: 0; font: inherit; }
+        .hero-h1 > span { display: block; }
         .hero-label { margin: 0 0 28px; opacity: .85; text-shadow: 0 1px 14px color-mix(in srgb, var(--tusche) 60%, transparent); }
         .hero-titel {
           margin: 0; font-family: var(--font-display), Georgia, serif; font-weight: 500;

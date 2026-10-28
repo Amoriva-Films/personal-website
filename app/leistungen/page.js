@@ -84,6 +84,7 @@ export default function Leistungen() {
                 <ul className="leist-inhalt">
                   {p.inhalt.map((punkt) => <li key={punkt}>{punkt}</li>)}
                 </ul>
+                {s.paketLinks?.[i] && <Link href={s.paketLinks[i].href} className="v-link leist-mehr">{s.paketLinks[i].label}</Link>}
               </div>
             </article>
           ))}
@@ -159,6 +160,8 @@ export default function Leistungen() {
         .leist-inhalt { list-style: none; margin: 22px 0 0; padding: 18px 0 0; display: flex; flex-direction: column; gap: 9px; border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent);
           font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; line-height: 1.5; color: color-mix(in srgb, var(--ton) 82%, transparent); }
         .leist-inhalt li { position: relative; padding-left: 22px; }
+        .leist-mehr { display: inline-block; margin-top: 20px; font-family: var(--font-text), system-ui, sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+        .leist-mehr::after { content: ' \\2192'; }
         .leist-inhalt li::before { content: ''; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border: 1px solid var(--ton-akzent); transform: rotate(45deg); }
 
         .leist-preise { text-align: center; }

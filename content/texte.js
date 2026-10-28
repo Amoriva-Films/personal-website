@@ -35,6 +35,7 @@ export const navigation = [
 // sonst gilt er fuer Google als unwichtig (Nevio 28.10.2026).
 export const navigationMehr = [
   { label: 'Ratgeber', href: '/ratgeber' },
+  { label: 'Hochzeitsfotograf Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' },
 ];
 
 export const anfrage = { label: 'Anfrage', href: '/anfrage' };
@@ -54,7 +55,8 @@ export const intro = {
 };
 
 export const hero = {
-  label: 'Hochzeitsfilm & Hochzeitsfotografie',
+  // SEO (Nevio 28.10.2026): "Hochzeitsfotograf in Wolfsburg" steht jetzt in der H1
+  label: 'Hochzeitsfotograf & Videograf in Wolfsburg',
   titel: 'Amoriva Films',
   unterzeile: 'Mit Sitz in Wolfsburg, für Hochzeiten in ganz Europa.',
   scroll: 'Scroll',
@@ -386,6 +388,8 @@ export const seiteLeistungen = {
   meta: { titel: 'Leistungen: Hochzeitsfilm & Fotografie', text: 'Hochzeitsfilm ab 1.000 €, Hochzeitsfotografie ab 850 €, Standesamt ab 250 €: was in jedem Paket steckt, wovon euer Angebot abhängt und wie der Ablauf ist. Aus Wolfsburg, europaweit.' },
   label: 'Leistungen',
   titel: 'Film, Foto oder *beides.*',
+  // Weiterfuehrender Link je Paket (gleiche Reihenfolge wie leistungen.pakete)
+  paketLinks: [null, { label: 'Hochzeitsfotograf in Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' }, null],
   // Je Paket ein Bild, in derselben Reihenfolge wie leistungen.pakete
   bilder: [
     { src: '/images/Bild-101.webp', alt: 'Brautpaar am Hochzeitstisch vor einem roten Samtvorhang', b: 2000, h: 3000 },
@@ -418,6 +422,67 @@ export const seiteLeistungen = {
   ablaufTitel: 'In fünf *Schritten* zu eurem Film.',
   abschlussTitel: 'Erzählt uns von *eurem* Tag.',
   abschluss: 'Schreibt uns Datum, Ort und was ihr euch vorstellt. Wir melden uns persönlich und schicken euch nach einem kurzen Gespräch euer Angebot.',
+};
+
+// Stadtseite "Hochzeitsfotograf in Wolfsburg" (Nevio 28.10.2026: "krass pushen
+// fuer Fotograf"). Nur Angaben, die auch sonst auf der Seite stehen. Die Orte
+// sind Orte, an denen in Wolfsburg geheiratet wird, keine Behauptung, dass wir
+// dort schon fotografiert haben.
+export const seiteFotografWolfsburg = {
+  meta: {
+    titel: 'Hochzeitsfotograf in Wolfsburg',
+    text: 'Hochzeitsfotograf in Wolfsburg: Fine-Art-Hochzeitsfotos vom Getting Ready bis zum ersten Tanz, ganzer Tag ab 850 €, Standesamt ab 250 €. Film auf Wunsch aus demselben Team.',
+  },
+  label: 'Hochzeitsfotograf Wolfsburg',
+  titel: 'Hochzeitsfotograf in *Wolfsburg.*',
+  einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und fotografieren Hochzeiten im Fine-Art-Stil: warm, zeitlos, mit einem Hauch Vintage. Den ganzen Tag begleiten wir euch ab 850 €, die standesamtliche Trauung ab 250 €, und wer zu den Fotos noch einen Film möchte, bekommt ihn vom selben Team.',
+  fakten: [
+    { wert: 'ab 850 €', text: 'Fotos für den ganzen Tag' },
+    { wert: 'ab 250 €', text: 'Fotos im Standesamt' },
+    { wert: '6 bis 8 Wochen', text: 'bis alle Fotos bei euch sind' },
+    { wert: 'Film dazu', text: 'aus demselben Team' },
+  ],
+  bilder: [
+    { src: '/images/Bild-76.webp', alt: 'Hochzeitsfotografie: Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000 },
+    { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
+    { src: '/images/feigen-ring.jpg', alt: 'Detailfoto: Ehering auf einer aufgeschnittenen Feige', b: 1333, h: 2000 },
+    { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
+  ],
+  stilZeile: 'Unser Stil',
+  stilTitel: 'Fotos, die sich nach *euch* anfühlen.',
+  stil: [
+    'Wir fotografieren so, dass ihr euren Tag in zwanzig Jahren wiedererkennt: das Licht am Nachmittag, die Hand eurer Mutter auf eurem Arm, den Moment, in dem beim Tanz alle gleichzeitig lachen. Die Bilder bearbeiten wir warm und natürlich, ohne harte Filter, damit sie auch später nicht nach einem bestimmten Jahr aussehen.',
+    'Vor der Kamera fühlen sich die meisten erst einmal ungewohnt an. Beim Paarshooting geben wir euch kleine Aufgaben statt steifer Posen, und während der Trauung und der Feier halten wir uns im Hintergrund. Kennenlernen werdet ihr uns vorher trotzdem, persönlich oder per Video, damit am Hochzeitstag niemand Fremdes hinter der Kamera steht.',
+  ],
+  inhaltTitel: 'Was in eurem *Paket* steckt.',
+  inhalt: [
+    'Fotobegleitung vom Getting Ready bis zum ersten Tanz',
+    'Alle bearbeiteten Fotos in hoher Auflösung',
+    'Private Online-Galerie zum Anschauen, Teilen und Herunterladen',
+    'Druckfreigabe inklusive',
+    'Persönliches Kennenlernen vor der Buchung',
+    'Lieferung in sechs bis acht Wochen',
+  ],
+  orteZeile: 'In Wolfsburg und Umgebung',
+  orteTitel: 'Wo in Wolfsburg *geheiratet* wird.',
+  orteText: 'Ob ihr im Standesamt heiratet, im Schloss oder in einer Scheune draußen vor der Stadt: Wir kommen dorthin, wo eure Hochzeit stattfindet. Ein paar Orte, die Paare in Wolfsburg gern wählen:',
+  orte: [
+    { name: 'Schloss Wolfsburg', text: 'Renaissance-Schloss mit Park und Schlosshof, Trauungen sind direkt im Schloss möglich. Gegenüber liegen die Schlossremisen für die Feier.' },
+    { name: 'Schloss Fallersleben', text: 'Kleines Schloss im Stadtteil Fallersleben mit Garten, beliebt für standesamtliche Trauungen im kleinen Kreis.' },
+    { name: 'Autostadt', text: 'Moderne Kulisse am Mittellandkanal, mit dem Ritz-Carlton für Feiern und Hotelzimmer direkt vor Ort.' },
+    { name: 'Allersee und Allerpark', text: 'Wasser, Wiesen und viel Himmel. Gut für ein Paarshooting am Abend, wenn das Licht weicher wird.' },
+  ],
+  umgebung: 'Genauso fotografieren wir in Braunschweig, Gifhorn, Wolfenbüttel, Helmstedt, Hannover und Celle, und für eure Hochzeit reisen wir auch durch ganz Europa.',
+  fragenTitel: 'Häufige Fragen zum Hochzeitsfotografen in *Wolfsburg.*',
+  fragen: [
+    { frage: 'Was kostet ein Hochzeitsfotograf in Wolfsburg bei euch?', antwort: 'Für den ganzen Tag ab 850 €, für die standesamtliche Trauung ab 250 €. Wenn ihr nur ein paar Stunden braucht, zum Beispiel Trauung und Paarshooting, machen wir euch ein Angebot. Der genaue Preis hängt davon ab, wie lange wir dabei sein sollen und was ihr euch wünscht.' },
+    { frage: 'Fotografiert ihr auch nur das Standesamt?', antwort: 'Ja. Viele Paare heiraten erst standesamtlich im kleinen Kreis und feiern später. Für die Trauung im Standesamt mit ein paar Bildern davor und danach beginnen wir ab 250 €.' },
+    { frage: 'Kommt ihr auch nach Braunschweig, Gifhorn oder Hannover?', antwort: 'Ja, Wolfsburg ist nur unser Zuhause. Wir fotografieren in ganz Niedersachsen und reisen für Hochzeiten durch ganz Europa. Die Anreise sprechen wir vorher offen mit euch ab.' },
+    { frage: 'Können wir zu den Fotos auch einen Hochzeitsfilm buchen?', antwort: 'Ja, Film und Fotos kommen bei uns aus einem Team. Ihr habt einen Ansprechpartner, und Bilder und Film passen im Look zusammen, statt dass zwei Anbieter nebeneinander arbeiten.' },
+    { frage: 'Wann sollten wir anfragen?', antwort: 'Sobald Datum und Location feststehen. Beliebte Samstage im Sommer sind oft früh vergeben, eine kurzfristige Anfrage lohnt sich aber trotzdem.' },
+  ],
+  abschlussTitel: 'Erzählt uns von *eurem* Tag.',
+  abschluss: 'Schreibt uns Datum und Ort eurer Hochzeit. Wir melden uns persönlich und sagen euch ehrlich, ob wir an dem Tag noch frei sind.',
 };
 
 // Ratgeber im Vintage-Design (Nevio 28.10.2026). Die Artikel liegen weiter
