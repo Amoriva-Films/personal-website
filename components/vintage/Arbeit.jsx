@@ -72,6 +72,21 @@ export default function Arbeit() {
         /* Blass: wie ein verblichener Abzug, der im Papier verschwindet */
         .ode-blass { opacity: .4; filter: grayscale(.5) sepia(.25); }
         .ode-scharf { box-shadow: 0 18px 34px -14px rgba(46, 43, 34, .5); outline: 1px solid rgba(46, 43, 34, .25); }
+        /* Die zwei kleinen Bilder schweben langsam wie die losen Abzuege im Fuss
+           (Nevio 26.10.2026), Hover haelt an und hebt hervor. Die blassen Bilder
+           bleiben ruhig im Hintergrund. translate/rotate als eigene Eigenschaften,
+           weil transform vom Scroll-Effekt belegt ist. */
+        .ode-scharf { --dreh: 0deg; rotate: var(--dreh); z-index: 1; animation: ode-schweben 7s ease-in-out infinite; transition: box-shadow 400ms var(--v-ease); }
+        .ode-stapel--links .ode-scharf { --dreh: -3deg; animation-duration: 7.4s; }
+        .ode-stapel--rechts .ode-scharf { --dreh: 2.5deg; animation-duration: 6.4s; animation-delay: -2.5s; }
+        @keyframes ode-schweben {
+          0%, 100% { translate: 0 0; rotate: var(--dreh); }
+          50% { translate: 4px -12px; rotate: calc(var(--dreh) * .5); }
+        }
+        @media (hover: hover) {
+          .ode-scharf:hover { animation-play-state: paused; z-index: 3; box-shadow: 0 28px 44px -12px rgba(46, 43, 34, .6); }
+        }
+        @media (prefers-reduced-motion: reduce) { .ode-scharf { animation: none; } }
         .ode-stapel--links .ode-blass { left: 0; right: 8%; top: 10%; bottom: 0; }
         .ode-stapel--links .ode-scharf { left: 0; top: 0; width: 46%; aspect-ratio: 4 / 5; }
         .ode-stapel--rechts .ode-blass { left: 12%; right: 0; top: 0; bottom: 6%; }

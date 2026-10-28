@@ -15,7 +15,7 @@ export default function Fragen() {
   return (
     <>
       <main>
-        <FragenListe liste={s.liste} label={s.label} titel={s.titel} />
+        <FragenListe liste={s.liste} label={s.label} titel={s.titel} bild={s.bild} einleitung={s.einleitung} abschlussTitel={s.abschlussTitel} abschluss={s.abschluss} />
       </main>
       <Fuss />
       <WhatsApp />

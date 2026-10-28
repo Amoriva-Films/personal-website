@@ -1,37 +1,16 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import IntroFilm from './IntroFilm';
 
-/* Intro, Fassung 6 (Danilo 23.10.2026): "ganz clean, einfach Amoriva, so
-   wie bei Westfeld Sicherheit". Aufbau wie dort (IntroVorhang): eine
-   Flaeche, der Name fliegt herein, die Unterzeile taucht auf, dann zieht
-   die Flaeche wie ein Vorhang nach oben weg.
-
-   Hier im Oliv-Braun der Seite, Schrift in Sand. Die Animation ist reines
-   CSS; das Skript regelt nur, dass das Intro beim Zurueckklicken innerhalb
-   der Seite nicht noch einmal kommt (window.__amorivaIntro), sperrt
-   waehrenddessen das Scrollen und gibt dem Hero das Startsignal. Bei
-   "Bewegung reduzieren" ist es aus (vintage.css).
-
-   Danilo 23.10.2026: als Preloader auf jeder Seite, bei jedem Aufruf. Unter
-   AMORIVA steht der Name der Seite (Startseite: "Films"). Das Intro sitzt
-   deshalb im Layout und startet bei jedem Seitenwechsel neu (key = Pfad). */
-
-const SEITEN = {
-  '/': 'Films',
-  '/ueber-uns': 'Über uns',
-  '/vision': 'Vision',
-  '/fragen': 'Fragen',
-  '/anfrage': 'Anfrage',
-  '/impressum': 'Impressum',
-  '/datenschutz': 'Datenschutz',
-};
+/* Intro (Nevio 27.10.2026): nur noch der kleine Film (IntroFilm) beim Laden der
+   Startseite. Der Vorhang mit Seitenname bei jedem Seitenwechsel ist weg, das
+   stoerte zu sehr. Auf allen anderen Seiten und beim Zurueckklicken zur
+   Startseite gibt es keine Animation, der Hero bekommt sofort sein Startsignal.
+   Das Skript sperrt waehrend des Films das Scrollen (window.__amorivaIntro). */
 
 const useVorDemBild = typeof window === 'undefined' ? useEffect : useLayoutEffect;
-
-const VORHANG_AB = 1750;   // ms, wie bei Westfeld
-const DAUER = 850;
 
 const TASTEN = new Set([' ', 'PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', 'Home', 'End']);
 function sperren(an) {
@@ -44,21 +23,30 @@ const tasteBlockieren = (e) => { if (document.documentElement.dataset.sperre && 
 
 export default function IntroWechsel() {
   const pfad = usePathname() || '/';
-  return <Intro key={pfad} unter={SEITEN[pfad] || 'Films'} />;
+  return <Intro key={pfad} pfad={pfad} />;
 }
 
-function Intro({ unter }) {
-  const [aktiv, setAktiv] = useState(true);
+function Intro({ pfad }) {
+  const [aktiv, setAktiv] = useState(pfad === '/');
+  // null = noch nicht entschieden: bis dahin nur Schwarz, damit nichts aufblitzt
+  // Einmal pro Intro entscheiden (React ruft Effekte im Dev-Modus doppelt auf)
+  const filmEntschieden = useRef(null);
+  const [film, setFilm] = useState(null);
 
   useVorDemBild(() => {
     const reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const oeffnen = () => window.dispatchEvent(new Event('amoriva:intro-oeffnet'));
-    if (reduziert) {
+    if (filmEntschieden.current === null) {
+      filmEntschieden.current = pfad === '/' && !window.__amorivaFilmGezeigt;
+      if (filmEntschieden.current) window.__amorivaFilmGezeigt = true;
+    }
+    if (reduziert || !filmEntschieden.current) {
       window.__amorivaIntro = 'fertig';
       setAktiv(false);
       oeffnen();
       return;
     }
+    setFilm(true);
     window.__amorivaIntro = 'laeuft';
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
@@ -67,16 +55,7 @@ function Intro({ unter }) {
     window.addEventListener('touchmove', blockieren, { passive: false });
     window.addEventListener('keydown', tasteBlockieren);
 
-    // Hero-Titel erscheint, waehrend der Vorhang hochzieht
-    const t1 = setTimeout(oeffnen, VORHANG_AB + 200);
-    const t2 = setTimeout(() => {
-      window.__amorivaIntro = 'fertig';
-      sperren(false);
-      setAktiv(false);
-    }, VORHANG_AB + DAUER + 50);
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
       window.removeEventListener('wheel', blockieren);
       window.removeEventListener('touchmove', blockieren);
       window.removeEventListener('keydown', tasteBlockieren);
@@ -84,37 +63,14 @@ function Intro({ unter }) {
     };
   }, []);
 
+  function beenden() {
+    window.__amorivaIntro = 'fertig';
+    sperren(false);
+    setAktiv(false);
+  }
+
   if (!aktiv) return null;
-
-  return (
-    <div className="intro" aria-hidden="true">
-      <p className="intro-name">
-        <span className="intro-titel">Amoriva</span>
-        <span className="intro-unter">{unter}</span>
-      </p>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        .intro {
-          position: fixed; inset: 0; z-index: 300; pointer-events: none; user-select: none;
-          display: flex; align-items: center; justify-content: center;
-          background: var(--nacht); color: var(--sand-hell);
-          animation: intro-vorhang ${DAUER}ms cubic-bezier(.65, 0, .35, 1) ${VORHANG_AB}ms both;
-        }
-        .intro-name { margin: 0; text-align: center; line-height: .9; }
-        .intro-titel {
-          display: block; font-family: var(--font-display), Georgia, serif; font-weight: 500;
-          font-size: clamp(46px, 9vw, 140px); letter-spacing: .14em; text-indent: .14em; text-transform: uppercase;
-          animation: intro-einflug 950ms cubic-bezier(.16, 1, .3, 1) 250ms both;
-        }
-        .intro-unter {
-          display: block; margin-top: .1em; font-family: var(--font-schrift), cursive; font-weight: 400;
-          font-size: clamp(30px, 4.6vw, 70px); line-height: 1; color: var(--khaki);
-          animation: intro-auftauchen 600ms cubic-bezier(.16, 1, .3, 1) 1050ms both;
-        }
-        @keyframes intro-vorhang { from { transform: none; } to { transform: translateY(-100%); } }
-        @keyframes intro-einflug { from { opacity: 0; transform: translateX(-55vw); } to { opacity: 1; transform: none; } }
-        @keyframes intro-auftauchen { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
-      ` }} />
-    </div>
-  );
+  if (film) return <IntroFilm fertig={beenden} />;
+  // Bis zur Entscheidung (vor dem ersten Bild) nur Schwarz, der Film beginnt schwarz
+  return <div className="intro-schwarz" aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 300, background: '#000' }} />;
 }

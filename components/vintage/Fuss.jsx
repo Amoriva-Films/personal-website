@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Wortmarke from '@/components/Wortmarke';
 import Titel from './Titel';
-import { anfrage, fuss, marke, navigation } from '@/content/texte';
+import { anfrage, fuss, marke, navigation, navigationMehr } from '@/content/texte';
 
 /* Fusszeile. Vorbild: die Footer-Referenz im Board ("Let's create
    something beautiful together"): oben ein breites Schwarzweiss-Bild mit
@@ -23,7 +23,7 @@ import { anfrage, fuss, marke, navigation } from '@/content/texte';
    der Fuss liegt auf dem Oliv-Braun mit Vintage-Oberflaeche wie "Wir sind
    ein Team". */
 
-const SEITEN = [...navigation, anfrage];
+const SEITEN = [...navigation, ...navigationMehr, anfrage];
 
 export default function Fuss() {
   const ref = useRef(null);
@@ -170,12 +170,11 @@ export default function Fuss() {
         }
         .fuss-kachel img { object-fit: cover; filter: sepia(.4) saturate(.8); }
         /* Lage, Drehung, Tempo je Bild: lose gestreut, teils ueberlappend */
-        .fuss-kachel--0 { left: 0;   top: 6%;  width: 36%; --dreh: -8deg; animation-duration: 7.5s; }
-        .fuss-kachel--1 { left: 33%; top: 0;   width: 33%; --dreh: 5deg;  animation-duration: 6.2s; animation-delay: -2s; z-index: 2; }
-        .fuss-kachel--2 { left: 66%; top: 10%; width: 34%; --dreh: -4deg; animation-duration: 8s;   animation-delay: -4s; }
-        .fuss-kachel--3 { left: 6%;  top: 52%; width: 33%; --dreh: 7deg;  animation-duration: 6.8s; animation-delay: -1s; z-index: 1; }
-        .fuss-kachel--4 { left: 38%; top: 46%; width: 36%; --dreh: -6deg; animation-duration: 7.2s; animation-delay: -3s; z-index: 3; }
-        .fuss-kachel--5 { left: 70%; top: 56%; width: 30%; --dreh: 9deg;  animation-duration: 6.5s; animation-delay: -5s; }
+        /* Vier lose Abzuege (26.10.2026: vorher sechs, davon alle doppelt) */
+        .fuss-kachel--0 { left: 2%;  top: 4%;  width: 44%; --dreh: -7deg; animation-duration: 7.5s; }
+        .fuss-kachel--1 { left: 52%; top: 0;   width: 42%; --dreh: 5deg;  animation-duration: 6.2s; animation-delay: -2s; z-index: 2; }
+        .fuss-kachel--2 { left: 6%;  top: 50%; width: 42%; --dreh: 6deg;  animation-duration: 6.8s; animation-delay: -1s; z-index: 1; }
+        .fuss-kachel--3 { left: 50%; top: 46%; width: 44%; --dreh: -5deg; animation-duration: 7.2s; animation-delay: -3s; z-index: 3; }
         @keyframes fuss-schweben {
           0%, 100% { transform: translate(0, 0) rotate(var(--dreh)); }
           50% { transform: translate(3px, -9px) rotate(calc(var(--dreh) * .6)); }

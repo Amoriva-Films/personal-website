@@ -23,7 +23,7 @@ export default function Termine() {
   const sichtbar = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
   return (
-    <section className="v-papier termine">
+    <section className="termine">
       <div ref={ref} className="v-bahn termine-band">
         <div className="termine-kopf">
           <p className="v-label termine-label">{termine.zeile}</p>

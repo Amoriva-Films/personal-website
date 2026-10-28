@@ -13,7 +13,7 @@ import { stimmen } from '@/content/texte';
 
 export default function Stimmen() {
   return (
-    <section className="v-papier stimmen" aria-labelledby="stimmen-titel">
+    <section className="stimmen" aria-labelledby="stimmen-titel">
       <span className="v-zeichnung stimmen-falter" style={{ '--bild': 'url(/images/vintage/falter-flug.webp)' }} aria-hidden="true" />
       <div className="v-bahn">
         <p id="stimmen-titel" className="v-zeile stimmen-zeile">{stimmen.zeile}</p>

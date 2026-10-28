@@ -71,11 +71,24 @@ const nextConfig = {
         permanent: true,
       },
       {
-        // Die Preisseite ist in /angebote aufgegangen (eine Seite statt zwei mit
-        // demselben Thema). Dauerhafte Umleitung, damit alte Links und die
-        // Google-Bewertung der Seite erhalten bleiben.
+        // Die Preisseite ist erst in /angebote aufgegangen, /angebote dann
+        // in /leistungen (Vintage-Redesign 28.10.2026: eine Seite statt zwei
+        // mit demselben Thema, keine Preise). Beide direkt auf /leistungen,
+        // ohne Kette, damit alte Links und die Google-Bewertung erhalten bleiben.
         source: '/preise',
-        destination: '/angebote',
+        destination: '/leistungen',
+        permanent: true,
+      },
+      {
+        source: '/angebote',
+        destination: '/leistungen',
+        permanent: true,
+      },
+      {
+        // Same Day Edit bieten wir vorerst nicht an (Nevio 28.10.2026). Der
+        // Artikel ist raus, alte Links landen auf der Ratgeber-Uebersicht.
+        source: '/ratgeber/same-day-edit-hochzeit',
+        destination: '/ratgeber',
         permanent: true,
       },
     ];

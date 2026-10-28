@@ -4,41 +4,34 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Wortmarke from '@/components/Wortmarke';
-import { anfrage, kopf, marke, navigation } from '@/content/texte';
+import { anfrage, kopf, marke, navigation, navigationMehr } from '@/content/texte';
 
 /* Kopfzeile nach der Crown-Perfumery-Referenz: Links links, Wortmarke in
    der Mitte, Anfrage rechts. Keine Pille, kein Milchglas: backdrop-blur
    wird bei jedem Scrollbild neu berechnet (Vault: Fluessige Animationen).
 
-   Ueber einem dunklen Kopfbereich (data-dunkler-kopf, z. B. Hero-Video)
-   steht sie hell und durchsichtig. Sobald dieser Bereich unter der Leiste
-   durch ist, liegt sie als Sand-Leiste mit dunkler Schrift (Vorbild
-   Tilly Roberts im Board). "Start" fuehrt immer zurueck (Danilo: "ich will einen Home-Button"). */
-
-// Muss zu --v-kopf in vintage.css passen (dort fuer das CSS).
-const HOEHE = 76;
+   Sie liegt auf jeder Seite gleich als Sand-Leiste mit dunkler Schrift
+   (Vorbild Tilly Roberts im Board). "Start" fuehrt immer zurueck (Danilo: "ich will einen Home-Button"). */
 
 export default function Kopf() {
   const pfad = usePathname();
-  // 'leiste' = feste dunkle Leiste, 'hell' = durchsichtig ueber dem Video.
-  const [modus, setModus] = useState('leiste');
+  // Eine einheitliche Kopfzeile auf jeder Seite (Nevio 26.10.2026: "die Zeile da
+  // oben darf sich nicht aendern"): die Sand-Leiste mit dunkler Schrift.
+  // Ganz oben liegt sie auf jeder Seite mit dunklem Kopfbereich (Hero-Video,
+  // gemalte Kopfbilder, Vision) durchsichtig mit heller Schrift, damit das Bild
+  // voll zu sehen ist. Sobald man ein Stueck scrollt, kommt die Sand-Leiste
+  // (Nevio 26.10.2026).
   const [offen, setOffen] = useState(false);
+  const [ueberVideo, setUeberVideo] = useState(false);
 
   useEffect(() => {
     let bild = 0;
     const pruefen = () => {
       bild = 0;
       const kopfbereich = document.querySelector('[data-dunkler-kopf]');
-      if (!kopfbereich || kopfbereich.getBoundingClientRect().bottom <= HOEHE) { setModus('leiste'); return; }
-      // Seiten, die oben auf Oliv-Braun beginnen (Fragen, Vision): die Leiste
-      // wird selbst Oliv-Braun mit heller Schrift, solange diese Flaeche unter
-      // ihr liegt. Keine helle Kante oben (Danilo 23.10.2026).
-      if (kopfbereich.dataset.dunklerKopf === 'flaeche') { setModus('dunkel'); return; }
-      // Helle Schrift nur, solange das dunkle Bild wirklich hinter der Leiste
-      // liegt. Beim Hero schrumpft das Video schnell unter die Leiste weg,
-      // dann steht die Kopfzeile wieder als Sandleiste da (sonst helle Schrift
-      // auf hellem Himmel, 22.10.2026).
-      setModus(kopfbereich.getBoundingClientRect().top > -window.innerHeight * 0.08 ? 'hell' : 'leiste');
+      // Ab etwa 8 % Scrollweg kommt die Leiste (beim Hero schrumpft das Video
+      // dann schon in seinen Rahmen und dahinter liegt heller Grund)
+      setUeberVideo(Boolean(kopfbereich) && kopfbereich.getBoundingClientRect().top > -window.innerHeight * 0.08);
     };
     const beiScroll = () => { if (!bild) bild = requestAnimationFrame(pruefen); };
     pruefen();
@@ -69,7 +62,7 @@ export default function Kopf() {
   const aktiv = (href) => (pfad === href ? 'page' : undefined);
 
   return (
-    <header className={`kopf${!offen && modus !== 'leiste' ? ` kopf--${modus}` : ''}`}>
+    <header className={`kopf${pfad !== '/' ? ' kopf--dunkel' : ''}${ueberVideo && !offen ? ' kopf--video' : ''}`}>
       <div className="kopf-bahn">
         <nav className="kopf-links" aria-label="Hauptnavigation">
           {navigation.map(({ label, href }) => (
@@ -104,7 +97,7 @@ export default function Kopf() {
 
       <div id="kopf-panel" className={`kopf-panel${offen ? ' kopf-panel--offen' : ''}`} hidden={!offen}>
         <nav aria-label="Menü">
-          {[...navigation, anfrage].map(({ label, href }) => (
+          {[...navigation, ...navigationMehr, anfrage].map(({ label, href }) => (
             <Link key={href} href={href} className="kopf-panel-link" aria-current={aktiv(href)}>
               {label}
             </Link>
@@ -121,12 +114,20 @@ export default function Kopf() {
           border-bottom: 1px solid color-mix(in srgb, var(--tinte) 12%, transparent);
           transition: background-color 400ms var(--v-ease), color 400ms var(--v-ease), border-color 400ms var(--v-ease);
         }
-        .kopf--hell { color: var(--blatt); background: transparent; border-bottom-color: transparent; }
+        /* Unterseiten (alles ausser Start): die Leiste im Oliv-Braun mit
+           Papierstruktur wie die Flaechen darunter, helle Schrift (Nevio 26.10.2026) */
         .kopf--dunkel {
           color: var(--sand-hell); border-bottom-color: color-mix(in srgb, var(--sand-hell) 10%, transparent);
           background: url("/images/vintage/braun-alt.webp") 0 0 / 1024px repeat, var(--nacht);
           background-blend-mode: luminosity, normal;
         }
+        @media (hover: hover) { .kopf--dunkel .kopf-knopf:hover { background-color: var(--sand-hell); color: var(--tinte); } }
+        /* Ganz oben ueber dem dunklen Kopfbereich: durchsichtig, helle Schrift,
+           oben ein weicher Schatten, damit die Schrift lesbar bleibt */
+        .kopf--video { color: var(--blatt); background: transparent; border-bottom-color: transparent; }
+        .kopf--video::before { content: ''; position: absolute; inset: 0 0 -40px; z-index: -1; pointer-events: none;
+          background: linear-gradient(to bottom, rgba(14, 11, 6, .5), rgba(14, 11, 6, 0)); }
+        @media (hover: hover) { .kopf--video .kopf-knopf:hover { background-color: var(--sand-hell); color: var(--tinte); } }
         .kopf-bahn {
           height: var(--v-kopf); max-width: var(--spalte); margin-inline: auto; padding-inline: var(--rand);
           display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--luft-3);
@@ -165,7 +166,6 @@ export default function Kopf() {
         }
         @media (hover: hover) {
           .kopf-knopf:hover { background-color: var(--tinte); color: var(--sand); }
-          .kopf--hell .kopf-knopf:hover, .kopf--dunkel .kopf-knopf:hover { background-color: var(--sand-hell); color: var(--tinte); }
         }
         .kopf a:focus-visible, .kopf button:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
@@ -196,6 +196,15 @@ export default function Kopf() {
         }
         @media (max-width: 959px) { .kopf-bahn > .kopf-menue { grid-column: 1; grid-row: 1; } .kopf-marke { grid-column: 2; grid-row: 1; } .kopf-rechts { grid-column: 3; grid-row: 1; } }
         @media (min-width: 960px) { .kopf-bahn { padding-inline: 60px; } }
+        /* Kleine Laptops: mit "Leistungen" im Menue brachen die Links sonst in zwei
+           Zeilen um (28.10.2026). Enger setzen, Telefonnummer steht dann nur im Fuss. */
+        .kopf-link { white-space: nowrap; }
+        @media (min-width: 960px) and (max-width: 1239px) {
+          .kopf-bahn { padding-inline: 32px; }
+          .kopf-links { gap: 20px; }
+          .kopf-link { font-size: 12px; letter-spacing: .12em; }
+          .kopf-telefon { display: none; }
+        }
         @media (prefers-reduced-motion: reduce) { .kopf, .kopf-link::after, .kopf-knopf { transition: none; } }
       ` }} />
     </header>

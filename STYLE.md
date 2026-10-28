@@ -205,3 +205,31 @@ Quellen: nur Danilos sechs Referenzen im Board (Wedding Sessions, Blumen-Stateme
 - Fassungen 3 bis 5 sind verworfen; 3 und 4 liegen im Backup-Ordner.
 - Intro als Preloader auf jeder Seite und bei jedem Seitenwechsel (im Layout, key = Pfad). Unter AMORIVA der Seitenname: Films, Über uns, Vision, Fragen, Anfrage, Impressum, Datenschutz.
 - Kopfzeile Modus 'dunkel': auf Seiten mit data-dunkler-kopf="flaeche" (Fragen, Vision) wird die Leiste Oliv-Braun mit heller Schrift, solange die Fläche darunter liegt.
+
+## Nachtrag 2026-10-26 (Nevio, Mac)
+- Leistungen rechts: Text, Pakete und Knopf stehen auf einer echten Karte mit Blindprägung (Figma-KI, `public/images/vintage/karte-praegung.jpg`, Vorbild "Why We Gather"). Karte quer und mit fester Größe (border-image, 9-Teilung): links Titel, Pakete als Auswahl und Knopf, rechts ein festes Feld mit den Details des gewählten Pakets. Beim Wechseln springt nichts. Kein Akkordeon mehr, ein Paket ist immer gewählt. Links (Fotokarte, Kordel, Siegel) bleibt.
+- Fotos: jedes Foto nur einmal auf der Seite, kein Paar soll dominieren. Neue Fotos siehe `content/texte.js`.
+- Über uns: Kopf wie bei Fragen (volle Breite, unten weich ins Braun), gemaltes Team-Bild `team-unterwegs.jpg`: Danilo, Kati, Nevio klein von hinten, locker und unregelmäßig im Feld unterwegs, keine Gesichter; Titel mittig wie bei Fragen (leicht angehoben), grün abgestimmt, Werte I bis VI, Langtexte für Danilo, Kati, Nevio (`bioLang`).
+- Fragen: gemaltes Toskana-Bild im Kopf, Einleitung, Abschluss mit Knöpfen.
+- Stimmen, Termine und Gründer liegen auf einer durchgehenden dunklen Fläche (`.dunkel-strecke`).
+- Vision: Team-Text als schmale Blocksatz-Spalte, die aus dem Objektiv einer Vintage-Kamera kommt (Vorbild alte Leica-Anzeige, Kamera per Figma-KI ohne Marke, `public/images/vintage/kamera.png`, Magenta freigestellt). Moodboard deutlich kleiner. Keine Teamgröße im Text.
+- Kopfzeile: auf jeder Seite gleich. Ganz oben über dem dunklen Kopfbereich (Hero-Video, gemalte Kopfbilder, Vision) durchsichtig mit heller Schrift und weichem Schatten (`kopf--video`), damit das Bild voll zu sehen ist; ab etwa 8 % Scrollweg die Leiste: auf der Startseite Sand mit dunkler Schrift, auf allen Unterseiten Oliv-Braun mit Papierstruktur und heller Schrift (`kopf--dunkel`).
+- Vision: Kopf und Team-Text liegen auf einer durchgehenden Fläche (`.vision-flaeche`), keine Naht.
+- Über uns, Gründer: Danilo und Nevio als "Plakat" (abgenommen 26.10.2026): großer blasser Name in Versalien hinter der Person, Person freigestellt in Farbe davor (`danilo-frei.png`, `nevio-frei.png`, PNG mit Transparenz), Text im Blocksatz. Danilo: Name oben, Text rechts. Nevio: Name zweizeilig rechts neben ihm, Text unter dem MacBook. Kati: gespiegelt, Foto rechts, Name zweizeilig links, ihre Kamera zeigt in den Text (`kati-frei.png`).
+
+## Intro, Fassung 7 (2026-10-26): kleiner Film beim ersten Besuch der Startseite
+- Vorbild: Lusio-Clip auf Pinterest ("Episode 1"), ohne Tasche aufs Auto. `components/vintage/IntroFilm.jsx`, Bilder `public/images/intro/` (Figma-KI).
+- Ablauf (rund 6,2 s, Ende fliessend: Schriftzug blendet aus, gleichzeitig loest sich das Schwarz ins Video auf, dann der Hero-Titel): weisses Palazzo-Modell mit warm erleuchteten Fenstern und Hochzeitsgaesten, Zeile "Kapitel eins. Euer Tag." in Schreibschrift; Kamera faehrt ins mittlere Fenster mit dem Brautpaar; warmes Licht, dann Schwarz; elfenbeinfarbener Oldtimer faehrt von rechts nach links durch und deckt hinter seinem Heck AMORIVA Films auf; Kamera fliegt vorher ueber das Brautpaar durchs Fenster ins Haus; Ausblenden in den Hero. Ueberspringen und Escape springen ans Ende.
+- Bei jedem Laden der Startseite, auch nach Aktualisieren (Nevio 26.10.2026). Seit 27.10.2026 rund 4,3 s (30 % schneller). Der Vorhang mit Seitenname bei Seitenwechseln ist ganz raus (stoerte), Unterseiten erscheinen ohne Intro.
+- Impressum und Datenschutz im Vintage-Design (`components/vintage/Rechtliches.jsx`): dunkler Kopf wie die anderen Unterseiten (Label "Rechtliches", Titel, Unterzeile in Schreibmaschine), Text auf einem Papierbogen mit feiner Innenlinie und Schatten. Inhalte unverändert.
+- Prozess: rechts dieselbe gepraegte Papierkarte wie bei Leistungen. Sie zeigt immer nur den aktiven Schritt (grosse Nummer, Titel, kurzer Text, Link auf die passende Seite: Anfrage, Ueber uns, Vision, Fragen, Anfrage), darunter die Nummern 01 bis 05 zum Anklicken. Jeder Scroll-Abschnitt wechselt zum naechsten Schritt. Waehlscheibe links unveraendert.
+
+## Leistungen, Ratgeber, Livegang-Vorbereitung (2026-10-28)
+- Keine Preise auf der Website (Teamentscheidung). `/angebote` und `/preise` leiten dauerhaft auf `/leistungen` um.
+- Leistungen (`app/leistungen/page.js`): ruhiger Textkopf, drei Pakete abwechselnd Bild und Text (Pakete aus `leistungen.pakete`, dieselben wie auf der Startseite), "Wovon euer Angebot abhängt" (I bis IV), Ablauf in fünf Schritten (`prozess.schritte`), Abschluss mit Knöpfen.
+- Ratgeber: Übersicht mit Textkopf und Artikelzeilen wie bei Fragen. Artikel laufen über `components/ArticleLayout.jsx`: dunkler Kopf mit Brotkrumen, Text auf Papierbogen wie Impressum, danach Anfrage und drei weitere Artikel. Kein Kopffoto (Hochformat war im breiten Kopf zu stark vergrößert).
+- Menü: "Leistungen" in der Kopfleiste, "Ratgeber" im Handy-Menü und im Fuß (`navigationMehr`). Zwischen 960 und 1239 px enger gesetzt, Telefonnummer dort ausgeblendet.
+- Handy: Werte auf Über uns einspaltig unter 560 px, Titel Datenschutz kurz ("Datenschutz"), damit nichts über den Rand ragt.
+- Fragen: LED-Hover (weißes Licht folgt der Maus, Linie leuchtet).
+- Preise doch auf der Seite (28.10.2026): Startpreise in `seiteLeistungen.preise`. Preiskarte (`components/vintage/Preiskarte.jsx`) wie die Menükarte eines alten Grandhotels: geprägte Karte, dahinter eine zweite, "Preiskarte" in Schreibschrift, Punktlinien, Gruß "Danilo, Kati & Nevio", grünes A-Siegel. Beim Hereinscrollen richtet sie sich aus dem Liegen auf, die hintere Karte fächert heraus, die Zeilen laufen nacheinander ein, Preise werden wie gestempelt, zuletzt das Siegel. Mit der Maus leichte 3D-Neigung.
+- Same Day Edit vorerst nicht im Angebot, Artikel entfernt (Umleitung auf /ratgeber). Keine Aussage über Kamera-Anzahl als Preisfaktor (es filmen immer mindestens zwei).

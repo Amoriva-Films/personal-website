@@ -34,7 +34,9 @@ function Stempel() {
 }
 
 export default function Leistungen() {
-  const [offen, setOffen] = useState(-1);
+  // Ein Paket ist immer gewaehlt; seine Details stehen in einem festen Feld der Karte,
+  // damit beim Wechseln nichts auf der Seite springt (Nevio 26.10.2026)
+  const [gewaehlt, setGewaehlt] = useState(0);
   const ref = useRef(null);
   const sichtbar = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
@@ -43,7 +45,7 @@ export default function Leistungen() {
       <div className="v-bahn sitzung">
         <div ref={ref} className="sitzung-bild">
           <div className="sitzung-grund">
-            <Image src="/images/paare/trauung-weit.webp" alt="" fill sizes="(max-width: 900px) 100vw, 50vw" quality={60} />
+            <Image src="/images/hochzeit-2.jpg" alt="" fill sizes="(max-width: 900px) 100vw, 50vw" quality={60} />
           </div>
           <motion.div
             className="sitzung-karte"
@@ -67,41 +69,46 @@ export default function Leistungen() {
         </div>
 
         <div className="sitzung-text">
-          <Titel text={leistungen.titel} className="v-titel sitzung-titel" />
-          <p className="sitzung-unter">{leistungen.untertitel}</p>
-
-          <ul className="sitzung-liste">
-            {leistungen.pakete.map((p, i) => {
-              const auf = offen === i;
-              return (
-                <li key={p.titel} className={`sitzung-paket${auf ? ' sitzung-paket--auf' : ''}`}>
-                  <button type="button" className="sitzung-kopf" aria-expanded={auf} onClick={() => setOffen(auf ? -1 : i)}>
-                    <span className="sitzung-paket-titel">{p.titel}</span>
-                    <svg className="sitzung-pfeil" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.2" /></svg>
+          <div className="sitzung-links">
+            <p className="v-label sitzung-zeile">{leistungen.zeile}</p>
+            <Titel text={leistungen.titel} className="v-titel sitzung-titel" />
+            <p className="sitzung-unter">{leistungen.untertitel}</p>
+            <ul className="sitzung-liste">
+              {leistungen.pakete.map((p, i) => (
+                <li key={p.titel}>
+                  <button
+                    type="button" className={`sitzung-wahl${gewaehlt === i ? ' sitzung-wahl--an' : ''}`}
+                    aria-pressed={gewaehlt === i} aria-controls="sitzung-feld" onClick={() => setGewaehlt(i)}
+                  >
+                    {p.titel}
                   </button>
-                  <div className="sitzung-inhalt" data-auf={auf ? '1' : '0'}>
-                    <div>
-                      <p className="v-label sitzung-paket-unter">{p.unter}</p>
-                      <p className="v-text sitzung-beschreibung">{p.text}</p>
-                      <ul className="sitzung-punkte">{p.inhalt.map((x) => <li key={x}>{x}</li>)}</ul>
-                    </div>
-                  </div>
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ul>
+            <Link href={anfrage.href} className="v-knopf">{leistungen.knopf}</Link>
+          </div>
 
-          <Link href={anfrage.href} className="v-knopf">{leistungen.knopf}</Link>
+          <div id="sitzung-feld" className="sitzung-feld" aria-live="polite">
+            {leistungen.pakete.map((p, i) => (
+              <div key={p.titel} className={`sitzung-paket${gewaehlt === i ? ' sitzung-paket--an' : ''}`} hidden={gewaehlt !== i}>
+                <p className="v-label sitzung-paket-unter">{p.unter}</p>
+                <p className="v-text sitzung-beschreibung">{p.text}</p>
+                <ul className="sitzung-punkte">{p.inhalt.map((x) => <li key={x}>{x}</li>)}</ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
         .leistungen.v-abschnitt { padding-block: clamp(56px, 6vw, 96px); }
-        .sitzung { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center; max-width: 1360px; }
+        .sitzung { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: center; max-width: 1360px; }
 
         /* Links: Komposition in festem Seitenverhaeltnis, alles in % */
         .sitzung-bild { position: relative; aspect-ratio: 860 / 560; }
-        .sitzung-grund { position: absolute; left: 0; right: 0; top: 0; height: 84%; overflow: hidden; opacity: .5; filter: grayscale(.85) sepia(.15); }
+        .sitzung-grund { position: absolute; left: 0; right: 0; top: 0; height: 100%; overflow: hidden; opacity: .5; filter: grayscale(.85) sepia(.15);
+          /* weiche Kanten rundum: keine harte Unterkante, an der die Karte ueberhaengt (Nevio 26.10.2026: Fehler) */
+          -webkit-mask-image: radial-gradient(closest-side at 50% 48%, #000 55%, transparent 100%); mask-image: radial-gradient(closest-side at 50% 48%, #000 55%, transparent 100%); }
         .sitzung-grund img { object-fit: cover; }
         .sitzung-karte {
           position: absolute; left: 30%; top: 8%; width: 35%; aspect-ratio: 0.74; padding: 6.5% 5.5% 14%;
@@ -138,32 +145,53 @@ export default function Leistungen() {
         .sitzung-stempel-zweig { position: absolute; inset: 27%; color: currentColor; }
         @keyframes stempel-dreht { to { transform: rotate(360deg); } }
 
-        /* Rechts: alles mittig */
-        .sitzung-text { text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .sitzung-titel { text-transform: none; letter-spacing: .01em; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.08; }
-        .sitzung-unter { margin: 14px 0 clamp(24px, 2.6vw, 34px); font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13.5px; color: var(--ton-akzent); }
-        .sitzung-liste { list-style: none; margin: 0 0 clamp(26px, 3vw, 38px); padding: 0; width: 100%; max-width: 520px; border-top: 3px double color-mix(in srgb, var(--ton) 30%, transparent); }
-        .sitzung-paket { border-bottom: 1px solid color-mix(in srgb, var(--ton) 22%, transparent); }
-        .sitzung-kopf {
-          width: 100%; display: grid; grid-template-columns: 18px minmax(0, 1fr) 18px; align-items: center; gap: 10px;
-          padding: 18px 0; background: none; border: none; cursor: pointer; color: inherit;
+        /* Rechts: eine Karte quer mit Blindpraegung (Figma-KI, Vorbild "Why We Gather").
+           Feste Groesse: links Titel, Pakete und Knopf, rechts ein festes Feld mit den
+           Details des gewaehlten Pakets. Beim Wechseln aendert sich keine Hoehe, links
+           und die Seite bleiben stehen (Nevio 26.10.2026). Rand und Ecken per
+           border-image (9-Teilung), die Mitte ist leeres Papier. */
+        .sitzung-text {
+          --rand: clamp(38px, 3.8vw, 58px);
+          display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(18px, 2.4vw, 34px); align-items: center;
+          justify-self: center; width: 100%; max-width: 740px; height: clamp(470px, 38vw, 530px); color: var(--tinte);
+          border: var(--rand) solid transparent;
+          border-image: url("/images/vintage/karte-praegung.jpg") 240 fill / var(--rand) stretch;
+          padding: clamp(4px, .8vw, 10px) clamp(6px, 1vw, 14px);
+          filter: drop-shadow(0 22px 26px rgba(46, 43, 34, .24)) drop-shadow(0 3px 4px rgba(46, 43, 34, .16));
+          rotate: -.5deg;
         }
-        .sitzung-kopf:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
-        .sitzung-paket-titel { grid-column: 2; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: .02em; }
-        .sitzung-pfeil { justify-self: end; opacity: .7; transition: transform 400ms var(--v-ease); }
-        .sitzung-paket--auf .sitzung-pfeil { transform: rotate(180deg); }
-        .sitzung-inhalt { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 500ms var(--v-ease); }
-        .sitzung-inhalt[data-auf='1'] { grid-template-rows: 1fr; }
-        .sitzung-inhalt > div { overflow: hidden; }
-        .sitzung-paket-unter { margin: 0 0 10px; color: var(--ton-akzent); }
-        .sitzung-beschreibung { margin: 0 auto 14px; max-width: 46ch; font-size: 15px; }
-        .sitzung-punkte { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 6px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13.5px; color: color-mix(in srgb, var(--ton) 82%, transparent); }
+        .sitzung-links { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .sitzung-zeile { margin: 0 0 10px; color: color-mix(in srgb, var(--tinte) 62%, transparent); }
+        .sitzung-titel { text-transform: none; letter-spacing: .01em; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.1; }
+        .sitzung-unter { margin: 8px 0 16px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 12px; color: var(--ton-akzent); }
+        .sitzung-liste { list-style: none; margin: 0 0 18px; padding: 0; width: 100%; border-top: 1px solid color-mix(in srgb, var(--tinte) 18%, transparent); }
+        .sitzung-liste li { border-bottom: 1px solid color-mix(in srgb, var(--tinte) 18%, transparent); }
+        .sitzung-wahl {
+          width: 100%; padding: 10px 0; background: none; border: none; cursor: pointer; color: color-mix(in srgb, var(--tinte) 55%, transparent);
+          font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); letter-spacing: .02em;
+          transition: color 300ms var(--v-ease);
+        }
+        .sitzung-wahl--an { color: var(--tinte); }
+        .sitzung-wahl--an::before, .sitzung-wahl--an::after { content: '\\2022'; margin: 0 .6em; font-size: .7em; vertical-align: .15em; color: var(--ton-akzent); }
+        @media (hover: hover) { .sitzung-wahl:hover { color: var(--tinte); } }
+        .sitzung-wahl:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+        .sitzung-links .v-knopf { margin-top: 4px; }
+        /* Festes Detailfeld: gleiche Hoehe fuer alle Pakete */
+        .sitzung-feld { position: relative; align-self: stretch; display: flex; align-items: center; padding-left: clamp(16px, 2vw, 28px); border-left: 1px solid color-mix(in srgb, var(--tinte) 16%, transparent); }
+        .sitzung-paket { animation: paket-ein 450ms var(--v-ease); }
+        @keyframes paket-ein { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+        .sitzung-paket-unter { margin: 0 0 8px; color: var(--ton-akzent); }
+        .sitzung-beschreibung { margin: 0 0 12px; font-size: 14px; line-height: 1.55; }
+        .sitzung-punkte { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 12px; line-height: 1.4; color: color-mix(in srgb, var(--tinte) 80%, transparent); }
+        .sitzung-punkte li::before { content: '\\2013'; margin-right: .5em; color: var(--ton-akzent); }
 
         @media (max-width: 900px) {
           .sitzung { grid-template-columns: minmax(0, 1fr); }
           .sitzung-bild { max-width: 620px; width: 100%; margin-inline: auto; }
+          .sitzung-text { grid-template-columns: minmax(0, 1fr); height: auto; }
+          .sitzung-feld { border-left: none; padding-left: 0; border-top: 1px solid color-mix(in srgb, var(--tinte) 16%, transparent); padding-top: 16px; min-height: 260px; align-items: flex-start; }
         }
-        @media (prefers-reduced-motion: reduce) { .sitzung-stempel svg { animation: none; } .sitzung-inhalt, .sitzung-pfeil { transition: none; } }
+        @media (prefers-reduced-motion: reduce) { .sitzung-stempel svg { animation: none; } .sitzung-paket { animation: none; } }
       ` }} />
     </section>
   );

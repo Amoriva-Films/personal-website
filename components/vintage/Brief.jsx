@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { brief, marke, anfrage } from '@/content/texte';
 import { zerlegen } from './Titel';
@@ -58,6 +58,28 @@ export default function Brief() {
   const briefVor = useTransform(p, [0.55, 0.8], ['0vh', '-112vh']);
   const briefGross = useTransform(p, [0.55, 0.8], [1, 1.14]);
 
+  // 3D: der Brief neigt sich mit der Maus (Perspektive, Glanz, wandernder Schatten)
+  // und kippt beim Herausziehen leicht nach hinten. Nur transform/opacity/filter,
+  // kein preserve-3d (das hat die Klappe frueher zerlegt).
+  const reduziert = useReducedMotion();
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 120, damping: 18, mass: 0.6 });
+  const sy = useSpring(my, { stiffness: 120, damping: 18, mass: 0.6 });
+  const scrollKipp = useTransform(p, [0.3, 0.5, 0.8], [0, 14, 0]);
+  const neigungX = useTransform([sy, scrollKipp], ([m, k]) => -m * 9 + k);
+  const neigungY = useTransform(sx, (m) => m * 11);
+  const schatten = useTransform([sx, sy], ([x, y]) => `drop-shadow(${(-x * 22).toFixed(1)}px ${(26 + y * 14).toFixed(1)}px 22px rgba(20, 16, 8, .38))`);
+  const glanzX = useTransform(sx, (m) => `${m * 38}%`);
+  const glanzY = useTransform(sy, (m) => `${m * 38}%`);
+  const zeiger = (e) => {
+    if (reduziert) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set(((e.clientX - r.left) / r.width) * 2 - 1);
+    my.set(((e.clientY - r.top) / r.height) * 2 - 1);
+  };
+  const zeigerWeg = () => { mx.set(0); my.set(0); };
+
   useMotionValueEvent(p, 'change', (w) => {
     setVorne(w > 0.53);
     setKlappeOffen(w > 0.18);
@@ -66,14 +88,15 @@ export default function Brief() {
   return (
     <>
     <section ref={huelle} className="brief v-nacht" style={{ height: '300vh' }}>
-      <div className="brief-buehne">
+      <div className="brief-buehne" onPointerMove={zeiger} onPointerLeave={zeigerWeg}>
         {/* Ausgeblendet werden nur die Umschlag-Teile, nicht der Brief */}
         <motion.div className="brief-umschlag" style={{ y: einY }}>
           <motion.span className="brief-rueckwand" aria-hidden="true" style={{ opacity: einO }} />
 
           {/* Der Brief: aussen die Bewegung nach vorne, innen das Herausgleiten */}
-          <motion.div className="brief-blatt-huelle" style={{ y: briefVor, scale: briefGross, zIndex: vorne ? 6 : 2 }}>
+          <motion.div className="brief-blatt-huelle" style={{ y: briefVor, scale: briefGross, zIndex: vorne ? 6 : 2, transformPerspective: 1100, rotateX: reduziert ? 0 : neigungX, rotateY: reduziert ? 0 : neigungY, filter: reduziert ? 'none' : schatten }}>
             <motion.div className="brief-blatt v-blatt" style={{ y: briefRaus }}>
+              <motion.span className="brief-glanz" aria-hidden="true" style={{ x: glanzX, y: glanzY }} />
               <p className="brief-zeile v-schrift">{brief.zeile}</p>
               <TitelZeile text={brief.titel} />
               <p className="brief-text">{brief.text}</p>
@@ -155,6 +178,10 @@ export default function Brief() {
           padding: 5cqw 7cqw; box-shadow: 0 10px 30px color-mix(in srgb, var(--tusche) 22%, transparent);
           outline: 1px solid color-mix(in srgb, var(--pergament) 70%, transparent); outline-offset: -2.2cqw;
         }
+        .brief-blatt { position: relative; overflow: hidden; }
+        .brief-blatt > :not(.brief-glanz) { position: relative; z-index: 1; }
+        .brief-glanz { position: absolute; inset: -40%; z-index: 2; pointer-events: none; mix-blend-mode: soft-light;
+          background: radial-gradient(circle at 50% 50%, rgba(255, 252, 240, .85), transparent 42%); }
         .brief-zeile { margin: 0 0 1.4cqw; font-size: 5cqw; line-height: 1; color: var(--oliv-mitte); }
         .brief-titel {
           margin: 0 0 2.6cqw; font-family: var(--font-display), Georgia, serif; font-weight: 500;

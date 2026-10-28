@@ -25,8 +25,16 @@ export const marke = {
 export const navigation = [
   { label: 'Start', href: '/' },
   { label: 'Über uns', href: '/ueber-uns' },
+  { label: 'Leistungen', href: '/leistungen' },
   { label: 'Vision', href: '/vision' },
   { label: 'Fragen', href: '/fragen' },
+];
+
+// Nur im Handy-Menue und im Fuss, nicht in der Kopfleiste (dort waere es zu
+// voll). Der Ratgeber braucht trotzdem einen festen Link von jeder Seite,
+// sonst gilt er fuer Google als unwichtig (Nevio 28.10.2026).
+export const navigationMehr = [
+  { label: 'Ratgeber', href: '/ratgeber' },
 ];
 
 export const anfrage = { label: 'Anfrage', href: '/anfrage' };
@@ -40,12 +48,15 @@ export const kopf = {
 
 export const intro = {
   ueberspringen: 'Überspringen',
+  // Start-Film (IntroFilm.jsx): Zeile ueber der Fassade, Entwurf 26.10.2026
+  filmKlein: 'Amoriva Films',
+  filmSchrift: 'Kapitel eins. Euer Tag.',
 };
 
 export const hero = {
   label: 'Hochzeitsfilm & Hochzeitsfotografie',
   titel: 'Amoriva Films',
-  unterzeile: 'Mit Sitz in Wolfsburg, für Hochzeiten auf der ganzen Welt.',
+  unterzeile: 'Mit Sitz in Wolfsburg, für Hochzeiten in ganz Europa.',
   scroll: 'Scroll',
 };
 
@@ -70,10 +81,11 @@ export const arbeit = {
   // Collage links und rechts vom Text (Vorbild "An Ode to your Memories"):
   // je ein grosses, blasses Bild und ein kleines, scharfes davor
   collage: {
-    linksBlass: { src: '/images/Bild-5.webp', b: 2000, h: 3000 },
+    // Neue Fotos (Nevio 26.10.2026): jedes Bild nur einmal auf der Seite
+    linksBlass: { src: '/images/anzug-balkon.jpg', b: 1600, h: 2400 },
     linksScharf: { src: '/images/paare/paar-gehen.webp', alt: 'Ein Brautpaar geht Hand in Hand durch den Schlossgarten', b: 1024, h: 1536 },
-    rechtsBlass: { src: '/images/paare/kronleuchter-v2.webp', b: 1600, h: 2400 },
-    rechtsScharf: { src: '/images/hochzeit-4.jpg', alt: 'Brautpaar im Garten', b: 1333, h: 2000 },
+    rechtsBlass: { src: '/images/kerzentisch.jpg', b: 1600, h: 2400 },
+    rechtsScharf: { src: '/images/braut-schleier-garten.jpg', alt: 'Braut mit Schleier und Strauß im Schlossgarten', b: 1333, h: 2000 },
   },
   knopf: 'Anfrage stellen',
 };
@@ -83,21 +95,24 @@ export const leitsatz = {
   label: 'Amoriva Films · Wolfsburg',
   // Haltung gegen den Einheitslook der Branche, ohne jemanden zu nennen
   text: 'Euer Film soll sich in zwanzig Jahren noch nach euch anfühlen und nicht nach dem Trend von damals.',
-  bild: { src: '/images/hochzeit-2.jpg', alt: '' },
+  bild: { src: '/images/autofahrt.jpg', alt: 'Brautpaar lacht auf der Rückbank eines Oldtimers' },
 };
 
 export const momente = {
   zeile: 'Aus unseren Hochzeiten',
   titel: 'Momente, die *bleiben.*',
   schrift: 'Momente, die bleiben',
+  // Paare gemischt, kein Paar dominiert, kein Bild doppelt (Nevio 26.10.2026).
+  // 0 und 2 stehen gross in der Mitte, der Rest liegt verstreut (STREU in Momente.jsx).
   bilder: [
-    { src: '/images/hochzeit-2.jpg', alt: 'Braut mit Brautstrauß', b: 1333, h: 2000 },
-    { src: '/images/paare/paar-kuss.webp', alt: 'Ein Brautpaar küsst sich nach der Trauung, Schwarzweiß', b: 1600, h: 2400 },
+    { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
     { src: '/images/hochzeit-1.jpg', alt: 'Brautpaar Stirn an Stirn unter dem Schleier', b: 1333, h: 2000 },
+    { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
+    { src: '/images/feigen-ring.jpg', alt: 'Ehering auf einer aufgeschnittenen Feige', b: 1333, h: 2000 },
+    { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000 },
     { src: '/images/Bild-76.webp', alt: 'Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000 },
-    { src: '/images/hochzeit-4.jpg', alt: 'Brautpaar im Garten, Ganzkörperaufnahme', b: 1333, h: 2000 },
-    { src: '/images/paare/haende.webp', alt: 'Die Hände des Brautpaars, ineinander gelegt', b: 1600, h: 2400 },
     { src: '/images/hochzeit-3.jpg', alt: 'Brautpaar unter dem Schleier, Schwarzweiß', b: 1333, h: 2000 },
+    { src: '/images/paare/haende.webp', alt: 'Die Hände des Brautpaars, ineinander gelegt', b: 1600, h: 2400 },
   ],
   link: 'Zu unserer Vision',
   // Kurztext rechts in Schreibmaschine (Vorbild Darcy McQueeny)
@@ -129,7 +144,7 @@ export const leistungen = {
     {
       // Weiches Trennzeichen: bricht am Handy statt ueberzustehen (wie auf der alten Seite)
       titel: 'Hochzeits­fotografie',
-      unter: 'Fine Art Fotografie Niedersachsen',
+      unter: 'Fine-Art-Fotografie',
       text: 'Zeitlose Bilder im Fine-Art-Stil. Wo es hilft, leiten wir euch an; wo es gerade echt wird, halten wir uns raus.',
       inhalt: [
         'Vollständige Fotobegleitung vom Getting Ready bis zum Tanz',
@@ -153,7 +168,7 @@ export const leistungen = {
     { titel: 'Persönliche Beratung', text: 'Von Anfang bis Ende nur wir' },
     { titel: 'Datenschutz garantiert', text: 'Veröffentlichung nur nach eurer Freigabe' },
     { titel: 'Antwort innerhalb 24 Stunden', text: 'Auch per WhatsApp erreichbar' },
-    { titel: 'International buchbar', text: 'Wir reisen dorthin, wo eure Hochzeit ist' },
+    { titel: 'Europaweit buchbar', text: 'Wir reisen dorthin, wo eure Hochzeit ist' },
   ],
   knopf: 'Anfrage stellen',
 };
@@ -161,13 +176,16 @@ export const leistungen = {
 export const prozess = {
   zeile: 'So funktioniert es',
   titel: 'Von der ersten Nachricht bis zu *eurem* Film.',
+  // Je Schritt ein kurzer Text und ein Link auf die passende Seite. Die Karte
+  // zeigt immer nur den aktiven Schritt (Nevio 26.10.2026)
   schritte: [
-    { titel: 'Anfrage', text: 'Kurz per Formular oder WhatsApp. Keine Verpflichtung.' },
-    { titel: 'Kennenlernen', text: 'Ihr lernt jeden kennen, der an eurem Tag dabei ist, persönlich oder per Video. Ohne Verkaufsgespräch.' },
-    { titel: 'Eure Vision', text: 'Was euer Film erzählen soll. Kein Wort über Technik.' },
-    { titel: 'Euer Tag', text: 'Wir sind den ganzen Tag da. Ohne zu stören, ohne Anweisungen.' },
-    { titel: 'Film und Fotos', text: 'In sechs bis acht Wochen in eurer privaten Galerie.' },
+    { titel: 'Anfrage', text: 'Schreibt uns kurz über das Formular oder per WhatsApp, wann und wo ihr heiratet und was ihr euch vorstellt. Das ist unverbindlich, ihr verpflichtet euch zu nichts.', link: { label: 'Zur Anfrage', href: '/anfrage' } },
+    { titel: 'Kennenlernen', text: 'Bevor ihr bucht, lernt ihr jeden kennen, der an eurem Tag hinter der Kamera steht, persönlich oder per Video. Ohne Verkaufsgespräch, einfach um zu sehen, ob es passt.', link: { label: 'Wer wir sind', href: '/ueber-uns' } },
+    { titel: 'Eure Vision', text: 'Gemeinsam sprechen wir darüber, was euer Film und eure Fotos erzählen sollen. Was ihr euch vorstellt, setzen wir um, ob erstes Morgenlicht oder Feier in Italien.', link: { label: 'Unsere Vision', href: '/vision' } },
+    { titel: 'Euer Tag', text: 'Am Tag selbst sind wir von morgens bis abends da. Wo ihr unsicher seid, leiten wir euch an, sonst halten wir uns im Hintergrund, damit ihr eure Hochzeit wirklich erlebt.', link: { label: 'Häufige Fragen', href: '/fragen' } },
+    { titel: 'Film und Fotos', text: 'In sechs bis acht Wochen bekommt ihr euren Film und alle Fotos in einer privaten Online-Galerie, in voller Auflösung zum Anschauen, Teilen und Aufheben.', link: { label: 'Jetzt anfragen', href: '/anfrage' } },
   ],
+
   schritt: 'Schritt',
 };
 
@@ -207,14 +225,47 @@ export const gruender = {
   titel: 'Wir sind *ein* Team.',
   leute: [
     {
-      name: 'Nevio Mastrogiorgio',
-      bio: 'Nevio steht genauso hinter der Kamera wie Danilo und ist vom ersten Gespräch an für euch da. Mit seiner ruhigen und klaren Art sorgt er dafür, dass ihr euch am Tag selbst sicher und vollkommen aufgehoben fühlt.',
-      bild: '/images/nevio-v2.webp',
-    },
-    {
       name: 'Danilo Buonafede',
       bio: 'Danilo filmt und fotografiert mit demselben Anspruch und plant euren Tag von Anfang an mit. Mit seinem Gespür für Licht, Bewegung und echte Emotionen entstehen Momente, die euren Film später lebendig machen.',
+      // Langfassung nur fuer Ueber uns (Nevio 26.10.2026, freigegeben); die Startseite nutzt bio
+      // Test (Nevio 26.10.2026): auf Ueber uns als Plakat nach "About me"-Vorbild
+      plakat: true,
+      freigestellt: '/images/danilo-frei.png',
+      bioLang: [
+        'Danilo arbeitet seit vier Jahren in der Medienbranche und hat in dieser Zeit an ganz unterschiedlichen Projekten mitgearbeitet. Das merkt man heute an jedem Film: Er weiß, wie Licht fällt und in welchem Moment man einfach draufhalten muss, statt lange zu überlegen. Angekommen ist er in der Hochzeitscinégraphie. Hier hat er gefunden, was ihm am meisten Spaß macht, und das sieht man seinen Filmen an.',
+        'Wer Danilo kennenlernt, lacht meistens schon nach ein paar Minuten. Wenn er eine Hochzeit filmen darf, ist er in seinem Element, gut gelaunt und voller Freude. Diese Laune bringt er mit an euren Tag, was gerade dann hilft, wenn sich die Kamera für euch noch ungewohnt anfühlt. Hinter der guten Stimmung steckt aber jemand, der sehr genau arbeitet: Während er mit euch scherzt, hat er längst im Blick, wo das Licht gleich am schönsten ist.',
+      ],
       bild: '/images/danilo-v3.webp',
+    },
+    {
+      // Entwurf (Nevio 23.10.2026: "denk dir erstmal irgendeinen Text aus"), noch nicht bestätigt.
+      // Katharina macht die Bilder von Amoriva und steht in der Mitte zwischen den Gründern.
+      name: 'Katharina Hieb',
+      bio: 'Katharina fotografiert, was sie bewegt, und das ist fast alles: Menschen, Orte, Licht, Alltag und Feiern. Genau dieser weite Blick macht ihre Bilder lebendig. Sie arbeitet eng mit uns zusammen und hält fest, wie Amoriva aussieht und sich anfühlt.',
+      // Langfassung nur fuer Ueber uns (Nevio 26.10.2026, freigegeben); die Startseite nutzt bio
+      // Wie Danilo und Nevio, dritte Anordnung: Foto rechts, Name und Text links,
+      // Katis Kamera zeigt in den Namen (Nevio 26.10.2026)
+      plakat: 'rechts',
+      freigestellt: '/images/kati-frei.png',
+      bioLang: [
+        'Kati fotografiert in ganz unterschiedlichen Bereichen, und genau diese Vielfalt bringt sie mit auf eure Hochzeit. Sie hält sich an kein festes Schema und entdeckt Motive oft dort, wo andere einfach vorbeilaufen. So entstehen Fotos mit einem Look, der so einzigartig ist wie eure Hochzeit.',
+        'Für uns war Kati das letzte Puzzleteil. Mit ihr bekommt ihr Film und Fotos aus einem Team, das sich kennt und aufeinander eingespielt ist. Sie arbeitet mit einer Leidenschaft, die ansteckt, und hat ein Auge für Details, das man nicht lernen kann. Spätestens wenn ihr eure Bilder zum ersten Mal durchblättert, werdet ihr das sehen.',
+      ],
+      bild: '/images/katharina-hieb-v2.jpg',
+    },
+    {
+      name: 'Nevio Mastrogiorgio',
+      bio: 'Nevio steht genauso hinter der Kamera wie Danilo und ist vom ersten Gespräch an für euch da. Mit seiner ruhigen und klaren Art sorgt er dafür, dass ihr euch am Tag selbst sicher und vollkommen aufgehoben fühlt.',
+      // Langfassung nur fuer Ueber uns (Nevio 26.10.2026, freigegeben); die Startseite nutzt bio
+      // Test (Nevio 26.10.2026): wie Danilo (grosser blasser Name, Foto davor),
+      // aber anders gesetzt: Name auf Hoehe des Laptops, Text darunter rechts
+      plakat: 'unten',
+      freigestellt: '/images/nevio-frei.png',
+      bioLang: [
+        'Mit Nevio sprecht ihr meistens als Erstes. Er beantwortet eure Fragen, hört genau hin, was euch wichtig ist, und behält die Absprachen im Blick, damit am Tag selbst nichts offen bleibt. Hinter der Kamera steht er trotzdem genauso wie Danilo. Gerade diese Mischung macht ihn aus: Wenn eure Hochzeit beginnt, kennt er sie schon ziemlich gut.',
+        'Nevio ist der Ruhepol im Team. Wenn der Zeitplan wackelt oder jemand noch fehlt, bleibt er gelassen und findet eine Lösung, ohne dass ihr viel davon mitbekommt. Diese Ruhe überträgt sich, und ihr könnt euch auf das konzentrieren, worum es an dem Tag eigentlich geht: auf euch.',
+      ],
+      bild: '/images/nevio-v2.webp',
     },
   ],
   knopf: 'Mehr über uns',
@@ -238,76 +289,156 @@ export const fuss = {
     { label: 'Datenschutz', href: '/datenschutz' },
   ],
   copyright: '© 2026 Amoriva Films',
+  // Vier lose Abzuege, keines davon steht sonst auf der Seite
   bilder: [
     { src: '/images/Bild-5.webp', alt: '' },
     { src: '/images/paare/kronleuchter-v2.webp', alt: '' },
-    { src: '/images/paare/paar-wand-v2.webp', alt: '' },
-    { src: '/images/hochzeit-3.jpg', alt: '' },
-    { src: '/images/Bild-76.webp', alt: '' },
-    { src: '/images/paare/haende.webp', alt: '' },
+    { src: '/images/hochzeit-4.jpg', alt: '' },
+    { src: '/images/champagner.jpg', alt: '' },
   ],
 };
 
 /* ── Unterseiten ─────────────────────────────────────────────────── */
 
 export const seiteUeberUns = {
-  meta: { titel: 'Über uns', text: 'Amoriva Films: ein junges Team mit italienischen Wurzeln aus Wolfsburg. Hochzeitsfilm und Fotografie im neuen Vintage, für Hochzeiten auf der ganzen Welt.' },
+  meta: { titel: 'Über uns', text: 'Amoriva Films: ein junges Team mit italienischen Wurzeln aus Wolfsburg. Hochzeitsfilm und Fotografie im neuen Vintage, für Hochzeiten in ganz Europa.' },
   label: 'Amoriva Films',
   titel: 'Über *uns*',
-  bild: { src: '/images/paare/paar-wand-v2.webp', alt: '' },
+  // Gemaltes Team-Bild (Figma-KI, 26.10.2026), Kopf im gleichen Aufbau wie Fragen
+  bild: { src: '/images/vintage/team-unterwegs.jpg', alt: 'Gemaltes Bild: Danilo, Kati und Nevio gehen in der Ferne durch ein Feld in der Toskana' },
   // Danilo, Runde 7: "Ich moechte jetzt ueber Amoriva, wofuer wir stehen."
   // Junges Team, Mediengestaltung, italienisch, neues Vintage, und das
   // Gegenteil von teuer, unzuverlaessig und stoerend.
   einleitungZeile: 'Wofür wir stehen',
   einleitungTitel: 'Neues *Vintage* aus Wolfsburg.',
+  // Text neu aufgebaut (Nevio 23.10.2026): ohne "gegruendet von" und "zu dritt oder
+  // zu viert"; Jung und kreativ, professionell, erreichbar, Team vorher persoenlich
+  // kennenlernen, freundschaftliche Verbindung, Wohlfuehlen an einem intimen Tag.
+  // Schreibregeln: Skill anti-ai-slop-writing. Unbestaetigtes (vier Jahre
+  // Medienbranche, 24 Stunden) bewusst nicht im Text.
   absaetze: [
-    'Amoriva ist ein junges, ambitioniertes Team mit italienischen Wurzeln, zu Hause in Wolfsburg und unterwegs zu Hochzeiten auf der ganzen Welt. Gegründet haben es Nevio und Danilo; auf euren Hochzeiten sind wir meistens zu dritt oder zu viert. Seit vier Jahren arbeiten wir in der Medienbranche und wissen, wie Licht, Bild, Ton und Schnitt zusammenspielen müssen, damit am Ende ein Gefühl bleibt und nicht nur eine Aufnahme.',
-    'Ehrlich gesagt hat uns vieles in der Branche gestört. Teure Pakete, bei denen am Ende zu wenig zurückkommt. Dienstleister, die sich tagelang nicht melden, unprofessionell auftreten oder am Hochzeitstag mehr im Weg stehen, als dass sie helfen. Wir wollten genau das Gegenteil sein.',
-    'Bei uns bekommt ihr schnelle Antworten, klare Absprachen und ein Team, das am Tag selbst kaum auffällt und trotzdem alles mitbekommt. Was wir zusagen, liefern wir auch.',
+    'Amoriva ist ein junges, kreatives Team mit italienischen Wurzeln, zu Hause in Wolfsburg und unterwegs auf Hochzeiten in ganz Europa. Ja, wir sind jung, aber wir wissen ganz genau, was wir tun: Wir arbeiten professionell, halten klare Absprachen ein und antworten euch, bevor ihr anfangt zu zweifeln.',
+    'Eine Hochzeit ist ein besonderer und sehr persönlicher Tag, und dass wir dabei sein dürfen, ist für uns keine Selbstverständlichkeit. Deshalb lernt ihr jeden aus unserem Team vorher kennen, bei einem Treffen oder per Video, wie es euch lieber ist. Dabei soll mehr entstehen als ein Termin im Kalender, nämlich ein freundschaftliches Verhältnis, in dem ihr euch wohlfühlt.',
+    'Am Tag selbst stehen dann Menschen neben euch, mit denen ihr schon gelacht habt. Ihr müsst euch nicht verstellen und niemandem etwas beweisen. Wer sich wohlfühlt, sieht auf den Bildern später genau so aus.',
     'Unser Stil ist neues Vintage: die Wärme alter Filme und Fotografien, so wie wir sie aus Italien kennen, verbunden mit moderner Technik und einem ruhigen, klaren Schnitt. Zeitlos, ohne altmodisch zu sein.',
   ],
   werte: [
+    { titel: 'Jung und kreativ', text: 'Frische Ideen und ein eigener Look statt Standard' },
     { titel: 'Professionell', text: 'Klare Absprachen, pünktlich und verlässlich' },
     { titel: 'Erreichbar', text: 'Antwort innerhalb von 24 Stunden' },
     { titel: 'Unauffällig', text: 'Wir begleiten euren Tag, ohne ihn zu stören' },
     { titel: 'Neues Vintage', text: 'Italienischer Flair, moderne Technik' },
+    { titel: 'Schnelle Lieferung', text: 'Film und Fotos in sechs bis acht Wochen bei euch' },
   ],
 };
 
 export const seiteVision = {
-  meta: { titel: 'Vision', text: 'Die Vision von Amoriva Films: Hochzeitsfilm und Fotografie, die sich anfühlen wie euer Tag.' },
+  meta: { titel: 'Vision', text: 'Die Vision von Amoriva Films aus Wolfsburg: Hochzeitsfilm und Hochzeitsfotografie mit eigenem Look, für Paare in Niedersachsen, Deutschland und Südeuropa.' },
   label: 'Amoriva Films',
   titel: 'Unsere *Vision*',
   video: '[VIDEO FOLGT: Vision-Film]',
-  text: '[TEXT FEHLT: Vision-Text von Danilo]',
-  // Vorstellung als Team (vorher auf der Startseite unter "Unsere Arbeit")
-  teamZeile: 'Team Amoriva',
-  teamTitel: 'Jung, ja. Aber nicht *neu* in dem, was wir tun.',
-  teamAbsaetze: [
-    'Hinter Amoriva steht ein kleines Team aus Wolfsburg. Seit vier Jahren arbeiten wir in der Medienbranche, haben für Unternehmen gedreht, geschnitten und ganze Social-Media-Auftritte betreut. Deshalb wissen wir ziemlich genau, wie ein Film aussehen und klingen muss, damit man ihn sich nicht nur einmal anschaut.',
-    'Auf eurer Hochzeit sind wir meistens zu dritt oder zu viert. Und weil ihr uns an so einem Tag ganz nah an euch heranlasst, lernt ihr vorher jeden kennen, der dabei ist, persönlich oder per Video, wie es euch lieber ist. Am Tag selbst stehen dann Leute neben euch, mit denen ihr schon gelacht habt.',
+  // Vision-Text (Nevio 26.10.2026 freigegeben): Fliesstext aus Sicht der Paare,
+  // mit allen Vorteilen und Orten fuer Google
+  absaetze: [
+    'Unsere Vision ist schnell erklärt: Jedes Paar soll Erinnerungen bekommen, die es so nur einmal gibt. Wenn ihr euren Hochzeitsfilm in ein paar Jahren wieder anschaut oder eure Hochzeitsfotos durchblättert, soll sich das nach euch anfühlen und nicht nach einem Stil, den man auf jeder zweiten Hochzeit sieht. Deshalb arbeiten wir mit einem eigenen Look, den man erkennt, bevor man unseren Namen liest, und der sich nicht einfach nachmachen lässt.',
+    'Vielleicht kennt ihr die Sorge, dass am Ende genau die Momente fehlen, die euch wichtig waren, oder dass ihr euch vor der Kamera fremd fühlt. Bei uns lernt ihr jeden, der an eurem Tag filmt oder fotografiert, vorher persönlich kennen, und wo ihr unsicher seid, leiten wir euch an. Den Rest des Tages halten wir uns im Hintergrund, damit ihr eure Hochzeit wirklich erlebt. Film und Fotos kommen dabei aus einem Team, mit einem Look und einem Ansprechpartner, ohne dass ihr zwei Anbieter aufeinander abstimmen müsst.',
+    'Was ihr euch vorstellt, setzen wir um. Ihr wollt euch im ersten Morgenlicht sehen, eure Trauung am See oder eure Feier in Italien? Dann finden wir einen Weg, statt nach Gründen zu suchen, warum es nicht geht. Unser Zuhause ist Wolfsburg, und wir begleiten Hochzeiten in Braunschweig, Hannover und ganz Niedersachsen genauso wie in ganz Deutschland, Österreich, der Schweiz und Südeuropa.',
+    'Unsere italienischen Wurzeln sieht man unseren Bildern an: warm, zeitlos und mit einem Hauch Vintage, aber mit moderner Technik umgesetzt. Euren fertigen Hochzeitsfilm und alle Fotos bekommt ihr in sechs bis acht Wochen in eurer privaten Online-Galerie, zum Anschauen, Teilen und Aufheben.',
   ],
+  // Ueberschrift der Spalte, die aus der Kamera kommt (darin der Vision-Text)
+  spalteZeile: 'Wofür wir stehen',
+  spalteTitel: 'Erinnerungen, die es nur *einmal* gibt.',
   moodboardZeile: 'Moodboard',
-  moodboardHinweis: '[BILDAUSWAHL FOLGT: Danilo wählt die Bilder]',
 };
 
 export const seiteFragen = {
   meta: { titel: 'Häufige Fragen', text: 'Antworten zu Hochzeitsfilm und Hochzeitsfotografie bei Amoriva Films: Ablauf, Lieferzeit, Vertrag, Reisen.' },
   label: 'Häufige Fragen',
   titel: 'Was ihr *wissen* wollt.',
-  bild: { src: '/images/paare/kronleuchter-v2.webp', alt: '' },
+  // Gemaltes Toskana-Bild statt Paarfoto (Nevio 23.10.2026: Seite wirkte leer)
+  bild: { src: '/images/vintage/landschaft-gemalt.webp', alt: '' },
+  einleitung: 'Bevor ihr uns schreibt, habt ihr bestimmt ein paar Fragen. Die, die uns am häufigsten gestellt werden, beantworten wir hier ehrlich und ohne Kleingedrucktes.',
+  abschlussTitel: 'Eure Frage ist *nicht* dabei?',
+  abschluss: 'Dann schreibt uns einfach, per Formular oder WhatsApp. Wir antworten persönlich, nicht mit einem Textbaustein.',
+  // Zwoelf Fragen (Nevio 26.10.2026), sortiert nach dem Weg eines Paares:
+  // Anfragen, Kennenlernen, der Tag, das Ergebnis. Neu: Zeitpunkt, Kennenlernen,
+  // Teamgroesse, Kamerascheu, Filmlaenge/Musik, Ausfall.
   liste: [
-    { frage: 'Was kostet ein Hochzeitsfilm bei euch?', antwort: 'Das hängt von eurem Tag ab. Wo findet die Hochzeit statt, was braucht ihr, wie lange soll der Film sein. Wir erstellen jedem Paar ein individuelles Angebot nach einem kurzen Gespräch. Schreibt uns einfach an.' },
-    { frage: 'Wie lange dauert es bis wir den Film bekommen?', antwort: 'Innerhalb von 6 bis 8 Wochen nach eurer Hochzeit erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.' },
+    { frage: 'Was kostet ein Hochzeitsfilm bei euch?', antwort: 'Ein Hochzeitsfilm beginnt bei uns ab 1.000 €, Hochzeitsfotografie für den ganzen Tag ab 850 € und Fotos im Standesamt ab 250 €. Was euer Tag genau kostet, hängt vom Aufwand ab: wie viele Stunden wir da sein sollen, wie lang euer Film wird und ob ihr ihn dokumentarisch oder gescriptet mit gespielten Szenen möchtet. Nach einem kurzen Gespräch bekommt ihr ein Angebot, das genau zu euch passt.' },
+    { frage: 'Wie früh sollten wir anfragen?', antwort: 'Am besten, sobald Datum und Location feststehen. Weil wir die Zahl unserer Hochzeiten bewusst begrenzt halten, sind beliebte Samstage im Sommer oft früh vergeben. Kurzfristig lohnt sich eine Anfrage trotzdem, manchmal ist genau euer Termin noch frei.' },
     { frage: 'Gibt es einen Vertrag und wie läuft die Bezahlung ab?', antwort: 'Ja. Nach der Anfrage erhaltet ihr von uns ein schriftliches Angebot und einen Vertrag. Eine Anzahlung sichert euren Termin. Den Restbetrag zahlt ihr nach der Hochzeit. Alles wird offen und transparent im Vorfeld besprochen.' },
-    { frage: 'Seid ihr nur in Wolfsburg tätig?', antwort: 'Nein, wir filmen international. Wolfsburg ist unser Zuhause und bisher waren wir in ganz Deutschland unterwegs. Für eure Hochzeit reisen wir genauso nach Österreich, in die Schweiz oder nach Südeuropa. Wo es hingeht, schauen wir uns gemeinsam an, und die Anreise sprechen wir vorher offen ab.' },
-    { frage: 'Wie viele Hochzeiten begleitet ihr pro Jahr?', antwort: 'Wir halten unsere Buchungen bewusst begrenzt. So bleibt jede Hochzeit eine Einzelanfertigung und keine Routine. Ihr arbeitet direkt mit uns und nicht mit einem großen Agenturteam das euch kurz vor der Hochzeit zum ersten Mal trifft.' },
-    { frage: 'In welchem Format erhalten wir den Film und die Fotos?', antwort: 'Euer Film wird als hochauflösende Videodatei geliefert. Die Fotos erhaltet ihr in voller Auflösung mit Druckfreigabe. Alles landet in einer privaten Online-Galerie die ihr jederzeit aufrufen und mit Familie und Freunden teilen könnt.' },
+    { frage: 'Lernen wir euch vor der Hochzeit kennen?', antwort: 'Ja, und zwar jeden, der an eurem Tag filmt oder fotografiert. Wir treffen uns persönlich oder per Video, ganz ohne Verkaufsgespräch. Ihr sollt wissen, mit wem ihr den wichtigsten Tag verbringt, und wir wollen wissen, was euch als Paar ausmacht.' },
+    { frage: 'Wie viele von euch sind am Tag dabei?', antwort: 'In der Regel sind wir zu dritt oder zu viert, je nachdem, ob ihr Film, Fotos oder beides bucht und wie groß eure Hochzeit ist. Alle gehören zu unserem festen Team und arbeiten eingespielt zusammen, ihr habt trotzdem nur einen Ansprechpartner.' },
+    { frage: 'Wir stehen nicht gern vor der Kamera. Ist das ein Problem?', antwort: 'Überhaupt nicht. Beim Paarshooting leiten wir euch an, mit kleinen Aufgaben statt steifer Posen, und den Rest des Tages halten wir uns im Hintergrund. Nach ein paar Minuten vergessen die meisten, dass wir überhaupt da sind.' },
+    { frage: 'Seid ihr nur in Wolfsburg tätig?', antwort: 'Nein, wir filmen europaweit. Wolfsburg ist unser Zuhause und bisher waren wir in ganz Deutschland unterwegs. Für eure Hochzeit reisen wir genauso nach Österreich, in die Schweiz oder nach Südeuropa. Wo es hingeht, schauen wir uns gemeinsam an, und die Anreise sprechen wir vorher offen ab.' },
+    { frage: 'Wie lang wird unser Film und können wir die Musik mitbestimmen?', antwort: 'Euer Hauptfilm ist zwischen 3 und 12 Minuten lang. Die Musik wählen wir gemeinsam mit euch aus, damit der Film nach euch klingt. Habt ihr ein Lied, das euch viel bedeutet, sagt es uns einfach.' },
+    { frage: 'Wie lange dauert es, bis wir den Film bekommen?', antwort: 'Innerhalb von 6 bis 8 Wochen nach eurer Hochzeit erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.' },
+    { frage: 'In welchem Format erhalten wir den Film und die Fotos?', antwort: 'Euer Film wird als hochauflösende Videodatei geliefert. Die Fotos erhaltet ihr in voller Auflösung mit Druckfreigabe. Alles landet in einer privaten Online-Galerie, die ihr jederzeit aufrufen und mit Familie und Freunden teilen könnt.' },
+    { frage: 'Was passiert, wenn jemand von euch krank wird?', antwort: 'Weil wir als Team arbeiten, hängt euer Tag nicht an einer einzelnen Person. Fällt jemand aus, springt jemand aus unserem Team ein, der eure Absprachen kennt. Ihr erfahrt es sofort von uns und müsst euch um nichts kümmern.' },
   ],
+};
+
+// Leistungen im Vintage-Design (Nevio 28.10.2026). Ersetzt /angebote (leitet
+// hierher um). Erst ohne Preise, dann am selben Tag doch mit Startpreisen
+// (Nevio 28.10.2026, siehe preise). Pakete und Ablauf kommen aus
+// leistungen.pakete und prozess.schritte.
+export const seiteLeistungen = {
+  meta: { titel: 'Leistungen: Hochzeitsfilm & Fotografie', text: 'Hochzeitsfilm ab 1.000 €, Hochzeitsfotografie ab 850 €, Standesamt ab 250 €: was in jedem Paket steckt, wovon euer Angebot abhängt und wie der Ablauf ist. Aus Wolfsburg, europaweit.' },
+  label: 'Leistungen',
+  titel: 'Film, Foto oder *beides.*',
+  // Je Paket ein Bild, in derselben Reihenfolge wie leistungen.pakete
+  bilder: [
+    { src: '/images/Bild-101.webp', alt: 'Brautpaar am Hochzeitstisch vor einem roten Samtvorhang', b: 2000, h: 3000 },
+    { src: '/images/paare/paar-wand-v2.webp', alt: 'Bräutigam lehnt an einer Säule, die Braut schaut zu ihm auf', b: 1600, h: 2400 },
+    { src: '/images/paare/paar-kuss.webp', alt: 'Brautpaar kurz vor dem Kuss, Schwarzweiß', b: 1600, h: 2400 },
+  ],
+  einleitung: 'Hier seht ihr, was in jedem Paket steckt und ab welchem Preis es losgeht. Jede Hochzeit ist anders, deshalb bekommt ihr nach einem kurzen Gespräch ein Angebot, das genau zu eurem Tag passt.',
+  // Startpreise (Nevio 28.10.2026). Reihenfolge wie besprochen.
+  preiseZeile: 'Preise',
+  preiseTitel: 'Womit ihr *rechnen* könnt.',
+  preise: [
+    { titel: 'Hochzeitsfilm', text: 'Begleitung eures Tages mit Film in Cinégraphie', preis: 'ab 1.000 €', ab: 1000 },
+    { titel: 'Hochzeitsfotografie, ganzer Tag', text: 'Vom Getting Ready bis zum Tanz', preis: 'ab 850 €', ab: 850 },
+    { titel: 'Fotos im Standesamt', text: 'Eure standesamtliche Trauung in Bildern', preis: 'ab 250 €', ab: 250 },
+    { titel: 'Fotos für ein paar Stunden', text: 'Zum Beispiel Trauung und Paarshooting', preis: 'auf Anfrage' },
+    { titel: 'Film und Foto aus einer Hand', text: 'Ein Team, ein Look, ein Ansprechpartner', preis: 'auf Anfrage' },
+  ],
+  // Preiskarte wie die Menuekarte eines alten Grandhotels (Preiskarte.jsx)
+  preiseKarte: { kopf: 'Amoriva Films · Wolfsburg', titel: 'Preiskarte', saison: 'Saison 2026 · 2027', gruss: 'Danilo, Kati & Nevio' },
+  preiseHinweis: 'Alle Preise sind Startpreise. Was euer Tag genau kostet, hängt vom Aufwand ab: wie viele Stunden wir da sind, wie lang euer Film wird und ob ihr ihn dokumentarisch oder gescriptet mit gespielten Szenen möchtet. Das besprechen wir offen, bevor ihr bucht.',
+  angebotZeile: 'Euer Angebot',
+  angebotTitel: 'Wovon euer Angebot *abhängt.*',
+  angebotPunkte: [
+    { titel: 'Film, Foto oder beides', text: 'Bucht ihr Film und Fotos zusammen, arbeitet ein eingespieltes Team mit einem Look, statt zwei Anbieter nebeneinander.' },
+    { titel: 'Dauer der Begleitung', text: 'Wie viele Stunden wir da sein sollen: nur die Trauung im Standesamt oder der ganze Tag bis zum ersten Tanz.' },
+    { titel: 'Art und Länge des Films', text: 'Dokumentarisch, wie euer Tag passiert, oder gescriptet mit gespielten Szenen. Und wie lang euer Film werden soll.' },
+    { titel: 'Ort und Anreise', text: 'Wolfsburg, Braunschweig, Hannover oder eine Hochzeit irgendwo in Europa. Die Anreise sprechen wir vorher offen ab.' },
+  ],
+  ablaufZeile: 'Ablauf',
+  ablaufTitel: 'In fünf *Schritten* zu eurem Film.',
+  abschlussTitel: 'Erzählt uns von *eurem* Tag.',
+  abschluss: 'Schreibt uns Datum, Ort und was ihr euch vorstellt. Wir melden uns persönlich und schicken euch nach einem kurzen Gespräch euer Angebot.',
+};
+
+// Ratgeber im Vintage-Design (Nevio 28.10.2026). Die Artikel liegen weiter
+// unter app/ratgeber/<slug>, hier stehen nur Liste und Kopf.
+export const seiteRatgeber = {
+  meta: { titel: 'Ratgeber: Hochzeitsfilm & Fotografie', text: 'Ratgeber für Brautpaare: was ein Hochzeitsfilm kostet, wann ihr Fotograf und Videograf buchen solltet und was einen cinematic Hochzeitsfilm ausmacht.' },
+  label: 'Ratgeber',
+  titel: 'Was ihr vor der *Buchung* wissen solltet.',
+  einleitung: 'Ehrliche Antworten auf die Fragen, die uns Paare vor der Buchung am häufigsten stellen: Kosten, der richtige Zeitpunkt und der Stil eures Films.',
+  artikel: [
+    { href: '/ratgeber/was-kostet-ein-hochzeitsfilm', kategorie: 'Kosten', titel: 'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt', kurz: 'Was kostet ein Hochzeitsfilm?', text: 'Den einen Preis gibt es nicht. Wir erklären, welche Faktoren ihn bestimmen und woran ihr ein gutes Paket erkennt.', lesezeit: '5 Min.' },
+    { href: '/ratgeber/hochzeitsfilmer-wann-buchen', kategorie: 'Planung', titel: 'Wann Hochzeitsfilmer & Fotograf buchen? Der richtige Zeitpunkt', kurz: 'Wann Hochzeitsfilmer & Fotograf buchen?', text: 'Zu spät buchen ist der häufigste Fehler bei der Hochzeitsplanung. Eine klare Empfehlung und eine Checkliste für die Buchung.', lesezeit: '4 Min.' },
+    { href: '/ratgeber/cinematic-hochzeitsfilm', kategorie: 'Stil', titel: 'Was ist ein cinematic Hochzeitsfilm?', kurz: 'Was ist ein cinematic Hochzeitsfilm?', text: 'Cinematic bedeutet mehr als eine gute Kamera. Der Unterschied zwischen dokumentarisch und cinematic, und warum er so viel ausmacht.', lesezeit: '4 Min.' },
+  ],
+  abschlussTitel: 'Eure Frage ist *nicht* dabei?',
+  abschluss: 'In unseren häufigen Fragen findet ihr kurze Antworten zu Vertrag, Lieferzeit und Ablauf. Oder ihr schreibt uns direkt.',
+  artikelCta: { zeile: 'Amoriva Films · Wolfsburg', titel: 'Euer Hochzeitsfilm *wartet.*', text: 'Schreibt uns, wann und wo ihr heiratet. Wir melden uns persönlich und beraten euch unverbindlich.' },
 };
 
 export const seiteAnfrage = {
   label: 'Jetzt anfragen',
   titel: 'Beginnt mit eurer *Geschichte.*',
-  bild: { src: '/images/paare/trauung-weit.webp', alt: '' },
+  bild: { src: '/images/braut-drehen.jpg', alt: '' },
 };

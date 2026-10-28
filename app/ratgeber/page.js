@@ -1,101 +1,81 @@
-'use client';
-
 import Link from 'next/link';
-import Footer from '../../components/Footer';
-import FadeIn from '../../components/FadeIn';
+import Titel from '@/components/vintage/Titel';
+import Fuss from '@/components/vintage/Fuss';
+import WhatsApp from '@/components/WhatsApp';
+import { seiteRatgeber as s } from '@/content/texte';
 
-const serif = "var(--font-display), Georgia, serif";
-const sans  = "var(--font-text), system-ui, sans-serif";
-const brown = 'var(--tinte)';
-const gruen  = 'var(--gruen)';
-const soft  = 'var(--grau-2)';
+/* Ratgeber-Uebersicht im Vintage-Design (Nevio 28.10.2026). Ruhiger
+   Textkopf wie bei den Artikeln (ein Hochformat-Foto war im breiten Kopf
+   zu stark vergroessert), ein Satz Einleitung, die Artikel als Zeilen mit
+   Linien, am Ende der Weg zu Fragen/Anfrage.
+   Metadaten stehen in layout.js. */
 
-const articles = [
-  {
-    href:     '/ratgeber/was-kostet-ein-hochzeitsfilm',
-    cat:      'Kosten',
-    title:    'Was kostet ein Hochzeitsfilm? Was den Preis bestimmt',
-    excerpt:  'Den einen Preis gibt es nicht. Wir erklären, welche Faktoren ihn bestimmen und woran ihr ein gutes Paket erkennt.',
-    readTime: '5 Min.',
-  },
-  {
-    href:     '/ratgeber/cinematic-hochzeitsfilm',
-    cat:      'Stil & Qualität',
-    title:    'Was ist ein cinematic Hochzeitsfilm und warum macht es den Unterschied?',
-    excerpt:  'Cinematic bedeutet mehr als eine Kamera. Wir erklären den Unterschied zwischen documentary und cinematic Hochzeitsfilm und warum es emotional so viel mehr berührt.',
-    readTime: '4 Min.',
-  },
-  {
-    href:     '/ratgeber/same-day-edit-hochzeit',
-    cat:      'Leistungen',
-    title:    'Same Day Edit: Euer Hochzeitsfilm noch am selben Abend',
-    excerpt:  'Ein Same Day Edit ist einer der emotionalsten Momente einer Hochzeit. Wir erklären wie es funktioniert und für wen es sich lohnt.',
-    readTime: '3 Min.',
-  },
-  {
-    href:     '/ratgeber/hochzeitsfilmer-wann-buchen',
-    cat:      'Planung',
-    title:    'Wann Hochzeitsfilmer & Fotograf buchen? Der richtige Zeitpunkt',
-    excerpt:  'Zu spät buchen ist der häufigste Fehler bei der Hochzeitsplanung. Wir geben euch eine klare Empfehlung und eine Checkliste für die Buchung.',
-    readTime: '4 Min.',
-  },
-];
-
-export default function RatgeberPage() {
+export default function Ratgeber() {
   return (
     <>
+      <main>
+        <div className="v-nacht ratgeber-flaeche">
+          <header className="ratgeber-kopf" data-dunkler-kopf="flaeche">
+            <p className="v-label ratgeber-label">{s.label}</p>
+            <Titel text={s.titel} als="h1" className="v-titel ratgeber-h1" />
+          </header>
+          <section className="v-abschnitt ratgeber">
+            <div className="v-bahn">
+              <p className="v-text ratgeber-einleitung">{s.einleitung}</p>
+              <ul className="ratgeber-liste">
+                {s.artikel.map((a, i) => (
+                  <li key={a.href}>
+                    <Link href={a.href} className="ratgeber-zeile">
+                      <span className="ratgeber-nr v-schrift" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="ratgeber-mitte">
+                        <span className="v-label ratgeber-kat">{a.kategorie} · {a.lesezeit} Lesezeit</span>
+                        <h2 className="ratgeber-titel">{a.titel}</h2>
+                        <span className="ratgeber-text">{a.text}</span>
+                      </span>
+                      <span className="ratgeber-pfeil" aria-hidden="true">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
 
-      {/* Hero */}
-      <section className="abschnitt-kopf hell">
-        <div className="bahn lesebreite">
-        <FadeIn>
-          <span style={{ display: 'block', fontFamily: sans, fontSize: '0.66rem', fontWeight: 300, letterSpacing: '0.28em', textTransform: 'uppercase', color: gruen, marginBottom: 'var(--luft-3)' }}>
-            Wissen & Tipps
-          </span>
-          <h1 style={{ fontFamily: serif, fontSize: 'clamp(36px,5vw,72px)', fontWeight: 300, lineHeight: 1.05, color: brown, hyphens: 'none', wordBreak: 'keep-all' }}>
-            Der Hochzeitsfilm{' '}
-            <em style={{ fontStyle: 'italic' }}>Ratgeber.</em>
-          </h1>
-          <p style={{ fontFamily: sans, fontSize: 'clamp(14px,1.1vw,16px)', fontWeight: 300, color: soft, lineHeight: 1.8, marginTop: 'var(--luft-3)' }}>
-            Alles was ihr über Hochzeitsfilme und Fotografie wissen müsst: Kosten, Buchungszeitpunkte, Stile und mehr.
-          </p>
-        </FadeIn>
-        </div>
-      </section>
-
-      {/* Articles */}
-      <section className="abschnitt hell" style={{ paddingTop: 0 }}>
-        <div className="bahn" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-          {articles.map((a, i) => (
-            <FadeIn key={i}>
-              <Link
-                href={a.href}
-                style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px,4vw,64px)', borderTop: '1px solid var(--linie)', padding: 'clamp(36px,4vw,56px) 0', textDecoration: 'none', alignItems: 'start' }}
-                className="article-row"
-                onMouseEnter={e => { e.currentTarget.querySelector('h2').style.opacity = '0.5'; }}
-                onMouseLeave={e => { e.currentTarget.querySelector('h2').style.opacity = '1'; }}
-              >
-                <div>
-                  <span style={{ fontFamily: sans, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: gruen, fontWeight: 300 }}>{a.cat}</span>
-                  <p style={{ fontFamily: sans, fontSize: '11px', color: soft, opacity: 0.5, fontWeight: 300, marginTop: 'var(--luft-1)' }}>{a.readTime} Lesezeit</p>
+              <div className="ratgeber-abschluss">
+                <Titel text={s.abschlussTitel} className="v-titel ratgeber-abschluss-titel" />
+                <p className="v-text">{s.abschluss}</p>
+                <div className="ratgeber-knoepfe">
+                  <Link href="/fragen" className="v-knopf">Häufige Fragen</Link>
+                  <Link href="/anfrage" className="v-knopf">Anfrage stellen</Link>
                 </div>
-                <div>
-                  <h2 style={{ fontFamily: serif, fontSize: 'clamp(22px,2.4vw,36px)', fontWeight: 300, color: brown, lineHeight: 1.15, marginBottom: 'var(--luft-1)', transition: 'opacity 0.3s' }}>{a.title}</h2>
-                  <p style={{ fontFamily: sans, fontSize: 'clamp(13px,1vw,15px)', fontWeight: 300, color: soft, lineHeight: 1.75, opacity: 0.85 }}>{a.excerpt}</p>
-                  <span style={{ fontFamily: sans, fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: gruen, fontWeight: 300, display: 'inline-block', marginTop: 'var(--luft-2)' }}>Lesen →</span>
-                </div>
-              </Link>
-            </FadeIn>
-          ))}
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-
-      <Footer />
+      </main>
+      <Fuss />
+      <WhatsApp />
 
       <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 640px) {
-          .article-row { grid-template-columns: 1fr !important; gap: 0.8rem !important; }
-        }
+        .ratgeber-flaeche .ratgeber { background: none; }
+        .ratgeber-kopf { max-width: 980px; margin-inline: auto; padding: calc(var(--v-kopf) + clamp(56px, 8vw, 110px)) var(--rand) clamp(28px, 3vw, 40px); text-align: center; }
+        .ratgeber-label { margin: 0 0 18px; color: color-mix(in srgb, var(--ton) 75%, transparent); }
+        .ratgeber-h1 { font-size: var(--v-titel); text-wrap: balance; }
+        .ratgeber.v-abschnitt { padding-top: 0; }
+        .ratgeber-einleitung { max-width: 600px; margin: 0 auto clamp(36px, 4vw, 56px); text-align: center; }
+        .ratgeber-liste { list-style: none; margin: 0 auto; padding: 0; max-width: 900px; border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .ratgeber-liste li { border-bottom: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .ratgeber-zeile { display: grid; grid-template-columns: 48px minmax(0, 1fr) 32px; gap: clamp(14px, 2vw, 28px); align-items: center;
+          padding: clamp(24px, 2.6vw, 34px) 0; color: inherit; text-decoration: none; }
+        .ratgeber-nr { font-size: 24px; line-height: 1; color: var(--ton-akzent); }
+        .ratgeber-mitte { display: flex; flex-direction: column; gap: 8px; }
+        .ratgeber-kat { color: var(--ton-akzent); }
+        .ratgeber-titel { margin: 0; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; text-wrap: balance; transition: opacity 300ms var(--v-ease); }
+        .ratgeber-text { font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: color-mix(in srgb, var(--ton) 72%, transparent); }
+        .ratgeber-pfeil { justify-self: end; font-size: 20px; color: var(--ton-akzent); transition: transform 400ms var(--v-ease); }
+        @media (hover: hover) { .ratgeber-zeile:hover .ratgeber-pfeil { transform: translateX(6px); } .ratgeber-zeile:hover .ratgeber-titel { opacity: .75; } }
+        .ratgeber-zeile:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+        .ratgeber-abschluss { max-width: 620px; margin: clamp(56px, 6vw, 88px) auto 0; text-align: center; }
+        .ratgeber-abschluss-titel { font-size: var(--v-h2); margin-bottom: 16px; }
+        .ratgeber-knoepfe { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 28px; }
+        @media (max-width: 640px) { .ratgeber-zeile { grid-template-columns: minmax(0, 1fr) 24px; } .ratgeber-nr { display: none; } }
       ` }} />
     </>
   );

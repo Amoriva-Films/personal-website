@@ -6,7 +6,6 @@ const RATGEBER = [
   'was-kostet-ein-hochzeitsfilm',
   'cinematic-hochzeitsfilm',
   'hochzeitsfilmer-wann-buchen',
-  'same-day-edit-hochzeit',
 ];
 
 /* Stand der letzten inhaltlichen Aenderung. Bewusst ein fester Wert:
@@ -14,7 +13,7 @@ const RATGEBER = [
    aufs Neue, jede Unterseite habe sich geaendert. Wer staendig "alles neu"
    meldet, wird irgendwann nicht mehr geglaubt. Beim naechsten echten
    Umbau hier das Datum nachziehen. */
-const STAND = '2026-10-20';
+const STAND = '2026-10-28';
 
 export default function sitemap() {
   const jetzt = new Date(STAND);
@@ -30,8 +29,8 @@ export default function sitemap() {
     // Filme sind das Wichtigste, was die Seite zeigt - deshalb meldet
     // sie sich erst bei Google an, wenn dort auch Filme liegen.
     // eintrag('filme', 0.95),
-    eintrag('angebote', 0.9),
-    eintrag('leistungen', 0.8),
+    // /angebote leitet seit dem Redesign auf /leistungen um (28.10.2026)
+    eintrag('leistungen', 0.9),
     // eintrag('referenzen', 0.9),   // Galerie raus, Seite nicht mehr verlinkt
     eintrag('anfrage', 0.8, 'yearly'),
     // Vintage-Redesign 20.10.2026: Unterseiten statt Onepager

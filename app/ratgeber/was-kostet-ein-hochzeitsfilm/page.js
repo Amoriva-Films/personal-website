@@ -13,7 +13,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: 'https://amoriva-films.de/images/logo.webp' },
   },
   datePublished: '2025-05-01',
-  dateModified: '2026-09-21',
+  dateModified: '2026-10-28',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://amoriva-films.de/ratgeber/was-kostet-ein-hochzeitsfilm' },
   image: 'https://amoriva-films.de/images/og-image.jpg',
 };
@@ -44,7 +44,7 @@ export default function Page() {
       </p>
 
       <div className="highlight-box">
-        Kurze Antwort: Den einen Preis gibt es nicht. Was ein Hochzeitsfilm kostet, hängt an <strong>Drehzeit, Anzahl der Kameras und Schnittaufwand</strong>. Wer euch ohne ein Gespräch eine Zahl nennt, kennt euren Tag noch gar nicht.
+        Kurze Antwort: Den einen Preis gibt es nicht. Was ein Hochzeitsfilm kostet, hängt vom <strong>Aufwand</strong> ab: wie viele Stunden gefilmt wird, wie lang euer Film wird und ob ihr ihn <strong>dokumentarisch</strong> oder <strong>gescriptet mit gespielten Szenen</strong> möchtet. Wer euch ohne ein Gespräch eine Zahl nennt, kennt euren Tag noch gar nicht.
       </div>
 
       <h2>Warum ein Hochzeitsfilm eine lohnende Investition ist</h2>
@@ -61,11 +61,11 @@ export default function Page() {
       </p>
       <ul>
         <li><strong>Drehtag & Stunden:</strong> Wie lange wird gefilmt? Von der Vorbereitung bis zur Party oder nur Trauung bis Dinner?</li>
-        <li><strong>Anzahl der Kameramänner:</strong> Ein Kameramann filmt anders als zwei. Mit zwei Kameras werden gleichzeitige Momente eingefangen, zum Beispiel die Reaktionen der Gäste beim Einzug.</li>
-        <li><strong>Schnitt & Nachbearbeitung:</strong> Ein Film in Cinégraphie braucht 30 bis 80 Stunden Schnittprozess: Farbkorrektur, Sounddesign und Musik Licensing.</li>
+        <li><strong>Art des Films:</strong> Ein dokumentarischer Film begleitet euren Tag so, wie er passiert. Ein gescripteter Film hat eine Idee, ein kleines Drehbuch und Szenen, die ihr gemeinsam mit uns spielt. Das braucht mehr Vorbereitung, Drehzeit und Schnitt.</li>
+        <li><strong>Schnitt & Nachbearbeitung:</strong> Ein Film in Cinégraphie braucht 30 bis 80 Stunden Schnittprozess: Farbkorrektur und Sounddesign.</li>
         <li><strong>Kameraausrüstung:</strong> Vollformat-Kameras, Gimbal, Slider. Professionelles Equipment kostet und macht den visuellen Unterschied.</li>
         <li><strong>Länge des Hauptfilms:</strong> 6 Minuten oder 20 Minuten sind zwei komplett unterschiedliche Schnittaufwände.</li>
-        <li><strong>Zusatzleistungen:</strong> Separater Trailer, Rohschnitt-Material oder besondere Formate.</li>
+        <li><strong>Eure Wünsche:</strong> Ein separater Trailer, Rohmaterial, Clips für Social Media oder ein Paarshooting an einem zweiten Tag.</li>
       </ul>
 
       <h2>Woran ihr die Unterschiede erkennt</h2>
@@ -82,7 +82,7 @@ export default function Page() {
 
       <h3>Premium</h3>
       <p>
-        Ganz oben wird mit zwei Kameras gearbeitet, in Cinégraphie, mit ausgeprägtem Stilgefühl und oft mit nur wenigen Hochzeiten im Jahr. Die Ergebnisse sind filmreif, das ist auch der Anspruch. Hier arbeiten wir.
+        Ganz oben wird in Cinégraphie gearbeitet, mit ausgeprägtem Stilgefühl und oft mit nur wenigen Hochzeiten im Jahr. Die Ergebnisse sind filmreif, das ist auch der Anspruch. Hier arbeiten wir. Bei uns filmen immer mindestens zwei von uns, so entgeht euch kein Moment, auch wenn an zwei Stellen gleichzeitig etwas passiert.
       </p>
 
       <h2>Was sollte in einem guten Paket enthalten sein?</h2>
@@ -91,14 +91,26 @@ export default function Page() {
         <li>Hauptfilm in Cinégraphie (mindestens 5 bis 8 Minuten)</li>
         <li>Highlight Trailer (1 bis 2 Minuten)</li>
         <li>Professionelle Farbkorrektur und Audiobearbeitung</li>
-        <li>Lizenzierte Musik (kein Copyright Problem)</li>
         <li>Private Online-Galerie mit Download-Option</li>
         <li>Klarer Zeitrahmen für die Lieferung</li>
       </ul>
 
       <h2>Unser Angebot bei Amoriva Films</h2>
       <p>
-        Wir von <strong>Amoriva Films</strong> begleiten Paare international. Unsere Pakete beginnen bei einem einzigen Ansprechpartner und enden bei einem vollständigen Kombipaket aus Hochzeitsfilm und Hochzeitsfotografie.
+        Wir von <strong>Amoriva Films</strong> begleiten Paare in Niedersachsen und europaweit. Unsere Pakete beginnen bei einem einzigen Ansprechpartner und enden bei einem vollständigen Kombipaket aus Hochzeitsfilm und Hochzeitsfotografie.
+      </p>
+      <p>
+        Damit ihr eine Orientierung habt, hier unsere Startpreise:
+      </p>
+      <ul>
+        <li><strong>Hochzeitsfilm:</strong> ab 1.000 €</li>
+        <li><strong>Hochzeitsfotografie, ganzer Tag:</strong> ab 850 €</li>
+        <li><strong>Fotos im Standesamt:</strong> ab 250 €</li>
+        <li><strong>Fotos für ein paar Stunden:</strong> auf Anfrage</li>
+        <li><strong>Film und Foto aus einer Hand:</strong> auf Anfrage</li>
+      </ul>
+      <p>
+        Alle Details zu den Paketen findet ihr auf unserer Seite <Link href="/leistungen#preise">Leistungen und Preise</Link>.
       </p>
       <p>
         Was uns wichtig ist: Wir beraten euch ehrlich. Wenn euer Datum verfügbar ist, erzählen wir euch genau, was möglich ist, ohne versteckte Kosten. <Link href="/anfrage">Stellt uns jetzt eine unverbindliche Anfrage</Link> und erhaltet innerhalb von 24 Stunden eine Antwort.

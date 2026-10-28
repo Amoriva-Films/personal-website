@@ -1,19 +1,8 @@
+import { seiteLeistungen as s } from '@/content/texte';
+
 export const metadata = {
-  title: 'Leistungen: Hochzeitsfilm & Fotografie',
-  description:
-    'Hochzeitsfilm in Cinégraphie & Hochzeitsfotografie international. Amoriva Films begleitet euch weltweit. Alle Pakete & Leistungen im Überblick.',
-  keywords: [
-    'Hochzeitsfilm Wolfsburg',
-    'Hochzeitsfotografie Wolfsburg',
-    'Videograf Hochzeit Wolfsburg',
-    'Drohnenfilm Hochzeit',
-    'Same Day Edit Hochzeit',
-    'Hochzeitsfilm Kosten',
-    'Hochzeitsfilm Preise',
-    'Hochzeitspaket Film Foto',
-    'Hochzeitsfilmer buchen Wolfsburg',
-    'Hochzeitsvideograf Niedersachsen',
-  ],
+  title: s.meta.titel,
+  description: s.meta.text,
   alternates: {
     canonical: 'https://amoriva-films.de/leistungen',
   },

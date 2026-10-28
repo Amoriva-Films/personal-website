@@ -294,11 +294,19 @@ body { background: transparent !important; }
   -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent);
           mask-image: linear-gradient(to bottom, #000 84%, transparent);
 }
-/* Die Wiese mit dem Paar */
+/* Die Wiese mit dem Paar: dunkel (Oliv-Braun), das Bild nur als gedaempfte
+   Stimmung dahinter (Nevio 23.10.2026: "Hintergrund muss dunkler, Sichtbarkeit ist schlecht") */
+.tag-zone--wiese { isolation: isolate; }
+/* Eine Flaeche fuer Stimmen, Termine, Gruender. Die Papierkachel beginnt um eine
+   Buehnenhoehe versetzt, damit sie an die Kachel der Prozess-Buehne darueber
+   anschliesst (Buehne = 100svh hoch, endet genau hier). */
+.dunkel-strecke { background-position: 0 0, 0 -100svh, 0 0; }
+.dunkel-strecke .gruender, .dunkel-strecke .stimmen, .dunkel-strecke .termine { background: none; }
 .tag-zone--wiese::before {
+  mix-blend-mode: normal; opacity: .3; filter: brightness(.75) saturate(.8);
   background-position: center 70%;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
-          mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 6%, #000 40%, #000 78%, transparent);
+          mask-image: linear-gradient(to bottom, transparent 6%, #000 40%, #000 78%, transparent);
 }
 
 

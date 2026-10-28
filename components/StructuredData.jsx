@@ -44,6 +44,9 @@ export default function StructuredData() {
           { '@type': 'Country', name: 'Deutschland' },
           { '@type': 'Country', name: 'Österreich' },
           { '@type': 'Country', name: 'Schweiz' },
+          { '@type': 'Country', name: 'Italien' },
+          // Europaweit buchbar (Nevio 28.10.2026)
+          { '@type': 'Continent', name: 'Europa' },
         ],
         serviceType: ['Hochzeitsfilm', 'Hochzeitsfotografie', 'Videografie'],
         hasOfferCatalog: {

@@ -5,7 +5,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: 'Wann Hochzeitsfilmer & Fotograf buchen? Der richtige Zeitpunkt',
-  description: 'Wann sollte man Hochzeitsfilmer und Hochzeitsfotograf buchen? Empfehlung, Checkliste und Tipps für Paare weltweit.',
+  description: 'Wann sollte man Hochzeitsfilmer und Hochzeitsfotograf buchen? Empfehlung, Checkliste und Tipps für Paare in Niedersachsen und ganz Europa.',
   author: { '@type': 'Organization', name: 'Amoriva Films', url: 'https://amoriva-films.de' },
   publisher: {
     '@type': 'Organization',

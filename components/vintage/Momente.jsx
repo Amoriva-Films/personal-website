@@ -22,7 +22,8 @@ const STREU = [
   { i: 3, l: 24, o: 82, b: 15, r: '4 / 3', t: 30, blass: true },
   { i: 4, l: 76, o: 0, b: 14, r: '3 / 4', t: -60, blass: true },
   { i: 6, l: 57, o: 66, b: 18, r: '4 / 3', t: 40, blass: true },
-  { i: 2, l: 92, o: 86, b: 12, r: '1 / 1', t: -30, blass: true },
+  // 7 statt 2: Bild 2 steht schon gross in der Mitte (vorher doppelt)
+  { i: 7, l: 92, o: 86, b: 12, r: '1 / 1', t: -30, blass: true },
 ];
 
 function Foto({ bild, lage, p, groesse }) {

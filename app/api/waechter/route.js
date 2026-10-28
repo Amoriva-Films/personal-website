@@ -36,12 +36,12 @@ const BASIS = (process.env.WAECHTER_BASIS || 'https://amoriva-films.de').replace
 const STILLE_TAGE = Number(process.env.WAECHTER_STILLE_TAGE || 14);
 
 const SEITEN = [
-  '/', '/leistungen', '/angebote', '/anfrage', '/filme', '/referenzen',
+  '/', '/leistungen', '/anfrage', '/ueber-uns', '/vision', '/fragen',
+  '/filme', '/referenzen',
   '/ratgeber',
   '/ratgeber/was-kostet-ein-hochzeitsfilm',
   '/ratgeber/hochzeitsfilmer-wann-buchen',
   '/ratgeber/cinematic-hochzeitsfilm',
-  '/ratgeber/same-day-edit-hochzeit',
   '/impressum', '/datenschutz',
 ];
 

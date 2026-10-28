@@ -1,7 +1,8 @@
+import { seiteRatgeber as s } from '@/content/texte';
+
 export const metadata = {
-  title: 'Ratgeber | Hochzeitsfilm & Fotografie',
-  description:
-    'Ratgeber für Hochzeitsfilme: Kosten, wann buchen, Same Day Edit und cinematic Stil. Alles, was Paare vor der Buchung wissen sollten.',
+  title: s.meta.titel,
+  description: s.meta.text,
   alternates: {
     canonical: 'https://amoriva-films.de/ratgeber',
   },

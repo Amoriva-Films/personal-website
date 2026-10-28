@@ -36,11 +36,16 @@ export default function Home() {
         <Momente />
         <Leistungen />
         <Prozess />
-        <div className="tag-zone tag-zone--wiese">
-          <Stimmen />
-          <Termine />
+        {/* Stimmen, Termine und Gruender liegen auf EINER dunklen Flaeche: keine Naht
+            zwischen den Abschnitten (Nevio 26.10.2026). Das Wiesen-Bild haengt nur
+            hinter Stimmen und Terminen. */}
+        <div className="dunkel-strecke v-nacht">
+          <div className="tag-zone tag-zone--wiese">
+            <Stimmen />
+            <Termine />
+          </div>
+          <Gruender />
         </div>
-        <Gruender />
         <Brief />
       </main>
       <Fuss />
