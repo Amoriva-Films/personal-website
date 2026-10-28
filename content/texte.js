@@ -185,7 +185,7 @@ export const prozess = {
     { titel: 'Kennenlernen', text: 'Bevor ihr bucht, lernt ihr jeden kennen, der an eurem Tag hinter der Kamera steht, persönlich oder per Video. Ohne Verkaufsgespräch, einfach um zu sehen, ob es passt.', link: { label: 'Wer wir sind', href: '/ueber-uns' } },
     { titel: 'Eure Vision', text: 'Gemeinsam sprechen wir darüber, was euer Film und eure Fotos erzählen sollen. Was ihr euch vorstellt, setzen wir um, ob erstes Morgenlicht oder Feier in Italien.', link: { label: 'Unsere Vision', href: '/vision' } },
     { titel: 'Euer Tag', text: 'Am Tag selbst sind wir von morgens bis abends da. Wo ihr unsicher seid, leiten wir euch an, sonst halten wir uns im Hintergrund, damit ihr eure Hochzeit wirklich erlebt.', link: { label: 'Häufige Fragen', href: '/fragen' } },
-    { titel: 'Film und Fotos', text: 'In sechs bis acht Wochen bekommt ihr euren Film und alle Fotos in einer privaten Online-Galerie, in voller Auflösung zum Anschauen, Teilen und Aufheben.', link: { label: 'Jetzt anfragen', href: '/anfrage' } },
+    { titel: 'Film und Fotos', text: 'Eure Fotos bekommt ihr in drei bis sechs Wochen, euren Film in sechs bis acht Wochen, beides in einer privaten Online-Galerie, in voller Auflösung zum Anschauen, Teilen und Aufheben.', link: { label: 'Jetzt anfragen', href: '/anfrage' } },
   ],
 
   schritt: 'Schritt',
@@ -330,7 +330,7 @@ export const seiteUeberUns = {
     { titel: 'Erreichbar', text: 'Antwort innerhalb von 24 Stunden' },
     { titel: 'Unauffällig', text: 'Wir begleiten euren Tag, ohne ihn zu stören' },
     { titel: 'Neues Vintage', text: 'Italienischer Flair, moderne Technik' },
-    { titel: 'Schnelle Lieferung', text: 'Film und Fotos in sechs bis acht Wochen bei euch' },
+    { titel: 'Schnelle Lieferung', text: 'Fotos in drei bis sechs Wochen, Film in sechs bis acht' },
   ],
 };
 
@@ -345,7 +345,7 @@ export const seiteVision = {
     'Unsere Vision ist schnell erklärt: Jedes Paar soll Erinnerungen bekommen, die es so nur einmal gibt. Wenn ihr euren Hochzeitsfilm in ein paar Jahren wieder anschaut oder eure Hochzeitsfotos durchblättert, soll sich das nach euch anfühlen und nicht nach einem Stil, den man auf jeder zweiten Hochzeit sieht. Deshalb arbeiten wir mit einem eigenen Look, den man erkennt, bevor man unseren Namen liest, und der sich nicht einfach nachmachen lässt.',
     'Vielleicht kennt ihr die Sorge, dass am Ende genau die Momente fehlen, die euch wichtig waren, oder dass ihr euch vor der Kamera fremd fühlt. Bei uns lernt ihr jeden, der an eurem Tag filmt oder fotografiert, vorher persönlich kennen, und wo ihr unsicher seid, leiten wir euch an. Den Rest des Tages halten wir uns im Hintergrund, damit ihr eure Hochzeit wirklich erlebt. Film und Fotos kommen dabei aus einem Team, mit einem Look und einem Ansprechpartner, ohne dass ihr zwei Anbieter aufeinander abstimmen müsst.',
     'Was ihr euch vorstellt, setzen wir um. Ihr wollt euch im ersten Morgenlicht sehen, eure Trauung am See oder eure Feier in Italien? Dann finden wir einen Weg, statt nach Gründen zu suchen, warum es nicht geht. Unser Zuhause ist Wolfsburg, und wir begleiten Hochzeiten in Braunschweig, Hannover und ganz Niedersachsen genauso wie in ganz Deutschland, Österreich, der Schweiz und Südeuropa.',
-    'Unsere italienischen Wurzeln sieht man unseren Bildern an: warm, zeitlos und mit einem Hauch Vintage, aber mit moderner Technik umgesetzt. Euren fertigen Hochzeitsfilm und alle Fotos bekommt ihr in sechs bis acht Wochen in eurer privaten Online-Galerie, zum Anschauen, Teilen und Aufheben.',
+    'Unsere italienischen Wurzeln sieht man unseren Bildern an: warm, zeitlos und mit einem Hauch Vintage, aber mit moderner Technik umgesetzt. Eure Fotos bekommt ihr in drei bis sechs Wochen, euren fertigen Hochzeitsfilm in sechs bis acht Wochen, beides in eurer privaten Online-Galerie, zum Anschauen, Teilen und Aufheben.',
   ],
   // Ueberschrift der Spalte, die aus der Kamera kommt (darin der Vision-Text)
   spalteZeile: 'Wofür wir stehen',
@@ -374,7 +374,7 @@ export const seiteFragen = {
     { frage: 'Wir stehen nicht gern vor der Kamera. Ist das ein Problem?', antwort: 'Überhaupt nicht. Beim Paarshooting leiten wir euch an, mit kleinen Aufgaben statt steifer Posen, und den Rest des Tages halten wir uns im Hintergrund. Nach ein paar Minuten vergessen die meisten, dass wir überhaupt da sind.' },
     { frage: 'Seid ihr nur in Wolfsburg tätig?', antwort: 'Nein, wir filmen europaweit. Wolfsburg ist unser Zuhause und bisher waren wir in ganz Deutschland unterwegs. Für eure Hochzeit reisen wir genauso nach Österreich, in die Schweiz oder nach Südeuropa. Wo es hingeht, schauen wir uns gemeinsam an, und die Anreise sprechen wir vorher offen ab.' },
     { frage: 'Wie lang wird unser Film und können wir die Musik mitbestimmen?', antwort: 'Euer Hauptfilm ist zwischen 3 und 12 Minuten lang. Die Musik wählen wir gemeinsam mit euch aus, damit der Film nach euch klingt. Habt ihr ein Lied, das euch viel bedeutet, sagt es uns einfach.' },
-    { frage: 'Wie lange dauert es, bis wir den Film bekommen?', antwort: 'Innerhalb von 6 bis 8 Wochen nach eurer Hochzeit erhaltet ihr euren fertigen Film und alle Fotos in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.' },
+    { frage: 'Wie lange dauert es, bis wir Film und Fotos bekommen?', antwort: 'Eure Fotos bekommt ihr innerhalb von 3 bis 6 Wochen nach der Hochzeit, euren fertigen Film innerhalb von 6 bis 8 Wochen, beides in einer privaten Online-Galerie. Bei besonderen Terminwünschen sprechen wir das gerne vorab ab.' },
     { frage: 'In welchem Format erhalten wir den Film und die Fotos?', antwort: 'Euer Film wird als hochauflösende Videodatei geliefert. Die Fotos erhaltet ihr in voller Auflösung mit Druckfreigabe. Alles landet in einer privaten Online-Galerie, die ihr jederzeit aufrufen und mit Familie und Freunden teilen könnt.' },
     { frage: 'Was passiert, wenn jemand von euch krank wird?', antwort: 'Weil wir als Team arbeiten, hängt euer Tag nicht an einer einzelnen Person. Fällt jemand aus, springt jemand aus unserem Team ein, der eure Absprachen kennt. Ihr erfahrt es sofort von uns und müsst euch um nichts kümmern.' },
   ],
@@ -439,7 +439,7 @@ export const seiteFotografWolfsburg = {
   fakten: [
     { wert: 'ab 850 €', text: 'Fotos für den ganzen Tag' },
     { wert: 'ab 250 €', text: 'Fotos im Standesamt' },
-    { wert: '6 bis 8 Wochen', text: 'bis alle Fotos bei euch sind' },
+    { wert: '3 bis 6 Wochen', text: 'bis alle Fotos bei euch sind' },
     { wert: 'Film dazu', text: 'aus demselben Team' },
   ],
   bilder: [
@@ -461,7 +461,7 @@ export const seiteFotografWolfsburg = {
     'Private Online-Galerie zum Anschauen, Teilen und Herunterladen',
     'Druckfreigabe inklusive',
     'Persönliches Kennenlernen vor der Buchung',
-    'Lieferung in sechs bis acht Wochen',
+    'Lieferung in drei bis sechs Wochen',
   ],
   orteZeile: 'In Wolfsburg und Umgebung',
   orteTitel: 'Wo in Wolfsburg *geheiratet* wird.',
