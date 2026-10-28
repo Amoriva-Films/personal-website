@@ -22,13 +22,15 @@ export default function StructuredData() {
         name: 'Amoriva Films',
         alternateName: 'Amoriva Films Hochzeitsfilm',
         description:
-          'Hochzeitsfilm in Cinégraphie und Hochzeitsfotografie aus Niedersachsen. Wolfsburg, Braunschweig, Hannover und deutschlandweit.',
+          'Hochzeitsfotograf und Videograf aus Wolfsburg: Fine-Art-Hochzeitsfotografie und Hochzeitsfilm in Cinégraphie aus einem Team, für Wolfsburg, Braunschweig, Hannover und ganz Europa.',
         url: 'https://amoriva-films.de',
         telephone: '+4915565559747',
         email: 'booking@amoriva-films.de',
         address: ADRESSE,
         geo: { '@type': 'GeoCoordinates', latitude: 52.4083, longitude: 10.9333 },
-        image: 'https://amoriva-films.de/brand/wortmarke-gruen-v2.png',
+        // Ein echtes Foto statt der Wortmarke (das Logo steht unter logo)
+        image: ['https://amoriva-films.de/images/og-image.jpg', 'https://amoriva-films.de/images/kuss-seifenblasen.jpg'],
+        priceRange: 'ab 250 €',
         logo: {
           '@type': 'ImageObject',
           url: 'https://amoriva-films.de/brand/wortmarke-gruen-v2.png',
@@ -48,19 +50,27 @@ export default function StructuredData() {
           // Europaweit buchbar (Nevio 28.10.2026)
           { '@type': 'Continent', name: 'Europa' },
         ],
-        serviceType: ['Hochzeitsfilm', 'Hochzeitsfotografie', 'Videografie'],
+        serviceType: ['Hochzeitsfotograf', 'Hochzeitsfotografie', 'Hochzeitsfilm', 'Videografie'],
+        /* Startpreise wie auf /leistungen (28.10.2026). Highlight-Clip raus,
+           der steht nicht mehr im Angebot der Fragen-Seite. */
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Leistungen',
+          url: 'https://amoriva-films.de/leistungen',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfilm', description: 'Hauptfilm in Cinégraphie und Highlights-Clip, Begleitung vom Morgen bis zum Abend.' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfotografie', description: 'Fine-Art-Fotografie vom Getting Ready bis zum Tanz, private Online-Galerie.' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Film und Foto', description: 'Film und Fotografie aus einer Hand, ein Team, eine Bildsprache.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfilm', description: 'Hauptfilm in Cinégraphie, 3 bis 12 Minuten, Begleitung vom Morgen bis zum Abend, Lieferung in 6 bis 8 Wochen.' }, priceSpecification: { '@type': 'PriceSpecification', minPrice: 1000, priceCurrency: 'EUR' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Hochzeitsfotografie, ganzer Tag', description: 'Fine-Art-Fotografie vom Getting Ready bis zum ersten Tanz, private Online-Galerie, Lieferung in 3 bis 6 Wochen.' }, priceSpecification: { '@type': 'PriceSpecification', minPrice: 850, priceCurrency: 'EUR' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Fotos im Standesamt', description: 'Fotos der standesamtlichen Trauung.' }, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Film und Foto aus einer Hand', description: 'Hochzeitsfilm und Hochzeitsfotografie aus einem Team, ein Look, ein Ansprechpartner. Preis auf Anfrage.' } },
           ],
         },
         founder: [
           { '@type': 'Person', name: 'Nevio Mastrogiorgio', jobTitle: 'Founder, Beratung und kreative Leitung' },
           { '@type': 'Person', name: 'Danilo Buonafede', jobTitle: 'Co Founder, Cinégraphie und Bildgestaltung' },
+        ],
+        // Kati gehoert seit 2026 zum Team (Fotografie), fehlte hier bisher
+        employee: [
+          { '@type': 'Person', name: 'Katharina Hieb', jobTitle: 'Hochzeitsfotografie' },
         ],
         knowsLanguage: ['de', 'en'],
         /* Die Adresse hier stand als "amoriva.films" mit Punkt drin -
