@@ -68,15 +68,29 @@ export default function Abspann() {
           ))}
         </dl>
 
-        <motion.div className="ab-ende"
-          initial={false}
-          animate={an ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.94 }}
-          transition={{ duration: 1, ease, delay: still ? 0 : 0.85 + s.inhalt.length * 0.16 }}>
-          <span className="ab-ornament" aria-hidden="true">✦</span>
-          <p className="ab-preis-marke">Euer Hochzeitsfilm</p>
-          <p className="ab-preis">{s.inhaltPreis}</p>
+        {/* Schluss: was uns ausmacht, vier Filmbilder */}
+        <div className="ab-ende">
+          <motion.p className="ab-ende-titel"
+            initial={false}
+            animate={an ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.8, ease, delay: still ? 0 : 0.85 + s.inhalt.length * 0.16 }}>
+            <span className="ab-ornament" aria-hidden="true">✦</span>
+            <span>{s.ausmachtTitel.split('*').map((t, i) => (i % 2 ? <em key={i}>{t}</em> : t))}</span>
+          </motion.p>
+          <ul className="ab-usps">
+            {s.ausmacht.map((u, i) => (
+              <motion.li key={u.titel} className="ab-usp"
+                initial={false}
+                animate={an ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.9, ease, delay: still ? 0 : 1.05 + s.inhalt.length * 0.16 + i * 0.14 }}>
+                <span className="ab-usp-nr" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{u.titel}</h3>
+                <p>{u.text}</p>
+              </motion.li>
+            ))}
+          </ul>
           <Link href="/anfrage" className="v-knopf ab-knopf">Termin anfragen</Link>
-        </motion.div>
+        </div>
       </motion.div>
 
       <style dangerouslySetInnerHTML={{ __html: `
@@ -116,13 +130,31 @@ export default function Abspann() {
 
         /* Schlusstafel */
         .ab-ende { margin-top: clamp(40px, 4.5vw, 60px); display: flex; flex-direction: column; align-items: center; }
-        .ab-ornament { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; font-size: 12px; color: var(--ton-akzent); }
+        .ab-ende-titel { margin: 0; display: flex; flex-direction: column; align-items: center; font-family: var(--font-display), Georgia, serif; font-weight: 500;
+          font-size: clamp(26px, 2.6vw, 36px); letter-spacing: .08em; text-transform: uppercase; color: var(--ton); }
+        .ab-ende-titel em { font-family: var(--font-schrift), cursive; font-style: normal; text-transform: none; letter-spacing: 0; font-size: 1.25em; color: var(--ton-akzent); margin-left: .2em; }
+        .ab-ornament { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; font-size: 12px; color: var(--ton-akzent); }
         .ab-ornament::before, .ab-ornament::after { content: ''; width: 64px; height: 1px; background: currentColor; opacity: .55; }
-        .ab-preis-marke { margin: 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 11.5px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: color-mix(in srgb, var(--ton) 58%, transparent); }
-        .ab-preis { margin: 10px 0 0; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(40px, 4.4vw, 60px); line-height: 1; letter-spacing: .02em; color: var(--ton); white-space: nowrap; }
-        .ab-knopf { margin-top: 28px; }
+        /* USPs als Filmbilder: abgerundetes Fenster wie ein 35-mm-Bild,
+           Hover: Projektorlicht faellt hinein, Bild hebt sich leicht */
+        .ab-usps { list-style: none; margin: clamp(28px, 3.4vw, 44px) 0 0; padding: 0; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+        .ab-usp { position: relative; overflow: hidden; padding: 26px 26px 28px; border-radius: 14px / 10px;
+          border: 1px solid color-mix(in srgb, var(--ton) 16%, transparent); background: rgba(241, 232, 214, .035);
+          transition: transform .55s cubic-bezier(.22, 1, .36, 1), border-color .5s ease, background-color .5s ease, box-shadow .5s ease; }
+        .ab-usp::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+          background: radial-gradient(ellipse 90% 80% at 50% 0%, rgba(241, 232, 214, .14), transparent 70%); transition: opacity .6s ease; }
+        .ab-usp-nr { display: block; font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 18px; color: var(--ton-akzent); transition: letter-spacing .5s cubic-bezier(.22, 1, .36, 1); }
+        .ab-usp h3 { margin: 10px 0 0; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(20px, 1.8vw, 23px); line-height: 1.25; color: var(--ton); }
+        .ab-usp p { margin: 10px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: color-mix(in srgb, var(--ton) 72%, transparent); }
+        @media (hover: hover) {
+          .ab-usp:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--ton-akzent) 55%, transparent);
+            background-color: rgba(241, 232, 214, .06); box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .75); }
+          .ab-usp:hover::before { opacity: 1; }
+          .ab-usp:hover .ab-usp-nr { letter-spacing: .12em; }
+        }
+        .ab-knopf { margin-top: clamp(32px, 3.6vw, 44px); }
 
-        @media (prefers-reduced-motion: reduce) { .ab-zeile::before, .ab-zeile dt, .ab-steg, .ab-zeile dd { transition: none; } }
+        @media (prefers-reduced-motion: reduce) { .ab-zeile::before, .ab-zeile dt, .ab-steg, .ab-zeile dd, .ab-usp, .ab-usp::before { transition: none; } .ab-usp:hover { transform: none; } }
 
         @media (max-width: 760px) {
           .ab { padding: 44px 30px 48px; box-shadow: inset 0 0 80px rgba(0, 0, 0, .5); }
@@ -135,6 +167,9 @@ export default function Abspann() {
           .ab-steg { display: none; }
           .ab-zeile + .ab-zeile { border-top: 1px solid color-mix(in srgb, var(--ton) 10%, transparent); }
           .ab-ornament::before, .ab-ornament::after { width: 44px; }
+          .ab-usps { grid-template-columns: 1fr; gap: 12px; }
+          .ab-usp { padding: 20px 20px 22px; }
+          .ab-usp p { font-size: 14.5px; }
         }
       ` }} />
     </div>

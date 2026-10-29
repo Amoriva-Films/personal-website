@@ -539,7 +539,14 @@ export const seiteVideoWolfsburg = {
     { rolle: 'Galerie', wert: 'Privat, zum Anschauen und Teilen' },
     { rolle: 'Premiere', wert: 'In sechs bis acht Wochen' },
   ],
-  inhaltPreis: 'ab 1.000\u00a0€',
+  // Schluss des Abspanns: was uns ausmacht, statt Preis (Nevio 29.10.2026)
+  ausmachtTitel: 'Und darum *Amoriva.*',
+  ausmacht: [
+    { titel: 'Film und Foto aus einer Hand', text: 'Ein Team, ein Look, ein Ansprechpartner. Bilder und Film passen zusammen, weil sie vom selben Team kommen.' },
+    { titel: 'Ihr kennt uns vorher', text: 'Vor der Buchung lernt ihr jeden kennen, der an eurem Tag filmt. An der Kamera steht niemand Fremdes.' },
+    { titel: 'Kino statt Mitschnitt', text: 'Cinégraphie mit Licht und Musik wie im Kino, dokumentarisch oder mit Drehbuch, ganz wie ihr wollt.' },
+    { titel: 'Entspannt vor der Kamera', text: 'Wo ihr unsicher seid, leiten wir euch an. Sonst halten wir uns im Hintergrund und ihr feiert.' },
+  ],
   orteZeile: 'In Wolfsburg und Umgebung',
   orteTitel: 'Wo euer Film *spielen* kann.',
   orteText: 'Wir kommen dorthin, wo ihr heiratet. Ein paar Orte in Wolfsburg, die im Film jeweils ganz anders wirken:',
