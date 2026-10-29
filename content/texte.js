@@ -50,9 +50,6 @@ export const kopf = {
 
 export const intro = {
   ueberspringen: 'Überspringen',
-  // Start-Film (IntroFilm.jsx): Zeile ueber der Fassade, Entwurf 26.10.2026
-  filmKlein: 'Amoriva Films',
-  filmSchrift: 'Kapitel eins. Euer Tag.',
 };
 
 export const hero = {
