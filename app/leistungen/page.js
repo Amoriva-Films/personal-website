@@ -140,6 +140,8 @@ export default function Leistungen() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .leist { padding-bottom: clamp(80px, 9vw, 130px); overflow-x: clip; }
+        /* Kopfbild etwas dunkler, damit es zu den anderen Unterseiten passt (Nevio 29.10.2026) */
+        .leist .seitenkopf-bild img { filter: brightness(.72) saturate(.85) sepia(.1); }
         .leist-einleitung { position: relative; z-index: 1; max-width: 600px; margin: calc(clamp(40px, 5vw, 72px) * -1) auto 0; padding-inline: var(--rand); text-align: center; }
 
         .leist-pakete { max-width: 1080px; margin-top: clamp(64px, 7vw, 100px); display: flex; flex-direction: column; gap: clamp(64px, 8vw, 120px); }
