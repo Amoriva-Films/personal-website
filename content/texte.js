@@ -550,15 +550,7 @@ export const seiteVideoWolfsburg = {
     { titel: 'Entspannt vor der Kamera', text: 'Wo ihr unsicher seid, leiten wir euch an. Sonst halten wir uns im Hintergrund und ihr feiert.' },
   ],
   orteZeile: 'In Wolfsburg und Umgebung',
-  orteTitel: 'Wo euer Film *spielen* kann.',
-  orteText: 'Wir kommen dorthin, wo ihr heiratet. Ein paar Orte in Wolfsburg, die im Film jeweils ganz anders wirken:',
-  orte: [
-    { name: 'Schloss Wolfsburg', text: 'Der Schlosshof mit seinen Arkaden gibt eurem Film sofort einen Rahmen, und getraut werden könnt ihr direkt im Schloss.' },
-    { name: 'Schloss Fallersleben', text: 'Klein und ruhig, gut für eine standesamtliche Trauung im engsten Kreis, bei der es auf jedes Wort ankommt.' },
-    { name: 'Autostadt', text: 'Glas, Wasser und klare Linien am Mittellandkanal. Eine moderne Kulisse, die im Film ganz anders wirkt als ein Schloss.' },
-    { name: 'Allersee', text: 'Am Abend über dem Wasser entstehen die ruhigen, weiten Bilder, mit denen viele Hochzeitsfilme enden.' },
-  ],
-  umgebung: 'Genauso filmen wir in Braunschweig, Gifhorn, Wolfenbüttel, Helmstedt, Hannover und Celle, und für eure Hochzeit reisen wir durch ganz Europa.',
+  umgebung: 'Wir filmen in Wolfsburg, Braunschweig, Gifhorn, Wolfenbüttel, Helmstedt, Hannover und Celle, und für eure Hochzeit reisen wir durch ganz Europa.',
   fragenTitel: 'Häufige Fragen zum Hochzeitsvideo in *Wolfsburg.*',
   fragen: [
     { frage: 'Was kostet ein Hochzeitsvideo in Wolfsburg bei euch?', antwort: 'Euer Hochzeitsvideo beginnt bei 1.000 €. Was es genau kostet, hängt vom Aufwand ab: wie viele Stunden wir filmen, wie lang euer Film wird und ob ihr ihn dokumentarisch oder gescriptet möchtet. Nach einem kurzen Gespräch bekommt ihr ein Angebot, das genau zu eurem Tag passt.' },

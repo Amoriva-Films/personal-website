@@ -10,7 +10,7 @@ import { brief, marke, seiteVideoWolfsburg as s } from '@/content/texte';
    Fotograf-Seite. Bei "Hochzeitsvideo Wolfsburg" stand Amoriva nicht in den
    Top 10, die Startseite bleibt aber bei "Hochzeitsfilm" (Platz 2). Aufbau:
    Textkopf mit Antwort zuerst, vier Eckdaten, Stil, der Drehplan (Filmklappe und Drehbuchblatt), das Paket
-   als Abspann, Orte, lokale Fragen, Abschluss. Antworten offen im HTML.
+   als Abspann, Region, lokale Fragen, Abschluss. Antworten offen im HTML.
    Das Video aus der Vision-Seite kommt hier dazu, sobald es da ist. */
 
 const BASIS = 'https://amoriva-films.de';
@@ -23,7 +23,6 @@ export const metadata = {
   openGraph: { title: `${s.meta.titel} | Amoriva Films`, description: s.meta.text, url: URL, images: [{ url: '/images/og-image.jpg', width: 1200, height: 630 }] },
 };
 
-const ZIFFER = ['I', 'II', 'III', 'IV'];
 const ohneStern = (t) => t.replace(/\*/g, '');
 
 const ld = [
@@ -103,19 +102,9 @@ export default function VideoWolfsburg() {
           </p>
         </section>
 
+        {/* Orte raus (Nevio 29.10.2026), nur die Region bleibt als kurzer Satz */}
         <section className="v-bahn fw-orte">
           <p className="v-zeile">{s.orteZeile}</p>
-          <Titel text={s.orteTitel} className="v-titel fw-zwischen" />
-          <p className="v-text fw-orte-text">{s.orteText}</p>
-          <ul className="fw-orte-liste">
-            {s.orte.map((o, i) => (
-              <li key={o.name}>
-                <span className="fw-ort-ziffer" aria-hidden="true">{ZIFFER[i]}</span>
-                <h3 className="fw-ort-name">{o.name}</h3>
-                <p>{o.text}</p>
-              </li>
-            ))}
-          </ul>
           <p className="v-text fw-umgebung">{s.umgebung}</p>
         </section>
 
@@ -185,15 +174,7 @@ export default function VideoWolfsburg() {
         .fw-abspann-fuss { margin: clamp(32px, 4vw, 48px) auto 0; max-width: 600px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
 
         .fw-orte { text-align: center; }
-        .fw-orte-text { max-width: 640px; margin: 0 auto; }
-        .fw-orte-liste { list-style: none; margin: clamp(32px, 4vw, 48px) auto 0; padding: 26px 0 0; max-width: 1080px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 32px;
-          border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
-        .fw-orte-liste li { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 18px; border-left: 1px solid color-mix(in srgb, var(--ton) 11%, transparent); }
-        .fw-orte-liste li:first-child { border-left: none; }
-        .fw-ort-ziffer { font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 18px; color: var(--ton-akzent); }
-        .fw-ort-name { margin: 0; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: 19px; text-transform: uppercase; letter-spacing: .06em; }
-        .fw-orte-liste p { margin: 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 14px; line-height: 1.55; color: color-mix(in srgb, var(--ton) 72%, transparent); }
-        .fw-umgebung { max-width: 640px; margin: clamp(32px, 4vw, 48px) auto 0; }
+        .fw-umgebung { max-width: 640px; margin: 14px auto 0; }
 
         .fw-fragen { max-width: 820px; text-align: center; }
         .fw-fragen-liste { margin: 0; text-align: left; border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
@@ -206,16 +187,13 @@ export default function VideoWolfsburg() {
         .fw-knoepfe { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 28px; }
 
         @media (max-width: 860px) {
-          .fw-fakten, .fw-orte-liste { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+          .fw-fakten { grid-template-columns: 1fr 1fr; row-gap: 28px; }
           .fw-fakten { gap: 10px; }
           .fw-fakten li { padding: 20px 10px 22px; gap: 10px; }
-          .fw-orte-liste li:nth-child(3) { border-left: none; }
         }
         @media (max-width: 520px) {
           /* "HOCHZEITSVIDEO" ist ein langes Wort, am Handy kleiner, damit es passt */
           .fw-h1 { font-size: clamp(22px, 7vw, 32px); }
-          .fw-orte-liste { grid-template-columns: 1fr; }
-          .fw-orte-liste li { border-left: none; }
         }
       ` }} />
     </>
