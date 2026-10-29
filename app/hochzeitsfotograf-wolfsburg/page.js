@@ -178,8 +178,22 @@ export default function FotografWolfsburg() {
         /* Eckdaten (Nevio 29.10.2026: "hingeballert"): kleine Marke in Versalien
            oben, Wert ruhig in Antiqua darunter, feine Trennlinien, keine Kursive */
         .fw-fakten { list-style: none; margin: clamp(40px, 4.5vw, 60px) auto 0; padding: 0; max-width: 820px; display: grid; grid-template-columns: repeat(4, 1fr); }
-        .fw-fakten li { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 6px 16px; border-left: 1px solid color-mix(in srgb, var(--ton) 16%, transparent); }
-        .fw-fakten li:first-child { border-left: none; }
+        /* Karten (Nevio 29.10.2026): doppelter feiner Rahmen wie ein Etikett,
+           beim Hovern heben sie sich leicht, Rahmen wird bernstein, unten
+           waechst ein kurzer Strich. Am Handy ruhig, ohne Bewegung. */
+        .fw-fakten { gap: 14px; }
+        .fw-fakten li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 26px 14px 28px; border-radius: 3px;
+          border: 1px solid color-mix(in srgb, var(--ton) 18%, transparent); background: color-mix(in srgb, var(--ton) 4%, transparent);
+          transition: transform .5s cubic-bezier(.22, 1, .36, 1), border-color .5s ease, background-color .5s ease, box-shadow .5s ease; }
+        .fw-fakten li::before { content: ''; position: absolute; inset: 5px; border: 1px solid color-mix(in srgb, var(--ton) 8%, transparent); border-radius: 2px; pointer-events: none; transition: border-color .5s ease; }
+        .fw-fakten li::after { content: ''; position: absolute; left: 50%; bottom: 14px; width: 0; height: 1px; background: var(--ton-akzent); translate: -50% 0; transition: width .5s cubic-bezier(.22, 1, .36, 1); }
+        @media (hover: hover) {
+          .fw-fakten li:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--ton-akzent) 60%, transparent);
+            background-color: color-mix(in srgb, var(--ton) 7%, transparent); box-shadow: 0 22px 34px -20px rgba(0, 0, 0, .6); }
+          .fw-fakten li:hover::before { border-color: color-mix(in srgb, var(--ton-akzent) 28%, transparent); }
+          .fw-fakten li:hover::after { width: 34px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .fw-fakten li, .fw-fakten li::after { transition: none; } .fw-fakten li:hover { transform: none; } }
         .fw-fakt-text { order: -1; font-family: var(--font-text), system-ui, sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: color-mix(in srgb, var(--ton) 55%, transparent); }
         .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(21px, 1.9vw, 26px); line-height: 1.1; letter-spacing: .02em; color: var(--ton); white-space: nowrap; }
 
@@ -264,7 +278,9 @@ export default function FotografWolfsburg() {
 
         @media (max-width: 860px) {
           .fw-fakten, .fw-orte-liste { grid-template-columns: 1fr 1fr; row-gap: 28px; }
-          .fw-fakten li:nth-child(3), .fw-orte-liste li:nth-child(3) { border-left: none; }
+          .fw-fakten { gap: 10px; }
+          .fw-fakten li { padding: 20px 10px 22px; gap: 10px; }
+          .fw-orte-liste li:nth-child(3) { border-left: none; }
           .fw-bilder { grid-template-columns: 1fr 1fr; }
           .fw-bild--1, .fw-bild--3 { margin-top: 28px; }
         }
