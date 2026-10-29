@@ -3,6 +3,7 @@ import Titel from '@/components/vintage/Titel';
 import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import Drehplan from '@/components/vintage/Drehplan';
+import Abspann from '@/components/vintage/Abspann';
 import { brief, marke, seiteVideoWolfsburg as s } from '@/content/texte';
 
 /* Stadtseite "Hochzeitsvideo in Wolfsburg" (Nevio 29.10.2026), Gegenstueck zur
@@ -93,14 +94,12 @@ export default function VideoWolfsburg() {
           <Drehplan />
         </section>
 
-        {/* Paketinhalt als Abspann: zentriert, Versalien, wie am Ende eines Films */}
+        {/* Paketinhalt als Kino-Abspann auf einer Leinwand */}
         <section className="v-bahn fw-abspann">
           <Titel text={s.inhaltTitel} className="v-titel fw-zwischen" />
-          <ul className="fw-abspann-liste">
-            {s.inhalt.map((p) => <li key={p}>{p}</li>)}
-          </ul>
+          <Abspann />
           <p className="fw-abspann-fuss">
-            Ab 1.000 €. Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>, Fotos dazu unter <Link href="/hochzeitsfotograf-wolfsburg" className="v-link">Hochzeitsfotograf in Wolfsburg</Link>.
+            Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>, Fotos dazu unter <Link href="/hochzeitsfotograf-wolfsburg" className="v-link">Hochzeitsfotograf in Wolfsburg</Link>.
           </p>
         </section>
 
@@ -182,10 +181,7 @@ export default function VideoWolfsburg() {
         .fw-zwischen { margin-bottom: clamp(26px, 3vw, 40px); }
 
         .fw-drehplan { text-align: center; }
-        .fw-abspann { max-width: 760px; text-align: center; }
-        .fw-abspann-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
-        .fw-abspann-liste li { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: .14em; text-transform: uppercase; line-height: 1.35; color: color-mix(in srgb, var(--ton) 92%, transparent); }
-        .fw-abspann-liste li + li::before { content: ''; display: block; width: 26px; height: 1px; margin: 0 auto 18px; background: var(--ton-akzent); opacity: .6; }
+        .fw-abspann { max-width: 980px; text-align: center; }
         .fw-abspann-fuss { margin: clamp(32px, 4vw, 48px) auto 0; max-width: 600px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
 
         .fw-orte { text-align: center; }
