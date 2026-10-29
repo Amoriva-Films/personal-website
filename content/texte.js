@@ -397,6 +397,7 @@ export const seiteLeistungen = {
     { src: '/images/paare/paar-wand-v2.webp', alt: 'Bräutigam lehnt an einer Säule, die Braut schaut zu ihm auf', b: 1600, h: 2400 },
     { src: '/images/paare/paar-kuss.webp', alt: 'Brautpaar kurz vor dem Kuss, Schwarzweiß', b: 1600, h: 2400 },
   ],
+  bild: { src: '/images/vintage/leistungen-wiese.jpg', alt: 'Gemaltes Bild: ein Brautpaar geht Hand in Hand über eine Sommerwiese' },
   einleitung: 'Hier seht ihr, was in jedem Paket steckt und ab welchem Preis es losgeht. Jede Hochzeit ist anders, deshalb bekommt ihr nach einem kurzen Gespräch ein Angebot, das genau zu eurem Tag passt.',
   // Startpreise (Nevio 28.10.2026). Reihenfolge wie besprochen.
   preiseZeile: 'Preise',

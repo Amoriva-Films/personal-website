@@ -2,13 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Titel from '@/components/vintage/Titel';
 import Preiskarte from '@/components/vintage/Preiskarte';
+import SeitenKopf from '@/components/vintage/SeitenKopf';
 import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import { leistungen, prozess, marke, brief, seiteLeistungen as s } from '@/content/texte';
 
 /* Leistungen im Vintage-Design (Nevio 28.10.2026), ersetzt auch /angebote
    (leitet hierher um, next.config.mjs). Keine Preise (Teamentscheidung
-   28.10.2026), am selben Tag doch mit Startpreisen. Aufbau: ruhiger Textkopf,
+   28.10.2026), am selben Tag doch mit Startpreisen. Aufbau: Kopf mit gemaltem Bild,
    die drei Pakete abwechselnd Bild und Text, die Preiskarte (Preiskarte.jsx, wie die
    Menuekarte eines alten Grandhotels), wovon das Angebot abhaengt, der Ablauf in fuenf Schritten,
    Abschluss mit Knoepfen. Pakete und Schritte kommen aus derselben Quelle
@@ -64,11 +65,9 @@ export default function Leistungen() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(preisLd) }} />
 
       <main className="v-nacht leist">
-        <header className="leist-kopf" data-dunkler-kopf="flaeche">
-          <p className="v-label leist-label">{s.label}</p>
-          <Titel text={s.titel} als="h1" className="v-titel leist-h1" />
-          <p className="v-text leist-einleitung">{s.einleitung}</p>
-        </header>
+        {/* Kopf mit gemalter Sommerwiese (Nevio 29.10.2026), blendet unten weich aus */}
+        <SeitenKopf label={s.label} titel={s.titel} bild={s.bild} weich oben bildLage="64% 100%" />
+        <p className="v-text leist-einleitung">{s.einleitung}</p>
 
         <section className="v-bahn leist-pakete" aria-label="Pakete">
           {leistungen.pakete.map((p, i) => (
@@ -141,10 +140,7 @@ export default function Leistungen() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .leist { padding-bottom: clamp(80px, 9vw, 130px); overflow-x: clip; }
-        .leist-kopf { max-width: 860px; margin-inline: auto; padding: calc(var(--v-kopf) + clamp(56px, 8vw, 110px)) var(--rand) 0; text-align: center; }
-        .leist-label { margin: 0 0 18px; color: color-mix(in srgb, var(--ton) 75%, transparent); }
-        .leist-h1 { font-size: var(--v-titel); text-wrap: balance; }
-        .leist-einleitung { max-width: 600px; margin: 24px auto 0; }
+        .leist-einleitung { position: relative; z-index: 1; max-width: 600px; margin: calc(clamp(40px, 5vw, 72px) * -1) auto 0; padding-inline: var(--rand); text-align: center; }
 
         .leist-pakete { max-width: 1080px; margin-top: clamp(64px, 7vw, 100px); display: flex; flex-direction: column; gap: clamp(64px, 8vw, 120px); }
         .leist-paket { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
