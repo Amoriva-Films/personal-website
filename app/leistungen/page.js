@@ -66,7 +66,7 @@ export default function Leistungen() {
 
       <main className="v-nacht leist">
         {/* Kopf mit gemalter Sommerwiese (Nevio 29.10.2026), blendet unten weich aus */}
-        <SeitenKopf label={s.label} titel={s.titel} bild={s.bild} weich oben bildLage="64% 100%" />
+        <SeitenKopf label={s.label} titel={s.titel} bild={s.bild} weich bildLage="64% 70%" />
         <p className="v-text leist-einleitung">{s.einleitung}</p>
 
         <section className="v-bahn leist-pakete" aria-label="Pakete">
@@ -142,6 +142,9 @@ export default function Leistungen() {
         .leist { padding-bottom: clamp(80px, 9vw, 130px); overflow-x: clip; }
         /* Kopfbild etwas dunkler, damit es zu den anderen Unterseiten passt (Nevio 29.10.2026) */
         .leist .seitenkopf-bild img { filter: brightness(.72) saturate(.85) sepia(.1); }
+        /* Titel mittig wie auf /fragen: das Bild wird von oben her leicht vergroessert,
+           damit das Brautpaar unter dem Titel steht und nicht dahinter */
+        .leist .seitenkopf-bild img { transform: scale(1.18); transform-origin: 50% 0; }
         .leist-einleitung { position: relative; z-index: 1; max-width: 600px; margin: calc(clamp(40px, 5vw, 72px) * -1) auto 0; padding-inline: var(--rand); text-align: center; }
 
         .leist-pakete { max-width: 1080px; margin-top: clamp(64px, 7vw, 100px); display: flex; flex-direction: column; gap: clamp(64px, 8vw, 120px); }
