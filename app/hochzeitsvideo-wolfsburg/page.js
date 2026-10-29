@@ -1,0 +1,223 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import Titel from '@/components/vintage/Titel';
+import Fuss from '@/components/vintage/Fuss';
+import WhatsApp from '@/components/WhatsApp';
+import Drehplan from '@/components/vintage/Drehplan';
+import { brief, marke, seiteVideoWolfsburg as s } from '@/content/texte';
+
+/* Stadtseite "Hochzeitsvideo in Wolfsburg" (Nevio 29.10.2026), Gegenstueck zur
+   Fotograf-Seite. Bei "Hochzeitsvideo Wolfsburg" stand Amoriva nicht in den
+   Top 10, die Startseite bleibt aber bei "Hochzeitsfilm" (Platz 2). Aufbau:
+   Textkopf mit Antwort zuerst, vier Eckdaten, ein breites Standbild im
+   Kinoformat, Stil, der Drehplan (Filmklappe und Drehbuchblatt), das Paket
+   als Abspann, Orte, lokale Fragen, Abschluss. Antworten offen im HTML.
+   Das Video aus der Vision-Seite kommt hier dazu, sobald es da ist. */
+
+const BASIS = 'https://amoriva-films.de';
+const URL = `${BASIS}/hochzeitsvideo-wolfsburg`;
+
+export const metadata = {
+  title: s.meta.titel,
+  description: s.meta.text,
+  alternates: { canonical: URL },
+  openGraph: { title: `${s.meta.titel} | Amoriva Films`, description: s.meta.text, url: URL, images: [{ url: '/images/og-image.jpg', width: 1200, height: 630 }] },
+};
+
+const ZIFFER = ['I', 'II', 'III', 'IV'];
+const ohneStern = (t) => t.replace(/\*/g, '');
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Hochzeitsvideo in Wolfsburg',
+    serviceType: 'Hochzeitsvideo',
+    url: URL,
+    description: s.meta.text,
+    provider: { '@type': 'ProfessionalService', name: 'Amoriva Films', url: BASIS },
+    areaServed: [
+      { '@type': 'City', name: 'Wolfsburg' },
+      { '@type': 'City', name: 'Braunschweig' },
+      { '@type': 'City', name: 'Gifhorn' },
+      { '@type': 'City', name: 'Hannover' },
+      { '@type': 'State', name: 'Niedersachsen' },
+    ],
+    offers: { '@type': 'Offer', name: 'Hochzeitsvideo', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1000, priceCurrency: 'EUR' } },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: s.fragen.map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: BASIS },
+      { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${BASIS}/leistungen` },
+      { '@type': 'ListItem', position: 3, name: 'Hochzeitsvideo Wolfsburg', item: URL },
+    ],
+  },
+];
+
+export default function VideoWolfsburg() {
+  return (
+    <>
+      {ld.map((d) => <script key={d['@type']} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d) }} />)}
+
+      <main className="v-nacht fw">
+        <header className="fw-kopf" data-dunkler-kopf="flaeche">
+          <nav className="fw-krumen" aria-label="Brotkrumen">
+            <Link href="/">Startseite</Link><span aria-hidden="true">·</span>
+            <Link href="/leistungen">Leistungen</Link><span aria-hidden="true">·</span>
+            <span>Hochzeitsvideo Wolfsburg</span>
+          </nav>
+          <Titel text={s.titel} als="h1" className="v-titel fw-h1" />
+          <p className="v-text fw-einleitung">{s.einleitung}</p>
+          <ul className="fw-fakten">
+            {s.fakten.map((f) => (
+              <li key={f.text}><span className="fw-fakt-wert">{f.wert}</span><span className="fw-fakt-text">{f.text}</span></li>
+            ))}
+          </ul>
+        </header>
+
+        {/* Breites Standbild im Kinoformat, oben und unten schwarze Balken */}
+        <figure className="v-bahn fw-still">
+          <div className="fw-still-bild">
+            <Image src={s.still.src} alt={s.still.alt} width={s.still.b} height={s.still.h} sizes="(max-width: 1180px) 100vw, 1100px" quality={82} />
+          </div>
+          <figcaption>{s.stillText}</figcaption>
+        </figure>
+
+        <section className="v-bahn fw-stil">
+          <p className="v-zeile">{s.stilZeile}</p>
+          <Titel text={s.stilTitel} className="v-titel fw-zwischen" />
+          {s.stil.map((t) => <p key={t.slice(0, 20)} className="v-text">{t}</p>)}
+        </section>
+
+        <section className="v-bahn fw-drehplan">
+          <p className="v-zeile">{s.drehplanZeile}</p>
+          <Titel text={s.drehplanTitel} className="v-titel fw-zwischen" />
+          <Drehplan />
+        </section>
+
+        {/* Paketinhalt als Abspann: zentriert, Versalien, wie am Ende eines Films */}
+        <section className="v-bahn fw-abspann">
+          <Titel text={s.inhaltTitel} className="v-titel fw-zwischen" />
+          <ul className="fw-abspann-liste">
+            {s.inhalt.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+          <p className="fw-abspann-fuss">
+            Ab 1.000 €. Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>, Fotos dazu unter <Link href="/hochzeitsfotograf-wolfsburg" className="v-link">Hochzeitsfotograf in Wolfsburg</Link>.
+          </p>
+        </section>
+
+        <section className="v-bahn fw-orte">
+          <p className="v-zeile">{s.orteZeile}</p>
+          <Titel text={s.orteTitel} className="v-titel fw-zwischen" />
+          <p className="v-text fw-orte-text">{s.orteText}</p>
+          <ul className="fw-orte-liste">
+            {s.orte.map((o, i) => (
+              <li key={o.name}>
+                <span className="fw-ort-ziffer" aria-hidden="true">{ZIFFER[i]}</span>
+                <h3 className="fw-ort-name">{o.name}</h3>
+                <p>{o.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="v-text fw-umgebung">{s.umgebung}</p>
+        </section>
+
+        <section className="v-bahn fw-fragen">
+          <Titel text={s.fragenTitel} className="v-titel fw-zwischen" />
+          <dl className="fw-fragen-liste">
+            {s.fragen.map((f) => (
+              <div key={f.frage}>
+                <dt>{f.frage}</dt>
+                <dd>{f.antwort}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="fw-mehr">Noch mehr Antworten: <Link href="/fragen" className="v-link">Häufige Fragen</Link> · <Link href="/ratgeber/was-kostet-ein-hochzeitsfilm" className="v-link">Was kostet ein Hochzeitsfilm?</Link></p>
+        </section>
+
+        <section className="v-bahn fw-abschluss">
+          <Titel text={s.abschlussTitel} className="v-titel fw-zwischen" />
+          <p className="v-text">{s.abschluss}</p>
+          <div className="fw-knoepfe">
+            <Link href="/anfrage" className="v-knopf">{brief.knopf}</Link>
+            <a href={marke.whatsapp} className="v-knopf" target="_blank" rel="noopener noreferrer">{brief.whatsapp}</a>
+          </div>
+        </section>
+      </main>
+      <Fuss />
+      <WhatsApp />
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .fw { padding-bottom: clamp(80px, 9vw, 130px); overflow-x: clip; }
+        .fw-kopf { max-width: 900px; margin-inline: auto; padding: calc(var(--v-kopf) + clamp(48px, 7vw, 96px)) var(--rand) 0; text-align: center; }
+        .fw-krumen { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; margin-bottom: 22px;
+          font-family: var(--font-text), system-ui, sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: color-mix(in srgb, var(--ton) 62%, transparent); }
+        .fw-krumen a { color: inherit; text-decoration: none; padding-block: 6px; }
+        @media (hover: hover) { .fw-krumen a:hover { color: var(--ton); } }
+        .fw-h1 { font-size: var(--v-titel); text-wrap: balance; }
+        .fw-einleitung { max-width: 640px; margin: 24px auto 0; }
+        .fw-fakten { list-style: none; margin: clamp(36px, 4vw, 52px) auto 0; padding: 22px 0 0; max-width: 860px; display: grid; grid-template-columns: repeat(4, 1fr);
+          border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .fw-fakten li { display: flex; flex-direction: column; gap: 4px; padding: 0 14px; border-left: 1px solid color-mix(in srgb, var(--ton) 11%, transparent); }
+        .fw-fakten li:first-child { border-left: none; }
+        .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(22px, 2vw, 28px); color: var(--ton-akzent); }
+        .fw-fakt-text { font-family: var(--font-text), system-ui, sans-serif; font-size: 13.5px; line-height: 1.4; color: color-mix(in srgb, var(--ton) 72%, transparent); }
+
+        .fw-still { max-width: 1180px; margin: clamp(56px, 7vw, 96px) auto 0; }
+        .fw-still-bild { position: relative; overflow: hidden; background: #000; padding: clamp(14px, 2.4vw, 34px) 0; box-shadow: 0 30px 50px -24px rgba(0, 0, 0, .8); }
+        .fw-still-bild img { display: block; width: 100%; height: auto; aspect-ratio: 2.39 / 1; object-fit: cover; object-position: center 35%; }
+        .fw-still figcaption { margin-top: 12px; text-align: center; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 12px; letter-spacing: .08em; color: color-mix(in srgb, var(--ton) 60%, transparent); }
+        .fw-stil, .fw-drehplan, .fw-abspann, .fw-orte, .fw-fragen, .fw-abschluss { margin-top: clamp(88px, 10vw, 140px); }
+        .fw-stil { max-width: 760px; text-align: center; }
+        .fw-stil .v-text + .v-text { margin-top: 16px; }
+        .fw-zwischen { margin-bottom: clamp(26px, 3vw, 40px); }
+
+        .fw-drehplan { text-align: center; }
+        .fw-abspann { max-width: 760px; text-align: center; }
+        .fw-abspann-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+        .fw-abspann-liste li { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: .14em; text-transform: uppercase; line-height: 1.35; color: color-mix(in srgb, var(--ton) 92%, transparent); }
+        .fw-abspann-liste li + li::before { content: ''; display: block; width: 26px; height: 1px; margin: 0 auto 18px; background: var(--ton-akzent); opacity: .6; }
+        .fw-abspann-fuss { margin: clamp(32px, 4vw, 48px) auto 0; max-width: 600px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
+
+        .fw-orte { text-align: center; }
+        .fw-orte-text { max-width: 640px; margin: 0 auto; }
+        .fw-orte-liste { list-style: none; margin: clamp(32px, 4vw, 48px) auto 0; padding: 26px 0 0; max-width: 1080px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 32px;
+          border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .fw-orte-liste li { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 18px; border-left: 1px solid color-mix(in srgb, var(--ton) 11%, transparent); }
+        .fw-orte-liste li:first-child { border-left: none; }
+        .fw-ort-ziffer { font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 18px; color: var(--ton-akzent); }
+        .fw-ort-name { margin: 0; font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: 19px; text-transform: uppercase; letter-spacing: .06em; }
+        .fw-orte-liste p { margin: 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 14px; line-height: 1.55; color: color-mix(in srgb, var(--ton) 72%, transparent); }
+        .fw-umgebung { max-width: 640px; margin: clamp(32px, 4vw, 48px) auto 0; }
+
+        .fw-fragen { max-width: 820px; text-align: center; }
+        .fw-fragen-liste { margin: 0; text-align: left; border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .fw-fragen-liste > div { padding: 22px 0; border-bottom: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
+        .fw-fragen-liste dt { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.6vw, 22px); line-height: 1.3; }
+        .fw-fragen-liste dd { margin: 8px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: color-mix(in srgb, var(--ton) 78%, transparent); }
+        .fw-mehr { margin: 24px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 14px; color: color-mix(in srgb, var(--ton) 70%, transparent); }
+
+        .fw-abschluss { max-width: 640px; text-align: center; }
+        .fw-knoepfe { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 28px; }
+
+        @media (max-width: 860px) {
+          .fw-fakten, .fw-orte-liste { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+          .fw-fakten li:nth-child(3), .fw-orte-liste li:nth-child(3) { border-left: none; }
+        }
+        @media (max-width: 520px) {
+          /* "HOCHZEITSVIDEO" ist ein langes Wort, am Handy kleiner, damit es passt */
+          .fw-h1 { font-size: clamp(22px, 7vw, 32px); }
+          .fw-orte-liste { grid-template-columns: 1fr; }
+          .fw-orte-liste li { border-left: none; }
+        }
+      ` }} />
+    </>
+  );
+}

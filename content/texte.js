@@ -36,6 +36,7 @@ export const navigation = [
 export const navigationMehr = [
   { label: 'Ratgeber', href: '/ratgeber' },
   { label: 'Hochzeitsfotograf Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' },
+  { label: 'Hochzeitsvideo Wolfsburg', href: '/hochzeitsvideo-wolfsburg' },
 ];
 
 export const anfrage = { label: 'Anfrage', href: '/anfrage' };
@@ -389,7 +390,7 @@ export const seiteLeistungen = {
   label: 'Leistungen',
   titel: 'Film, Foto oder *beides.*',
   // Weiterfuehrender Link je Paket (gleiche Reihenfolge wie leistungen.pakete)
-  paketLinks: [null, { label: 'Hochzeitsfotograf in Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' }, null],
+  paketLinks: [{ label: 'Hochzeitsvideo in Wolfsburg', href: '/hochzeitsvideo-wolfsburg' }, { label: 'Hochzeitsfotograf in Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' }, null],
   // Je Paket ein Bild, in derselben Reihenfolge wie leistungen.pakete
   bilder: [
     { src: '/images/Bild-101.webp', alt: 'Brautpaar am Hochzeitstisch vor einem roten Samtvorhang', b: 2000, h: 3000 },
@@ -480,6 +481,80 @@ export const seiteFotografWolfsburg = {
     { frage: 'Kommt ihr auch nach Braunschweig, Gifhorn oder Hannover?', antwort: 'Ja, Wolfsburg ist nur unser Zuhause. Wir fotografieren in ganz Niedersachsen und reisen für Hochzeiten durch ganz Europa. Die Anreise sprechen wir vorher offen mit euch ab.' },
     { frage: 'Können wir zu den Fotos auch einen Hochzeitsfilm buchen?', antwort: 'Ja, Film und Fotos kommen bei uns aus einem Team. Ihr habt einen Ansprechpartner, und Bilder und Film passen im Look zusammen, statt dass zwei Anbieter nebeneinander arbeiten.' },
     { frage: 'Wann sollten wir anfragen?', antwort: 'Sobald Datum und Location feststehen. Beliebte Samstage im Sommer sind oft früh vergeben, eine kurzfristige Anfrage lohnt sich aber trotzdem.' },
+  ],
+  abschlussTitel: 'Erzählt uns von *eurem* Tag.',
+  abschluss: 'Schreibt uns Datum und Ort eurer Hochzeit. Wir melden uns persönlich und sagen euch ehrlich, ob wir an dem Tag noch frei sind.',
+};
+
+// Stadtseite "Hochzeitsvideo in Wolfsburg" (Nevio 29.10.2026). Gegenstueck zur
+// Fotograf-Seite, aber auf "Hochzeitsvideo" ausgerichtet; die Startseite bleibt
+// bei "Hochzeitsfilm" (Platz 2 bei Google), damit sich beide nicht im Weg stehen.
+// Nur Angaben, die auch sonst auf der Seite stehen.
+export const seiteVideoWolfsburg = {
+  meta: {
+    titel: 'Hochzeitsvideo in Wolfsburg',
+    text: 'Hochzeitsvideo in Wolfsburg: euer Hochzeitsfilm in Cinégraphie ab 1.000 €, 3 bis 12 Minuten lang, gefilmt von mindestens zwei Leuten, fertig in 6 bis 8 Wochen.',
+  },
+  label: 'Hochzeitsvideo Wolfsburg',
+  titel: 'Hochzeitsvideo in *Wolfsburg.*',
+  einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und machen aus eurem Hochzeitsvideo einen Film, der sich anfühlt wie Kino. Euer Hauptfilm ist 3 bis 12 Minuten lang, es filmen immer mindestens zwei von uns, und nach sechs bis acht Wochen liegt er in eurer privaten Online-Galerie. Los geht es ab 1.000 €, und wer zum Film noch Fotos möchte, bekommt sie vom selben Team.',
+  fakten: [
+    { wert: 'ab 1.000 €', text: 'für euer Hochzeitsvideo' },
+    { wert: '3 bis 12 Min.', text: 'lang ist der Hauptfilm' },
+    { wert: '6 bis 8 Wochen', text: 'bis der Film bei euch ist' },
+    { wert: 'mind. zwei', text: 'von uns filmen an eurem Tag' },
+  ],
+  still: { src: '/images/hero-poster.jpg', alt: 'Standbild aus einem Hochzeitsfilm von Amoriva: Brautpaar umarmt sich beim Tanz', b: 1280, h: 720 },
+  stillText: 'Standbild aus einem unserer Hochzeitsfilme',
+  stilZeile: 'Unser Stil',
+  stilTitel: 'Dokumentarisch oder mit *Drehbuch.*',
+  stil: [
+    'Ein Hochzeitsvideo kann zwei Dinge sein. Dokumentarisch heißt, wir begleiten euren Tag so, wie er passiert, und fangen die Momente ein, die man nicht planen kann: den Blick beim Einzug, das Lachen bei den Reden, die Hand eures Vaters auf eurer Schulter. Gescriptet heißt, wir überlegen vorher gemeinsam eine Idee, schreiben ein kleines Drehbuch und drehen ein paar Szenen, die ihr mit uns spielt.',
+    'Die meisten Paare nehmen eine Mischung aus beidem. Weil bei uns immer mindestens zwei filmen, entgeht euch dabei nichts, auch wenn an zwei Stellen gleichzeitig etwas passiert, und die Musik sucht ihr mit uns aus, damit der Film nach euch klingt.',
+  ],
+  // Drehplan als Drehbuchblatt (Drehplan.jsx). Ein Beispieltag, kein fester Ablauf.
+  drehplanZeile: 'So kann euer Drehtag aussehen',
+  drehplanTitel: 'Euer *Drehplan.*',
+  klappe: [
+    { feld: 'Produktion', wert: 'Eure Hochzeit' },
+    { feld: 'Ort', wert: 'Wolfsburg' },
+    { feld: 'Kamera', wert: 'mind. zwei' },
+    { feld: 'Format', wert: 'Cinégraphie' },
+  ],
+  szenen: [
+    { zeit: '10:00', titel: 'Getting Ready', text: 'Kleid, Anzug, Ringe und die letzten nervösen Minuten' },
+    { zeit: '13:00', titel: 'Trauung', text: 'Einzug, Ja-Wort und die ersten Glückwünsche' },
+    { zeit: '15:00', titel: 'Paarshooting', text: 'Eine halbe Stunde nur für euch zwei' },
+    { zeit: '18:00', titel: 'Dinner und Reden', text: 'Eure Gäste, die Reden und die kleinen Details am Tisch' },
+    { zeit: '21:00', titel: 'Erster Tanz', text: 'Und alles, was danach auf der Tanzfläche passiert' },
+  ],
+  drehplanFuss: 'Beispiel. Euren eigenen Drehplan schreiben wir beim Kennenlernen gemeinsam.',
+  inhaltTitel: 'Was in eurem *Paket* steckt.',
+  inhalt: [
+    'Hauptfilm in Cinégraphie, 3 bis 12 Minuten',
+    'Begleitung vom Morgen bis zum Abend',
+    'Mindestens zwei von uns filmen an eurem Tag',
+    'Soundtrack nach euren Wünschen',
+    'Private Online-Galerie zum Anschauen und Teilen',
+    'Lieferung in sechs bis acht Wochen',
+  ],
+  orteZeile: 'In Wolfsburg und Umgebung',
+  orteTitel: 'Wo euer Film *spielen* kann.',
+  orteText: 'Wir kommen dorthin, wo ihr heiratet. Ein paar Orte in Wolfsburg, die im Film jeweils ganz anders wirken:',
+  orte: [
+    { name: 'Schloss Wolfsburg', text: 'Der Schlosshof mit seinen Arkaden gibt eurem Film sofort einen Rahmen, und getraut werden könnt ihr direkt im Schloss.' },
+    { name: 'Schloss Fallersleben', text: 'Klein und ruhig, gut für eine standesamtliche Trauung im engsten Kreis, bei der es auf jedes Wort ankommt.' },
+    { name: 'Autostadt', text: 'Glas, Wasser und klare Linien am Mittellandkanal. Eine moderne Kulisse, die im Film ganz anders wirkt als ein Schloss.' },
+    { name: 'Allersee', text: 'Am Abend über dem Wasser entstehen die ruhigen, weiten Bilder, mit denen viele Hochzeitsfilme enden.' },
+  ],
+  umgebung: 'Genauso filmen wir in Braunschweig, Gifhorn, Wolfenbüttel, Helmstedt, Hannover und Celle, und für eure Hochzeit reisen wir durch ganz Europa.',
+  fragenTitel: 'Häufige Fragen zum Hochzeitsvideo in *Wolfsburg.*',
+  fragen: [
+    { frage: 'Was kostet ein Hochzeitsvideo in Wolfsburg bei euch?', antwort: 'Euer Hochzeitsvideo beginnt bei 1.000 €. Was es genau kostet, hängt vom Aufwand ab: wie viele Stunden wir filmen, wie lang euer Film wird und ob ihr ihn dokumentarisch oder gescriptet möchtet. Nach einem kurzen Gespräch bekommt ihr ein Angebot, das genau zu eurem Tag passt.' },
+    { frage: 'Wie lang wird unser Hochzeitsvideo?', antwort: 'Der Hauptfilm ist zwischen 3 und 12 Minuten lang. Die Länge legen wir vorher mit euch fest, je nachdem, wie viel von eurem Tag ihr im Film sehen wollt.' },
+    { frage: 'Hochzeitsfilm oder Hochzeitsvideo, was ist der Unterschied?', antwort: 'Im Alltag meinen beide Wörter dasselbe. Wenn wir von Hochzeitsfilm sprechen, meinen wir aber mehr als ein Video, das den Tag einfach mitschneidet: Wir drehen in Cinégraphie, mit Licht und Musik wie im Kino, und schneiden euren Tag zu einem Film, der eure Geschichte erzählt.' },
+    { frage: 'Dokumentarisch oder gescriptet, was passt zu uns?', antwort: 'Wenn ihr euren Tag einfach erleben wollt, ist dokumentarisch richtig, und wir halten uns im Hintergrund. Habt ihr Lust auf eine Idee, die über den Tag hinausgeht, zum Beispiel eine kleine Geschichte, wie ihr euch kennengelernt habt, drehen wir dafür ein paar gescriptete Szenen. Das besprechen wir beim Kennenlernen.' },
+    { frage: 'Können wir zum Hochzeitsvideo auch Fotos buchen?', antwort: 'Ja, Film und Fotos kommen bei uns aus einem Team. Ihr habt einen Ansprechpartner, und Bilder und Film passen im Look zusammen. Fotos für den ganzen Tag beginnen bei 850 €.' },
   ],
   abschlussTitel: 'Erzählt uns von *eurem* Tag.',
   abschluss: 'Schreibt uns Datum und Ort eurer Hochzeit. Wir melden uns persönlich und sagen euch ehrlich, ob wir an dem Tag noch frei sind.',

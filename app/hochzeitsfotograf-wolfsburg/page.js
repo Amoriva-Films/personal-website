@@ -121,7 +121,7 @@ export default function FotografWolfsburg() {
             <p className="fw-film-rand fw-film-rand--unten" aria-hidden="true"><span>▸ 1</span><span>▸ 2</span><span>▸ 3</span><span>▸ 4</span><span>▸ 5</span><span>▸ 6</span></p>
           </div>
           <p className="fw-film-fuss">
-            Ganzer Tag ab 850 €, Standesamt ab 250 €. Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>.
+            Ganzer Tag ab 850 €, Standesamt ab 250 €. Alle Preise findet ihr unter <Link href="/leistungen#preise" className="v-link">Leistungen und Preise</Link>, den Film dazu unter <Link href="/hochzeitsvideo-wolfsburg" className="v-link">Hochzeitsvideo in Wolfsburg</Link>.
           </p>
         </section>
 

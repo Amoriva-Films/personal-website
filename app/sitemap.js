@@ -33,6 +33,7 @@ export default function sitemap() {
     eintrag('leistungen', 0.9),
     // Stadtseite fuer die meistgesuchte Leistung (28.10.2026)
     eintrag('hochzeitsfotograf-wolfsburg', 0.9),
+    eintrag('hochzeitsvideo-wolfsburg', 0.9),
     // eintrag('referenzen', 0.9),   // Galerie raus, Seite nicht mehr verlinkt
     eintrag('anfrage', 0.8, 'yearly'),
     // Vintage-Redesign 20.10.2026: Unterseiten statt Onepager

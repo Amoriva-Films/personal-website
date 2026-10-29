@@ -36,7 +36,7 @@ const BASIS = (process.env.WAECHTER_BASIS || 'https://amoriva-films.de').replace
 const STILLE_TAGE = Number(process.env.WAECHTER_STILLE_TAGE || 14);
 
 const SEITEN = [
-  '/', '/leistungen', '/hochzeitsfotograf-wolfsburg', '/anfrage', '/ueber-uns', '/vision', '/fragen',
+  '/', '/leistungen', '/hochzeitsfotograf-wolfsburg', '/hochzeitsvideo-wolfsburg', '/anfrage', '/ueber-uns', '/vision', '/fragen',
   '/filme', '/referenzen',
   '/ratgeber',
   '/ratgeber/was-kostet-ein-hochzeitsfilm',
