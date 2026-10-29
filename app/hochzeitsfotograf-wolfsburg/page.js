@@ -175,12 +175,13 @@ export default function FotografWolfsburg() {
         @media (hover: hover) { .fw-krumen a:hover { color: var(--ton); } }
         .fw-h1 { font-size: var(--v-titel); text-wrap: balance; }
         .fw-einleitung { max-width: 640px; margin: 24px auto 0; }
-        .fw-fakten { list-style: none; margin: clamp(36px, 4vw, 52px) auto 0; padding: 22px 0 0; max-width: 860px; display: grid; grid-template-columns: repeat(4, 1fr);
-          border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
-        .fw-fakten li { display: flex; flex-direction: column; gap: 4px; padding: 0 14px; border-left: 1px solid color-mix(in srgb, var(--ton) 11%, transparent); }
+        /* Eckdaten (Nevio 29.10.2026: "hingeballert"): kleine Marke in Versalien
+           oben, Wert ruhig in Antiqua darunter, feine Trennlinien, keine Kursive */
+        .fw-fakten { list-style: none; margin: clamp(40px, 4.5vw, 60px) auto 0; padding: 0; max-width: 820px; display: grid; grid-template-columns: repeat(4, 1fr); }
+        .fw-fakten li { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 6px 16px; border-left: 1px solid color-mix(in srgb, var(--ton) 16%, transparent); }
         .fw-fakten li:first-child { border-left: none; }
-        .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(22px, 2vw, 28px); color: var(--ton-akzent); }
-        .fw-fakt-text { font-family: var(--font-text), system-ui, sans-serif; font-size: 13.5px; line-height: 1.4; color: color-mix(in srgb, var(--ton) 72%, transparent); }
+        .fw-fakt-text { order: -1; font-family: var(--font-text), system-ui, sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: color-mix(in srgb, var(--ton) 55%, transparent); }
+        .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(21px, 1.9vw, 26px); line-height: 1.1; letter-spacing: .02em; color: var(--ton); white-space: nowrap; }
 
         .fw-bilder { max-width: 1180px; margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.4vw, 20px); align-items: start; }
         .fw-bild { margin: 0; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 24px 40px -22px rgba(8, 6, 3, .7); }
@@ -262,7 +263,7 @@ export default function FotografWolfsburg() {
         .fw-knoepfe { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 28px; }
 
         @media (max-width: 860px) {
-          .fw-fakten, .fw-orte-liste { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+          .fw-fakten, .fw-orte-liste { grid-template-columns: 1fr 1fr; row-gap: 28px; }
           .fw-fakten li:nth-child(3), .fw-orte-liste li:nth-child(3) { border-left: none; }
           .fw-bilder { grid-template-columns: 1fr 1fr; }
           .fw-bild--1, .fw-bild--3 { margin-top: 28px; }

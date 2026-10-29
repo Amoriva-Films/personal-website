@@ -438,10 +438,11 @@ export const seiteFotografWolfsburg = {
   titel: 'Hochzeitsfotograf in *Wolfsburg.*',
   einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und fotografieren Hochzeiten im Fine-Art-Stil: warm, zeitlos, mit einem Hauch Vintage. Den ganzen Tag begleiten wir euch ab 850 €, die standesamtliche Trauung ab 250 €, und wer zu den Fotos noch einen Film möchte, bekommt ihn vom selben Team.',
   fakten: [
-    { wert: 'ab 850 €', text: 'Fotos für den ganzen Tag' },
-    { wert: 'ab 250 €', text: 'Fotos im Standesamt' },
-    { wert: '3 bis 6 Wochen', text: 'bis alle Fotos bei euch sind' },
-    { wert: 'Film dazu', text: 'aus demselben Team' },
+    // Eckdaten: kurze Marke oben, Wert darunter (Nevio 29.10.2026: "cleaner")
+    { text: 'Ganzer Tag', wert: 'ab 850 €' },
+    { text: 'Standesamt', wert: 'ab 250 €' },
+    { text: 'Fertig in', wert: '3–6 Wochen' },
+    { text: 'Dazu buchbar', wert: 'Hochzeitsfilm' },
   ],
   bilder: [
     { src: '/images/Bild-76.webp', alt: 'Hochzeitsfotografie: Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000 },
@@ -499,10 +500,11 @@ export const seiteVideoWolfsburg = {
   titel: 'Hochzeitsvideo in *Wolfsburg.*',
   einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und machen aus eurem Hochzeitsvideo einen Film, der sich anfühlt wie Kino. Euer Hauptfilm ist 3 bis 12 Minuten lang, und nach sechs bis acht Wochen liegt er in eurer privaten Online-Galerie. Los geht es ab 1.000 €, und wer zum Film noch Fotos möchte, bekommt sie vom selben Team.',
   fakten: [
-    { wert: 'ab 1.000 €', text: 'für euer Hochzeitsvideo' },
-    { wert: '3 bis 12 Min.', text: 'lang ist der Hauptfilm' },
-    { wert: '6 bis 8 Wochen', text: 'bis der Film bei euch ist' },
-    { wert: 'Film + Foto', text: 'auf Wunsch aus einem Team' },
+    // Eckdaten: kurze Marke oben, Wert darunter (Nevio 29.10.2026: "cleaner")
+    { text: 'Preis', wert: 'ab 1.000 €' },
+    { text: 'Hauptfilm', wert: '3–12 Minuten' },
+    { text: 'Fertig in', wert: '6–8 Wochen' },
+    { text: 'Dazu buchbar', wert: 'Fotos' },
   ],
   stilZeile: 'Unser Stil',
   stilTitel: 'Dokumentarisch oder mit *Drehbuch.*',
