@@ -543,6 +543,8 @@ export const seiteVideoWolfsburg = {
   ausmachtTitel: 'Und darum *Amoriva.*',
   ausmacht: [
     { titel: 'Film und Foto aus einer Hand', text: 'Ein Team, ein Look, ein Ansprechpartner. Bilder und Film passen zusammen, weil sie vom selben Team kommen.' },
+    { titel: 'Ein Look, den keiner kopiert', text: 'Kein gekauftes Preset von der Stange. Farbe und Rhythmus entstehen bei uns von Hand, Film für Film, deshalb sieht euer Film nirgends sonst so aus.' },
+    { titel: 'Expertise in Mediengestaltung', text: 'Wir kommen aus der Mediengestaltung. Bildaufbau, Licht, Farbe und Schnitt sind unser Handwerk, nicht nur die Kamera.' },
     { titel: 'Ihr kennt uns vorher', text: 'Vor der Buchung lernt ihr jeden kennen, der an eurem Tag filmt. An der Kamera steht niemand Fremdes.' },
     { titel: 'Kino statt Mitschnitt', text: 'Cinégraphie mit Licht und Musik wie im Kino, dokumentarisch oder mit Drehbuch, ganz wie ihr wollt.' },
     { titel: 'Entspannt vor der Kamera', text: 'Wo ihr unsicher seid, leiten wir euch an. Sonst halten wir uns im Hintergrund und ihr feiert.' },
