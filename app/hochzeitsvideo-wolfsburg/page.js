@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Titel from '@/components/vintage/Titel';
+import Aufklapper from '@/components/vintage/Aufklapper';
 import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import Drehplan from '@/components/vintage/Drehplan';
@@ -110,14 +111,7 @@ export default function VideoWolfsburg() {
 
         <section className="v-bahn fw-fragen">
           <Titel text={s.fragenTitel} className="v-titel fw-zwischen" />
-          <dl className="fw-fragen-liste">
-            {s.fragen.map((f) => (
-              <div key={f.frage}>
-                <dt>{f.frage}</dt>
-                <dd>{f.antwort}</dd>
-              </div>
-            ))}
-          </dl>
+          <Aufklapper liste={s.fragen} ebene="h3" />
           <p className="fw-mehr">Noch mehr Antworten: <Link href="/fragen" className="v-link">Häufige Fragen</Link> · <Link href="/ratgeber/was-kostet-ein-hochzeitsfilm" className="v-link">Was kostet ein Hochzeitsfilm?</Link></p>
         </section>
 
@@ -177,10 +171,6 @@ export default function VideoWolfsburg() {
         .fw-umgebung { max-width: 640px; margin: 14px auto 0; }
 
         .fw-fragen { max-width: 820px; text-align: center; }
-        .fw-fragen-liste { margin: 0; text-align: left; border-top: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
-        .fw-fragen-liste > div { padding: 22px 0; border-bottom: 1px solid color-mix(in srgb, var(--ton) 15%, transparent); }
-        .fw-fragen-liste dt { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.6vw, 22px); line-height: 1.3; }
-        .fw-fragen-liste dd { margin: 8px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: color-mix(in srgb, var(--ton) 78%, transparent); }
         .fw-mehr { margin: 24px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 14px; color: color-mix(in srgb, var(--ton) 70%, transparent); }
 
         .fw-abschluss { max-width: 640px; text-align: center; }
