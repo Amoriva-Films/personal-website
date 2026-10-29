@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Titel from '@/components/vintage/Titel';
 import Fuss from '@/components/vintage/Fuss';
@@ -9,8 +8,7 @@ import { brief, marke, seiteVideoWolfsburg as s } from '@/content/texte';
 /* Stadtseite "Hochzeitsvideo in Wolfsburg" (Nevio 29.10.2026), Gegenstueck zur
    Fotograf-Seite. Bei "Hochzeitsvideo Wolfsburg" stand Amoriva nicht in den
    Top 10, die Startseite bleibt aber bei "Hochzeitsfilm" (Platz 2). Aufbau:
-   Textkopf mit Antwort zuerst, vier Eckdaten, ein breites Standbild im
-   Kinoformat, Stil, der Drehplan (Filmklappe und Drehbuchblatt), das Paket
+   Textkopf mit Antwort zuerst, vier Eckdaten, Stil, der Drehplan (Filmklappe und Drehbuchblatt), das Paket
    als Abspann, Orte, lokale Fragen, Abschluss. Antworten offen im HTML.
    Das Video aus der Vision-Seite kommt hier dazu, sobald es da ist. */
 
@@ -82,13 +80,6 @@ export default function VideoWolfsburg() {
           </ul>
         </header>
 
-        {/* Breites Standbild im Kinoformat, oben und unten schwarze Balken */}
-        <figure className="v-bahn fw-still">
-          <div className="fw-still-bild">
-            <Image src={s.still.src} alt={s.still.alt} width={s.still.b} height={s.still.h} sizes="(max-width: 1180px) 100vw, 1100px" quality={82} />
-          </div>
-          <figcaption>{s.stillText}</figcaption>
-        </figure>
 
         <section className="v-bahn fw-stil">
           <p className="v-zeile">{s.stilZeile}</p>
@@ -170,10 +161,6 @@ export default function VideoWolfsburg() {
         .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(22px, 2vw, 28px); color: var(--ton-akzent); }
         .fw-fakt-text { font-family: var(--font-text), system-ui, sans-serif; font-size: 13.5px; line-height: 1.4; color: color-mix(in srgb, var(--ton) 72%, transparent); }
 
-        .fw-still { max-width: 1180px; margin: clamp(56px, 7vw, 96px) auto 0; }
-        .fw-still-bild { position: relative; overflow: hidden; background: #000; padding: clamp(14px, 2.4vw, 34px) 0; box-shadow: 0 30px 50px -24px rgba(0, 0, 0, .8); }
-        .fw-still-bild img { display: block; width: 100%; height: auto; aspect-ratio: 2.39 / 1; object-fit: cover; object-position: center 35%; }
-        .fw-still figcaption { margin-top: 12px; text-align: center; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 12px; letter-spacing: .08em; color: color-mix(in srgb, var(--ton) 60%, transparent); }
         .fw-stil, .fw-drehplan, .fw-abspann, .fw-orte, .fw-fragen, .fw-abschluss { margin-top: clamp(88px, 10vw, 140px); }
         .fw-stil { max-width: 760px; text-align: center; }
         .fw-stil .v-text + .v-text { margin-top: 16px; }

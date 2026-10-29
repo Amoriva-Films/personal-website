@@ -493,19 +493,17 @@ export const seiteFotografWolfsburg = {
 export const seiteVideoWolfsburg = {
   meta: {
     titel: 'Hochzeitsvideo in Wolfsburg',
-    text: 'Hochzeitsvideo in Wolfsburg: euer Hochzeitsfilm in Cinégraphie ab 1.000 €, 3 bis 12 Minuten lang, gefilmt von mindestens zwei Leuten, fertig in 6 bis 8 Wochen.',
+    text: 'Hochzeitsvideo in Wolfsburg: euer Hochzeitsfilm in Cinégraphie ab 1.000 €, 3 bis 12 Minuten lang, dokumentarisch oder mit Drehbuch, fertig in 6 bis 8 Wochen.',
   },
   label: 'Hochzeitsvideo Wolfsburg',
   titel: 'Hochzeitsvideo in *Wolfsburg.*',
-  einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und machen aus eurem Hochzeitsvideo einen Film, der sich anfühlt wie Kino. Euer Hauptfilm ist 3 bis 12 Minuten lang, es filmen immer mindestens zwei von uns, und nach sechs bis acht Wochen liegt er in eurer privaten Online-Galerie. Los geht es ab 1.000 €, und wer zum Film noch Fotos möchte, bekommt sie vom selben Team.',
+  einleitung: 'Wir sind Amoriva, ein junges Team aus Wolfsburg, und machen aus eurem Hochzeitsvideo einen Film, der sich anfühlt wie Kino. Euer Hauptfilm ist 3 bis 12 Minuten lang, und nach sechs bis acht Wochen liegt er in eurer privaten Online-Galerie. Los geht es ab 1.000 €, und wer zum Film noch Fotos möchte, bekommt sie vom selben Team.',
   fakten: [
     { wert: 'ab 1.000 €', text: 'für euer Hochzeitsvideo' },
     { wert: '3 bis 12 Min.', text: 'lang ist der Hauptfilm' },
     { wert: '6 bis 8 Wochen', text: 'bis der Film bei euch ist' },
-    { wert: 'mind. zwei', text: 'von uns filmen an eurem Tag' },
+    { wert: 'Film + Foto', text: 'auf Wunsch aus einem Team' },
   ],
-  still: { src: '/images/hero-poster.jpg', alt: 'Standbild aus einem Hochzeitsfilm von Amoriva: Brautpaar umarmt sich beim Tanz', b: 1280, h: 720 },
-  stillText: 'Standbild aus einem unserer Hochzeitsfilme',
   stilZeile: 'Unser Stil',
   stilTitel: 'Dokumentarisch oder mit *Drehbuch.*',
   stil: [
@@ -518,7 +516,7 @@ export const seiteVideoWolfsburg = {
   klappe: [
     { feld: 'Produktion', wert: 'Eure Hochzeit' },
     { feld: 'Ort', wert: 'Wolfsburg' },
-    { feld: 'Kamera', wert: 'mind. zwei' },
+    { feld: 'Datum', wert: 'Euer Tag' },
     { feld: 'Format', wert: 'Cinégraphie' },
   ],
   szenen: [
@@ -533,7 +531,7 @@ export const seiteVideoWolfsburg = {
   inhalt: [
     'Hauptfilm in Cinégraphie, 3 bis 12 Minuten',
     'Begleitung vom Morgen bis zum Abend',
-    'Mindestens zwei von uns filmen an eurem Tag',
+    'Persönliches Kennenlernen vor der Buchung',
     'Soundtrack nach euren Wünschen',
     'Private Online-Galerie zum Anschauen und Teilen',
     'Lieferung in sechs bis acht Wochen',
