@@ -160,6 +160,8 @@ function ausFormular(fd) {
   };
 }
 
+const ohneVision = ({ vision, ...rest }) => rest;
+
 export async function POST(request) {
   /* Absenden ohne Javascript, gefunden am 21.10.2026.
 
@@ -233,7 +235,13 @@ export async function POST(request) {
     const leer = { ok: false, status: 0, data: { message: 'RESEND_API_KEY ist nicht gesetzt.' } };
     const [anUns, dashboard, bestaetigung] = await Promise.allSettled([
       schluessel ? senden({ from: FROM, to: [AN_UNS], reply_to: email, ...mailAnUns(anfrage) }) : Promise.resolve(leer),
-      anAmoriva(anfrage),
+      /* Ohne vision: das Dashboard kennt telefon, gaeste und budget und
+         sortiert sie in eigene Spalten, vision kennt es nicht und haengt
+         es unter "Weitere Angaben aus dem Formular" noch einmal an. Die
+         Nachricht stand dort dadurch doppelt (Testanfrage 6, 29.10.2026).
+         Sie steckt ohnehin schon in nachricht. Die Mail an uns braucht
+         vision weiter, deshalb nur hier herausnehmen. */
+      anAmoriva(ohneVision(anfrage)),
       schluessel ? senden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name, hochzeitsdatum, location, nachricht }) }) : Promise.resolve(leer),
     ]);
 
