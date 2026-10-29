@@ -5,6 +5,7 @@ import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import Drehplan from '@/components/vintage/Drehplan';
 import Abspann from '@/components/vintage/Abspann';
+import Umgebung from '@/components/vintage/Umgebung';
 import { brief, marke, seiteVideoWolfsburg as s } from '@/content/texte';
 
 /* Stadtseite "Hochzeitsvideo in Wolfsburg" (Nevio 29.10.2026), Gegenstueck zur
@@ -103,10 +104,9 @@ export default function VideoWolfsburg() {
           </p>
         </section>
 
-        {/* Orte raus (Nevio 29.10.2026), nur die Region bleibt als kurzer Satz */}
+        {/* Region als dezente Landkarte (Umgebung.jsx) */}
         <section className="v-bahn fw-orte">
-          <p className="v-zeile">{s.orteZeile}</p>
-          <p className="v-text fw-umgebung">{s.umgebung}</p>
+          <Umgebung zeile={s.orteZeile} text={s.umgebung} />
         </section>
 
         <section className="v-bahn fw-fragen">
@@ -168,7 +168,6 @@ export default function VideoWolfsburg() {
         .fw-abspann-fuss { margin: clamp(32px, 4vw, 48px) auto 0; max-width: 600px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
 
         .fw-orte { text-align: center; }
-        .fw-umgebung { max-width: 640px; margin: 14px auto 0; }
 
         .fw-fragen { max-width: 820px; text-align: center; }
         .fw-mehr { margin: 24px 0 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 14px; color: color-mix(in srgb, var(--ton) 70%, transparent); }
