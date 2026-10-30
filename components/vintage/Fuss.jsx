@@ -49,6 +49,12 @@ export default function Fuss() {
         <div className="fuss-marke">
           <Wortmarke hoehe={46} />
           <p>{marke.sparte}<br />{marke.ort}</p>
+          {/* WeddyPlace-Siegel (30.10.2026). Bild und Link genau so, wie
+              WeddyPlace es vorgibt, deshalb einfaches img statt next/image */}
+          <a href="https://www.weddyplace.com/vendors/6ae486f49da56f42c53e9226" target="_blank" rel="noopener" className="fuss-siegel">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="WeddyPlace" src="https://cdn.weddyplace.com/static/misc/badges/badge-gelistet.png" width="250" height="250" loading="lazy" />
+          </a>
         </div>
 
         <nav aria-label="Fußzeile">
@@ -155,6 +161,10 @@ export default function Fuss() {
         }
         .fuss-marke { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
         .fuss-marke p { margin: 0; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13.5px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
+        .fuss-siegel { display: block; width: 92px; border-radius: 50%; opacity: .92; transition: opacity 250ms var(--v-ease), transform 400ms var(--v-ease); }
+        .fuss-siegel img { display: block; width: 100%; height: auto; border-radius: 50%; }
+        @media (hover: hover) { .fuss-siegel:hover { opacity: 1; transform: translateY(-2px); } }
+        .fuss-siegel:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
         .fuss-label { margin: 0 0 18px; color: var(--ton-akzent); }
         .fuss ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
         .fuss-link { color: color-mix(in srgb, var(--ton) 85%, transparent); text-decoration: none; font-family: var(--font-text), system-ui, sans-serif; font-size: var(--v-klein); transition: color 250ms var(--v-ease); }
