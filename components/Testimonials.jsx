@@ -13,10 +13,6 @@ const stimmen = [
     namen: 'Celine & Alex', datum: 'Hochzeitsfotografie · 2026', init: 'C&A', bild: null,
   },
   {
-    quote: 'Nevio und Danilo waren den ganzen Tag da und trotzdem haben wir sie kaum bemerkt. Als wir den Film dann gesehen haben, mussten wir beide weinen. Da war alles drin, sogar Momente, die wir selbst gar nicht mitbekommen hatten.',
-    namen: 'Laura & Jakob', datum: 'Hochzeitsfilm · 2026', init: 'L&J', bild: null,
-  },
-  {
     quote: 'Film und Fotos aus einer Hand war für uns die beste Entscheidung. Kein Abstimmen zwischen zwei Teams, einfach zwei Leute, die wussten was sie tun. Der Film und die Bilder passen perfekt zusammen und erzählen unseren Tag genau so, wie er war.',
     namen: 'Diana & Mattia', datum: 'Hochzeitsfilm und Fotografie · 2026', init: 'D&M', bild: null,
   },

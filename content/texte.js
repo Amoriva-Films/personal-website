@@ -198,10 +198,6 @@ export const stimmen = {
       namen: 'Celine & Alex', art: 'Hochzeitsfotografie · 2026',
     },
     {
-      zitat: 'Nevio und Danilo waren den ganzen Tag da und trotzdem haben wir sie kaum bemerkt. Als wir den Film dann gesehen haben, mussten wir beide weinen. Da war alles drin, sogar Momente, die wir selbst gar nicht mitbekommen hatten.',
-      namen: 'Laura & Jakob', art: 'Hochzeitsfilm · 2026',
-    },
-    {
       zitat: 'Film und Fotos aus einer Hand war für uns die beste Entscheidung. Kein Abstimmen zwischen zwei Teams, einfach zwei Leute, die wussten was sie tun. Der Film und die Bilder passen perfekt zusammen und erzählen unseren Tag genau so, wie er war.',
       namen: 'Diana & Mattia', art: 'Hochzeitsfilm und Fotografie · 2026',
     },
