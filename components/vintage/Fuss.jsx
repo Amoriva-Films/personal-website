@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Wortmarke from '@/components/Wortmarke';
 import Titel from './Titel';
+import Fotokarte from './Fotokarte';
 import { anfrage, fuss, marke, navigation, navigationMehr } from '@/content/texte';
 
 /* Fusszeile. Vorbild: die Footer-Referenz im Board ("Let's create
@@ -55,6 +56,8 @@ export default function Fuss() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img alt="WeddyPlace" src="https://cdn.weddyplace.com/static/misc/badges/badge-gelistet.png" width="250" height="250" loading="lazy" />
           </a>
+          {/* Fotokarte mit Kordel und Siegel, vorher neben den Leistungen (Nevio 17.11.2026) */}
+          <div className="fuss-fotokarte"><Fotokarte /></div>
         </div>
 
         <nav aria-label="Fußzeile">
@@ -161,6 +164,7 @@ export default function Fuss() {
         }
         .fuss-marke { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
         .fuss-marke p { margin: 0; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 13.5px; line-height: 1.7; color: color-mix(in srgb, var(--ton) 75%, transparent); }
+        .fuss-fotokarte { width: 100%; max-width: 270px; margin-top: 6px; }
         .fuss-siegel { display: block; width: 92px; border-radius: 50%; opacity: .92; transition: opacity 250ms var(--v-ease), transform 400ms var(--v-ease); }
         .fuss-siegel img { display: block; width: 100%; height: auto; border-radius: 50%; }
         @media (hover: hover) { .fuss-siegel:hover { opacity: 1; transform: translateY(-2px); } }

@@ -95,15 +95,27 @@ export default function Momente() {
         }
         .momente-paar { position: relative; margin: 0; aspect-ratio: 3 / 4; overflow: hidden; box-shadow: 0 22px 40px -16px rgba(46, 43, 34, .55); }
 
-        .momente-notiz { position: absolute; right: 2.5%; top: 50%; z-index: 2; width: clamp(200px, 18vw, 270px); }
-        .momente-notiz p { margin: 0 0 14px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 14px; line-height: 1.6; color: var(--ton); }
-        .momente-notiz .v-link { font-family: var(--font-text), system-ui, sans-serif; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+        /* Notiz als getippte Karteikarte mit Klebestreifen (Nevio 17.11.2026:
+           vorher kaum lesbar, weil der Text frei auf dem Papier zwischen den
+           blassen Fotos stand). Heller Karton, dunkle Tinte, groessere Schrift. */
+        .momente-notiz {
+          position: absolute; right: 2.5%; top: 44%; z-index: 3; width: clamp(260px, 21vw, 330px);
+          padding: clamp(26px, 2.2vw, 34px) clamp(22px, 2vw, 30px) clamp(20px, 1.8vw, 26px);
+          background: #FBF8F1; rotate: 1.5deg;
+          box-shadow: 0 18px 30px -14px rgba(46, 43, 34, .45), 0 2px 5px rgba(46, 43, 34, .14);
+        }
+        .momente-notiz::before {
+          content: ''; position: absolute; left: 50%; top: -12px; width: 92px; height: 26px; translate: -50% 0; rotate: -3deg;
+          background: rgba(222, 210, 182, .78); box-shadow: 0 1px 2px rgba(46, 43, 34, .12);
+        }
+        .momente-notiz p { margin: 0 0 18px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: clamp(15px, 1.1vw, 16.5px); line-height: 1.65; color: var(--tinte); }
+        .momente-notiz .v-link { font-family: var(--font-text), system-ui, sans-serif; font-size: 13.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--tinte); }
 
         @media (max-width: 760px) {
           .momente-buehne { height: auto; display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 24px var(--rand) 0; }
           .momente-foto, .momente-handschrift { display: none; }
           .momente-mitte { position: relative; top: auto; width: 100%; }
-          .momente-notiz { position: relative; right: auto; top: auto; width: 100%; text-align: center; }
+          .momente-notiz { position: relative; right: auto; top: auto; width: 100%; max-width: 420px; text-align: center; rotate: .8deg; margin-top: 10px; }
         }
       ` }} />
     </section>
