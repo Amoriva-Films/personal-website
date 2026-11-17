@@ -78,8 +78,11 @@ export default function Fotokarte() {
         .fk-umschlag::before { left: -3px; background: linear-gradient(to right, #8E6E55, #C59F82); }
         .fk-umschlag::after { right: -3px; background: linear-gradient(to left, #8E6E55, #C59F82); }
         .fk-siegel { position: absolute; left: 66%; top: 68%; width: 20%; aspect-ratio: 1; background: var(--v-siegel) center / contain no-repeat; filter: drop-shadow(0 5px 6px rgba(0, 0, 0, .45)); }
-        /* Stempel hell auf dem dunklen Fuss */
-        .fk-stempel { position: absolute; left: 2%; top: 2%; width: 40%; aspect-ratio: 1; color: var(--ton); opacity: .55; }
+        /* Stempel liegt halb auf der Karte, halb auf dem dunklen Fuss. Ein
+           mittlerer Khaki-Ton ist auf beiden Gruenden zu sehen, wie Tinte, die
+           ueber den Kartenrand gestempelt wurde (Nevio 17.11.2026: auf der Karte
+           war er vorher unsichtbar). Liegt ueber der Karte (z-index). */
+        .fk-stempel { position: absolute; left: 2%; top: 2%; z-index: 2; width: 40%; aspect-ratio: 1; color: #A8986F; opacity: .9; pointer-events: none; }
         .fk-stempel svg { width: 100%; height: 100%; animation: fk-dreht 60s linear infinite; }
         .fk-stempel text { font-family: var(--font-display), Georgia, serif; font-weight: 600; font-size: 15px; letter-spacing: 2px; fill: currentColor; }
         .fk-stempel-zweig { position: absolute; inset: 27%; color: currentColor; }
