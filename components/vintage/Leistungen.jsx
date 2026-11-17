@@ -94,7 +94,10 @@ export default function Leistungen() {
         .sitzung-paket-unter { margin: 0 0 12px; font-size: 13px; color: var(--ton-akzent); }
         .sitzung-beschreibung { margin: 0 0 18px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; }
         .sitzung-punkte { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: clamp(14px, 1.05vw, 15px); line-height: 1.45; color: var(--tinte); }
-        .sitzung-punkte li::before { content: '\\2013'; margin-right: .5em; color: var(--ton-akzent); }
+        /* Haengender Einzug: der Strich steht links, umbrechender Text beginnt
+           unter dem Text und nicht unter dem Strich (Nevio 17.11.2026) */
+        .sitzung-punkte li { position: relative; padding-left: 1.5em; }
+        .sitzung-punkte li::before { content: '\\2013'; position: absolute; left: 0; color: var(--ton-akzent); }
 
         @media (max-width: 900px) {
           .sitzung { grid-template-columns: minmax(0, 1fr); }
