@@ -329,3 +329,13 @@ body { background: transparent !important; }
    von selbst (Hero.jsx), bis dahin steht das Standbild. */
 video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
 video::-webkit-media-controls { display: none !important; }
+
+/* Bildnachweis unten links im Bild (Credit.jsx, Nevio 24.11.2026) */
+.v-credit {
+  position: absolute; left: 8px; bottom: 6px; z-index: 2;
+  font-family: var(--font-text), system-ui, sans-serif; font-size: 10px; letter-spacing: .04em; line-height: 1;
+  color: rgba(255, 255, 255, .72); text-decoration: none; text-shadow: 0 1px 3px rgba(0, 0, 0, .55);
+  transition: color 250ms ease;
+}
+@media (hover: hover) { .v-credit:hover { color: #fff; } }
+.v-credit:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }

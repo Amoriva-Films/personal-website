@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { momente } from '@/content/texte';
+import Credit from './Credit';
 
 /* "Momente, die bleiben". Vorbild (Danilo 22.10.2026): die Darcy-McQueeny-
    Referenz im Board. Heller Papiergrund, oben der Titel in Schreibschrift,
@@ -34,6 +35,7 @@ function Foto({ bild, lage, p, groesse }) {
       style={{ left: `${lage.l}%`, top: `${lage.o}%`, width: `${lage.b}%`, aspectRatio: lage.r, y }}
     >
       <Image src={bild.src} alt={lage.blass ? '' : bild.alt} fill sizes={groesse} quality={lage.blass ? 60 : 80} />
+      {bild.credit && !lage.blass && <Credit name={bild.credit} />}
     </motion.figure>
   );
 }

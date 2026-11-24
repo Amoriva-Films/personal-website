@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Titel from '@/components/vintage/Titel';
 import Aufklapper from '@/components/vintage/Aufklapper';
+import Credit from '@/components/vintage/Credit';
 import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import { brief, marke, seiteFotografWolfsburg as s } from '@/content/texte';
@@ -91,6 +92,7 @@ export default function FotografWolfsburg() {
           {s.bilder.map((b, i) => (
             <figure key={b.src} className={`fw-bild fw-bild--${i}`}>
               <Image src={b.src} alt={b.alt} width={b.b} height={b.h} sizes="(max-width: 760px) 46vw, 24vw" quality={80} />
+              {b.credit && <Credit name={b.credit} />}
             </figure>
           ))}
         </section>
@@ -192,7 +194,7 @@ export default function FotografWolfsburg() {
         .fw-fakt-wert { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: clamp(21px, 1.9vw, 26px); line-height: 1.1; letter-spacing: .02em; color: var(--ton); white-space: nowrap; }
 
         .fw-bilder { max-width: 1180px; margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.4vw, 20px); align-items: start; }
-        .fw-bild { margin: 0; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 24px 40px -22px rgba(8, 6, 3, .7); }
+        .fw-bild { position: relative; margin: 0; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 24px 40px -22px rgba(8, 6, 3, .7); }
         .fw-bild--1, .fw-bild--3 { margin-top: clamp(28px, 4vw, 60px); }
         .fw-bild img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--v-ease); }
         @media (hover: hover) { .fw-bild:hover img { transform: scale(1.04); } }
