@@ -109,7 +109,8 @@ export const momente = {
     { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
     { src: '/images/hochzeit-1.jpg', alt: 'Brautpaar Stirn an Stirn unter dem Schleier', b: 1333, h: 2000 },
     { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
-    { src: '/images/feigen-ring.jpg', alt: 'Ehering auf einer aufgeschnittenen Feige', b: 1333, h: 2000 },
+    // Haende mit Ehering und Strauss statt Feige (Nevio 24.11.2026)
+    { src: '/images/haende-strauss.jpg', alt: 'Hände des Brautpaars mit Ehering, die Braut hält den Brautstrauß', b: 1333, h: 2000 },
     { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000 },
     { src: '/images/Bild-76.webp', alt: 'Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000 },
     { src: '/images/hochzeit-3.jpg', alt: 'Brautpaar unter dem Schleier, Schwarzweiß', b: 1333, h: 2000 },
@@ -442,7 +443,7 @@ export const seiteFotografWolfsburg = {
   bilder: [
     { src: '/images/Bild-76.webp', alt: 'Hochzeitsfotografie: Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000 },
     { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
-    { src: '/images/feigen-ring.jpg', alt: 'Detailfoto: Ehering auf einer aufgeschnittenen Feige', b: 1333, h: 2000 },
+    { src: '/images/haende-strauss.jpg', alt: 'Detailfoto: Hände des Brautpaars mit Ehering und Brautstrauß', b: 1333, h: 2000 },
     { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
   ],
   stilZeile: 'Unser Stil',
