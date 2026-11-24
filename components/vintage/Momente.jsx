@@ -35,7 +35,7 @@ function Foto({ bild, lage, p, groesse }) {
       style={{ left: `${lage.l}%`, top: `${lage.o}%`, width: `${lage.b}%`, aspectRatio: lage.r, y }}
     >
       <Image src={bild.src} alt={lage.blass ? '' : bild.alt} fill sizes={groesse} quality={lage.blass ? 60 : 80} />
-      {bild.credit && !lage.blass && <Credit name={bild.credit} />}
+      {bild.credit && <Credit name={bild.credit} />}
     </motion.figure>
   );
 }
@@ -88,7 +88,9 @@ export default function Momente() {
         .momente-foto { position: absolute; margin: 0; overflow: hidden; z-index: 1; will-change: transform; }
         .momente-foto img, .momente-paar img { object-fit: cover; }
         /* Blass: verblichen, fast im Papier (Referenz) */
-        .momente-foto--blass { opacity: .34; filter: grayscale(.4) sepia(.3); }
+        /* Blass wird nur das Foto, damit ein Bildnachweis darauf lesbar bleibt */
+        .momente-foto--blass img { opacity: .34; filter: grayscale(.4) sepia(.3); }
+        .momente-foto--blass .v-credit { color: color-mix(in srgb, var(--tinte) 70%, transparent); text-shadow: none; }
         .momente-foto:not(.momente-foto--blass) { box-shadow: 0 16px 30px -14px rgba(46, 43, 34, .5); }
 
         .momente-mitte {

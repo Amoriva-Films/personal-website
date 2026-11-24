@@ -112,7 +112,7 @@ export const momente = {
     { src: '/images/braut-hochgehoben.jpg', alt: 'Bräutigam hebt seine lachende Braut im Park hoch, ihr Schleier weht', b: 1333, h: 2000 },
     // Haende mit Ehering und Strauss statt Feige (Nevio 24.11.2026)
     { src: '/images/haende-strauss.jpg', alt: 'Hände des Brautpaars mit Ehering, die Braut hält den Brautstrauß', b: 1333, h: 2000 },
-    { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000 },
+    { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000, credit: 'eileencamin.fotografie' },
     // Credit dezent unten links am Bild (Nevio 24.11.2026)
     { src: '/images/Bild-76.webp', alt: 'Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000, credit: 'royanilagraphy' },
     { src: '/images/hochzeit-3.jpg', alt: 'Brautpaar unter dem Schleier, Schwarzweiß', b: 1333, h: 2000 },
