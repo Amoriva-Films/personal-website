@@ -85,7 +85,8 @@ export const arbeit = {
     // Braeutigam mit Anstecker statt Anzug am Balkon (Nevio 24.11.2026)
     linksBlass: { src: '/images/braeutigam-anstecker.jpg', b: 1333, h: 2000 },
     linksScharf: { src: '/images/paare/paar-gehen.webp', alt: 'Ein Brautpaar geht Hand in Hand durch den Schlossgarten', b: 1024, h: 1536 },
-    rechtsBlass: { src: '/images/kerzentisch.jpg', b: 1600, h: 2400 },
+    // Kerzen mit Kristallglas statt Kerzenstaender (Nevio 24.11.2026)
+    rechtsBlass: { src: '/images/kerzen-kristallglas.webp', b: 1086, h: 1448 },
     rechtsScharf: { src: '/images/braut-schleier-garten.jpg', alt: 'Braut mit Schleier und Strauß im Schlossgarten', b: 1333, h: 2000 },
   },
   knopf: 'Anfrage stellen',
