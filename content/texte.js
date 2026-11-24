@@ -131,7 +131,8 @@ export const leistungen = {
   zeile: 'Leistungen',
   titel: 'Was wir für euch *tun* können.',
   untertitel: 'Film, Foto oder beides aus einer Hand',
-  bild: { src: '/images/Bild-33.webp', alt: 'Brautpaar mit Champagner zwischen brennenden Kerzen', b: 2000, h: 3000 },
+  // Fotokarte im Fuss (Fotokarte.jsx): Paar unter Lichterketten statt Champagner (Nevio 24.11.2026)
+  bild: { src: '/images/paar-lichterketten.webp', alt: 'Brautpaar geht Hand in Hand durch einen Garten mit Lichterketten, die Braut blickt zurück', b: 1122, h: 1402 },
   pakete: [
     {
       titel: 'Hochzeitsfilm',
