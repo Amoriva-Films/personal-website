@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Titel from '@/components/vintage/Titel';
 import Preiskarte from '@/components/vintage/Preiskarte';
 import SeitenKopf from '@/components/vintage/SeitenKopf';
+import Credit from '@/components/vintage/Credit';
 import Fuss from '@/components/vintage/Fuss';
 import WhatsApp from '@/components/WhatsApp';
 import { leistungen, prozess, marke, brief, seiteLeistungen as s } from '@/content/texte';
@@ -74,6 +75,7 @@ export default function Leistungen() {
             <article key={p.titel} className={`leist-paket${i % 2 ? ' leist-paket--rechts' : ''}`}>
               <div className="leist-bild">
                 <Image src={s.bilder[i].src} alt={s.bilder[i].alt} width={s.bilder[i].b} height={s.bilder[i].h} sizes="(max-width: 860px) 90vw, 440px" quality={80} />
+                {s.bilder[i].credit && <Credit name={s.bilder[i].credit} />}
               </div>
               <div className="leist-text">
                 <p className="leist-nr v-schrift" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>

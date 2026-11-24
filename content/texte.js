@@ -390,7 +390,7 @@ export const seiteLeistungen = {
   paketLinks: [{ label: 'Hochzeitsvideo in Wolfsburg', href: '/hochzeitsvideo-wolfsburg' }, { label: 'Hochzeitsfotograf in Wolfsburg', href: '/hochzeitsfotograf-wolfsburg' }, null],
   // Je Paket ein Bild, in derselben Reihenfolge wie leistungen.pakete
   bilder: [
-    { src: '/images/Bild-101.webp', alt: 'Brautpaar am Hochzeitstisch vor einem roten Samtvorhang', b: 2000, h: 3000 },
+    { src: '/images/Bild-101.webp', alt: 'Brautpaar am Hochzeitstisch vor einem roten Samtvorhang', b: 2000, h: 3000, credit: 'royanilagraphy' },
     { src: '/images/paare/paar-wand-v2.webp', alt: 'Bräutigam lehnt an einer Säule, die Braut schaut zu ihm auf', b: 1600, h: 2400 },
     { src: '/images/paare/paar-kuss.webp', alt: 'Brautpaar kurz vor dem Kuss, Schwarzweiß', b: 1600, h: 2400 },
   ],
