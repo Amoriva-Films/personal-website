@@ -19,11 +19,10 @@ import Credit from './Credit';
 // Lage auf dem Rechner (in %): links, oben, Breite, Seitenverhaeltnis, Tempo, blass?
 const STREU = [
   { i: 1, l: 11, o: 30, b: 19, r: '4 / 3', t: -40, blass: true },
-  { i: 4, l: 4, o: 70, b: 15, r: '1 / 1', t: 60, blass: false },
   { i: 3, l: 24, o: 82, b: 15, r: '4 / 3', t: 30, blass: true },
-  { i: 5, l: 57, o: 66, b: 18, r: '4 / 3', t: 40, blass: true },
-  // Schleier am Fluegel raus (Nevio 24.11.2026), Indizes ruecken nach
-  { i: 6, l: 92, o: 86, b: 12, r: '1 / 1', t: -30, blass: true },
+  { i: 4, l: 57, o: 66, b: 18, r: '4 / 3', t: 40, blass: true },
+  // Schleier am Fluegel und Torte raus (Nevio 24.11.2026), Indizes ruecken nach
+  { i: 5, l: 92, o: 86, b: 12, r: '1 / 1', t: -30, blass: true },
 ];
 
 function Foto({ bild, lage, p, groesse }) {

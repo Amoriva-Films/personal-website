@@ -114,8 +114,6 @@ export const momente = {
     // Haende mit Ehering und Strauss statt Feige (Nevio 24.11.2026)
     { src: '/images/haende-strauss.jpg', alt: 'Hände des Brautpaars mit Ehering, die Braut hält den Brautstrauß', b: 1333, h: 2000 },
     // Credit dezent unten links am Bild (Nevio 24.11.2026)
-    // Torte vor rotem Vorhang statt Perlenschleier, Credit bleibt (Nevio 24.11.2026)
-    { src: '/images/torte-vorhang.webp', alt: 'Brautpaar lacht nach dem Auspusten der Kerzen auf der Hochzeitstorte, dahinter ein roter Samtvorhang', b: 1080, h: 1620, credit: 'royanilagraphy' },
     { src: '/images/hochzeit-3.jpg', alt: 'Brautpaar unter dem Schleier, Schwarzweiß', b: 1333, h: 2000 },
     { src: '/images/paare/haende.webp', alt: 'Die Hände des Brautpaars, ineinander gelegt', b: 1600, h: 2400 },
   ],
