@@ -108,7 +108,8 @@ export const momente = {
   bilder: [
     { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
     { src: '/images/hochzeit-1.jpg', alt: 'Brautpaar Stirn an Stirn unter dem Schleier', b: 1333, h: 2000 },
-    { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
+    // Braut hochgehoben im Park statt Discokugel (Nevio 24.11.2026)
+    { src: '/images/braut-hochgehoben.jpg', alt: 'Bräutigam hebt seine lachende Braut im Park hoch, ihr Schleier weht', b: 1333, h: 2000 },
     // Haende mit Ehering und Strauss statt Feige (Nevio 24.11.2026)
     { src: '/images/haende-strauss.jpg', alt: 'Hände des Brautpaars mit Ehering, die Braut hält den Brautstrauß', b: 1333, h: 2000 },
     { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000 },
@@ -445,7 +446,7 @@ export const seiteFotografWolfsburg = {
     { src: '/images/Bild-76.webp', alt: 'Hochzeitsfotografie: Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000, credit: 'royanilagraphy' },
     { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
     { src: '/images/haende-strauss.jpg', alt: 'Detailfoto: Hände des Brautpaars mit Ehering und Brautstrauß', b: 1333, h: 2000 },
-    { src: '/images/discokugel.jpg', alt: 'Brautpaar tanzt allein unter einer Discokugel', b: 1333, h: 2000 },
+    { src: '/images/braut-hochgehoben.jpg', alt: 'Bräutigam hebt seine lachende Braut im Park hoch, ihr Schleier weht', b: 1333, h: 2000 },
   ],
   stilZeile: 'Unser Stil',
   stilTitel: 'Fotos, die sich nach *euch* anfühlen.',
