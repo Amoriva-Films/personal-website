@@ -27,7 +27,7 @@ export const metadata = {
 
 const ZIFFER = ['I', 'II', 'III', 'IV'];
 // Blasse Fotos in den Bildern des Filmstreifens, keins davon steht weiter oben
-const FILM = ['/images/hochzeit-1.jpg', '/images/braut-schleier-garten.jpg', '/images/schleier-klavier.jpg', '/images/champagner.jpg', '/images/paare/haende.webp', '/images/braut-drehen.jpg'];
+const FILM = ['/images/hochzeit-1.jpg', '/images/braut-schleier-garten.jpg', '/images/braut-strauss-oben.jpg', '/images/champagner.jpg', '/images/paare/haende.webp', '/images/braut-drehen.jpg'];
 const ohneStern = (t) => t.replace(/\*/g, '');
 
 const ld = [
