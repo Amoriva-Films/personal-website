@@ -115,7 +115,8 @@ export const momente = {
     { src: '/images/haende-strauss.jpg', alt: 'Hände des Brautpaars mit Ehering, die Braut hält den Brautstrauß', b: 1333, h: 2000 },
     { src: '/images/schleier-klavier.jpg', alt: 'Braut unter dem Schleier am Flügel', b: 1333, h: 2000, credit: 'eileencamin.fotografie' },
     // Credit dezent unten links am Bild (Nevio 24.11.2026)
-    { src: '/images/Bild-76.webp', alt: 'Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000, credit: 'royanilagraphy' },
+    // Torte vor rotem Vorhang statt Perlenschleier, Credit bleibt (Nevio 24.11.2026)
+    { src: '/images/torte-vorhang.webp', alt: 'Brautpaar lacht nach dem Auspusten der Kerzen auf der Hochzeitstorte, dahinter ein roter Samtvorhang', b: 1080, h: 1620, credit: 'royanilagraphy' },
     { src: '/images/hochzeit-3.jpg', alt: 'Brautpaar unter dem Schleier, Schwarzweiß', b: 1333, h: 2000 },
     { src: '/images/paare/haende.webp', alt: 'Die Hände des Brautpaars, ineinander gelegt', b: 1600, h: 2400 },
   ],
@@ -445,7 +446,7 @@ export const seiteFotografWolfsburg = {
     { text: 'Dazu buchbar', wert: 'Hochzeitsfilm' },
   ],
   bilder: [
-    { src: '/images/Bild-76.webp', alt: 'Hochzeitsfotografie: Braut unter einem Perlenschleier, Porträt', b: 2000, h: 3000, credit: 'royanilagraphy' },
+    { src: '/images/torte-vorhang.webp', alt: 'Hochzeitsfotografie: Brautpaar lacht an der Hochzeitstorte vor rotem Samtvorhang', b: 1080, h: 1620, credit: 'royanilagraphy' },
     { src: '/images/kuss-seifenblasen.jpg', alt: 'Brautpaar küsst sich im Schlosshof, Seifenblasen fliegen', b: 1600, h: 2400 },
     { src: '/images/haende-strauss.jpg', alt: 'Detailfoto: Hände des Brautpaars mit Ehering und Brautstrauß', b: 1333, h: 2000 },
     { src: '/images/braut-hochgehoben.jpg', alt: 'Bräutigam hebt seine lachende Braut im Park hoch, ihr Schleier weht', b: 1333, h: 2000 },
