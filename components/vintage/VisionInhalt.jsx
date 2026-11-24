@@ -66,7 +66,13 @@ export default function VisionInhalt() {
   const trichter = useRef(null);
   useTrichter(trichter);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const bilder = momente.bilder.slice(1, 6);
+  // Moodboard: drei Bilder wie auf der Startseite, dazu zwei eigene statt
+  // Schleier am Fluegel und Perlenschleier (Nevio 24.11.2026)
+  const bilder = [
+    ...momente.bilder.slice(1, 4),
+    { src: '/images/braut-strauss-oben.jpg', alt: 'Braut blickt lachend über ihren Brautstrauß nach oben', b: 1333, h: 2000 },
+    { src: '/images/braeutigam-anstecker.jpg', alt: 'Bräutigam mit Stehkragen und Blumenanstecker', b: 1333, h: 2000 },
+  ];
 
   return (
     <>
