@@ -82,7 +82,8 @@ export const arbeit = {
   // je ein grosses, blasses Bild und ein kleines, scharfes davor
   collage: {
     // Neue Fotos (Nevio 26.10.2026): jedes Bild nur einmal auf der Seite
-    linksBlass: { src: '/images/anzug-balkon.jpg', b: 1600, h: 2400 },
+    // Braeutigam mit Anstecker statt Anzug am Balkon (Nevio 24.11.2026)
+    linksBlass: { src: '/images/braeutigam-anstecker.jpg', b: 1333, h: 2000 },
     linksScharf: { src: '/images/paare/paar-gehen.webp', alt: 'Ein Brautpaar geht Hand in Hand durch den Schlossgarten', b: 1024, h: 1536 },
     rechtsBlass: { src: '/images/kerzentisch.jpg', b: 1600, h: 2400 },
     rechtsScharf: { src: '/images/braut-schleier-garten.jpg', alt: 'Braut mit Schleier und Strauß im Schlossgarten', b: 1333, h: 2000 },
