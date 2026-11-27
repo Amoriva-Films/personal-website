@@ -20,8 +20,10 @@ import { GAESTE, HERKUNFT, MAX_DATEN, WUENSCHE, WUNSCH_REIHENFOLGE } from "./wer
 type Seite = "start" | "pruefung" | "schritt1" | "schritt2" | "danke";
 
 /** Reihenfolge der Felder je Schritt: der Weiter-Knopf springt zum ersten Fehler. */
-const FELDER_WUNSCH = ["paket", "datum", "wunschdatum-1", "wunschdatum-2", "ort", "gaeste"];
-const FELDER_KONTAKT = ["namen", "email", "telefon", "nachricht"];
+// Schritt 1: wer ihr seid, Schritt 2: eure Hochzeit (Nevio 27.11.: erst die Daten des Paares)
+const FELDER_SCHRITT1 = ["namen", "email", "telefon"];
+const FELDER_SCHRITT2 = ["paket", "datum", "wunschdatum-1", "wunschdatum-2", "ort", "gaeste", "nachricht"];
+const nur = (f: FeldFehler, ids: string[]): FeldFehler => Object.fromEntries(Object.entries(f).filter(([k]) => ids.includes(k)));
 
 function zumFeld(id: string) {
   const el = document.getElementById(id === "paket" ? "paket-wahl" : id);
@@ -157,20 +159,23 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
     return false;
   }
 
+  const fehlerSchritt1 = nur(alleFehler, FELDER_SCHRITT1);
+  const fehlerSchritt2 = nur(alleFehler, FELDER_SCHRITT2);
+
   function weiterNach1() {
-    if (!schrittOk(fehlerWunsch, FELDER_WUNSCH)) return;
+    if (!schrittOk(fehlerSchritt1, FELDER_SCHRITT1)) return;
     zeige("schritt2");
   }
 
   async function absenden(e?: FormEvent) {
     e?.preventDefault();
     if (sendet) return;
-    if (Object.keys(fehlerWunsch).length) {
+    if (Object.keys(fehlerSchritt1).length) {
       zeige("schritt1");
-      requestAnimationFrame(() => void schrittOk(fehlerWunsch, FELDER_WUNSCH));
+      requestAnimationFrame(() => void schrittOk(fehlerSchritt1, FELDER_SCHRITT1));
       return;
     }
-    if (!schrittOk(fehlerKontakt, FELDER_KONTAKT)) return;
+    if (!schrittOk(fehlerSchritt2, FELDER_SCHRITT2)) return;
     setSendet(true);
     setFehler(null);
     try {
@@ -292,11 +297,73 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
           <SchrittLeiste schritt={1} von={2} />
           <Label style={{ marginTop: 14 }}>Schritt 1 von 2</Label>
           <h2 style={{ marginTop: 6 }}>
-            Was wünscht ihr <em>euch?</em>
+            Wer seid <em>ihr?</em>
           </h2>
           <p className="leise klein" style={{ marginTop: 8 }}>
             Zwei kurze Schritte, dauert etwa eine Minute. Unverbindlich.
           </p>
+          <Feld label="Eure Vornamen" fehler={fehlerAm("namen")}>
+            <input
+              id="namen"
+              value={namen}
+              onChange={(e) => setNamen(e.target.value)}
+              autoComplete="off"
+              placeholder="Zum Beispiel: Lena und Jonas"
+              maxLength={120}
+              required
+            />
+          </Feld>
+          <Feld label="E-Mail-Adresse" fehler={fehlerAm("email")}>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              inputMode="email"
+              autoCapitalize="off"
+              spellCheck={false}
+              maxLength={200}
+              required
+            />
+          </Feld>
+          <Feld label="Handynummer für WhatsApp" fehler={fehlerAm("telefon")}>
+            <input
+              id="telefon"
+              type="tel"
+              value={telefon}
+              onChange={(e) => setTelefon(e.target.value)}
+              autoComplete="tel"
+              inputMode="tel"
+              maxLength={40}
+            />
+          </Feld>
+          <p className="leise klein" style={{ marginTop: 10, paddingLeft: 22 }}>
+            Wir schreiben euch meist per WhatsApp, das geht für alle am schnellsten.
+          </p>
+          {/* Verstecktes Feld gegen Bots, für Menschen unsichtbar */}
+          <label className="versteckt" aria-hidden="true">
+            Website
+            <input tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+          </label>
+          <Abstand />
+          <Knopf type="submit">Weiter</Knopf>
+          <Fehler text={fehler} />
+        </form>
+      </section>
+    );
+  }
+
+  if (seite === "schritt2") {
+    return (
+      <section className="seite">
+        <Kopf zurueck={{ onClick: () => zeige("schritt1") }} />
+        <form className="bahn luft" style={{ paddingTop: 8 }} noValidate onSubmit={absenden}>
+          <SchrittLeiste schritt={2} von={2} />
+          <Label style={{ marginTop: 14 }}>Schritt 2 von 2</Label>
+          <h2 style={{ marginTop: 6 }}>
+            Eure <em>Hochzeit</em>
+          </h2>
           <div className="wunsch" id="paket-wahl" role="radiogroup" aria-label="Was wünscht ihr euch" aria-describedby={fehlerAm("paket") ? "paket-fehler" : undefined}>
             {WUNSCH_REIHENFOLGE.map((id) => (
               <button
@@ -372,68 +439,6 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               ))}
             </select>
           </Feld>
-          <Abstand />
-          <Knopf type="submit">Weiter</Knopf>
-          <Fehler text={fehler} />
-        </form>
-      </section>
-    );
-  }
-
-  if (seite === "schritt2") {
-    return (
-      <section className="seite">
-        <Kopf zurueck={{ onClick: () => zeige("schritt1") }} />
-        <form className="bahn luft" style={{ paddingTop: 8 }} noValidate onSubmit={absenden}>
-          <SchrittLeiste schritt={2} von={2} />
-          <Label style={{ marginTop: 14 }}>Schritt 2 von 2</Label>
-          <h2 style={{ marginTop: 6 }}>
-            Wer seid <em>ihr?</em>
-          </h2>
-          <Feld label="Eure Vornamen" fehler={fehlerAm("namen")}>
-            <input
-              id="namen"
-              value={namen}
-              onChange={(e) => setNamen(e.target.value)}
-              autoComplete="off"
-              placeholder="Zum Beispiel: Lena und Jonas"
-              maxLength={120}
-              required
-            />
-          </Feld>
-          <Feld label="E-Mail-Adresse" fehler={fehlerAm("email")}>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              inputMode="email"
-              autoCapitalize="off"
-              spellCheck={false}
-              maxLength={200}
-              required
-            />
-          </Feld>
-          <Feld label="Handynummer für WhatsApp" fehler={fehlerAm("telefon")}>
-            <input
-              id="telefon"
-              type="tel"
-              value={telefon}
-              onChange={(e) => setTelefon(e.target.value)}
-              autoComplete="tel"
-              inputMode="tel"
-              maxLength={40}
-            />
-          </Feld>
-          <p className="leise klein" style={{ marginTop: 10, paddingLeft: 22 }}>
-            Wir schreiben euch meist per WhatsApp, das geht für alle am schnellsten.
-          </p>
-          {/* Verstecktes Feld gegen Bots, für Menschen unsichtbar */}
-          <label className="versteckt" aria-hidden="true">
-            Website
-            <input tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
-          </label>
           <Feld label="Was ist euch wichtig? (optional)" fehler={fehlerAm("nachricht")}>
             <textarea
               id="nachricht"
