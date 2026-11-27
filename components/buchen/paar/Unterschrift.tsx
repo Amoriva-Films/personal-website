@@ -133,7 +133,7 @@ export function Unterschrift({ unterschreiben, schluessel }: { unterschreiben: (
       });
       const json = (await res.json().catch(() => ({}))) as { art?: string; an?: string; minuten?: number; error?: string };
       if (!res.ok) {
-        setFehler(json.error ?? "Das hat gerade nicht geklappt. Bitte probiert es noch einmal.");
+        setFehler(json.error ?? "Das hat gerade nicht geklappt. Versucht es noch einmal.");
         setLaeuft(false);
         return;
       }
@@ -145,7 +145,7 @@ export function Unterschrift({ unterschreiben, schluessel }: { unterschreiben: (
       setCode("");
       setLaeuft(false);
     } catch {
-      setFehler("Keine Verbindung. Bitte probiert es noch einmal.");
+      setFehler("Keine Verbindung. Versucht es noch einmal.");
       setLaeuft(false);
     }
   };

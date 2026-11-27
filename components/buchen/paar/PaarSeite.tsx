@@ -101,7 +101,7 @@ export function PaarSeite() {
         schluessel={schluessel}
         zurueck={() => zeige("angebot")}
         unterschreiben={async (eingabe) => {
-          const r = await holen("/api/buchen/paar/vertrag", { schluessel, ...eingabe, textHash: s.vertrag!.hash }).catch(() => ({ error: "Keine Verbindung. Bitte probiert es noch einmal." }) as { seite?: Daten; error?: string });
+          const r = await holen("/api/buchen/paar/vertrag", { schluessel, ...eingabe, textHash: s.vertrag!.hash }).catch(() => ({ error: "Keine Verbindung. Versucht es noch einmal." }) as { seite?: Daten; error?: string });
           if (!r.seite) return r.error ?? "Das hat gerade nicht geklappt.";
           setZustand({ art: "da", seite: r.seite });
           setGeradeGebucht(true);
@@ -236,7 +236,7 @@ function Uebersicht({ seite: s, schluessel, zeige, setSeite }: { seite: Daten; s
           <Karte style={{ marginTop: 22 }}>
             <Label>Euer Fahrplan</Label>
             <p className="klein" style={{ marginTop: 6 }}>
-              Ihr müsst euch um nichts kümmern. Wir melden uns bei jedem Schritt rechtzeitig per Mail und WhatsApp.
+              Wir erinnern euch rechtzeitig an jeden Schritt.
             </p>
             <Liste punkte={s.fahrplan} />
           </Karte>
@@ -347,7 +347,7 @@ function FragenKarte() {
   return (
     <Karte style={{ textAlign: "center", marginTop: 16 }}>
       <Label>Fragen?</Label>
-      <p className="klein" style={{ marginTop: 6 }}>Schreibt uns einfach. Wir antworten meist am selben Tag.</p>
+      <p className="klein" style={{ marginTop: 6 }}>Schreibt uns. Wir antworten meist am selben Tag.</p>
       <Abstand hoehe={16} />
       <Knopf art="hell-voll" href={KONTAKT.whatsapp}>
         Per WhatsApp schreiben
@@ -396,10 +396,10 @@ function Gebucht({ seite: s, schluessel, geradeGebucht, zeige }: { seite: Daten;
         <Karte style={{ marginTop: 14 }}>
           <p>
             {gebucht
-              ? "Wir freuen uns riesig auf euren Tag. Euer Datum ist ab jetzt fest für euch eingetragen."
+              ? "Wir freuen uns auf euren Tag. Euer Datum ist ab jetzt fest für euch gebucht."
               : geradeGebucht
-                ? "Wir freuen uns riesig auf euren Tag. Mit eurer Anzahlung ist euer Datum fest für euch eingetragen."
-                : "Schön, dass ihr wieder da seid. Mit eurer Anzahlung ist euer Datum fest für euch eingetragen."}
+                ? "Wir freuen uns auf euren Tag. Mit eurer Anzahlung ist euer Datum fest für euch gebucht."
+                : "Schön, dass ihr wieder da seid. Mit eurer Anzahlung ist euer Datum fest für euch gebucht."}
           </p>
           <p className="leise klein" style={{ marginTop: 8 }}>
             Euer Amoriva-Team
@@ -423,7 +423,7 @@ function Gebucht({ seite: s, schluessel, geradeGebucht, zeige }: { seite: Daten;
             </li>
             <li>
               <span className="nr">4</span>
-              <span>Etwa 6 Wochen vorher gehen wir euren Tagesablauf gemeinsam durch</span>
+              <span>Etwa sechs Wochen vorher gehen wir euren Tagesablauf gemeinsam durch</span>
             </li>
           </ol>
         </Karte>
@@ -577,7 +577,7 @@ async function pdfLaden(art: PdfArt, schluessel: string): Promise<string | null>
     if (!res.ok || !(res.headers.get("Content-Type") ?? "").includes("pdf")) {
       const json = (await res.json().catch(() => ({}))) as { error?: string };
       if (res.status === 404) return json.error ?? weg.fehlt;
-      return json.error ?? "Das hat gerade nicht geklappt. Bitte probiert es gleich noch einmal.";
+      return json.error ?? "Das hat gerade nicht geklappt. Versucht es noch einmal.";
     }
     const name = /filename="([^"]+)"/.exec(res.headers.get("Content-Disposition") ?? "")?.[1] ?? weg.name;
     const url = URL.createObjectURL(await res.blob());
@@ -590,7 +590,7 @@ async function pdfLaden(art: PdfArt, schluessel: string): Promise<string | null>
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
     return null;
   } catch {
-    return "Keine Verbindung. Bitte probiert es noch einmal.";
+    return "Keine Verbindung. Versucht es noch einmal.";
   }
 }
 
@@ -715,14 +715,14 @@ function AngebotDoc({ seite: s, weiter, zurueck }: { seite: Daten; weiter: (() =
           <div>
             <p className="doc-klein">Hochzeit</p>
             <p className="doc-wert">
-              {s.paar.datumKurz}
+              {s.paar.datumLang}
               {s.paar.ort ? ` · ${s.paar.ort}` : ""}
             </p>
           </div>
         </div>
         {a.haltenBis ? (
           <div className="doc-halten">
-            <b>Wir halten euren Tag bis {a.haltenBis}.</b> Bis dahin bekommt ihn niemand anderes.
+            <b>Wir halten euren Tag bis {a.haltenBis}.</b> Bis dahin bekommt ihn niemand anders.
           </div>
         ) : null}
 
@@ -762,7 +762,7 @@ function AngebotDoc({ seite: s, weiter, zurueck }: { seite: Daten; weiter: (() =
           ))}
         </div>
         <p className="doc-wunsch">
-          <i>Ihr habt noch Wünsche? Schreibt uns, wir setzen sie für euch um.</i>
+          <i>Ihr habt noch Wünsche? Schreibt uns, wir schauen gern, was geht.</i>
         </p>
         <p className="doc-klein-text" style={{ textAlign: "center" }}>
           {a.steuerHinweis}
@@ -861,13 +861,13 @@ function VertragAnsicht({
             <div>
               <span>Anzahlung 30 %</span>
               <span>
-                {a.anzahlung}, {a.anzahlungBis}
+                {/^\d{2}\.\d{2}\.\d{4}$/.test(a.anzahlungBis) ? `${a.anzahlung} bis ${a.anzahlungBis}` : `${a.anzahlung}, ${a.anzahlungBis}`}
               </span>
             </div>
             <div>
               <span>Rest</span>
               <span>
-                {a.rest}, bis {a.restBis}
+                {a.rest} bis {a.restBis}
               </span>
             </div>
           </div>

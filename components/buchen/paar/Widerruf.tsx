@@ -70,7 +70,7 @@ export function Widerruf({
       setStand({ art: "fertig", am: json.seite.widerrufen?.am ?? "heute" });
       fertig?.(json.seite);
     } catch {
-      setFehler("Keine Verbindung. Bitte probiert es noch einmal.");
+      setFehler("Keine Verbindung. Versucht es noch einmal.");
       setLaeuft(false);
     }
   };
@@ -95,13 +95,13 @@ export function Widerruf({
     <Karte style={{ marginTop: 28 }}>
       <Label>Vertrag widerrufen</Label>
       <p className="klein" style={{ marginTop: 10 }}>
-        Wollt ihr den Vertrag wirklich widerrufen? Euer Tag ist dann nicht mehr für euch gebucht. Habt ihr schon etwas gezahlt, bekommt ihr es zurück.
+        Wollt ihr den Vertrag wirklich widerrufen? Euer Tag ist dann nicht mehr für euch gebucht. Habt ihr schon etwas gezahlt, bekommt ihr es zurück. Hattet ihr einen früheren Beginn gewünscht, ziehen wir den Anteil für bereits erbrachte Leistungen ab.
       </p>
       <Feld label="Euer Vor- und Nachname" style={{ marginTop: 18 }}>
         <input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" maxLength={120} />
       </Feld>
       <p className="leise klein" style={{ marginTop: 10 }}>
-        Die Bestätigung mit Datum und Uhrzeit schicken wir an eure Mail-Adresse.
+        Die Bestätigung mit Datum und Uhrzeit schicken wir an eure E-Mail-Adresse.
       </p>
       <div style={{ marginTop: 22 }}>
         <Knopf art="hell-voll" disabled={name.trim().length < 3} beschaeftigt={laeuft} onClick={() => void bestaetigen()}>

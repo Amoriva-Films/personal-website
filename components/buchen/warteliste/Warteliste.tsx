@@ -17,7 +17,7 @@ async function senden(body: Record<string, unknown>): Promise<WartelisteAntwort>
     const res = await fetch("/api/buchen/warteliste", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), cache: "no-store" });
     return (await res.json()) as WartelisteAntwort;
   } catch {
-    return { ok: false, grund: "fehler", meldung: "Keine Verbindung. Versucht es bitte gleich noch einmal." };
+    return { ok: false, grund: "fehler", meldung: "Keine Verbindung. Versucht es noch einmal." };
   }
 }
 
@@ -123,7 +123,7 @@ function Warteliste({ schluessel, rausZuerst }: { schluessel: string; rausZuerst
               setVersuch((v) => v + 1);
             }}
           >
-            Nochmal
+            Noch einmal
           </Knopf>
         </div>
       </>
@@ -208,7 +208,7 @@ function Warteliste({ schluessel, rausZuerst }: { schluessel: string; rausZuerst
             <h2 style={{ marginTop: 22 }}>
               Gerade keine <em>Warteliste.</em>
             </h2>
-            <p style={{ marginTop: 14 }}>Ihr steht im Moment auf keiner Warteliste. Fragen? Schreibt uns einfach.</p>
+            <p style={{ marginTop: 14 }}>Ihr steht im Moment auf keiner Warteliste. Fragen? Schreibt uns.</p>
             <Abstand />
             <Knopf href={KONTAKT.whatsapp}>WhatsApp schreiben</Knopf>
           </div>
@@ -246,6 +246,8 @@ function Warteliste({ schluessel, rausZuerst }: { schluessel: string; rausZuerst
 
 function Bestaetigung({ erledigt, tag, schluessel }: { erledigt: { aktion: Aktion; datum: string; warAngeboten?: boolean }; tag?: WartelisteTag; schluessel: string }) {
   const datum = tag?.datumKurz ?? erledigt.datum;
+  // Im Fließtext die lange Form („Samstag, 12. Juni 2027“), kurz nur in Überschriften
+  const lang = tag?.datumLang ?? datum;
   if (erledigt.aktion === "raus") {
     return (
       <div style={{ textAlign: "center" }}>
@@ -254,7 +256,7 @@ function Bestaetigung({ erledigt, tag, schluessel }: { erledigt: { aktion: Aktio
           Danke <em>euch.</em>
         </h2>
         <Band grau style={{ marginTop: 18, textAlign: "left" }}>
-          Wir wünschen euch einen wunderschönen Tag.{erledigt.warAngeboten ? ` Den ${datum} geben wir frei.` : ` Für den ${datum} steht ihr nicht mehr auf unserer Warteliste.`}
+          Wir wünschen euch einen wunderschönen Tag.{erledigt.warAngeboten ? ` Den ${lang}, geben wir frei.` : ` Für den ${lang}, steht ihr nicht mehr auf unserer Warteliste.`}
         </Band>
         <p className="leise klein" style={{ marginTop: 14 }}>
           Euer Amoriva-Team
@@ -272,10 +274,10 @@ function Bestaetigung({ erledigt, tag, schluessel }: { erledigt: { aktion: Aktio
         <Band style={{ marginTop: 18, textAlign: "left" }}>
           {tag?.platz ? (
             <>
-              Ihr bleibt für den {datum} auf <b>Platz {tag.platz}</b>.
+              Ihr bleibt für den {lang}, auf <b>Platz {tag.platz}</b>.
             </>
           ) : (
-            <>Ihr bleibt für den {datum} auf unserer Warteliste.</>
+            <>Ihr bleibt für den {lang}, auf unserer Warteliste.</>
           )}{" "}
           Wird der Tag frei, bekommt ihr sofort eine Mail.
         </Band>
@@ -301,7 +303,12 @@ function Bestaetigung({ erledigt, tag, schluessel }: { erledigt: { aktion: Aktio
           </>
         ) : (
           <>
-            <b>Niemand sonst bekommt den Tag.</b> Euer Angebot schicken wir euch in Kürze per Mail.
+            {tag?.haltenBis ? (
+              <>
+                <b>Wir halten den Tag bis {tag.haltenBis} für euch.</b>{" "}
+              </>
+            ) : null}
+            Euer Angebot schicken wir euch in Kürze per Mail.
           </>
         )}
       </Band>
@@ -355,8 +362,8 @@ function TagBlock({
         </h2>
         <Band style={{ marginTop: 18 }}>
           <b>
-            Wir halten den {tag.datumKurz}
-            {tag.haltenBis ? ` bis ${tag.haltenBis}` : ""} für euch.
+            Wir halten den {tag.datumLang}
+            {tag.haltenBis ? `, bis ${tag.haltenBis}` : ""} für euch.
           </b>{" "}
           Wollt ihr ihn haben?
         </Band>
@@ -384,7 +391,8 @@ function TagBlock({
             </>
           ) : (
             <>
-              <b>Danke für eure Zusage.</b> Euer Angebot schicken wir euch in Kürze per Mail.
+              <b>Danke für eure Zusage.</b>
+              {tag.haltenBis ? ` Wir halten den Tag bis ${tag.haltenBis} für euch.` : ""} Euer Angebot schicken wir euch in Kürze per Mail.
             </>
           )}
         </Band>
@@ -405,7 +413,7 @@ function TagBlock({
     // Prototyp „Datum fest vergeben“: ehrlich, mit Hilfe aus dem Netzwerk, ohne Namen
     return (
       <>
-        <Label>Danke{vornamen ? `, ${vornamen}` : ""}</Label>
+        <Label>{vornamen ? `Hallo ${vornamen}` : "Hallo"}</Label>
         <h2 style={{ marginTop: 8 }}>
           Der {tag.datumKurz} ist leider <em>vergeben.</em>
         </h2>
@@ -443,7 +451,7 @@ function TagBlock({
         Wartet ihr noch auf den <em>{tag.datumKurz}?</em>
       </h2>
       <p style={{ marginTop: 12 }}>
-        Der {tag.datumLang} ist noch nicht frei geworden.{tag.platz ? ` Ihr seid weiter auf Platz ${tag.platz}.` : ""}
+        Der {tag.datumLang}, ist noch nicht frei geworden.{tag.platz ? ` Ihr seid weiter auf Platz ${tag.platz}.` : ""}
       </p>
       <p style={{ marginTop: 10 }}>Wollt ihr weiter auf der Warteliste bleiben? Ein Klick reicht.</p>
       <Abstand />

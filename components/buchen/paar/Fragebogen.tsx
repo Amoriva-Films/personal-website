@@ -17,7 +17,7 @@ async function senden(body: Record<string, unknown>, keepalive = false): Promise
   try {
     const res = await fetch(URL_FRAGEBOGEN, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), cache: "no-store", keepalive });
     const json = (await res.json().catch(() => ({}))) as Omit<Antwort, "status">;
-    return { ...json, status: res.status, ...(res.ok ? {} : { error: json.error ?? "Das hat gerade nicht geklappt. Probiert es gleich noch einmal." }) };
+    return { ...json, status: res.status, ...(res.ok ? {} : { error: json.error ?? "Das hat gerade nicht geklappt. Versucht es noch einmal." }) };
   } catch {
     return { status: 0, error: "Keine Verbindung. Eure Eingaben sind noch da, wir versuchen es gleich noch einmal." };
   }
@@ -226,7 +226,7 @@ export function Fragebogen({ schluessel, zurueck }: { schluessel: string; zuruec
               Danke <em>euch.</em>
             </h2>
             <p className="klein" style={{ marginTop: 8 }}>
-              Euer Fragebogen ist bei uns. Fällt euch noch etwas ein, ergänzt es einfach hier, bis zu eurem Tag.
+              Euer Fragebogen ist bei uns. Fällt euch noch etwas ein, ergänzt es hier, bis zu eurem Tag.
             </p>
             <p className="leise klein" style={{ marginTop: 6 }}>Euer Amoriva-Team</p>
           </div>
@@ -242,7 +242,7 @@ export function Fragebogen({ schluessel, zurueck }: { schluessel: string; zuruec
               Erzählt uns von <em>euch.</em>
             </h2>
             <p className="klein" style={{ marginTop: 8 }}>
-              Damit wir euren Tag so festhalten, wie ihr ihn erlebt. Ihr könnt jederzeit unterbrechen, alles wird gespeichert.
+              So können wir euren Tag so festhalten, wie ihr ihn erlebt. Ihr könnt jederzeit unterbrechen, alles wird gespeichert.
             </p>
           </>
         )}
@@ -253,7 +253,7 @@ export function Fragebogen({ schluessel, zurueck }: { schluessel: string; zuruec
           </Band>
         ) : eingereicht && !geradeAbgeschickt && seite.eingereichtAm ? (
           <Band grau style={{ marginTop: 18 }}>
-            Abgeschickt am {seite.eingereichtAm}. Änderungen speichern wir einfach mit.
+            Abgeschickt am {seite.eingereichtAm}. Änderungen speichern wir mit.
           </Band>
         ) : null}
 
@@ -268,7 +268,7 @@ export function Fragebogen({ schluessel, zurueck }: { schluessel: string; zuruec
                 Den anderen Stand
               </Knopf>
               <Knopf art="hell" onClick={() => behalten(konflikt)}>
-                Meine Eingaben hier
+                Unsere Eingaben hier
               </Knopf>
             </div>
           </Karte>
@@ -278,7 +278,7 @@ export function Fragebogen({ schluessel, zurueck }: { schluessel: string; zuruec
           <Karte>
             <Label>Euer Ablauf</Label>
             <p className="klein" style={{ marginTop: 6 }}>
-              Ungefähre Uhrzeiten reichen völlig. Was es bei euch nicht gibt, lasst ihr einfach leer.
+              Ungefähre Uhrzeiten reichen völlig. Was es bei euch nicht gibt, lasst ihr leer.
             </p>
             <Paar>
               {seite.aufbau.zeiten.map((z) => (

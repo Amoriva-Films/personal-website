@@ -17,10 +17,10 @@ export function Countdown({ ziel }: { ziel: string }) {
   const min = Math.floor(ms / 6e4) % 60;
   const sek = Math.floor(ms / 1e3) % 60;
   return (
-    <div className="countdown" aria-label={`Noch ${tage} Tage bis zu eurem Tag`}>
+    <div className="countdown" aria-label={`Noch ${tage} ${tage === 1 ? "Tag" : "Tage"} bis zu eurem Tag`}>
       <div>
         <b>{tage}</b>
-        <span>Tage</span>
+        <span>{tage === 1 ? "Tag" : "Tage"}</span>
       </div>
       <div>
         <b>{zwei(std)}</b>

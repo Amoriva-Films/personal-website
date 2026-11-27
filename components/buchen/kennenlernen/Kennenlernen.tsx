@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Abstand, Band, Fehler, Haken, Karte, Knopf, Kopf, Label, Lade } from "@/components/buchen/basis/bausteine";
 import { KONTAKT } from "@/components/buchen/basis/kontakt";
+import { KENNENLERNEN_DAUER_MIN, KENNENLERNEN_KALENDER_TITEL, KENNENLERNEN_VIDEO_SATZ, kennenlernenKalenderText } from "@/lib/films-typen";
 import type { FreierTag, KennenlernenAntwort, KennenlernenStand, TerminAnsicht } from "@/lib/films-typen";
 
 // Kennenlernen wählen, bestätigen, verschieben, absagen. Look wie der Prototyp (Schritt „Danke + Kennenlernen“ und „Termin steht“).
@@ -16,6 +17,9 @@ const TAG = new Intl.DateTimeFormat("de-DE", { timeZone: TZ, day: "numeric" });
 const MONAT = new Intl.DateTimeFormat("de-DE", { timeZone: TZ, month: "long" });
 const UHR = new Intl.DateTimeFormat("de-DE", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
 
+/** Text für die Kalenderdatei maskieren (wie mail/ics.ts). */
+const icsText = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+
 // Knöpfe bleiben auch bei 375 px in der Karte einzeilig
 const EINZEILIG = { whiteSpace: "nowrap", paddingInline: 20 } as const;
 
@@ -27,11 +31,11 @@ async function senden(body: Record<string, string>): Promise<KennenlernenAntwort
     const res = await fetch("/api/buchen/kennenlernen", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), cache: "no-store" });
     return (await res.json()) as KennenlernenAntwort;
   } catch {
-    return { ok: false, grund: "fehler", meldung: "Keine Verbindung. Versucht es bitte gleich noch einmal." };
+    return { ok: false, grund: "fehler", meldung: "Keine Verbindung. Versucht es noch einmal." };
   }
 }
 
-/** Kalenderdatei zum Speichern, im Browser gebaut (keine Mail, kein Server). */
+/** Kalenderdatei zum Speichern, im Browser gebaut (keine Mail, kein Server). Titel und Beschreibung wie im Mail-Anhang. */
 function kalenderDatei(t: TerminAnsicht) {
   const z = (iso: string) => new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   const ics = [
@@ -43,8 +47,8 @@ function kalenderDatei(t: TerminAnsicht) {
     `DTSTAMP:${z(new Date().toISOString())}`,
     `DTSTART:${z(t.start)}`,
     `DTEND:${z(t.ende)}`,
-    "SUMMARY:Kennenlernen mit Amoriva Films",
-    `DESCRIPTION:Video-Call\\, ${t.dauerMin} Minuten. Fragen? WhatsApp ${KONTAKT.telefonText}`,
+    `SUMMARY:${icsText(KENNENLERNEN_KALENDER_TITEL)}`,
+    `DESCRIPTION:${icsText(kennenlernenKalenderText(t.dauerMin))}`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\r\n");
@@ -156,7 +160,7 @@ export function KennenlernenWahl({ schluessel, mitKopf, ohneGruss }: { schluesse
               setVersuch((v) => v + 1);
             }}
           >
-            Nochmal
+            Noch einmal
           </Knopf>
           <Abstand hoehe={12} />
           <Knopf href={KONTAKT.whatsapp}>WhatsApp schreiben</Knopf>
@@ -201,16 +205,16 @@ export function KennenlernenWahl({ schluessel, mitKopf, ohneGruss }: { schluesse
             <p className="tk-monat">
               {MONAT.format(s)} · {UHR.format(s)} Uhr
             </p>
-            <p className="tk-art">Video-Call · {t.dauerMin} Minuten · euer Amoriva-Team</p>
+            <p className="tk-art">Video-Call · {t.dauerMin} Minuten · Euer Amoriva-Team</p>
           </div>
           {t.vorbei ? null : (
             <>
               <Knopf art="hell-voll" style={EINZEILIG} onClick={() => kalenderDatei(t)}>
                 In euren Kalender
               </Knopf>
-              {/* OFFEN: Link zum Video-Call. Ohne Mailversand kommt er per WhatsApp vom Team. */}
+              {/* OFFEN: Link zum Video-Call. Er kommt vorher per WhatsApp oder Mail vom Team. */}
               <p className="leise klein" style={{ marginTop: 12 }}>
-                Den Link zum Video-Call schicken wir euch vorher per WhatsApp.
+                {KENNENLERNEN_VIDEO_SATZ}
               </p>
             </>
           )}
@@ -311,7 +315,7 @@ export function KennenlernenWahl({ schluessel, mitKopf, ohneGruss }: { schluesse
           <Label>{verschieben ? "Verschieben" : "Wollt ihr uns kennenlernen?"}</Label>
           <h3 style={{ marginTop: 6 }}>{verschieben ? "Sucht euch einen neuen Termin aus." : "Sucht euch einen Termin aus."}</h3>
           <p className="leise klein" style={{ marginTop: 4 }}>
-            20 Minuten per Video. Ganz unverbindlich.
+            {t?.dauerMin ?? KENNENLERNEN_DAUER_MIN} Minuten per Video. Unverbindlich.
           </p>
           {stand.tage.length === 0 ? (
             <>
@@ -386,7 +390,7 @@ export function KennenlernenWahl({ schluessel, mitKopf, ohneGruss }: { schluesse
         </Karte>
         {verschieben ? null : (
           <p className="leise klein" style={{ marginTop: 14 }}>
-            Lieber später? Wir melden uns sowieso persönlich per WhatsApp bei euch.
+            Lieber später? Wir melden uns sowieso persönlich bei euch.
           </p>
         )}
       </div>

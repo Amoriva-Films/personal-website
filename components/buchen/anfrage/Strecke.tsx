@@ -52,7 +52,7 @@ async function senden<T>(url: string, body: unknown): Promise<T> {
     throw new Error("Keine Verbindung. Prüft kurz euer Internet und versucht es noch einmal.");
   }
   const daten = (await res.json().catch(() => null)) as (T & { error?: string }) | null;
-  if (!res.ok || !daten) throw new Error(daten?.error ?? "Gerade klemmt etwas bei uns. Bitte versucht es gleich noch einmal.");
+  if (!res.ok || !daten) throw new Error(daten?.error ?? "Gerade klemmt etwas bei uns. Versucht es noch einmal.");
   return daten;
 }
 
@@ -116,7 +116,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
     } catch (err) {
       if (nr !== lauf.current) return;
       setSeite("start");
-      setFehler(err instanceof Error ? err.message : "Bitte versucht es noch einmal.");
+      setFehler(err instanceof Error ? err.message : "Versucht es noch einmal.");
     }
   }
 
@@ -163,7 +163,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
       setErgebnis(r);
       zeige("danke");
     } catch (err) {
-      setFehler(err instanceof Error ? err.message : "Bitte versucht es noch einmal.");
+      setFehler(err instanceof Error ? err.message : "Versucht es noch einmal.");
     } finally {
       setSendet(false);
     }
@@ -190,7 +190,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               <h1>
                 Ist euer Tag noch <em>frei?</em>
               </h1>
-              <p className="landing-unter">Tippt euer Hochzeitsdatum ein. Ihr seht sofort, ob wir für euch Zeit haben.</p>
+              <p className="landing-unter">Wählt euer Hochzeitsdatum. Ihr seht sofort, wie es für euren Tag aussieht.</p>
               <label className="datum-feld">
                 <span className="label">Euer Hochzeitsdatum</span>
                 <input type="date" id="datum" value={datum} min={min || undefined} onChange={(e) => setDatum(e.target.value)} required />
@@ -238,7 +238,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
             Los geht&#8217;s
           </Knopf>
           <p className="leise klein" style={{ marginTop: 14 }}>
-            Dauert etwa eine Minute. Ganz unverbindlich.
+            Dauert etwa eine Minute. Unverbindlich.
           </p>
           <p style={{ marginTop: 18 }}>
             <button type="button" className="textlink" onClick={() => zeige("start")}>
@@ -307,7 +307,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
           <Feld label="Eure Vornamen" ungueltig={ungueltig.includes("namen")}>
             <input value={namen} onChange={(e) => setNamen(e.target.value)} autoComplete="off" placeholder="Zum Beispiel: Lena und Jonas" maxLength={120} required />
           </Feld>
-          <Feld label="E-Mail" ungueltig={ungueltig.includes("email")}>
+          <Feld label="E-Mail-Adresse" ungueltig={ungueltig.includes("email")}>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" inputMode="email" maxLength={200} required />
           </Feld>
           <Feld label="Handynummer für WhatsApp">
@@ -424,7 +424,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               value={nachricht}
               onChange={(e) => setNachricht(e.target.value)}
               maxLength={2000}
-              placeholder="Zum Beispiel: Uns ist die Rede von Jonas' Bruder wichtig und unser erster Tanz."
+              placeholder="Zum Beispiel: Uns ist die Rede von Jonas’ Bruder wichtig und unser erster Tanz."
             />
           </Feld>
           <Label style={{ marginTop: 26 }}>Wie habt ihr von uns erfahren? (optional)</Label>
@@ -523,13 +523,13 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
             <Label>Wollt ihr uns kennenlernen?</Label>
             <h3 style={{ marginTop: 6 }}>Sucht euch einen Termin aus.</h3>
             <p className="leise klein" style={{ marginTop: 4 }}>
-              {dauerMin} Minuten per Video. Ganz unverbindlich.
+              {dauerMin} Minuten per Video.
             </p>
             <Abstand hoehe={20} />
             <Knopf href={PFADE.kennenlernen(ergebnis.schluessel)}>{nurWarteliste ? "Trotzdem schon kennenlernen" : "Termin aussuchen"}</Knopf>
           </Karte>
           <p className="leise klein" style={{ marginTop: 14 }}>
-            Lieber später? Wir melden uns sowieso persönlich per WhatsApp bei euch.
+            Lieber später? Wir melden uns sowieso persönlich bei euch.
           </p>
           <Karte style={{ marginTop: 18 }}>
             <Label>Eure Seite</Label>

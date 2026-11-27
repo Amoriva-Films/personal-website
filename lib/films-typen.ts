@@ -129,6 +129,17 @@ export type KennenlernenAntwort =
 /** Wert aus Selfmade (oeffentlich-kennenlernen.ts, REGELN.dauerMin): so lange dauert das Kennenlernen in Minuten. */
 export const KENNENLERNEN_DAUER_MIN = 20;
 
+// ---- kennenlernen-text.ts (Kopie, gleicher Wortlaut wie Mail und Kalenderdatei in Selfmade) ----
+
+/** Titel des Termins in der Kalenderdatei (.ics). */
+export const KENNENLERNEN_KALENDER_TITEL = "Kennenlernen mit Amoriva Films";
+
+/** Satz zum Link des Video-Calls, in Mails und in der Kalenderdatei. */
+export const KENNENLERNEN_VIDEO_SATZ = "Den Link zum Video-Call schicken wir euch vorher per WhatsApp oder Mail.";
+
+/** Beschreibung des Termins in der Kalenderdatei (.ics). Reiner Text: Kommas und Semikolons maskiert die .ics-Datei selbst. */
+export const kennenlernenKalenderText = (minuten: number) => `Video-Call, ${minuten} Minuten. ${KENNENLERNEN_VIDEO_SATZ}`;
+
 // ---- fragebogen.ts ----
 
 export type ZeitId = "getting_ready" | "trauung" | "empfang" | "gruppenfotos" | "essen" | "reden" | "tanz" | "ende";
