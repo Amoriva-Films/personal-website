@@ -10,15 +10,19 @@
     "prebuild": "node scripts/bilder-pruefen.mjs && node scripts/mails-pruefen.mjs"
   },
   "dependencies": {
+    "framer-motion": "^11.2.10",
+    "lenis": "^1.1.14",
     "next": "^14.2.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "framer-motion": "^11.2.10",
-    "lenis": "^1.1.14"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.4",
+    "@types/node": "^20.19.43",
+    "@types/react": "^18.3.32",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.19"
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.9.3"
   }
 }

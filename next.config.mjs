@@ -91,6 +91,20 @@ const nextConfig = {
         destination: '/ratgeber',
         permanent: true,
       },
+      {
+        // Die Buchungsstrecke lief in Selfmade und in der Vorschau unter
+        // /buchen. Auf dieser Seite liegt sie unter /anfrage (Nevio
+        // 27.11.2026). Alte Links landen dort, der Schluessel im # bleibt
+        // dabei erhalten (den behaelt der Browser bei der Weiterleitung).
+        source: '/buchen',
+        destination: '/anfrage',
+        permanent: true,
+      },
+      {
+        source: '/buchen/:pfad*',
+        destination: '/anfrage/:pfad*',
+        permanent: true,
+      },
     ];
   },
 };

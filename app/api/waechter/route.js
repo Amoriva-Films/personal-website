@@ -16,6 +16,9 @@
  *      Form, und antwortet die Gegenstelle ueberhaupt?
  *   3. Liefern alle Seiten der Website noch 200?
  *   4. Ist es auffaellig still geworden? (Siehe unten.)
+ *   5. Steht der Anschluss der Buchungsstrecke an Selfmade (seit
+ *      27.11.2026): FILMS_API_URL und FILMS_EINGANG_TOKEN gesetzt, und
+ *      antwortet Selfmade mit diesem Token?
  *
  * Erreichbar nur mit CRON_SECRET im Kopf. Vercel schickt das bei
  * eigenen Cron-Aufrufen automatisch mit, sobald die Variable gesetzt
@@ -24,6 +27,7 @@
  * Fremde.
  * ------------------------------------------------------------------ */
 import { mailWaechter } from '../contact/mail.js';
+import { filmsBasis, filmsToken } from '@/lib/films-weiterleitung';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -149,6 +153,40 @@ async function pruefeAmoriva(befunde) {
   }
 }
 
+/* Buchungsstrecke: /anfrage leitet jeden Aufruf an Selfmade weiter
+   (app/api/buchen/[...pfad]/route.js). Faellt der Anschluss aus, koennen
+   Paare kein Datum pruefen. Geprueft wird mit GET auf den Eingang von
+   Selfmade: der legt nichts an und antwortet mit { ok: true }, wenn
+   Adresse und Token stimmen. */
+async function pruefeBuchung(befunde) {
+  const { basis, grund: basisGrund } = filmsBasis();
+  const { token, grund: tokenGrund } = filmsToken();
+  if (!basis || !token) {
+    befunde.push({
+      was: 'Die Buchungsstrecke ist nicht angeschlossen',
+      text: `${basisGrund || tokenGrund} Paare können unter /anfrage gerade kein Datum prüfen. Anfragen kommen nur noch als Ersatzmail an.`,
+    });
+    return;
+  }
+  try {
+    const res = await hol(`${basis}/api/buchen/eingang`, { method: 'GET', headers: { Authorization: `Bearer ${token}` } });
+    let daten = null;
+    try { daten = await res.json(); } catch { /* keine JSON-Antwort */ }
+    if (res.ok && daten?.ok === true) return;
+    const grund = res.status === 401
+      ? 'Selfmade lehnt den Token ab. FILMS_EINGANG_TOKEN muss bei Vercel und in Selfmade gleich sein.'
+      : res.status === 404
+        ? 'Selfmade kennt den Eingang nicht. Meist ist dort FILMS_EINGANG_TOKEN nicht gesetzt.'
+        : `Selfmade antwortet mit Status ${res.status}.`;
+    befunde.push({ was: 'Die Buchungsstrecke erreicht Selfmade nicht richtig', text: grund });
+  } catch (e) {
+    befunde.push({
+      was: 'Selfmade war nicht erreichbar',
+      text: `Die Buchungsstrecke unter /anfrage hat keinen Anschluss: ${String(e?.name === 'AbortError' ? 'keine Antwort in 8 Sekunden' : e?.message || e).slice(0, 160)}.`,
+    });
+  }
+}
+
 async function pruefeSeiten(befunde) {
   const ergebnisse = await Promise.all(
     SEITEN.map(async (pfad) => {
@@ -227,7 +265,7 @@ export async function GET(request) {
 
   const befunde = [];
   const mailGeht = await pruefeResend(befunde);
-  await Promise.all([pruefeAmoriva(befunde), pruefeSeiten(befunde)]);
+  await Promise.all([pruefeAmoriva(befunde), pruefeSeiten(befunde), pruefeBuchung(befunde)]);
   await pruefeStille(befunde);
 
   if (befunde.length === 0) {
