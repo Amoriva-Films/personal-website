@@ -517,6 +517,17 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               </ol>
             </Karte>
           ) : null}
+          {/* Übergang ohne Selfmade: kein Schlüssel, also keine Paar-Seite und kein Kennenlernen-Link */}
+          {!ergebnis.schluessel ? (
+            <p className="leise klein" style={{ marginTop: 18 }}>
+              Ihr bekommt gleich eine Bestätigung per Mail. Eilt es, schreibt uns gern per{" "}
+              <a className="textlink" href={KONTAKT.whatsapp} target="_blank" rel="noopener">
+                WhatsApp
+              </a>
+              .
+            </p>
+          ) : (
+          <>
           <Karte style={{ marginTop: 18 }}>
             <Label>Wollt ihr uns kennenlernen?</Label>
             <h3 style={{ marginTop: 6 }}>Sucht euch einen Termin aus.</h3>
@@ -540,6 +551,8 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               </a>
             </p>
           </Karte>
+          </>
+          )}
         </div>
       </section>
     );

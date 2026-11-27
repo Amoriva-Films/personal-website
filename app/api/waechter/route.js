@@ -27,6 +27,7 @@
  * Fremde.
  * ------------------------------------------------------------------ */
 import { mailWaechter } from '../contact/mail.js';
+import { uebergangAktiv } from '@/lib/films-uebergang';
 import { filmsBasis, filmsToken } from '@/lib/films-weiterleitung';
 
 export const dynamic = 'force-dynamic';
@@ -159,6 +160,8 @@ async function pruefeAmoriva(befunde) {
    Selfmade: der legt nichts an und antwortet mit { ok: true }, wenn
    Adresse und Token stimmen. */
 async function pruefeBuchung(befunde) {
+  // Übergang bis Selfmade Films live ist: ohne FILMS_API_URL laufen Datum und Anfrage über lib/films-uebergang.js, das ist gewollt
+  if (uebergangAktiv()) return;
   const { basis, grund: basisGrund } = filmsBasis();
   const { token, grund: tokenGrund } = filmsToken();
   if (!basis || !token) {

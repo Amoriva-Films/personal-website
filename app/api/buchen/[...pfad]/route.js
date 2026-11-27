@@ -22,7 +22,8 @@
      Inhalt. */
 import { isIP } from 'node:net';
 import { filmsBasis, filmsToken } from '@/lib/films-weiterleitung';
-import { kurz, mailAnUns } from '../../contact/mail.js';
+import { kurz, mailAnPaar, mailAnUns } from '../../contact/mail.js';
+import { datumPruefen, istBelegt, rueckmeldung, tagLang, uebergangAktiv } from '@/lib/films-uebergang';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -201,6 +202,75 @@ async function ausfallBeiAnfrage(inhalt, grund, ip) {
   return json({ error: raus ? TEXT_ANGEKOMMEN : TEXT_HAKT }, 503);
 }
 
+// ── Übergang ohne Selfmade (FILMS_API_URL leer) ─────────────────────
+
+function lesenJson(inhalt) {
+  try {
+    const a = JSON.parse(new TextDecoder().decode(inhalt));
+    return a && typeof a === 'object' ? a : null;
+  } catch {
+    return null;
+  }
+}
+
+async function uebergang(pfad, inhalt, ip) {
+  const a = lesenJson(inhalt);
+  if (pfad === 'datum') {
+    const r = datumPruefen(a?.datum);
+    if (r.fehler) {
+      protokoll('datum', 400, 'Übergang');
+      return json({ error: r.fehler }, 400);
+    }
+    protokoll('datum', 200, 'Übergang');
+    return json({ datum: r.datum, auskunft: istBelegt(r.datum) ? 'bitte_anfragen' : 'frei' }, 200);
+  }
+  if (pfad !== 'anfrage') {
+    protokoll(pfad, 503, 'Übergang');
+    return json({ error: TEXT_HAKT }, 503);
+  }
+  if (!a) return json({ error: 'Das hat nicht geklappt. Versucht es noch einmal.' }, 400);
+  const namen = feld(a.namen, 120);
+  const email = feld(a.email, 200);
+  const daten = [...new Set((Array.isArray(a.wunschdaten) ? a.wunschdaten : []).map((d) => datumPruefen(d).datum).filter(Boolean))].slice(0, 3);
+  // Verstecktes Feld gegen Bots: so tun, als waere alles gut, nichts verschicken
+  if (feld(a.website)) {
+    protokoll('anfrage', 201, 'Übergang, Fangfeld');
+    return json(rueckmeldung(namen, daten), 201);
+  }
+  if (!namen) return json({ error: 'Bitte tragt eure Vornamen ein.' }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return json({ error: 'Die E-Mail-Adresse sieht noch nicht richtig aus.' }, 400);
+  if (!daten.length) return json({ error: 'Bitte wählt euer Hochzeitsdatum.' }, 400);
+  if (zuVieleMails(ip)) return json({ error: 'Ihr habt gerade schon mehrere Anfragen geschickt. Versucht es in ein paar Minuten noch einmal.' }, 429);
+
+  const paket = PAKETE[a.paket] || feld(a.paket, 40);
+  const ort = feld(a.ort, 200);
+  const telefon = feld(a.telefon, 40);
+  const gaeste = feld(a.gaeste, 40);
+  const nachricht = feld(a.nachricht);
+  const kalender = daten.map((d) => `${tagLang(d)}: ${istBelegt(d) ? 'laut Liste schon belegt, persönlich nachsehen' : 'laut Liste frei'}`).join('\n');
+  const vision = [
+    `Wunsch: ${paket || 'keine Angabe'}`,
+    `Wunschdaten:\n${kalender}`,
+    `Von uns erfahren über: ${feld(a.herkunft, 60) || 'keine Angabe'}`,
+    '',
+    `Nachricht:\n${nachricht || 'keine Angabe'}`,
+    '',
+    'Über die neue Buchung auf amoriva-films.de/anfrage. Selfmade Films ist noch nicht angeschlossen: bitte von Hand anlegen und dem Paar innerhalb von 24 Stunden antworten (so steht es auf der Danke-Seite).',
+  ].join('\n');
+
+  const anUns = mailAnUns({ name: namen, email, hochzeitsdatum: daten[0], location: ort, telefon, gaeste, vision });
+  const [uns, paar] = await Promise.all([
+    resendSenden({ from: FROM, to: [AN_UNS], reply_to: email, ...anUns, subject: `Neue Anfrage: ${kurz(namen)} · ${daten[0].split('-').reverse().join('.')}` }),
+    resendSenden({ from: FROM, to: [email], reply_to: 'booking@amoriva-films.de', ...mailAnPaar({ name: namen, hochzeitsdatum: daten[0], location: ort, nachricht }) }),
+  ]);
+  if (!uns) {
+    protokoll('anfrage', 503, `Übergang, Mail an uns nicht raus, Bestätigung ${paar ? 'raus' : 'nicht raus'}`);
+    return json({ error: TEXT_HAKT }, 503);
+  }
+  protokoll('anfrage', 201, `Übergang, Bestätigung ${paar ? 'raus' : 'nicht raus'}`);
+  return json(rueckmeldung(namen, daten), 201);
+}
+
 // ── Weiterleitung ────────────────────────────────────────────────────
 
 export async function POST(request, { params }) {
@@ -222,6 +292,7 @@ export async function POST(request, { params }) {
   }
 
   const ip = clientIp(request);
+  if (uebergangAktiv()) return uebergang(pfad, inhalt, ip);
   const { basis, grund: basisGrund } = filmsBasis();
   const { token, grund: tokenGrund } = filmsToken();
   if (!basis || !token) {
