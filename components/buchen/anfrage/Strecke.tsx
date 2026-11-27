@@ -7,14 +7,30 @@ import { Abstand, Band, Fehler, Feld, Haken, Karte, Knopf, Kopf, Label, Lade, Sc
 import titel from "../basis/bilder/titel.webp";
 import { KONTAKT } from "../basis/kontakt";
 import { PFADE } from "../basis/pfade";
+import { pruefeKontakt, pruefeWunsch, type AnfrageEingabe, type FeldFehler } from "./pruefung";
 import { GAESTE, HERKUNFT, MAX_DATEN, WUENSCHE, WUNSCH_REIHENFOLGE } from "./werte";
 
-// Stufe 1 und 2 der Buchungsstrecke: Datum prüfen, Ergebnis, Anfrage in drei Schritten, Danke.
-// Ablauf und Texte 1:1 aus dem Prototyp. Öffentlich gibt es nur „frei“ oder „bitte anfragen“, das ehrliche
-// Ergebnis mit Wartelistenplatz kommt erst nach dem Absenden. Ist der Tag frei, kommt erst die Zwischenseite
-// „Gute Nachricht“ (Prototyp, Ergebnis frei), dann Schritt 1.
+// Stufe 1 und 2 der Buchungsstrecke: Datum prüfen, Anfrage in zwei Schritten, Danke.
+// Öffentlich gibt es nur „frei“ oder „bitte anfragen“, das ehrliche Ergebnis mit Wartelistenplatz kommt erst nach
+// dem Absenden. Nach dem Prüfen geht es ohne Zwischenseite direkt ins Formular (Nevio 27.11.2026): das Ergebnis
+// steht als kurze Zeile über Schritt 1. Schritt 1 fragt den Wunsch (Paket, Datum, Ort, Gäste), Schritt 2 wer ihr
+// seid. Jede Eingabe wird vor dem Weiter im Browser geprüft (pruefung.ts, Regeln wie in Selfmade), Fehler stehen
+// direkt am Feld. Der Server prüft zusätzlich.
 
-type Seite = "start" | "pruefung" | "frei" | "ergebnis" | "schritt1" | "schritt2" | "schritt3" | "danke";
+type Seite = "start" | "pruefung" | "schritt1" | "schritt2" | "danke";
+
+/** Reihenfolge der Felder je Schritt: der Weiter-Knopf springt zum ersten Fehler. */
+const FELDER_WUNSCH = ["paket", "datum", "wunschdatum-1", "wunschdatum-2", "ort", "gaeste"];
+const FELDER_KONTAKT = ["namen", "email", "telefon", "nachricht"];
+
+function zumFeld(id: string) {
+  const el = document.getElementById(id === "paket" ? "paket-wahl" : id);
+  if (!el) return;
+  const ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ block: "center", behavior: ruhig ? "auto" : "smooth" });
+  const ziel = id === "paket" ? el.querySelector<HTMLElement>("[aria-checked=true]") ?? el.querySelector<HTMLElement>("button") : el;
+  ziel?.focus({ preventScroll: true });
+}
 
 /**
  * Herkunft als eigene Zeile in der Notiz. OFFEN (oeffentlich.ts): anfrageFelder kennt kein Feld „herkunft“ und
@@ -38,10 +54,6 @@ function heuteBerlin() {
 
 function tagLang(iso: string) {
   return new Date(`${iso}T12:00:00`).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-}
-
-function tagKurz(iso: string) {
-  return `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}`;
 }
 
 async function senden<T>(url: string, body: unknown): Promise<T> {
@@ -78,7 +90,10 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
   const [website, setWebsite] = useState("");
   const [sendet, setSendet] = useState(false);
   const [ergebnis, setErgebnis] = useState<AnfrageRueckmeldung | null>(null);
-  const [ungueltig, setUngueltig] = useState<string[]>([]);
+  // Felder, deren Fehler sichtbar ist: alle Fehler eines Schritts, sobald „Weiter“ gedrückt ist. Nicht schon beim
+  // Verlassen eines Felds: der Fehlertext schöbe dann den Knopf weg, während er gedrückt wird, und der Klick ginge
+  // ins Leere. Die Prüfung läuft bei jeder Eingabe neu, ein korrigiertes Feld ist also sofort wieder ruhig.
+  const [gezeigt, setGezeigt] = useState<Set<string>>(() => new Set());
   const lauf = useRef(0);
 
   useEffect(() => {
@@ -112,7 +127,7 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
       const [a] = await Promise.all([senden<DatumAuskunft>("/api/buchen/datum", { datum: d }), warte(LADE_MS)]);
       if (nr !== lauf.current) return;
       setAuskunft(a);
-      zeige(a.auskunft === "frei" ? "frei" : "ergebnis");
+      zeige("schritt1");
     } catch (err) {
       if (nr !== lauf.current) return;
       setSeite("start");
@@ -121,30 +136,41 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
   }
 
   const alleDaten = [datum, ...weitere].filter(Boolean);
+  const eingabe: AnfrageEingabe = { namen, email, telefon, datum, weitere, paket, ort, gaeste, nachricht };
+  const fehlerWunsch = pruefeWunsch(eingabe, min);
+  const fehlerKontakt = pruefeKontakt(eingabe);
+  const alleFehler: FeldFehler = { ...fehlerWunsch, ...fehlerKontakt };
+  const fehlerAm = (id: string) => (gezeigt.has(id) ? (alleFehler[id] ?? null) : null);
 
-  function weiterNach1() {
-    const f: string[] = [];
-    if (namen.trim().length < 2) f.push("namen");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) f.push("email");
-    setUngueltig(f);
-    if (f.length) {
-      setFehler(f.includes("namen") ? "Bitte tragt eure Vornamen ein." : "Bitte prüft eure E-Mail-Adresse.");
-      return;
-    }
-    zeige("schritt2");
+  function zeigeFehlerFuer(ids: string[]) {
+    setGezeigt((alt) => new Set([...alt, ...ids]));
   }
 
-  function weiterNach2() {
-    if (new Set(alleDaten).size !== alleDaten.length) {
-      setFehler("Ein Datum steht doppelt drin.");
-      return;
-    }
-    zeige("schritt3");
+  /** Prüft einen Schritt. Bei Fehlern: alle markieren, zum ersten springen, false. */
+  function schrittOk(f: FeldFehler, reihenfolge: string[]) {
+    const ids = reihenfolge.filter((id) => f[id]);
+    if (!ids.length) return true;
+    zeigeFehlerFuer(ids);
+    setFehler(null);
+    // Erst nach dem Zeichnen springen, damit der Fehlertext schon steht
+    requestAnimationFrame(() => zumFeld(ids[0]!));
+    return false;
+  }
+
+  function weiterNach1() {
+    if (!schrittOk(fehlerWunsch, FELDER_WUNSCH)) return;
+    zeige("schritt2");
   }
 
   async function absenden(e?: FormEvent) {
     e?.preventDefault();
     if (sendet) return;
+    if (Object.keys(fehlerWunsch).length) {
+      zeige("schritt1");
+      requestAnimationFrame(() => void schrittOk(fehlerWunsch, FELDER_WUNSCH));
+      return;
+    }
+    if (!schrittOk(fehlerKontakt, FELDER_KONTAKT)) return;
     setSendet(true);
     setFehler(null);
     try {
@@ -222,67 +248,13 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
     );
   }
 
-  if (seite === "frei" && auskunft) {
-    return (
-      <section className="seite mitte">
-        <div className="bahn mitte-in">
-          <Haken />
-          <Label style={{ marginTop: 26 }}>Gute Nachricht</Label>
-          <h2 style={{ marginTop: 8 }}>
-            Euer Tag ist noch <em>frei.</em>
-          </h2>
-          <p className="lade-datum">{tagLang(auskunft.datum)}</p>
-          <p style={{ marginTop: 18 }}>Erzählt uns in drei kurzen Schritten von euch. Danach sucht ihr euch direkt einen Termin zum Kennenlernen aus.</p>
-          <Abstand />
-          <Knopf art="hell-voll" onClick={() => zeige("schritt1")}>
-            Los geht&#8217;s
-          </Knopf>
-          <p className="leise klein" style={{ marginTop: 14 }}>
-            Dauert etwa eine Minute. Unverbindlich.
-          </p>
-          <p style={{ marginTop: 18 }}>
-            <button type="button" className="textlink" onClick={() => zeige("start")}>
-              Anderes Datum prüfen
-            </button>
-          </p>
-        </div>
-      </section>
-    );
-  }
-
-  if (seite === "ergebnis" && auskunft) {
-    // Öffentlich nur „bitte anfragen“: ob reserviert, gebucht oder gesperrt, sagen wir erst nach dem Absenden
-    return (
-      <section className="seite mitte">
-        <div className="bahn mitte-in">
-          <Haken art="frage" />
-          <Label style={{ marginTop: 26 }}>Gut zu wissen</Label>
-          <h2 style={{ marginTop: 8 }}>
-            Fragt uns für euren Tag <em>kurz an.</em>
-          </h2>
-          <p className="lade-datum">{tagLang(auskunft.datum)}</p>
-          <p style={{ marginTop: 18 }}>
-            Für diesen Tag schauen wir lieber persönlich nach. Erzählt uns in drei kurzen Schritten von euch. Gleich danach seht ihr, wie es für euren Tag aussieht.
-          </p>
-          <Abstand />
-          <Knopf art="hell-voll" onClick={() => zeige("schritt1")}>
-            Anfrage starten
-          </Knopf>
-          <p style={{ marginTop: 18 }}>
-            <button type="button" className="textlink" onClick={() => zeige("start")}>
-              Anderes Datum prüfen
-            </button>
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   if (seite === "schritt1") {
-    const frei = auskunft?.auskunft === "frei";
+    // Das Ergebnis gilt nur für das geprüfte Datum. Ändert das Paar es hier, steht ein ruhiger Hinweis statt „frei“.
+    const geprueft = auskunft !== null && auskunft.datum === datum;
+    const frei = geprueft && auskunft?.auskunft === "frei";
     return (
       <section className="seite">
-        <Kopf zurueck={{ onClick: () => zeige(frei ? "frei" : "ergebnis") }} />
+        <Kopf zurueck={{ onClick: () => zeige("start") }} />
         <form
           className="bahn luft"
           style={{ paddingTop: 8 }}
@@ -292,61 +264,40 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
             weiterNach1();
           }}
         >
-          <div className={`frei-banner${frei ? "" : " warte"}`}>
-            {frei ? <Haken klein /> : null}
-            <div>
-              <p className="fb-titel">{frei ? "Euer Tag ist noch frei." : "Wir schauen für euren Tag nach."}</p>
-              <p className="fb-datum">{datum ? tagLang(datum) : ""}</p>
+          {frei ? (
+            <div className="frei-banner" role="status">
+              <Haken klein />
+              <div>
+                <p className="fb-titel">Euer Tag ist noch frei.</p>
+                <p className="fb-datum">{tagLang(datum)}</p>
+              </div>
             </div>
-          </div>
-          <SchrittLeiste schritt={1} />
-          <Label style={{ marginTop: 14 }}>Schritt 1 von 3</Label>
-          <h2 style={{ marginTop: 6 }}>
-            Wer seid <em>ihr?</em>
-          </h2>
-          <Feld label="Eure Vornamen" ungueltig={ungueltig.includes("namen")}>
-            <input value={namen} onChange={(e) => setNamen(e.target.value)} autoComplete="off" placeholder="Zum Beispiel: Lena und Jonas" maxLength={120} required />
-          </Feld>
-          <Feld label="E-Mail-Adresse" ungueltig={ungueltig.includes("email")}>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" inputMode="email" maxLength={200} required />
-          </Feld>
-          <Feld label="Handynummer für WhatsApp">
-            <input type="tel" value={telefon} onChange={(e) => setTelefon(e.target.value)} autoComplete="tel" inputMode="tel" maxLength={40} />
-          </Feld>
-          <p className="leise klein" style={{ marginTop: 10 }}>
-            Wir schreiben euch meist per WhatsApp, das geht für alle am schnellsten.
-          </p>
-          {/* Verstecktes Feld gegen Bots, für Menschen unsichtbar */}
-          <label className="versteckt" aria-hidden="true">
-            Website
-            <input tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
-          </label>
-          <Abstand />
-          <Knopf type="submit">Weiter</Knopf>
-          <Fehler text={fehler} />
-        </form>
-      </section>
-    );
-  }
-
-  if (seite === "schritt2") {
-    return (
-      <section className="seite">
-        <Kopf zurueck={{ onClick: () => zeige("schritt1") }} />
-        <form
-          className="bahn luft"
-          style={{ paddingTop: 8 }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            weiterNach2();
-          }}
-        >
-          <SchrittLeiste schritt={2} />
-          <Label style={{ marginTop: 14 }}>Schritt 2 von 3</Label>
+          ) : geprueft ? (
+            <div className="frei-banner warte lang" role="status">
+              <Haken art="frage" klein />
+              <div>
+                <p className="fb-titel">Fragt uns für euren Tag kurz an.</p>
+                <p className="fb-datum">{tagLang(datum)}</p>
+                <p className="fb-text">Für diesen Tag schauen wir lieber persönlich nach. Gleich nach dem Absenden seht ihr, wie es für euren Tag aussieht.</p>
+              </div>
+            </div>
+          ) : datum ? (
+            <div className="frei-banner warte" role="status">
+              <div style={{ paddingLeft: 12 }}>
+                <p className="fb-titel">Wir schauen für euren Tag nach.</p>
+                <p className="fb-datum">{tagLang(datum)}</p>
+              </div>
+            </div>
+          ) : null}
+          <SchrittLeiste schritt={1} von={2} />
+          <Label style={{ marginTop: 14 }}>Schritt 1 von 2</Label>
           <h2 style={{ marginTop: 6 }}>
             Was wünscht ihr <em>euch?</em>
           </h2>
-          <div className="wunsch" role="radiogroup" aria-label="Was wünscht ihr euch">
+          <p className="leise klein" style={{ marginTop: 8 }}>
+            Zwei kurze Schritte, dauert etwa eine Minute. Unverbindlich.
+          </p>
+          <div className="wunsch" id="paket-wahl" role="radiogroup" aria-label="Was wünscht ihr euch" aria-describedby={fehlerAm("paket") ? "paket-fehler" : undefined}>
             {WUNSCH_REIHENFOLGE.map((id) => (
               <button
                 key={id}
@@ -361,36 +312,58 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               </button>
             ))}
           </div>
-          <Feld label="Euer Hochzeitsdatum">
-            <input type="date" value={datum} min={min || undefined} onChange={(e) => setDatum(e.target.value)} required />
+          {fehlerAm("paket") ? (
+            <p className="feld-hinweis wahl-hinweis" id="paket-fehler">
+              {fehlerAm("paket")}
+            </p>
+          ) : null}
+          <Feld label="Euer Hochzeitsdatum" fehler={fehlerAm("datum")}>
+            <input
+              type="date"
+              id="datum"
+              value={datum}
+              min={min || undefined}
+              onChange={(e) => setDatum(e.target.value)}
+              required
+            />
           </Feld>
           {weitere.map((w, i) => (
-            <Feld key={i} label={`Weiteres Wunschdatum ${i + 1} (optional)`}>
-              <span className="wunschdaten-zeile" style={{ display: "flex", margin: 0, letterSpacing: 0, textTransform: "none" }}>
+            <div key={i}>
+              <Feld label={`Weiteres Wunschdatum ${i + 1} (optional)`} fehler={fehlerAm(`wunschdatum-${i + 1}`)}>
                 <input
                   type="date"
+                  id={`wunschdatum-${i + 1}`}
                   value={w}
                   min={min || undefined}
                   onChange={(e) => setWeitere((alt) => alt.map((x, j) => (j === i ? e.target.value : x)))}
                 />
-                <button type="button" className="textlink" onClick={() => setWeitere((alt) => alt.filter((_, j) => j !== i))}>
-                  Entfernen
-                </button>
-              </span>
-            </Feld>
+              </Feld>
+              <button
+                type="button"
+                className="textlink"
+                style={{ marginLeft: 22 }}
+                onClick={() => {
+                  setWeitere((alt) => alt.filter((_, j) => j !== i));
+                  // Die Felder rücken nach, ihre Fehler zeigen wir erst beim nächsten Weiter wieder
+                  setGezeigt((alt) => new Set([...alt].filter((id) => !id.startsWith("wunschdatum-"))));
+                }}
+              >
+                Datum entfernen
+              </button>
+            </div>
           ))}
           {weitere.length < MAX_DATEN - 1 ? (
-            <p style={{ marginTop: 6 }}>
+            <p style={{ marginTop: 6, paddingLeft: 22 }}>
               <button type="button" className="textlink" onClick={() => setWeitere((alt) => [...alt, ""])}>
                 Location noch nicht fest? Weiteres Datum dazu
               </button>
             </p>
           ) : null}
-          <Feld label="Wo feiert ihr?">
-            <input value={ort} onChange={(e) => setOrt(e.target.value)} maxLength={200} placeholder="Location oder Ort" />
+          <Feld label="Wo feiert ihr?" fehler={fehlerAm("ort")}>
+            <input id="ort" value={ort} onChange={(e) => setOrt(e.target.value)} maxLength={200} placeholder="Location oder Ort" />
           </Feld>
-          <Feld label="Wie viele Gäste ungefähr?">
-            <select value={gaeste} onChange={(e) => setGaeste(e.target.value)}>
+          <Feld label="Wie viele Gäste ungefähr?" fehler={fehlerAm("gaeste")}>
+            <select id="gaeste" value={gaeste} onChange={(e) => setGaeste(e.target.value)}>
               <option value="">Noch offen</option>
               {GAESTE.map((g) => (
                 <option key={g} value={g}>
@@ -400,34 +373,77 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
             </select>
           </Feld>
           <Abstand />
-          <Knopf type="submit" disabled={!datum}>
-            Weiter
-          </Knopf>
+          <Knopf type="submit">Weiter</Knopf>
           <Fehler text={fehler} />
         </form>
       </section>
     );
   }
 
-  if (seite === "schritt3") {
+  if (seite === "schritt2") {
     return (
       <section className="seite">
-        <Kopf zurueck={{ onClick: () => zeige("schritt2") }} />
-        <form className="bahn luft" style={{ paddingTop: 8 }} onSubmit={absenden}>
-          <SchrittLeiste schritt={3} />
-          <Label style={{ marginTop: 14 }}>Schritt 3 von 3</Label>
+        <Kopf zurueck={{ onClick: () => zeige("schritt1") }} />
+        <form className="bahn luft" style={{ paddingTop: 8 }} noValidate onSubmit={absenden}>
+          <SchrittLeiste schritt={2} von={2} />
+          <Label style={{ marginTop: 14 }}>Schritt 2 von 2</Label>
           <h2 style={{ marginTop: 6 }}>
-            Was ist euch <em>wichtig?</em>
+            Wer seid <em>ihr?</em>
           </h2>
-          <Feld label="Erzählt uns gern ein, zwei Sätze (optional)">
+          <Feld label="Eure Vornamen" fehler={fehlerAm("namen")}>
+            <input
+              id="namen"
+              value={namen}
+              onChange={(e) => setNamen(e.target.value)}
+              autoComplete="off"
+              placeholder="Zum Beispiel: Lena und Jonas"
+              maxLength={120}
+              required
+            />
+          </Feld>
+          <Feld label="E-Mail-Adresse" fehler={fehlerAm("email")}>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              inputMode="email"
+              autoCapitalize="off"
+              spellCheck={false}
+              maxLength={200}
+              required
+            />
+          </Feld>
+          <Feld label="Handynummer für WhatsApp" fehler={fehlerAm("telefon")}>
+            <input
+              id="telefon"
+              type="tel"
+              value={telefon}
+              onChange={(e) => setTelefon(e.target.value)}
+              autoComplete="tel"
+              inputMode="tel"
+              maxLength={40}
+            />
+          </Feld>
+          <p className="leise klein" style={{ marginTop: 10, paddingLeft: 22 }}>
+            Wir schreiben euch meist per WhatsApp, das geht für alle am schnellsten.
+          </p>
+          {/* Verstecktes Feld gegen Bots, für Menschen unsichtbar */}
+          <label className="versteckt" aria-hidden="true">
+            Website
+            <input tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+          </label>
+          <Feld label="Was ist euch wichtig? (optional)" fehler={fehlerAm("nachricht")}>
             <textarea
+              id="nachricht"
               value={nachricht}
               onChange={(e) => setNachricht(e.target.value)}
               maxLength={2000}
               placeholder="Zum Beispiel: Uns ist die Rede von Jonas’ Bruder wichtig und unser erster Tanz."
             />
           </Feld>
-          <Label style={{ marginTop: 26 }}>Wie habt ihr von uns erfahren? (optional)</Label>
+          <Label style={{ marginTop: 26, paddingLeft: 22 }}>Wie habt ihr von uns erfahren? (optional)</Label>
           <div className="wahl" role="group" aria-label="Wie habt ihr von uns erfahren">
             {HERKUNFT.map((h) => (
               <button key={h} type="button" className={`chip${herkunft === h ? " an" : ""}`} aria-pressed={herkunft === h} onClick={() => setHerkunft((alt) => (alt === h ? "" : h))}>
@@ -435,29 +451,6 @@ export function Strecke({ dauerMin }: { dauerMin: number }) {
               </button>
             ))}
           </div>
-          <Karte style={{ marginTop: 26 }}>
-            <Label>Eure Anfrage</Label>
-            <div className="zeilen" style={{ marginTop: 8 }}>
-              <div>
-                <span>{alleDaten.length > 1 ? "Daten" : "Datum"}</span>
-                <span>{alleDaten.map(tagKurz).join(", ")}</span>
-              </div>
-              <div>
-                <span>Wunsch</span>
-                <span>{WUENSCHE[paket].kurz}</span>
-              </div>
-              {auskunft?.auskunft === "frei" && alleDaten.length === 1 && alleDaten[0] === auskunft.datum ? (
-                <div>
-                  <span>Status</span>
-                  <span>Datum frei</span>
-                </div>
-              ) : null}
-              <div>
-                <span>Kontakt</span>
-                <span>{telefon.trim() ? "WhatsApp und Mail" : "Mail"}</span>
-              </div>
-            </div>
-          </Karte>
           <Abstand />
           <Knopf type="submit" beschaeftigt={sendet} disabled={sendet} id="absenden">
             {sendet ? "Wird gesendet" : "Anfrage senden"}

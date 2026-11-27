@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
+import { cloneElement, isValidElement, type ButtonHTMLAttributes, type CSSProperties, type ReactElement, type ReactNode } from "react";
 
 // Grundbausteine der Buchungsstrecke im Look von amoriva-films.de (Klassen aus buchen.css).
 // Bewusst ohne eigenen Zustand, nutzbar in Server- und Client-Komponenten.
@@ -61,12 +61,39 @@ export function Kopf({ zurueck, rechts }: { zurueck?: { href?: string; onClick?:
   );
 }
 
-/** Eingabefeld mit Versal-Beschriftung, wie im Anfrageformular. children ist das input, select oder textarea. */
-export function Feld({ label, ungueltig, children, style }: { label: string; ungueltig?: boolean; children: ReactNode; style?: CSSProperties }) {
+/**
+ * Eingabefeld mit Versal-Beschriftung, wie im Anfrageformular. children ist das input, select oder textarea.
+ * fehler: kurzer Satz direkt unter dem Feld, Rahmen in der Akzentfarbe. Hat das Feld eine id, bekommt es
+ * aria-invalid und aria-describedby auf den Satz, damit Vorleseprogramme ihn mitlesen.
+ */
+export function Feld({
+  label,
+  ungueltig,
+  fehler,
+  children,
+  style,
+}: {
+  label: string;
+  ungueltig?: boolean;
+  fehler?: string | null;
+  children: ReactNode;
+  style?: CSSProperties;
+}) {
+  const id = isValidElement<{ id?: string }>(children) ? children.props.id : undefined;
+  const fehlerId = fehler && id ? `${id}-fehler` : undefined;
+  const feld =
+    fehler && isValidElement(children)
+      ? cloneElement(children as ReactElement<Record<string, unknown>>, { "aria-invalid": true, "aria-describedby": fehlerId })
+      : children;
   return (
-    <label className={`feld${ungueltig ? " ungueltig" : ""}`} style={style}>
+    <label className={`feld${ungueltig || fehler ? " ungueltig" : ""}`} style={style}>
       <span>{label}</span>
-      {children}
+      {feld}
+      {fehler ? (
+        <span className="feld-hinweis" id={fehlerId}>
+          {fehler}
+        </span>
+      ) : null}
     </label>
   );
 }
