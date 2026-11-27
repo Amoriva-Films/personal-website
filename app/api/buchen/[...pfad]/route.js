@@ -206,7 +206,8 @@ async function ausfallBeiAnfrage(inhalt, grund, ip) {
 export async function POST(request, { params }) {
   const pfad = (Array.isArray(params?.pfad) ? params.pfad : []).join('/');
   if (!WEGE.has(pfad)) {
-    protokoll(pfad || '-', 404);
+    // Unbekannter Pfad kommt roh vom Besucher: maskiert und gekürzt, damit niemand Zeilen ins Protokoll schmuggelt
+    protokoll(JSON.stringify(String(pfad || '-')).slice(0, 80), 404);
     return json({ error: 'Nicht gefunden.' }, 404);
   }
 
