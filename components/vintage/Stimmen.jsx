@@ -21,11 +21,8 @@ export default function Stimmen() {
           {stimmen.liste.map((s) => (
             <li key={s.namen}>
               <figure>
+                {/* Ohne Namen und Jahr (Danilo 28.11.2026) */}
                 <blockquote>&bdquo;{s.zitat}&ldquo;</blockquote>
-                <figcaption>
-                  <span className="stimmen-namen">{s.namen}</span>
-                  <span className="stimmen-art">{s.art}</span>
-                </figcaption>
               </figure>
             </li>
           ))}
@@ -37,20 +34,22 @@ export default function Stimmen() {
         .stimmen-falter { position: absolute; right: 6%; top: 10%; width: clamp(70px, 7vw, 110px); aspect-ratio: 1; color: var(--ton-akzent); opacity: .55; transform: rotate(10deg); }
         /* Groesser und heller (Nevio 28.10.2026: war kaum zu sehen) */
         .stimmen-zeile { text-align: center; color: var(--ton); font-size: clamp(40px, 4.6vw, 66px); line-height: 1.1; margin-bottom: clamp(28px, 3vw, 44px); }
-        .stimmen-reihe { list-style: none; margin: 0 auto; padding: 0; max-width: 820px; display: grid; grid-template-columns: repeat(2, 1fr); }
-        .stimmen-reihe li { padding: 0 clamp(18px, 2.4vw, 36px); border-left: 1px solid color-mix(in srgb, var(--ton) 13%, transparent); }
-        .stimmen-reihe li:first-child { border-left: none; }
-        .stimmen-reihe figure { margin: 0; }
+        /* Sichtbarer (Danilo 28.11.2026): jede Stimme auf einer dunklen Glaskarte mit doppelter feiner Linie wie
+           das Formular der Anfrage-Seite, groessere und hellere Schrift, grosses Anfuehrungszeichen. Kein
+           backdrop-filter (Scrollen bleibt fluessig). Beide Karten gleich hoch. */
+        .stimmen-reihe { list-style: none; margin: 0 auto; padding: 0; max-width: 860px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); align-items: stretch; }
+        .stimmen-reihe li { position: relative; padding: clamp(34px, 3.2vw, 44px) clamp(24px, 2.6vw, 36px) clamp(24px, 2.4vw, 30px);
+          background: rgba(34, 31, 23, .8); outline: 1px solid rgba(238, 233, 222, .5); outline-offset: -10px; box-shadow: 0 24px 50px -28px rgba(10, 8, 4, .7); }
+        .stimmen-reihe li::after { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(238, 233, 222, .18); pointer-events: none; }
+        .stimmen-reihe li::before { content: '“'; position: absolute; left: 50%; top: 18px; transform: translateX(-50%);
+          font-family: var(--font-display), Georgia, serif; font-size: 52px; line-height: .6; color: var(--khaki); }
+        .stimmen-reihe figure { margin: 0; height: 100%; display: flex; flex-direction: column; text-align: center; }
         .stimmen-reihe blockquote {
-          margin: 0 0 14px; font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500;
-          font-size: 16px; line-height: 1.55; color: color-mix(in srgb, var(--ton) 85%, transparent);
+          margin: auto 0; font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500;
+          font-size: 16.5px; line-height: 1.6; color: var(--sand-hell);
         }
-        .stimmen-reihe figcaption { display: flex; flex-direction: column; gap: 2px; }
-        .stimmen-namen { font-family: var(--font-display), Georgia, serif; font-weight: 500; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; }
-        .stimmen-art { font-family: var(--font-text), system-ui, sans-serif; font-size: 12px; letter-spacing: .06em; color: var(--ton-akzent); }
         @media (max-width: 860px) {
-          .stimmen-reihe { grid-template-columns: 1fr; gap: 24px; max-width: 520px; }
-          .stimmen-reihe li { border-left: none; padding: 0; }
+          .stimmen-reihe { grid-template-columns: minmax(0, 1fr); gap: 30px; max-width: 560px; }
         }
       ` }} />
     </section>
