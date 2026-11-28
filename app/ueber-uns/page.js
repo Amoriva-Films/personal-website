@@ -28,7 +28,7 @@ export default function UeberUns() {
         {/* Kopf und "Wofuer wir stehen" sind eine durchgehende Flaeche (Nevio 23.10.2026:
             der Uebergang war als harte Kante sichtbar) */}
         <div className="v-nacht ueber-flaeche">
-        <SeitenKopf label={s.label} titel={s.titel} bild={s.bild} bildLage="center 60%" weich gruen />
+        <SeitenKopf label={s.label} titel={s.titel} bild={s.bild} bildLage="center 6%" weich gruen />
 
         <section className="v-abschnitt v-nacht amoriva-steht">
           <div className="v-bahn amoriva-steht-bahn">
@@ -56,8 +56,11 @@ export default function UeberUns() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .ueber-flaeche .seitenkopf, .ueber-flaeche .amoriva-steht { background: none; }
-        /* Titel ein Stueck hoeher als bei Fragen, damit er nicht auf den Koepfen im Bild sitzt */
-        .ueber-flaeche .seitenkopf-inhalt { translate: 0 calc(clamp(50px, 9vh, 90px) * -1); }
+        /* Titel auf derselben Hoehe wie bei Leistungen, Vision und Fragen (Danilo 28.11.2026).
+           Damit er nicht auf den Koepfen sitzt, rueckt stattdessen das Bild nach unten (bildLage). */
+        /* Handy und Tablet: das Bild liegt schon oben an, also von oben aus vergroessern, damit die Personen
+           unter den Titel rutschen */
+        @media (max-width: 900px) { .ueber-flaeche .seitenkopf-bild img { object-position: 46% 0% !important; transform: scale(1.3); transform-origin: 50% 0; } }
         .ueber-flaeche .amoriva-steht.v-abschnitt { padding-top: 0; }
         /* Unten Platz fuer den Papier-Riss der Gruender-Section */
         .amoriva-steht.v-abschnitt { padding-bottom: clamp(130px, 13vw, 190px); }
