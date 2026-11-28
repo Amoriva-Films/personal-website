@@ -1,0 +1,150 @@
+/* Anfrage-Seite, neues Aussehen (Danilo 28.11.2026: "komplett überarbeiten, einheitlich, alles gut lesbar").
+   Gilt nur unter .anf (Strecke.tsx), die übrigen Seiten der Buchungsstrecke bleiben bei buchen.css.
+
+   Aufbau:
+   1. Hintergrund: gemaltes Brautpaar auf der Abendwiese (Figma-KI, nach Danilos Foto-Referenz), steht fest
+      hinter der Seite und blendet beim Laden kurz ein.
+   Flüssig (Danilo 28.11.: "läuft nicht flüssig"): kein backdrop-filter (Weichzeichnen hinter Glas wird bei jedem
+   Scrollbild neu gerechnet), kein Filter in Animationen, nur opacity und transform. Das Glas ist dafür etwas
+   dichter. Die fest stehende Fläche liegt auf einer eigenen Ebene (translateZ).
+   2. Einstieg: Spitzenrahmen (Figma-KI, freigestellt) um die Datumsprüfung, innen eine ruhige, dunkle Fläche,
+      damit alles gut lesbar ist (Referenz Bild 2).
+   3. Formular: ein Glasfeld mit doppelter feiner Linie über dem Gemälde (Referenz Bild 3), Felder im Raster,
+      alle Angaben der bisherigen Anfrage. */
+
+.af .anf{
+  /* Lesbarkeit: dunkle Glasfläche, Schrift in Sand-Hell auf mind. 62 % Deckung */
+  --glas:rgba(34,31,23,.82);
+  --glas-linie:rgba(238,233,222,.55);
+  --spitze:clamp(58px,7vw,84px);
+  position:relative;isolation:isolate;min-height:calc(100svh - var(--v-kopf,76px))
+}
+
+/* 1. Gemälde, fest hinter der Seite */
+.af .anf-gemaelde{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--nacht-tief);transform:translateZ(0)}
+.af .anf-gemaelde::before{content:"";position:absolute;inset:0;
+  background:url(/images/anfrage/gemaelde-quer.webp) 50% 60%/cover no-repeat;
+  animation:anf-aufbau .7s ease-out both}
+/* Schleier: oben und unten dunkler, damit Kopf und Fuß lesbar bleiben */
+.af .anf-gemaelde::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(38,35,27,.55) 0%,rgba(38,35,27,.12) 28%,rgba(38,35,27,.2) 62%,rgba(38,35,27,.7) 100%)}
+@media (max-aspect-ratio:4/5){.af .anf-gemaelde::before{background-image:url(/images/anfrage/gemaelde-hoch.webp);background-position:50% 55%}}
+@keyframes anf-aufbau{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+/* Die Grundfläche der Strecke (Papier mit Mischmodus, fest) liegt hier ganz unter dem Gemälde: weglassen */
+.af:has(.anf){background:var(--nacht-tief)}
+
+/* 2. Einstieg im Spitzenrahmen */
+.af .anf-start{min-height:calc(100svh - var(--v-kopf,76px));display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px var(--rand) 56px}
+/* Querformat (Danilo 28.11.2026): breiter Rahmen, Titel in einer Zeile, Datum und Knopf nebeneinander.
+   Am Handy wird daraus von selbst wieder ein Hochformat. */
+.af .anf-spitze{position:relative;width:min(100%,1000px);padding:calc(var(--spitze) * .42)}
+.af .anf-spitze::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  border:var(--spitze) solid transparent;border-image:url(/images/anfrage/spitze-rahmen.webp) 170 round;
+  animation:anf-spitze .5s ease-out both}
+@keyframes anf-spitze{from{opacity:0}to{opacity:1}}
+.af .anf-spitze-in{position:relative;z-index:1;padding:clamp(44px,6vw,64px) clamp(30px,5.5vw,58px) clamp(40px,5.5vw,54px);text-align:center;
+  background:var(--glas);animation:rein .5s var(--ease) .1s both}
+.af .anf-spitze-in .label{color:var(--sand)}
+.af .anf-spitze-in h1{margin-top:12px;font-size:var(--v-titel);color:var(--sand-hell)}
+.af .anf-pruefzeile{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:end;max-width:700px;margin:26px auto 0}
+.af .anf-pruefzeile .anf-datum{margin-top:0}
+.af .anf-pruefzeile .knopf{margin-top:0!important;width:auto;min-height:62px;padding-left:44px;padding-right:44px;white-space:nowrap}
+@media (max-width:760px){.af .anf-pruefzeile{grid-template-columns:minmax(0,1fr)}.af .anf-pruefzeile .knopf{width:100%}}
+.af .anf-unter{margin:14px auto 0;max-width:34ch;font-size:16.5px;line-height:1.6;color:var(--sand-hell)}
+.af .anf-datum{display:block;margin-top:26px;text-align:left}
+.af .anf-datum > span{display:block;text-align:center;font-size:11.5px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--sand);margin-bottom:10px}
+.af .anf-datum input{display:block;width:100%;min-width:0;min-height:62px;-webkit-appearance:none;appearance:none;padding:0 26px;
+  border:1px solid var(--strich);border-radius:999px;outline:1px solid var(--ring);outline-offset:-5px;background:rgba(238,233,222,.08);
+  color:var(--sand-hell);color-scheme:dark;text-align:center;font-family:var(--display);font-size:24px;font-weight:500;letter-spacing:.06em;font-variant-numeric:lining-nums;
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease),background-color .25s var(--ease)}
+.af .anf-datum input::-webkit-date-and-time-value{text-align:center}
+.af .anf-datum input:focus{border-color:var(--sand-hell);background:rgba(238,233,222,.12);box-shadow:0 0 0 3px rgba(238,233,222,.16)}
+.af .anf-start .knopf{margin-top:14px}
+.af .anf-fusszeile{margin-top:22px;max-width:520px;text-align:center;font-size:13.5px;line-height:1.6;color:var(--sand-hell);text-shadow:0 1px 8px rgba(20,17,10,.7)}
+
+/* Laden im selben Rahmen */
+.af .anf-lade{padding:12px 0 6px}
+.af .anf-lade h2{color:var(--sand-hell)}
+
+/* 3. Formular im Glasfeld */
+.af .anf-bogen-huelle{padding:clamp(28px,5vw,60px) var(--rand) 72px}
+.af .anf-bogen{position:relative;width:min(100%,920px);margin:0 auto;padding:clamp(34px,5vw,58px) clamp(22px,5vw,60px) clamp(34px,4.5vw,48px);
+  background:var(--glas);
+  outline:1px solid var(--glas-linie);outline-offset:-12px;box-shadow:0 30px 60px -30px rgba(10,8,4,.7);animation:rein .45s var(--ease) both}
+.af .anf-bogen::after{content:"";position:absolute;inset:16px;border:1px solid rgba(238,233,222,.2);pointer-events:none}
+.af .anf-bogen > *{position:relative;z-index:1}
+.af .anf-kopf{text-align:center}
+.af .anf-kopf .label{color:var(--sand)}
+.af .anf-kopf h2{margin-top:10px;color:var(--sand-hell);font-size:var(--v-h2)}
+.af .anf-kopf .anf-unter{max-width:46ch}
+.af .anf-anderes{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;font-size:13.5px;letter-spacing:.04em;color:var(--sand-hell);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px;opacity:.85}
+
+/* Ergebnis der Datumsprüfung mittig */
+.af .anf .frei-banner{max-width:560px;margin:22px auto 0;text-align:left;background:rgba(143,162,117,.14)}
+.af .anf .frei-banner.warte{background:rgba(188,174,140,.12)}
+.af .anf .fb-titel,.af .anf .fb-datum,.af .anf .fb-text{color:var(--sand-hell)!important}
+
+/* Gruppen mit Versal-Überschrift und feiner Linie */
+.af .anf-gruppe{margin-top:34px;padding-top:26px;border-top:1px solid rgba(238,233,222,.2)}
+.af .anf-gruppe-titel{display:flex;align-items:baseline;justify-content:center;gap:12px;text-align:center}
+.af .anf-gruppe-titel span{font-family:var(--schrift);font-size:30px;line-height:1;color:var(--khaki)}
+.af .anf-gruppe-titel b{font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-hell)}
+.af .anf-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 18px;align-items:start}
+.af .anf-raster .voll{grid-column:1/-1}
+
+/* Felder: lesbarer als vorher (Beschriftung Sand statt Khaki, Fläche etwas heller) */
+.af .anf .feld{margin-top:20px}
+.af .anf .feld > span:first-child{color:var(--sand);padding-left:20px;font-size:11.5px}
+.af .anf .feld input,.af .anf .feld select,.af .anf .feld textarea{background-color:rgba(238,233,222,.08);font-size:18px;padding-left:22px;padding-right:22px}
+.af .anf .feld select{background:linear-gradient(45deg,transparent 50%,var(--ton-leis) 50%) right 30px center/6px 6px no-repeat,linear-gradient(-45deg,transparent 50%,var(--ton-leis) 50%) right 24px center/6px 6px no-repeat,rgba(238,233,222,.08);padding-right:52px}
+.af .anf .feld input::placeholder,.af .anf .feld textarea::placeholder{color:rgba(238,233,222,.55)}
+.af .anf-hinweis{margin-top:8px;padding-left:20px;font-size:13.5px;line-height:1.5;color:var(--ton-leis)}
+
+/* Was wünscht ihr euch: drei gleiche Felder nebeneinander */
+.af .anf .wunsch{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.af .anf .wunsch-karte{height:100%;padding:18px 18px 18px 54px;border-radius:30px}
+.af .anf .wunsch-karte::before{left:20px}
+.af .anf .wunsch-karte::after{border-radius:27px}
+.af .anf .wunsch-karte b{font-size:18px}
+.af .anf .wunsch-karte span{color:var(--ton-leis);font-size:14px}
+.af .anf .wunsch-karte.an span{color:var(--oliv-braun)}
+.af .anf-wahl-titel{display:block;margin-top:22px;padding-left:20px;font-size:11.5px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--sand)}
+.af .anf .wahl{justify-content:center;margin-top:12px}
+.af .anf-herkunft{margin-top:26px;text-align:center}
+.af .anf-herkunft .anf-wahl-titel{padding-left:0}
+
+.af .anf-absenden{max-width:420px;margin:36px auto 0}
+.af .anf-datenschutz{margin-top:14px;text-align:center;font-size:13.5px;line-height:1.6;color:var(--ton-leis)}
+.af .anf .fehler{text-align:center}
+
+/* Danke */
+.af .anf-danke{max-width:640px;margin:0 auto;text-align:center}
+.af .anf-danke .band{text-align:left;margin-top:18px}
+.af .anf-danke .karte{text-align:left}
+
+/* Fuß der Strecke liegt über dem Gemälde */
+.af:has(.anf) .fuss{position:relative;margin-top:0;border-top-color:rgba(238,233,222,.18);background:rgba(28,25,18,.72);color:var(--ton-leis)}
+
+@media (max-width:820px){
+  .af .anf-raster{grid-template-columns:minmax(0,1fr)}
+  .af .anf .wunsch{grid-template-columns:minmax(0,1fr)}
+  .af .anf-bogen{outline-offset:-8px}
+  .af .anf-bogen::after{inset:11px}
+}
+@media (max-width:480px){
+  .af .anf{--spitze:44px}
+  .af .anf-start{padding:18px 14px 44px}
+  .af .anf-spitze{padding:19px}
+  .af .anf-spitze-in{padding:36px 22px 32px}
+  .af .anf-spitze-in .label{font-size:10.5px;letter-spacing:.22em}
+  .af .anf-unter{font-size:15.5px}
+  .af .anf-datum input{font-size:20px;min-height:56px;padding:0 18px}
+  .af .anf-start .knopf{padding-left:34px;padding-right:34px;letter-spacing:.16em;white-space:nowrap}
+  .af .anf .knopf{white-space:nowrap}
+  .af .anf .chip{min-height:44px;padding:2px 15px 0;font-size:11.5px;letter-spacing:.1em}
+  .af .anf .wahl{gap:8px}
+  .af .anf-bogen{padding-left:18px;padding-right:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .af .anf-gemaelde::before,.af .anf-spitze::before,.af .anf-spitze-in,.af .anf-bogen{animation:none}
+}
