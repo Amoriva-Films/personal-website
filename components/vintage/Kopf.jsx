@@ -196,6 +196,8 @@ export default function Kopf() {
         }
         @media (max-width: 959px) { .kopf-bahn > .kopf-menue { grid-column: 1; grid-row: 1; } .kopf-marke { grid-column: 2; grid-row: 1; } .kopf-rechts { grid-column: 3; grid-row: 1; } }
         @media (min-width: 960px) { .kopf-bahn { padding-inline: 60px; } }
+        /* Sehr schmale Handys (320 px): Wortmarke und Anfrage-Knopf stiessen zusammen (28.11.2026) */
+        @media (max-width: 360px) { .kopf-bahn { gap: 6px; } .kopf-marke { transform: scale(.82); transform-origin: center; } .kopf-knopf { padding: 8px 10px 7px; font-size: 10px; letter-spacing: .1em; } }
         /* Kleine Laptops: mit "Leistungen" im Menue brachen die Links sonst in zwei
            Zeilen um (28.10.2026). Enger setzen, Telefonnummer steht dann nur im Fuss. */
         .kopf-link { white-space: nowrap; }
