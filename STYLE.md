@@ -233,3 +233,18 @@ Quellen: nur Danilos sechs Referenzen im Board (Wedding Sessions, Blumen-Stateme
 - Fragen: LED-Hover (weißes Licht folgt der Maus, Linie leuchtet).
 - Preise doch auf der Seite (28.10.2026): Startpreise in `seiteLeistungen.preise`. Preiskarte (`components/vintage/Preiskarte.jsx`) wie die Menükarte eines alten Grandhotels: geprägte Karte, dahinter eine zweite, "Preiskarte" in Schreibschrift, Punktlinien, Gruß "Danilo, Kati & Nevio", grünes A-Siegel. Beim Hereinscrollen richtet sie sich aus dem Liegen auf, die hintere Karte fächert heraus, die Zeilen laufen nacheinander ein, Preise werden wie gestempelt, zuletzt das Siegel. Mit der Maus leichte 3D-Neigung.
 - Same Day Edit vorerst nicht im Angebot, Artikel entfernt (Umleitung auf /ratgeber). Keine Aussage über Kamera-Anzahl als Preisfaktor (es filmen immer mindestens zwei).
+
+## Anfrage-Seite neu (2026-11-28, Danilo)
+- Quelle: Danilos vier Bilder im Chat (Ist-Zustand, Spitzenrahmen, Formular im Glasfeld, Schwarzweiß-Foto Paar auf Wiese).
+- Hintergrund: gemaltes Brautpaar auf der Abendwiese (Figma-KI, gpt-image-2.5, quer und hoch), fest hinter der Seite, baut sich beim Laden auf (Unschärfe und blass zu klar, 2,6 s). Dateien: public/images/anfrage/gemaelde-quer.webp, gemaelde-hoch.webp.
+- Datumsprüfung im Spitzenrahmen (spitze-rahmen.webp, freigestellt über den Grünkanal, border-image Slice 170, round), innen dunkles Glas rgba(34,31,23,.68) für Lesbarkeit.
+- Danach EIN Formular (statt zwei Schritten) im Glasfeld mit doppelter feiner Linie, zwei Gruppen "01 Über euch" und "02 Eure Hochzeit", Felder im 3er-Raster (Handy 1 Spalte). Logik und Prüfung aus Nevios Strecke unverändert.
+- Aussehen nur in components/buchen/anfrage/anfrage.css unter .af .anf; Kennenlernen, Warteliste, Paar-Seite unberührt.
+- SEO: Titel, Beschreibung, eigenes OG-Bild (og-anfrage.jpg), ContactPage und BreadcrumbList als JSON-LD in app/anfrage/layout.js, H1 und Ortszeile serverseitig im HTML.
+- Anfrage Runde 2 (28.11.2026): Glasfläche reicht unter die Spitze (keine Lücken), kein backdrop-filter und keine Filter-Animation (flüssig, gemessen 0 Ruckler), schneller (Hintergrund 0,7 s, Rahmen ab 0 s). Handynummer mit Platzhalter 'Für WhatsApp', Pflichtfelder mit *, keine weiteren Wunschdaten (Hinweis 'Location noch nicht fest? Einfach offen lassen.'), Reihenfolge Foto, Film, Komplett, Hochzeitsmesse raus.
+- Überschriften-Regel (28.11.2026, Danilo): Seitentitel immer var(--v-titel) = 60 px Rechner / 34 px Handy, Abschnittstitel immer var(--v-h2) = 36 / 24 px. Startseite, Vision und Anfrage angeglichen. Ausnahmen bewusst: Momente-Schreibschrift, Brief-Karte, Listeneinträge (Fragen, Paketnamen).
+- Über uns: Titel auf derselben Höhe wie Leistungen und Fragen (Verschiebung nach oben entfernt). Bild statt Titel verschoben: bildLage center 6 %, unter 900 px object-position 46 % 0 % und scale(1.3) von oben.
+- Stimmen (28.11.2026): jede Stimme auf dunkler Glaskarte (rgba(34,31,23,.8), doppelte feine Linie wie Anfrage-Formular), Zitat 18 bis 20 px in Sand-Hell, großes Anführungszeichen in Khaki, Karten gleich hoch.
+
+### Stimmen, Runde 2 (28.11.2026)
+- Karten wieder kleiner (max. 860 px für beide, Zitat 16,5 px), Namen und Jahr/Art unter den Zitaten entfernt. Nur noch Zitat mit Anführungszeichen im Glas-Rahmen.
