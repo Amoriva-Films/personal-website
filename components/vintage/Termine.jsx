@@ -64,7 +64,7 @@ export default function Termine() {
         .termine-band { border-top: 1px solid color-mix(in srgb, var(--ton) 14%, transparent); padding-top: clamp(32px, 3.6vw, 48px); }
         .termine-band { display: flex; align-items: center; justify-content: space-between; gap: clamp(24px, 4vw, 64px); flex-wrap: wrap; }
         .termine-label { margin: 0 0 8px; color: color-mix(in srgb, var(--ton) 65%, transparent); }
-        .termine-titel { font-size: clamp(22px, 2.2vw, 32px); }
+        .termine-titel { font-size: var(--v-h2); }
         .termine-schilder { display: flex; gap: clamp(14px, 2vw, 24px); flex-wrap: wrap; }
         .termine-schild {
           position: relative; border-radius: 999px; display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; column-gap: 18px; row-gap: 2px; align-items: center;

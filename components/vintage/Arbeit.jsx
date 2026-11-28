@@ -61,7 +61,7 @@ export default function Arbeit() {
           gap: clamp(28px, 4vw, 64px); align-items: center; max-width: 1360px;
         }
         .ode-mitte { text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
-        .ode-mitte .v-titel { font-size: clamp(26px, 2.6vw, 40px); margin-bottom: clamp(20px, 2.2vw, 28px); }
+        .ode-mitte .v-titel { font-size: var(--v-h2); margin-bottom: clamp(20px, 2.2vw, 28px); }
         .ode-mitte .v-text { max-width: 46ch; }
         .ode-mitte .v-text + .v-text { margin-top: 14px; }
         .ode-unterschrift { margin: clamp(18px, 2vw, 26px) 0 clamp(22px, 2.4vw, 30px); font-size: clamp(28px, 2.4vw, 38px); line-height: 1; color: var(--ton-akzent); transform: rotate(-4deg); }

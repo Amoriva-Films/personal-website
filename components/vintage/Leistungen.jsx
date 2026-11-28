@@ -73,7 +73,7 @@ export default function Leistungen() {
         }
         .sitzung-links { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .sitzung-zeile { margin: 0 0 10px; color: color-mix(in srgb, var(--tinte) 62%, transparent); }
-        .sitzung-titel { text-transform: none; letter-spacing: .01em; font-size: clamp(30px, 2.9vw, 42px); line-height: 1.1; }
+        .sitzung-titel { text-transform: none; letter-spacing: .01em; font-size: var(--v-h2); line-height: 1.1; }
         .sitzung-unter { margin: 10px 0 20px; font-family: var(--font-maschine), ui-monospace, monospace; font-size: 14px; color: var(--ton-akzent); }
         .sitzung-liste { list-style: none; margin: 0 0 18px; padding: 0; width: 100%; border-top: 1px solid color-mix(in srgb, var(--tinte) 18%, transparent); }
         .sitzung-liste li { border-bottom: 1px solid color-mix(in srgb, var(--tinte) 18%, transparent); }

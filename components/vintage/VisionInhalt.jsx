@@ -138,7 +138,7 @@ export default function VisionInhalt() {
         .trichter-l { float: left; shape-outside: polygon(0 0, 0 100%, 100% 100%); }
         .trichter-r { float: right; shape-outside: polygon(100% 0, 100% 100%, 0 100%); }
         .vision-spalte .v-zeile { margin-bottom: 10px; }
-        .vision-spalte-titel { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.12; margin-bottom: 14px; text-wrap: balance; }
+        .vision-spalte-titel { font-size: var(--v-h2); line-height: 1.12; margin-bottom: 14px; text-wrap: balance; }
         .vision-spalte-text { margin: 0; font-family: var(--font-text), system-ui, sans-serif; font-size: 15.5px; line-height: 1.55; text-align: justify; text-align-last: center; hyphens: auto; -webkit-hyphens: auto; color: color-mix(in srgb, var(--ton) 88%, transparent); }
         .vision-spalte-text + .vision-spalte-text { margin-top: 10px; }
         .vision-kamera { width: var(--kamera); margin-top: calc(var(--kamera) * -.145); }

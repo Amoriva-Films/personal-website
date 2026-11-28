@@ -155,7 +155,7 @@ export default function Gruender({ ausfuehrlich = false }) {
         .gruender-rahmen--1 { left: 30%; top: 40%; z-index: 2; --r: 1.5deg; }
         .gruender-rahmen--2 { right: 0; top: 0; --r: 3deg; }
         .gruender-text { position: relative; }
-        .gruender-titel { text-transform: none; letter-spacing: .01em; font-size: clamp(32px, 3.4vw, 52px); line-height: 1.08; margin-bottom: clamp(22px, 2.4vw, 30px); }
+        .gruender-titel { text-transform: none; letter-spacing: .01em; font-size: var(--v-h2); line-height: 1.08; margin-bottom: clamp(22px, 2.4vw, 30px); }
         .gruender-person { margin-bottom: 20px; max-width: 52ch; }
         .gruender-person .v-text { font-size: 15.5px; line-height: 1.7; }
         .gruender-text .v-knopf { margin-top: 10px; }

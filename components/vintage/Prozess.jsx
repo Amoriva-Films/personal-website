@@ -154,7 +154,7 @@ export default function Prozess() {
           rotate: .6deg;
         }
         .prozess-text .v-zeile { color: var(--oliv-braun); margin-bottom: 6px; }
-        .prozess-text .v-titel { font-size: clamp(24px, 2.1vw, 31px); line-height: 1.08; }
+        .prozess-text .v-titel { font-size: var(--v-h2); line-height: 1.08; }
         .prozess-schrittfeld { position: relative; min-height: clamp(250px, 24vw, 290px); margin-top: clamp(18px, 2vw, 24px); padding-top: clamp(16px, 1.8vw, 22px); border-top: 1px solid color-mix(in srgb, var(--tinte) 14%, transparent); }
         .prozess-gross { display: block; font-family: var(--font-display), Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(54px, 5vw, 76px); line-height: .9; color: var(--oliv-braun); }
         .prozess-titel { margin: 8px 0 10px; font-family: var(--font-display), Georgia, serif; font-weight: 600; font-size: clamp(22px, 2vw, 28px); text-transform: uppercase; letter-spacing: .07em; }
@@ -183,7 +183,7 @@ export default function Prozess() {
           .prozess-scheibe { display: none; }
           .prozess-text { order: 1; --rand: 26px; padding: 0 4px; rotate: 0deg; }
           .prozess-text .v-zeile { margin-bottom: 2px; }
-          .prozess-text .v-titel { font-size: clamp(20px, 5.4vw, 25px); }
+          .prozess-text .v-titel { font-size: var(--v-h2); }
           .prozess-schrittfeld { min-height: 0; height: 232px; margin-top: 12px; padding-top: 12px; }
           .prozess-gross { font-size: 40px; }
           .prozess-titel { margin: 4px 0 6px; font-size: 19px; }
