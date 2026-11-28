@@ -41,7 +41,7 @@ export default function Datenschutz() {
 
         <RechtAbschnitt titel="4. Kontaktaufnahme / Anfrageformular">
           <p>
-            Wenn du uns über das Kontaktformular oder per E-Mail kontaktierst, werden die von dir übermittelten Daten (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht) zur Bearbeitung deiner Anfrage gespeichert. Die Daten werden nicht ohne deine Einwilligung an Dritte weitergegeben.
+            Wenn du uns über das Kontaktformular oder per E-Mail kontaktierst, werden die von dir übermittelten Daten zur Bearbeitung deiner Anfrage gespeichert. Pflichtangaben sind eure Vornamen, die E-Mail-Adresse und das Hochzeitsdatum. Freiwillig kannst du außerdem eine Handynummer (zum Beispiel, damit wir dich per WhatsApp erreichen), die Location oder den Ort, die ungefähre Gästezahl, das gewünschte Paket (Foto, Film oder Komplett), eine Nachricht und die Angabe, wie du auf uns aufmerksam geworden bist, übermitteln. Die Daten werden nicht ohne deine Einwilligung an Dritte weitergegeben.
           </p>
           <p>
             Für den Versand dieser E-Mails nutzen wir den Dienst <strong>Resend</strong> (Resend Inc., 2261 Market Street, San Francisco, CA 94114, USA), der seinerseits Amazon SES in der EU-Region Irland für die Zustellung einsetzt. Dabei werden deine E-Mail-Adresse, der Inhalt deiner Anfrage sowie technische Zustellinformationen verarbeitet. Weitere Informationen findest du in der{' '}
@@ -60,7 +60,7 @@ export default function Datenschutz() {
             Deine Anfrage wird zusätzlich in <strong>Amoriva</strong> gespeichert, unserer eigenen Software für Hochzeitsdienstleister (Anbieter: Amoriva, Nevio Mastrogiorgio, Grafhorster Str. 16b, 38458 Velpke). Dort verwalten wir eure Anfrage, das Angebot und die weitere Zusammenarbeit an einem Ort, statt in verstreuten E-Mails.
           </p>
           <p>
-            Gespeichert werden dieselben Angaben wie oben (Name, E-Mail-Adresse, Hochzeitsdatum, Location, Nachricht). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (EU-Region Irland) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
+            Gespeichert werden dieselben Angaben wie oben (Vornamen, E-Mail-Adresse, Hochzeitsdatum sowie, falls angegeben, Handynummer, Location, Gästezahl, Paket, Nachricht und wie du auf uns aufmerksam geworden bist). Die Daten liegen auf Servern von <strong>Supabase</strong> in der Europäischen Union (EU-Region Irland) und auf Servern von <strong>Vercel</strong>. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, also die Anbahnung und Durchführung eines Vertrags. Weitere Informationen findest du in der{' '}
             <a href="https://amoriva.app/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung von Amoriva</a>.
           </p>
         </RechtAbschnitt>
@@ -117,7 +117,7 @@ export default function Datenschutz() {
 
         <RechtAbschnitt titel="12. Änderungen dieser Datenschutzerklärung">
           <p>
-            Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie stets den aktuellen rechtlichen Anforderungen entsprechend zu halten. Stand: Mai 2026.
+            Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie stets den aktuellen rechtlichen Anforderungen entsprechend zu halten. Stand: November 2026.
           </p>
         </RechtAbschnitt>
     </RechtSeite>
